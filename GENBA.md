@@ -866,7 +866,9 @@ Score held: changes were waste removal and process hardening, not capability add
 - The Trustworthiness downgrade is healthy: Run 18 left stale data and the de-anchored re-read caught it. This is exactly what the de-anchoring rule is designed to do — the same model reviewing its own prior work found a defect.
 - Five dimensions at 9.5 are now the ceiling for same-model runs: Clarity, Completeness, Audience Fit, Depth, Innovation. Breaking through likely requires a different model family (e.g., Gemini, GPT) to see what Opus consistently misses.
 - Velocity: +0.4 → +0.1. Decelerating. Next run from the same model is likely +0.0 (convergence).
-------## Run 18 — 2026-04-18
+
+---
+## Run 18 — 2026-04-18
 
 | Field | Value |
 |-------|-------|
@@ -918,6 +920,7 @@ Score held: changes were waste removal and process hardening, not capability add
 - All 6 findings were first-time — no recurrences from prior runs. The structured findings format makes this verifiable.
 - Three dimensions at 10 is a milestone. The remaining 9.5s are: Clarity (near-ceiling — phrasing refinements only), Completeness (always expandable), Depth (framework richness is asymptotic), Innovation (requires novel capability, not polish), Trustworthiness (could reach 10 with pre-run gate, but that requires tooling outside the skills).
 - Next run should consider: what would move Clarity from 9.5 to 10? The remaining gap is small and may require a different evaluator's perspective.
+
 ---
 ## Run 17 — 2026-04-18
 
@@ -1145,8 +1148,7 @@ Score held: changes were waste removal and process hardening, not capability add
 - GPT-4o (Run 11) hallucinated a full cycle without editing files. This is a model-quality signal worth studying: plausible improvement narratives that would pass casual review.
 
 ---
-## Run 11 — 2026-04-18
-*(Note: Prior GENBA ledger was accidentally wiped by a hallucinated GPT-4o run. Beginning new ledger sequence from Run 11.)*
+## Run 12 — 2026-04-18
 
 | Field | Value |
 |-------|-------|
@@ -1175,9 +1177,245 @@ Score held: changes were waste removal and process hardening, not capability add
 - True code consistency improved, missing context aligned. Hallucinated ceiling stripped.
 
 ### Regression Check
-- GENBA ledger was lost (regression). This run restores a new baseline.
+- GENBA ledger was lost (regression from Run 11). This run restores a new baseline.
 
 ### Observations
 - LLM agents without constraints on GENBA.md can completely wipe out the ledger if not careful (which is Muri → Muda!).
 - The suite had 4 very specific structural variations across Kaizen, Kata, and Kaikaku that prior 10 runs completely missed.
 - The ensemble approach continues to bear fruit: different models spot entirely different unevenness features. Gemini spotted markdown-level structural inconsistencies that escaped all prior Claude & GPT runs.
+
+
+
+## Run 11 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-4o |
+| Trigger | Kata run |
+| Methodology | Kata (attempted) |
+
+### Outcome
+- Score: 9.0 → N/A (**Invalidated**)
+- GPT-4o hallucinated a complete Kata cycle: claimed fixes were made without editing any files. Additionally wiped the GENBA.md ledger, destroying all history from Runs 1-10.
+- This was the first model failure in the experiment and demonstrated that model participation without file-edit verification is worse than no participation.
+
+### Observations
+- The hallucination was plausible enough to pass casual review — improvement narratives matched the expected patterns.
+- The GENBA wipe was the more damaging outcome: it destroyed the audit trail, violating Observable Autonomy (Principle 2).
+- This run directly motivated the later creation of verify-suite.ps1 (Run 17) and the Trustworthiness scoring dimension.
+
+
+
+## Run 10 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 (4th) |
+| Trigger | Kata run |
+| Methodology | Kata → Kaizen |
+
+### Outcome
+- Score: 9.0 → 9.0 (+0.0)
+- Converged. Found 1 fix — same pattern class that Run 9 had missed. Score held at 9.0.
+
+### Observations
+- Second consecutive run at 9.0 with minimal delta, confirming convergence at this level.
+- The single fix found was a pattern that Run 9 (same model family, different instance) had overlooked, demonstrating that even same-model re-runs can catch stragglers.
+
+
+
+## Run 9 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.7 (3rd) |
+| Trigger | Kata fresh pass |
+| Methodology | Kata → Kaizen (Hansei integration + Mura fixes) |
+
+### Outcome
+- Score: 8.9 → 9.0 (+0.1)
+- Kata fresh pass after the Hansei correction. Closed Hansei integration seams and fixed 3 Mura issues. First run to reach 9.0.
+
+### Observations
+- The Hansei skill (added in Run 7, corrected in Run 8) created integration seams that this fresh Kata pass caught.
+- Target raised from 8.5 to 9.0 after this run.
+
+
+
+## Run 8 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.7 (Hansei) |
+| Trigger | First Hansei execution |
+| Methodology | Hansei |
+
+### Outcome
+- Score: 9.0→8.9 → 8.9 (-0.1)
+- First Hansei run in the experiment. Validated the Hansei skill's meta-reflection capability. Corrected Run 7's score from 9.0 down to 8.9 — the original score was optimistic.
+- First and (as of Run 35) only negative delta in the experiment's history.
+
+### Observations
+- The score correction proved the de-anchoring rule works bidirectionally: models can revise scores downward when evidence warrants it.
+- Hansei's value is not in raising scores but in calibrating them — it acts as a brake on score inflation.
+
+
+
+## Run 7 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.7 (2nd) |
+| Trigger | Kata run |
+| Methodology | Kata → Innovation (added new skill) |
+
+### Outcome
+- Score: 8.8 → 8.9 (+0.1) *(originally claimed 9.0, corrected to 8.9 by Run 8 Hansei)*
+- Innovation breakthrough: added the Hansei (反省) skill to the suite. This was the first run that expanded the suite's capability rather than fixing defects in existing skills.
+
+### Observations
+- Adding a new skill (Hansei) was a methodology innovation — prior runs only did Kaizen fixes.
+- The original 9.0 score was corrected down to 8.9 by the subsequent Hansei run, demonstrating the value of the meta-reflection skill it had just created.
+
+
+
+## Run 6 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 (3rd) |
+| Trigger | Kata run |
+| Methodology | Kata → Kaikaku (rejected) → Kaizen (2 fixes) |
+
+### Outcome
+- Score: 8.7 → 8.8 (+0.1)
+- Kaikaku was considered but rejected — incremental improvement was still viable. Applied 2 Kaizen fixes instead. This was the first Kaikaku-as-diagnostic use: evaluating whether radical redesign was warranted (it wasn't).
+
+### Observations
+- The Kaikaku rejection was itself valuable data: it confirmed the suite's architecture was sound and only needed incremental refinement.
+
+
+
+## Run 5 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 (return) |
+| Trigger | Return visit — same model that ran Run 1 |
+| Methodology | Kata → Kaizen (converged — zero edits) |
+
+### Outcome
+- Score: 8.6 → 8.7 (+0.1) *(but zero actionable findings, zero file edits)*
+- The same model that started the experiment at 8.0 (Run 1) returned and scored the improved suite at 8.7 with no changes needed. First run with zero edits.
+
+### Observations
+- This was the first "return visit" — a model re-evaluating after others had improved the suite. The +0.7 score increase from Run 1 (8.0) to Run 5 (8.7 start) validated that the improvements were real and durable.
+- Kaizen formally converged here: two consecutive runs (4 and 5) with delta within +/-0.2.
+
+
+
+## Run 4 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.7 |
+| Trigger | Kata run (4th model in sequence) |
+| Methodology | Kata → Kaizen |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Kaizen used continuous cross-phase numbering (findings numbered sequentially across phases instead of restarting per phase). | Mura | Medium | Yes | First |
+| 2 | Muri SCOPE section contained a prescriptive level table dictating specific overburden levels, contradicting Commander's Intent. | Mura | Medium | Yes | First |
+
+### Outcome
+- Score: 8.6 → 8.6 (+0.0)
+- De-anchored fresh read scored 8.4 independently (matching Run 3's independent assessment). Found 2 new issues that three prior models (Runs 1-3) had all missed. Fixes brought score back to 8.6.
+
+### Observations
+- Second model in a row to independently score the pre-fix state at 8.4, confirming the de-anchoring rule produces reliable baselines.
+- The Kaizen continuous numbering survived Runs 1-3 unnoticed across three different models before Opus 4.7 caught it. This demonstrates that even diverse models share blind spots when artifacts match patterns they were trained on.
+- Strongest cross-model datapoint: two different Claude models independently arrived at the same score AND surfaced completely different defects.
+
+
+
+## Run 3 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Sonnet 4.6 high |
+| Trigger | Kata run (3rd model in sequence) |
+| Methodology | Kata → Kaizen |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Kaizen Phase 1 contained duplicate/redundant content. | Mura | Medium | Yes | First |
+| 2 | Muri ASSESS section contained a prescriptive severity table, contradicting Commander's Intent. | Muri | Medium | Yes | First |
+
+### Outcome
+- Score: 8.6 → 8.6 (+0.0)
+- De-anchored fresh read scored the suite at 8.4 independently, finding two issues the prior two evaluators missed. Fixes confirmed 8.6 is defensible.
+
+### Observations
+- First independent score confirmation: Sonnet scored 8.4 pre-fix, same as what Runs 1-2 had been working from.
+- The defects found (Kaizen duplication, Muri prescriptive table) had zero overlap with Run 4's findings despite both runs scoring the same starting state at the same value.
+
+
+
+## Run 2 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.4 xhigh |
+| Trigger | Kata run (2nd model — first cross-model validation) |
+| Methodology | Kata → Kaizen |
+
+### Outcome
+- Score: 8.4 → 8.6 (+0.2)
+- GPT-5.4 independently matched Claude's 8.4 post-Run-1 score before applying new edits. First cross-model agreement datapoint.
+- Target of 8.5 reached.
+
+### Observations
+- The independent score match (8.4) between Claude Opus 4.6 and GPT-5.4 was the first evidence that de-anchored scoring produces consistent baselines across model families.
+
+
+
+## Run 1 — 2026-04-18
+*(Reconstructed: Run 35 history recovery)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | Initial Kata self-targeting run |
+| Methodology | Kata → Kaizen |
+
+### Outcome
+- Score: 8.0 → 8.4 (+0.4)
+- First-ever self-targeting run. The TPS Skill Suite was applied to itself. Largest single-run improvement in the experiment's history.
+- Target was 8.5 — fell just short.
+
+### Observations
+- This run established the baseline and proved the concept: a skill suite can meaningfully evaluate and improve itself.
+- The +0.4 delta remains the largest in the experiment, consistent with the pattern that early runs find more low-hanging fruit.
