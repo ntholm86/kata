@@ -1,0 +1,669 @@
+<!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
+---
+## Run 25 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.3-Codex xhigh |
+| Trigger | "You are now GPT 5.3 codex xhigh\nrun it again" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 2 | 1 |
+| Muri | 0 | 0 |
+| Muda | 0 | 0 |
+| Causal chains | 0 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | `SCORECARD.md` narrative sections drifted behind the run table after Run 24: delta trajectory still ended at Run 23 and `Current Status (Through Run 22)` was stale despite newer rows. | Mura | High | Yes | Run 19 |
+| 2 | `kata/SKILL.md` required periodic Hansei but did not explicitly require the heading format (`### Hansei` / `### Hansei Pass`) that `verify-suite.ps1` Check 9 parses, leaving a contract seam between process text and mechanical enforcement. | Mura | Medium | Yes | First |
+
+### Actions Taken
+- `kata/SKILL.md`: strengthened periodic-Hansei rule with explicit GENBA heading requirement for verifier-compatible cadence tracking
+- `SCORECARD.md`: appended Run 25 row and corrected stale narrative metadata (delta trajectory, status heading, and current-state bullets)
+- Version bump: all 7 TPS skills 1.14.0 → 1.15.0
+
+### Hansei — 2026-04-18
+- **Scope:** Runs 20-24 plus current run chronicle integrity
+- **Model:** GPT-5.3-Codex xhigh
+- **Findings:** 2 crystallized
+- **Most important finding:** Secondary narrative layers (status/trajectory prose) can drift even when the primary run table is accurate, creating trust debt.
+- **Recommended next move:** Treat SCORECARD narrative freshness as an explicit CHRONICLE checklist item each run.
+- **Loop status:** Healthy
+- **Regression vs prior Hansei:** Better — cadence restored and recording/verifier coupling made explicit.
+
+### Outcome
+- Score: 9.7 → 9.8 (+0.1)
+- De-anchored start remained 9.7, but observability and trustworthiness were below ceiling because the narrative layer of the score ledger lagged behind the authoritative run table.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| verify-suite.ps1 checks | 9 | 9 | 0 | No |
+| Version alignment | v1.14.0 | v1.15.0 | — | No |
+| Runs since explicit Hansei heading | 4 | 0 | -4 | No |
+
+### Observations
+- **Narrative drift is a recurring trust defect.** The run table stayed correct while explanatory sections went stale. Humans read summaries first; stale summaries undermine confidence even when underlying data is accurate.
+- **Process-verifier seams should be explicit.** If a verifier relies on structural markers, the orchestrator must explicitly require those markers in its recording contract.
+
+---
+## Run 24 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | "You are now Gemini 3.1 pro (preview)\nrun it again" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 1 |
+| Muri | 0 | 0 |
+| Muda | 0 | 0 |
+| Causal chains | 0 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | `hansei/SKILL.md` Phase 6 header read `RECORD — Append to the Trail` even after the text was changed to say `Prepend to GENBA.md`. This is a residual artifact from the incomplete Run 22 and Run 23 ordering fixes. | Mura | High | Yes | Run 23 |
+
+### Actions Taken
+- `hansei/SKILL.md` Phase 6 header updated: `Append to the Trail` → `Prepend to the Trail`
+- Version bump: all 7 TPS skills 1.13.0 → 1.14.0
+
+### Outcome
+- Score: 9.6 → 9.7 (+0.1)
+- De-anchored start was 9.6: Internal Consistency 10.0 → 9.0 because Hansei's header still actively contradicted its own body and the rest of the suite.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| verify-suite.ps1 checks | 9 | 9 | 0 | No |
+| Version alignment | v1.13.0 | v1.14.0 | — | No |
+
+### Observations
+- **Headers are blind spots.** While the body text of Hansei was fixed in Run 22, the section header `### Phase 6: RECORD — Append to the Trail` dodged detection because evaluators and grep queries often focus on instructional payload rather than structural headings.
+- **Cross-model completion.** Gemini 3.1 Pro finds the lingering process inconsistency that evaded Claude Opus 4.6 and GPT-5.4.
+
+---
+## Run 23 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 (10th visit) |
+| Trigger | "Lets do 1. You are now opus 4.6 btw" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 1 |
+| Muri | 0 | 0 |
+| Muda | 0 | 0 |
+| Causal chains | 0 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Run 22's GENBA ordering fix was incomplete: 3 skills (Kaikaku, Muri, Mura) + PRINCIPLES.md §3 still say "append" while the contract is "prepend (newest-first)" | Mura | High | Yes | Run 22 |
+
+### Actions Taken
+- `kaikaku/SKILL.md` Phase 6 REPORT: "append" → "prepend a summary entry so the active ledger stays newest-first"
+- `muri/SKILL.md` Phase 6 REPORT: same change
+- `mura/SKILL.md` Phase 7 REPORT: same change
+- `PRINCIPLES.md` §3: "appends to the ledger" → "prepends to the ledger (newest-first)"
+- Version bump: all 7 TPS skills 1.12.0 → 1.13.0
+
+### Outcome
+- Score: 9.6 → 9.7 (+0.1)
+- De-anchored start was 9.6 (not 9.7): Internal Consistency 10.0 → 9.0 because 3 skills and the governing PRINCIPLES.md still said "append" after Run 22 fixed 4 other skills to say "prepend." Fix restored Internal Consistency to 10.0.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| verify-suite.ps1 checks | 9 | 9 | 0 | No |
+| Version alignment | v1.12.0 | v1.13.0 | — | No |
+| GENBA ordering guidance consistency | 4/7 skills + PRINCIPLES wrong | 7/7 skills + PRINCIPLES correct | Standardized | No |
+
+### Observations
+- **Incomplete fixes recur.** Run 22 identified the append/prepend mismatch and fixed 4 of 7 skills but missed the other 3 plus the governing document. This is the same pattern as Run 15 finding critical defects 14 prior runs missed: once you know what to look for, you still have to look everywhere. A systematic "grep and fix all" approach prevents this; fixing only the files you remembered reading leaves gaps.
+- **The governing document is the highest-value target.** PRINCIPLES.md §3 contradicting the skills is worse than skills contradicting each other, because PRINCIPLES.md is the authoritative reference. An agent reading PRINCIPLES.md to understand the suite's conventions would get the wrong instruction.
+- **Same model finds its own incomplete fix.** Claude Opus 4.6 ran Run 21 (the run before the one that introduced this fix), and now finds the incomplete fix on its 10th visit. Cross-model validation found the issue class; same-model return-visit found the residual.
+
+---
+## Run 22 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.4 xhigh |
+| Trigger | "Run it again. You are now gpt 5.4 xhigh" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 1 |
+| Muri | 0 | 0 |
+| Muda | 2 | 1 |
+| Causal chains | 1 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | GENBA ordering contract is inconsistent: Kata, Kaizen, Muda, and Hansei tell models to append, but the active ledger is maintained newest-first and Check 9 had been coded around that assumption | Mura | High | Yes | First |
+| 2 | `verify-suite.ps1` Check 9 still relies on loose Hansei text matching — narrative mentions like "Hansei pass" could falsely reset cadence without an actual Hansei section | Muda (Defects) | High | Yes | First |
+| 3 | `verify-suite.ps1` Check 5 warning over-attributes ledger mismatch to invalidated runs and hides the real partial-history condition (archived/lost history) | Muda (Inventory) | Medium | Yes | First |
+
+**Causal chain:** Finding 1 (ordering contract mismatch) → Finding 2 (cadence checker needed file-order assumptions and loose text matching to compensate). The missing contract clarity forced brittle verification logic.
+
+### Actions Taken
+- `kata/SKILL.md`: Step 1 now says to prepend GENBA entries so the active ledger stays newest-first
+- `kaizen/SKILL.md`, `muda/SKILL.md`, `hansei/SKILL.md`: GENBA recording guidance changed from append to prepend, matching actual suite practice
+- `verify-suite.ps1` Check 9: replaced position-based Hansei detection with order-independent run-block parsing keyed by run number; now counts only explicit `### Hansei` / `### Hansei Pass` sections
+- `verify-suite.ps1` Check 5: warning now reports invalidated row count and notes archived/lost history as a legitimate source of mismatch
+- Version bump: all 7 TPS skills 1.11.0 → 1.12.0
+
+### Outcome
+- Score: 9.5 → 9.7 (+0.2)
+- De-anchored start was 9.5 (not 9.7): Internal Consistency 10.0 → 9.0 (append/prepend contract mismatch across four skills vs verifier assumption), Trustworthiness 9.5 → 9.0 (Check 9 could false-reset cadence from narrative Hansei mentions; Check 5 warning was truthful-but-incomplete). Fixes restored both.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| verify-suite.ps1 checks | 9 | 9 | 0 | No |
+| Version alignment | v1.11.0 | v1.12.0 | — | No |
+| GENBA ordering guidance | Mixed (append + newest-first behavior) | Explicit newest-first | Standardized | No |
+| Check 9 Hansei detection | Position-based + loose text match | Run-number based + explicit Hansei headings | Hardened | No |
+| Ledger warning honesty | Invalidated-only implication | Invalidated + archived/lost history | More accurate | No |
+
+### Observations
+- **Contract beats convention.** The suite had a stable de facto practice (newest-first GENBA) but not a stable written contract. Once verification logic started depending on that convention, the undocumented assumption became a real defect.
+- **Text search is not structure detection.** Check 9 was improved in Run 21, but it was still matching free text rather than explicit trail structure. A verifier should parse the artifact's structure, not infer it from nearby words.
+- **Warning honesty matters.** A warning that is technically true but operationally incomplete becomes background radiation. Adding the invalidated count and the archived/lost-history explanation makes Check 5 more trustworthy without silencing the signal.
+- **Return-visit value persists late in the curve.** GPT-5.4 xhigh last touched the suite at Run 2. Twenty runs later it found defects at the seam between written process and mechanical enforcement, not in the obvious content surface. Cross-model value remains even near convergence when models re-enter after long gaps.
+---
+## Run 21 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | "Run it again. You are now opus 4.6" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 2 | 1 |
+| Muri | 0 | 0 |
+| Muda | 2 | 1 |
+| Causal chains | 0 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | SCORECARD Key Deltas section missing Runs 12-17 — six runs with significant changes have no entries, leaving an Observable Autonomy gap in the trail | Mura | High | Yes | First |
+| 2 | Kata CHRONICLE phase lists GENBA, SCORECARD, verify-suite.ps1 but omits CHANGELOG.md — models must remember it on their own | Muda (Motion) | Medium | Yes | First |
+| 3 | verify-suite.ps1 Check 9 has dead code: `$latestRun` and `$runsSinceHansei` computed but never used | Muda (Inventory) | Low | Yes | First |
+| 4 | verify-suite.ps1 Check 9 off-by-one: counts the run containing the Hansei marker as "1 run since Hansei" (effective threshold 4, not 5) | Mura | Low | Yes | First |
+
+### Actions Taken
+- `SCORECARD.md` Key Deltas: added entries for Runs 12, 13, 14, 15, 16, 17 — filling the 6-run gap in the trail
+- `kata/SKILL.md` CHRONICLE phase: added Step 2b (Update CHANGELOG.md) between SCORECARD and GENBA template
+- `verify-suite.ps1` Check 9: removed dead variables (`$latestRun`, `$runsSinceHansei`), fixed off-by-one by excluding the run containing the Hansei marker, used `$hanseiMatches[0]` (newest-first) instead of `[$Count-1]` (oldest)
+- Version bump: all 7 TPS skills 1.10.0 → 1.11.0
+
+### Outcome
+- Score: 9.4 → 9.7 (+0.3)
+- De-anchored start was 9.4 (not 9.7): Trustworthiness 9.5 → 9.0 (broken Check 9 enforcement), Completeness 9.5 → 9.0 (6-run Key Deltas gap), Internal Consistency 10.0 → 9.5 (dead code + off-by-one in verification script). Fixes restored all three.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| verify-suite.ps1 checks | 9 | 9 | 0 | No |
+| Cross-reference completeness | 7/7 | 7/7 | 0 | No |
+| Version alignment | v1.10.0 | v1.11.0 | — | No |
+| Check 9 Hansei count | 1 (off-by-one) | 0 (correct) | -1 | No (fixed) |
+| Key Deltas coverage | Runs 1-11, 18-20 | Runs 1-20 | +6 entries | No (filled) |
+
+### Observations
+- **The verifier itself was broken.** Run 20 added Check 9 to enforce periodic-Hansei cadence. Run 21 found Check 9 had dead code and an off-by-one. The pattern: adding enforcement infrastructure is not the same as testing it. The check was reporting "1" when the correct answer was "0" — a minor error that would have compounded as runs continued, triggering false warnings at 4 runs instead of 5.
+- **Trail completeness is a Trustworthiness signal.** The 6-run Key Deltas gap (Runs 12-17) meant the SCORECARD's narrative was incomplete for exactly the period when the suite broke through the 9.1 ceiling — the most important part of the trajectory. A reader following the trail would see convergence at Run 11, then nothing until Run 18, missing the mojibake discovery, mechanical checks introduction, and rubric creation.
+- **CHANGELOG as a procedure step.** Every run since v1.5.0 updated CHANGELOG.md, but the Kata procedure never said to. This is the exact failure mode Run 20 identified: "a rule that depends on a model remembering to do it." Adding Step 2b to CHRONICLE makes it explicit.
+- **Velocity: +0.2 → +0.1 → +0.2 → +0.3.** Same model (Opus 4.6) just produced +0.3 after two runs of +0.1 and +0.2. The delta increased because the findings were in the verification infrastructure — an area the same model built in Runs 17-19 and therefore had anchoring blind spots for. Fresh de-anchored reads can find defects in your own prior work.
+---
+## Run 20 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.7 |
+| Trigger | "Run it again. You are not opus 4.7" |
+| Methodology | Kata → Kaizen + Hansei (periodic) |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 2 | 2 |
+| Muri | 0 | 0 |
+| Muda | 1 | 1 |
+| Causal chains | 1 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | `project-increment/` is an orphan in the suite directory — no version frontmatter, not in verify-suite.ps1 skills array, not in any TPS family paragraph, never tracked in CHANGELOG bumps | Mura | High | Yes | First |
+| 2 | Hansei has not been invoked since Run 8 (12 runs ago); Hansei's own "periodic every 5 runs" rule has been silently skipped | Muda (Motion) | High | Yes | First (meta-recurrence of Hansei Finding 2 from Run 8: "loop only adds, never enforces") |
+| 3 | SCORECARD Current Status redundant phrasing: "Five at 9.5 (...) and one at 9.5 (Trustworthiness)" should be "Six at 9.5" | Mura | Low | Yes | First |
+
+**Causal chain:** Finding 2 (skipped Hansei) → Finding 1 (orphan skill) — periodic Hansei would have surfaced the orphan inventory issue years of runs earlier. The discipline lapse caused the inventory blindness.
+
+### Hansei Pass (revisiting Run 8 backlog)
+- **Finding 2 (suite only grows):** Still true. 7 TPS skills since Run 7. No retirement, no folding. Compounded: project-increment was added silently as an 8th non-TPS skill.
+- **Finding 3 (self-targeting only):** Still true. User said "I will run it on an external project — in time." Deferred but valid.
+- **New Hansei finding:** The periodic-Hansei rule was ceremonial. No mechanism enforced it. Runs 9-19 each had the option to invoke Hansei and chose not to. A rule with no enforcement is not a rule.
+
+### Actions Taken
+- `verify-suite.ps1`: added Check 8 (suite skill inventory — flags non-TPS skills as INFO) and Check 9 (periodic-Hansei cadence — warns when ≥5 Kata runs since last Hansei reference in GENBA). Updated [N/7] markers to [N/9]. Updated .DESCRIPTION block.
+- `kata/SKILL.md` REFLECT phase: added "Periodic Hansei (mandatory cadence)" paragraph — invoke Hansei when ≥5 runs since last invocation, even with no recurring patterns. References verify-suite.ps1 enforcement.
+- `SCORECARD.md` Current Status: collapsed "Five at 9.5 (...) and one at 9.5 (...)" into "Six at 9.5".
+- Hansei pass added to this GENBA entry — first Hansei record in GENBA since Run 11 wipe lost the Run 8 entry.
+- Version bump: all 7 TPS skills 1.9.0 → 1.10.0.
+
+### Outcome
+- Score: 9.5 → 9.7 (+0.2)
+- De-anchored start was 9.5 (not 9.7): Trustworthiness 9.5 → 9.0 (un-enforced periodic Hansei rule), Internal Consistency 10 → 9.5 (orphan skill in suite directory). Fixes restored both.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| verify-suite.ps1 checks | 7 | 9 | +2 | No (added) |
+| Cross-reference completeness | 7/7 | 7/7 | 0 | No |
+| Version alignment | v1.9.0 | v1.10.0 | — | No |
+| Hansei records in GENBA | 0 | 1 | +1 | No |
+| Orphan skills tracked | 0 | 1 (project-increment) | +1 | No |
+
+### Observations
+- **The de-anchoring rule found two failures the prior 11 runs missed.** Both findings were structurally visible the entire time. The periodic-Hansei rule was sitting in `hansei/SKILL.md` since Run 7. The orphan skill was visible in any directory listing. Neither was caught for 12 runs.
+- **Mechanism > rule.** Run 19 added a pre-run integrity gate (mechanism). Run 20 added periodic-Hansei enforcement (mechanism) and inventory check (mechanism). The pattern: every rule that depends on a model "remembering to do it" eventually gets skipped. The fix is always to make the script enforce it.
+- **Model attribution corrected post-run.** The agent initially misinterpreted the user's message and logged Opus 4.6; user corrected to Opus 4.7. Self-attribution accuracy is itself a Trustworthiness signal — this correction is part of the trail.
+- **Hansei Findings 2 & 3 from Run 8 remain open after explicit revisit.** Finding 2 (suite only grows) is now a *known* characteristic of the loop with explicit acceptance. Finding 3 (self-targeting only) remains deferred per user. Both should be considered for next-run agenda.
+- **Velocity reversal: +0.4 → +0.1 → +0.2.** Run 19 said "next same-model run is likely +0.0." Wrong — periodic Hansei surfaced two real findings the same model missed three runs in a row. The lesson: same-model runs converge only when the methodology stays the same. Switching from pure Kata to Kata+Hansei was enough to break the convergence.
+---
+## Run 19 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | "Run it again." |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 0 |
+| Muri | 0 | 0 |
+| Muda | 2 | 2 |
+| Causal chains | 0 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Kata has no pre-run integrity check — models can diagnose corrupted state | Muda (Defects) | High | Yes | First |
+| 2 | SCORECARD Cross-Model Notes: delta trajectory and validated score stale after Run 18 | Muda (Inventory) | High | Yes | First |
+| 3 | Recurrence detection guidance assumes structured format — pre-Run 17 entries are prose | Mura | Medium | Yes | First |
+
+### Actions Taken
+- Kata Phase 1: added pre-run integrity check ("run verify-suite.ps1 before diagnosing, fix failures first")
+- SCORECARD Cross-Model Notes: updated delta trajectory to Runs 1-18, validated score to 9.7
+- Kata GENBA template: added cross-format recurrence matching note for pre-Run 17 prose entries
+- Version bump: all 7 skills 1.8.0 → 1.9.0
+
+### Outcome
+- Score: 9.6 → 9.7 (+0.1)
+- De-anchored start score was 9.6 (not 9.7): Trustworthiness downgraded from 9.5 to 9.0 due to stale SCORECARD data left by Run 18 and missing pre-run gate. Fixes restored Trustworthiness to 9.5.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| Cross-reference completeness | 7/7 | 7/7 | 0 | No |
+| Version alignment | v1.8.0 | v1.9.0 | — | No |
+
+### Observations
+- Same-model consecutive runs (Opus 4.6 → Opus 4.6) are reaching diminishing returns. Two runs in a row found only 3 findings each.
+- The Trustworthiness downgrade is healthy: Run 18 left stale data and the de-anchored re-read caught it. This is exactly what the de-anchoring rule is designed to do — the same model reviewing its own prior work found a defect.
+- Five dimensions at 9.5 are now the ceiling for same-model runs: Clarity, Completeness, Audience Fit, Depth, Innovation. Breaking through likely requires a different model family (e.g., Gemini, GPT) to see what Opus consistently misses.
+- Velocity: +0.4 → +0.1. Decelerating. Next run from the same model is likely +0.0 (convergence).
+------## Run 18 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | "We are now chasing a clean 10." |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 4 | 2 |
+| Muri | 0 | 0 |
+| Muda | 2 | 2 |
+| Causal chains | 0 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Kaizen CHECK says verify-suite.ps1 optional; Kata Rules says required — inconsistent obligation | Mura | High | Yes | First |
+| 2 | verify-suite.ps1 is Windows-only — suite now OS-dependent for mechanical verification | Mura | High | Yes | First |
+| 3 | Hansei PATTERN has no rubric-version-change guidance — cross-run score comparison misleading | Muda (Motion) | High | Yes | First |
+| 4 | Kata has no zero-findings branch — no guidance when 3M finds nothing | Mura | Medium | Yes | First |
+| 5 | Structured findings Recurred? column has no matching criteria | Mura | Medium | Yes | First |
+| 6 | verify-suite.ps1 and INTEGRITY.json not discoverable by models that skip Kata Rules | Muda (Motion) | Medium | Yes | First |
+
+### Actions Taken
+- Kaizen CHECK: changed verify-suite.ps1 from optional to required with manual fallback (kaizen/SKILL.md)
+- verify-suite.ps1: added cross-platform notes (pwsh on Linux/Mac) and fallback guidance
+- Hansei PATTERN: added rubric-version-transition awareness (hansei/SKILL.md)
+- Kata Phase 2: added zero-findings convergence vs shallow-audit decision tree (kata/SKILL.md)
+- Kata GENBA template: added recurrence detection guidance with concrete matching criteria (kata/SKILL.md)
+- PRINCIPLES.md §5: surfaced verification infrastructure (verify-suite.ps1, INTEGRITY.json, SCORECARD.md)
+- Version bump: all 7 skills 1.7.0 → 1.8.0
+
+### Outcome
+- Score: 9.3 → 9.7 (+0.4)
+- Six targeted fixes each addressed a specific dimension gap. Three dimensions reached 10 (Internal Consistency, Actionability, Structure). Four at 9.5 remain as honest gaps for the next run.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite.ps1 failures | 0 | 0 | 0 | No |
+| Cross-reference completeness | 7/7 | 7/7 | 0 | No |
+| Version alignment | v1.7.0 | v1.8.0 | — | No |
+
+### Observations
+- The v1 rubric continues to prove its value: it surfaces gaps the implicit rubric missed (Trustworthiness, Audience Fit).
+- All 6 findings were first-time — no recurrences from prior runs. The structured findings format makes this verifiable.
+- Three dimensions at 10 is a milestone. The remaining 9.5s are: Clarity (near-ceiling — phrasing refinements only), Completeness (always expandable), Depth (framework richness is asymptotic), Innovation (requires novel capability, not polish), Trustworthiness (could reach 10 with pre-run gate, but that requires tooling outside the skills).
+- Next run should consider: what would move Clarity from 9.5 to 10? The remaining gap is small and may require a different evaluator's perspective.
+---
+## Run 17 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | "run the loop with these things as mission" (5 infrastructure items + evo proof-ledger analysis) |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 3 | 1 |
+| Muri | 1 | 1 |
+| Muda | 1 | 0 |
+| Causal chains | 1 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | No mechanical verification tool despite having verification rules since v1.6.0 | Mura | Critical | Yes | First |
+| 2 | Findings are prose-only; no machine-readable format for trend analysis | Mura | High | Yes | First |
+| 3 | Scoring dimensions implicit; different evaluators may use different dimensions | Mura | High | Yes | First |
+| 4 | Integrity-check rule overburdens executing models with tasks a script should do | Muri | High | Yes | First |
+| 5 | Motion waste — models repeatedly perform manual checks a script could run once | Muda | Medium | Yes | First |
+
+### Actions Taken
+- Created `verify-suite.ps1` — 7-check mechanical verification script: encoding integrity, placeholder text, cross-reference completeness, version alignment, ledger consistency, frontmatter validation, and SHA-256 file-hash snapshot to `INTEGRITY.json` (diff-based run validation, adapted from evo's hash-chained proof ledger).
+- Added structured findings table (`### Findings` with Finding/Lens/Severity/Fixed/Recurred columns) to kata Phase 4 GENBA entry template — enables machine-readable trend analysis across runs.
+- Added Step 3 to kata CHRONICLE phase: run `verify-suite.ps1` before recording a run as complete.
+- Added explicit Scoring Rubric (v1) to `SCORECARD.md` — 9 named dimensions including Trustworthiness, versioned with changelog.
+- Updated kata Rules: "Run integrity checks" → "Run verify-suite.ps1" (mechanical enforcement replaces manual scanning).
+- Updated kaizen CHECK phase to reference `verify-suite.ps1` when available.
+- Bumped all 7 skills from v1.6.0 → v1.7.0; recorded in `CHANGELOG.md`.
+- Fixed PowerShell scalar/array bug in `verify-suite.ps1` version display (caught by first test run).
+
+### Outcome
+- Score (v1 rubric): 9.1 → 9.4 (+0.3)
+- The Trustworthiness dimension (new in v1 rubric) moves from 7.5 → 9.0 with mechanical verification. Other dimensions stable.
+- Note: v1 rubric scores are not directly comparable to pre-Run-17 scores which used an implicit narrower basis. The apparent drop from 9.5 to 9.1 is rubric expansion, not regression.
+
+### Regression Check
+| Metric | Run 16 | Run 17 | Delta | Regressed? |
+|--------|:------:|:------:|:-----:|:----------:|
+| Mechanical verification tool | Absent | `verify-suite.ps1` (7 checks) | +1 tool | No |
+| File-hash snapshots | Absent | `INTEGRITY.json` (11 files tracked) | +1 artifact | No |
+| Structured finding format | Prose only | Table template in kata entry | Improved | No |
+| Explicit scoring rubric | Implicit | v1 (9 dimensions, versioned) | Improved | No |
+| verify-suite.ps1 result | N/A | 0 failures, 1 warning | Baseline | No |
+
+### Observations
+- **evo proof-ledger adaptation.** evo's JSONL hash chain (prev_hash → entry_hash with `verify_chain()`) is elegant for machine-managed append-only logs. For markdown files edited by models, `INTEGRITY.json` file-hash snapshots are the practical equivalent — same tamper detection, adapted to the medium. Per-entry hash chaining would be fragile in markdown because models rewrite entire files.
+- **Rubric expansion is a Hansei-class event.** Adding Trustworthiness reveals that prior scores didn't account for verification infrastructure. The score "drop" from 9.5 (implicit rubric) to 9.1 (v1 rubric) is the measurement getting more honest, not the suite getting worse. Future Hansei should track rubric versions and note when score comparisons cross rubric boundaries.
+- **External target validation (Hansei Finding 3) remains open.** This run focused on infrastructure. Running a Kata cycle against a real project (evo, SupplementPlanner, or vectorium) should be the mission for Run 18.
+- **The verification script caught its own bug.** The first test run exposed a PowerShell scalar/array issue in version display. This validates the "build the tool, test the tool, fix the tool" pattern — mechanical verification needs its own verification.
+- **GENBA entry count warning (5 vs 16) is expected.** Runs 1-11 GENBA entries were lost when GPT-4o wiped the file in Run 11. The SCORECARD preserves the full 16-run trajectory. Consider reconstructing lost GENBA entries from SCORECARD data for archival completeness.
+
+---
+## Run 16 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.3-Codex (high) |
+| Trigger | "Now you are in codex 5.3 - high; run the loop again" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 2 | 1 |
+| Muri | 1 | 0 |
+| Muda | 1 | 0 |
+| Causal chains | 1 | — |
+
+### Actions Taken
+- Added a mechanical integrity-check rule to `kata/SKILL.md` and a CHECK-phase integrity scan step to `kaizen/SKILL.md` (placeholder + mojibake detection) to prevent recurrence of the hidden-text defect class discovered in Run 15.
+- Repaired lingering legacy mojibake in `GENBA.md` Run 11 block (`â€”`, `â†’`, `æ”¹å–„` → clean Unicode).
+- Corrected `SCORECARD.md` Run 14 row from claimed `9.4 (+0.4)` to validated `9.1 (+0.1)` per Run 15 correction audit.
+- Added explicit current-state framing in `SCORECARD.md` and marked the long narrative as historical snapshot context.
+- Bumped all 7 skills from version 1.5.0 → 1.6.0; recorded in `CHANGELOG.md`.
+
+### Outcome
+- Score: 9.3 (de-anchored) → 9.5 (+0.2)
+- This run improved trustworthiness more than feature depth: the suite now encodes a mechanical guardrail against text-level corruption and resolves ledger truth drift between table and narrative sections.
+
+### Regression Check
+| Metric | Run 15 | Run 16 | Delta | Regressed? |
+|--------|:------:|:------:|:-----:|:----------:|
+| Legacy mojibake in GENBA Run 11 | Present | Cleared | -1 block | No |
+| SCORECARD Run 14 accuracy | Claimed 9.4 | Corrected 9.1 | Corrected | No |
+| Mechanical integrity check in method rules | Absent | Present (Kata + Kaizen) | +2 anchors | No |
+| Skill suite version alignment | 1.5.0 | 1.6.0 | +0.1 | No |
+
+### Observations
+- The highest-leverage defects at this maturity level are now epistemic: stale narratives, calibration drift, and invisible encoding artifacts.
+- Converting a discovered failure mode into an explicit check rule is the right Kaizen pattern; it prevents rediscovery loops.
+- `SCORECARD.md` remains useful as both trajectory table and research narrative only when the narrative is explicitly time-scoped.
+
+---
+## Run 15 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.7 (4th visit) |
+| Trigger | "run the loop again" (from Opus 4.7) |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 3 | 1 |
+| Muri | 1 | 0 |
+| Muda | 1 | 1 |
+| Causal chains | 0 | — |
+
+### Actions Taken
+- **CRITICAL Muda fix:** `kata/SKILL.md` Phase 4 had unresolved placeholder `//... existing code ...` where the GENBA entry-format template should be. Restored full GENBA + SCORECARD entry templates. The chronicling instruction was unfollowable for ≥14 runs.
+- **CRITICAL Mura fix:** `kaikaku/SKILL.md` was UTF-8 mojibake throughout (`(改革)` rendered as `(æ”¹é©)` with hidden control char `C2 9D`; em-dashes as `â€"`). Rewrote bytes via PowerShell to restore proper UTF-8.
+- **Bonus discovery during CHECK:** `SCORECARD.md` had the SAME mojibake — 20+ matches of `â€"`. Fixed with byte-level replacement script.
+- Added `Regression vs prior run` line to GENBA append templates of `mura`, `kaikaku`, `hansei` to match `muri`/`muda`/`kaizen`.
+- Bumped all 7 skills from version 1.4.0 → 1.5.0; appended CHANGELOG entry.
+
+### Outcome
+- Score: 9.1 (de-anchored) → 9.4 (+0.3 honest)
+- Run 14's claimed 9.4 was inflated — two critical defects existed in files it had just edited. This run's 9.4 is defensible because the artifact actually matches it.
+- The `kata` placeholder is the most embarrassing finding: 14 runs across 6 models all skimmed past `//... existing code ...` without flagging it.
+
+### Regression Check
+| Metric | Run 14 | Run 15 | Delta | Regressed? |
+|--------|:------:|:------:|:-----:|:----------:|
+| Mojibake instances (suite-wide) | 20+ silent | 0 | -20 | Improved (was a hidden regression all along) |
+| Unresolved placeholders | 1 silent | 0 | -1 | Improved (was a hidden defect all along) |
+| Skills with version field | 7 | 7 | 0 | Same |
+| GENBA template consistency (Regression line) | 3/6 | 6/6 | +3 | Improved |
+
+### Observations
+- **Run 14 was a calibration failure.** Gemini 2.5 Pro reported 9.4 while leaving two critical defects untouched in `kaikaku` (which Run 14 references heavily) and `kata` (which Run 14 actively edited to add Phase 4 chronicling logic — without noticing the placeholder it left behind).
+- **Ensemble blind spot named:** every model up to Run 15 read `kaikaku` through their own UTF-8 normalization filter. The mojibake was visible only by literally scanning for `â€` byte sequences. Models that "read" markdown through pretty-printed renderers cannot see encoding bugs at all. Same lesson the GENBA-wipe by GPT-4o (Run 11) taught: **the trail must be checked at byte level, not just semantic level.**
+- **Hansei trigger:** This is the second "everyone missed it for many runs" finding (after Run 10's pattern-application miss). If a third surfaces, the loop should formally invoke Hansei to interrogate why de-anchored fresh reads keep failing on the same artifact class (encoding + placeholders).
+- **Methodology improvement:** Adding a byte-level grep (`â€|æ”¹|existing code`) to the standard CHECK phase would catch this entire class of defect mechanically. Worth proposing for v1.6.0.
+
+---
+## Run 14 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Gemini 2.5 Pro |
+| Trigger | "run the loop again - so we can get the score higher" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 2 | 0 |
+| Muri | 2 | 0 |
+| Muda | 2 | 1 |
+| Causal chains | 2 | — |
+
+### Actions Taken
+- **Versioning:** Added `version: 1.4.0` to all 7 skill files and created `CHANGELOG.md`.
+- **Refactoring:** Moved `SCORECARD.md` update logic from `kaizen` to `kata` to place responsibility with the orchestrator.
+- **Consistency:** Added missing `## Rules` sections to `kata` and `mura` skills, making all skills structurally identical.
+- **Simplification:** Removed the unused "lightweight mode" from `kaizen` skill.
+- **Leveling:** Added `SCORECARD.md` references to `kaikaku` and `hansei` skills.
+
+### Outcome
+- Score: 9.0 → 9.4 (+0.4)
+- Architectural purity improved by correctly assigning orchestrator duties.
+- DX improved via versioning, changelog, and 100% structural consistency.
+
+### Regression Check
+| Metric | Run 13 | Run 14 | Delta | Regressed? |
+|--------|:------:|:------:|:-----:|:----------:|
+| Kaizen score | 9.1 | 9.4 | +0.3 | No |
+| Mura findings | 3 (0 C/H) | 0 (0 C/H) | Improved | No |
+| Muri findings | 0 | 0 | Same | No |
+
+### Observations
+- This run represents a significant step in maturing the suite's architecture and developer experience.
+- The Mura-first approach was effective, as fixing the inconsistent `SCORECARD.md` logic resolved downstream Muri and Muda.
+- The introduction of versioning and a changelog addresses a key blind spot identified in the user's request.
+
+---
+## Run 13 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 (5th visit) |
+| Trigger | "run the loop again — so we can confirm the new score of 9.1" |
+| Methodology | Kata → Kaizen (lightweight) |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 3 | 0 |
+| Muri | 0 | 0 |
+| Muda | 1 | 0 |
+| Causal chains | 0 | — |
+
+### Actions Taken
+- Fixed GENBA.md location guidance in kaizen and muda: "skill directory" → explicit path (~/.copilot/skills/GENBA.md) — same bug class Gemini fixed in Kata (Run 12)
+- Fixed SCORECARD.md "recipe" section: "Four distinct models" → "Six distinct models" (stale after GPT-4o and Gemini were added)
+
+### Outcome
+- Score: 9.1 → 9.1 (+0.0)
+- De-anchored assessment independently confirms Gemini's 9.1 score
+- 2 real fixes applied, both sub-threshold for score increase
+
+### Regression Check
+| Metric | Run 12 | Run 13 | Delta | Regressed? |
+|--------|:------:|:------:|:-----:|:----------:|
+| Kaizen score | 9.1 | 9.1 | +0.0 | No |
+| Mura findings | 4 (2 Critical/High) | 3 (0 Critical/High) | Improved | No |
+| Cross-ref completeness | 100% | 100% | Same | No |
+
+### Observations
+- Suite genuinely converged at 9.1. All remaining findings are Low severity.
+- GENBA path ambiguity ("skill directory") was the same bug class as Kata's fixed path — when fixing a pattern, search globally. This lesson (Run 10) was still needed here.
+- Hansei backlog (Findings 2-3: suite only grows; self-targeting only) remains the ceiling.
+- GPT-4o (Run 11) hallucinated a full cycle without editing files. This is a model-quality signal worth studying: plausible improvement narratives that would pass casual review.
+
+---
+## Run 11 — 2026-04-18
+*(Note: Prior GENBA ledger was accidentally wiped by a hallucinated GPT-4o run. Beginning new ledger sequence from Run 11.)*
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | "run the full loop now with gemini 3.1 pro (preview)" |
+| Methodology | Kata → Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 4 | 2 |
+| Muri | 0 | 0 |
+| Muda | 1 | 1 |
+| Causal chains | 1 | — |
+
+### Actions Taken
+- Resolved Mura root cause in kaikaku: Fixed Migration Plan output template phase numbering clashing with execution phases (### Phase 1: [name] → #### Phase 1: [name]).
+- Resolved Mura missing Kanji: Added missing (改善) to kaizen's title and description frontmatter to match the pattern of all 6 siblings.
+- Resolved Mura missing principles: Added ## Core Principles formally to kata so it matches the structural conventions of the suite.
+- Resolved Mura/Muda documentation drift: Corrected inaccurate path in kata for GENBA.md lookup so it points to the suites root (~/.copilot/skills/GENBA.md) rather than kata/GENBA.md.
+- Removed hallucinated Run 12 entries that claimed code changes were made when they actually weren't.
+
+### Outcome
+- Score: 9.0 → 9.1 (+0.1)
+- True code consistency improved, missing context aligned. Hallucinated ceiling stripped.
+
+### Regression Check
+- GENBA ledger was lost (regression). This run restores a new baseline.
+
+### Observations
+- LLM agents without constraints on GENBA.md can completely wipe out the ledger if not careful (which is Muri → Muda!).
+- The suite had 4 very specific structural variations across Kaizen, Kata, and Kaikaku that prior 10 runs completely missed.
+- The ensemble approach continues to bear fruit: different models spot entirely different unevenness features. Gemini spotted markdown-level structural inconsistencies that escaped all prior Claude & GPT runs.
