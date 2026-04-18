@@ -1,6 +1,6 @@
 ﻿---
 name: kaikaku
-version: 1.15.0
+version: 1.21.0
 description: 'Kaikaku (改革) — Radical redesign evaluation. When incremental improvement (kaizen) has converged or the architecture is fundamentally wrong, kaikaku asks: should we throw this away and rebuild? Evaluates whether the current system can reach the target through incremental changes or needs structural replacement. Produces a migration plan if redesign is warranted. USE WHEN: redesign, start over, rethink, rewrite this, architecture is wrong, kaizen isn''t working, converged too low, fundamental change, kaikaku, radical change, clean slate, rearchitect, pivot.'
 argument-hint: 'Optional: specify what feels wrong (architecture, data model, paradigm), target state if known, or constraints on the redesign (budget, timeline, backwards compatibility)'
 ---
@@ -208,7 +208,7 @@ Execute the migration plan phase by phase. After each phase:
 - Kaizen can now target: [what incremental improvements are newly possible]
 ```
 
-**If a GENBA.md exists**, prepend a summary entry so the active ledger stays newest-first:
+**If a GENBA.md exists** (look in the skills suite root `~/.copilot/skills/GENBA.md` or the project root), prepend a summary entry so the active ledger stays newest-first:
 
 ```markdown
 ### Kaikaku — [date]

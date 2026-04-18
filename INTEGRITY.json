@@ -1,17 +1,17 @@
 ﻿{
-    "last_verified":  "2026-04-18T15:59:17.6848036+02:00",
-    "suite_version":  "1.15.0",
+    "last_verified":  "2026-04-18T18:29:58.1433700+02:00",
+    "suite_version":  "1.21.0",
     "files":  {
-                  "kata/SKILL.md":  "87412A46A4F87A8B",
-                  "kaizen/SKILL.md":  "462EAE71A23F8B37",
-                  "kaikaku/SKILL.md":  "83D20EF3B42C6AA2",
-                  "mura/SKILL.md":  "74CDD4263BF1CB55",
-                  "muri/SKILL.md":  "038524AE9C12E884",
-                  "muda/SKILL.md":  "6EA090D896C33F5E",
-                  "hansei/SKILL.md":  "EE4DE7CC4CFF7192",
-                  "GENBA.md":  "30C9CD624220989B",
-                  "SCORECARD.md":  "FB591C583786A4A3",
-                  "CHANGELOG.md":  "0B4B5B553A698903",
-                  "PRINCIPLES.md":  "E5152D6BDC751BDE"
+                  "kata/SKILL.md":  "4EDC43640051F923",
+                  "kaizen/SKILL.md":  "92945359E5D7C879",
+                  "kaikaku/SKILL.md":  "E43779ACCA7E885D",
+                  "mura/SKILL.md":  "B85E1157DC3461A1",
+                  "muri/SKILL.md":  "34BCC0B60960B7A9",
+                  "muda/SKILL.md":  "AE702D99209EFCAA",
+                  "hansei/SKILL.md":  "12F3B0A67185DFD4",
+                  "GENBA.md":  "48BBE248250AE84B",
+                  "SCORECARD.md":  "317D1F1C00C05B30",
+                  "CHANGELOG.md":  "B1A83CF959BA5E34",
+                  "PRINCIPLES.md":  "064B9D0725820B3D"
               }
 }

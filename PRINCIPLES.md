@@ -71,6 +71,34 @@ Autonomy is a *function* of transparency:
 
 ---
 
+## Principle 3: Convergence Is Silence
+
+*A system has converged when diverse evaluators independently find nothing left to change — not when the score stops moving.*
+
+**Origin:** Cross-validation (statistics), ensemble agreement (machine learning), the Delphi method (forecasting), and Kaizen's own exit condition — taken to its logical conclusion.
+
+**The problem it solves:** Iterative improvement loops declare convergence too early. The typical criterion — "the score stabilized across N consecutive runs" — measures the wrong signal. A score can stabilize while the system is still changing underneath: each run removes something and adds something, the score stays flat, but the artifact never stops churning. Worse, a single evaluator (or a single model family) can converge on its own blind spots, producing a stable score that reflects the evaluator's limitations, not the artifact's quality.
+
+Score stability is necessary but not sufficient. Change-rate stability is necessary but not sufficient. Only the combination — across diverse, independent evaluators — constitutes convergence.
+
+**The principle:** Convergence requires three simultaneous conditions:
+
+1. **Score agreement.** N consecutive evaluations by M distinct evaluators produce the same score (within a defined tolerance). The evaluators must be meaningfully diverse — different models, different people, different analytical traditions. Same-family evaluators (e.g., multiple versions of one model) count as one.
+
+2. **Zero material change.** Each of those N evaluations ends with no changes to the artifact itself. The only output is the evaluation record (ledger entries, trajectory rows). If a run produces a diff to the artifact, the convergence counter resets to zero — regardless of whether the score changed.
+
+3. **Independent assessment.** Each evaluator scores the artifact fresh, without consulting prior scores. If evaluators anchor to the previous score, convergence measures social conformity, not quality. The de-anchoring rule is not optional — it is what makes convergence *observable* rather than *assumed*.
+
+**The minimum bar:** 3 consecutive runs, 3 distinct evaluators, same score, zero artifact changes. Below this, you have improvement trajectory. Above this, you have convergence. There is no middle ground.
+
+**Why this matters for autonomous development:** Without this principle, an autonomous improvement loop has no honest stopping condition. It will run indefinitely — each cycle finding something to change because finding something to change is what the loop is designed to do. The agent's incentive is to justify its own execution by producing changes. Convergence Is Silence inverts that incentive: the agent proves its value by finding *nothing*, and the system proves its quality by surviving diverse scrutiny unchanged.
+
+**The test:** Can you hand the artifact to an evaluator the system has never seen before, and that evaluator independently arrives at the same score and finds nothing material to fix? If yes — across multiple such evaluators — the system has converged. If the new evaluator finds real defects, convergence was premature regardless of how many prior runs agreed.
+
+**The corollary:** *If the loop is still producing changes, the system is still improving. If the system is still improving, it hasn't converged. Convergence is not a score — it is the absence of actionable findings across independent observers.*
+
+---
+
 ## How the principles interact
 
 Commander's Intent without Observable Autonomy is dangerous — you told the agent what to achieve but can't see how it's pursuing it.
@@ -79,21 +107,23 @@ Observable Autonomy without Commander's Intent is theater — you can see everyt
 
 Together: the agent understands the goal, reasons autonomously about how to achieve it, and makes every step of that reasoning visible. The human can trust the autonomy because they can see the thinking. The agent can be autonomous because it has earned that trust through transparency.
 
+Convergence Is Silence completes the system: it defines *when the work is done.* Without it, Commander's Intent gives purpose and Observable Autonomy gives visibility, but the loop has no honest exit. Convergence provides the stopping condition — and critically, it requires the other two principles to function. You can only measure convergence if the evaluator reasons independently (Commander's Intent, not checklist compliance) and the entire trail is visible (Observable Autonomy, not self-reported scores).
+
 ```
-Commander's Intent     Observable Autonomy
-(what + why)           (show everything)
-       \                     /
-        \                   /
-         → Autonomous Agent ←
-           that earns trust
-           through visible reasoning
+Commander's Intent     Observable Autonomy     Convergence Is Silence
+(what + why)           (show everything)       (when to stop)
+       \                     |                      /
+        \                    |                     /
+         →    Autonomous Agent that earns    ←
+              trust through visible reasoning
+              and knows when the work is done
 ```
 
 ---
 
 ## For skill authors
 
-Every skill in this system must embody both principles:
+Every skill in this system must embody all three principles:
 
 1. **Structure over prescription.** Define phases that shape the work. Within each phase, ask questions that guide reasoning. Don't provide the answers — provide the vocabulary and the thinking framework.
 

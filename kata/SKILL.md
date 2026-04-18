@@ -1,13 +1,13 @@
 ﻿---
 name: kata
-version: 1.15.0
-description: 'Kata (型) — Full TPS treatment orchestrator. Runs the complete Toyota Production System diagnostic and improvement cycle: diagnose with all 3M lenses (Mura → Muri → Muda in causal order), assess severity to select methodology (Kaizen for incremental, Kaikaku for radical), execute the selected methodology, and chronicle results in GENBA.md. The meta-pattern — the routine of improvement itself. USE WHEN: full treatment, kata, TPS, give me everything, full diagnostic, complete analysis, run all lenses, comprehensive improvement, what does this project need.'
+version: 1.21.0
+description: 'Kata (型) — Full TPS treatment orchestrator. Runs the complete Toyota Production System diagnostic and improvement cycle: diagnose with all 3M lenses (Mura → Muri → Muda in causal order), assess severity to select methodology (Kaizen for incremental, Kaikaku for radical), execute the selected methodology, chronicle results in GENBA.md, and persist to git. The meta-pattern — the routine of improvement itself. USE WHEN: full treatment, kata, TPS, give me everything, full diagnostic, complete analysis, run all lenses, comprehensive improvement, what does this project need.'
 argument-hint: 'Optional: specify target project/module, skip diagnosis if already done ("just run kaizen"), or focus the diagnosis ("only check the API layer")'
 ---
 
 # Kata (型) — Full TPS Treatment
 
-The routine of improvement. Diagnose, decide, execute, chronicle.
+The routine of improvement. Diagnose, decide, execute, chronicle, persist.
 
 > **Governing principles:** [Commander's Intent](../PRINCIPLES.md) — Kata sequences the skills and provides the thinking structure; what you find at each phase and how you act on it is your reasoned judgment. [Observable Autonomy](../PRINCIPLES.md) — every phase produces visible output; the GENBA.md chronicle is the proof trail that makes the full cycle auditable.
 
@@ -96,9 +96,10 @@ This is a judgment call, not a formula. Consider:
 
 State your reasoning explicitly. The human needs to understand why you selected the methodology you did.
 
-**If the 3M diagnostic surfaces zero findings:** This is either convergence (the target is genuinely clean) or a shallow audit. Distinguish:
-- **Convergence:** Prior runs fixed everything detectable at the current depth. Record it as convergence in GENBA. Consider running Hansei to check whether the diagnostic itself has blind spots.
-- **Shallow audit:** The diagnostic passed too quickly, skipped dimensions, or didn't read deeply enough. Re-run with explicit depth — read every file, check every cross-reference. If still zero, accept convergence.
+**If the 3M diagnostic surfaces zero findings:** This is a *candidate silence* signal, not convergence. Per **Principle 3 (Convergence Is Silence)**, true convergence requires 3 consecutive Kata runs by 3 distinct evaluators that produce the same score AND zero artifact changes. A single zero-findings run is one data point toward that condition. Distinguish:
+- **Candidate silence (record and increment the silence counter):** Prior runs fixed everything detectable at the current depth. Record it as candidate silence in GENBA, note the current value of the Principle 3 silence counter, and consider running Hansei to check whether the diagnostic itself has blind spots.
+- **Local plateau (silence counter resets to 0 if any artifact changes):** Score is steady but the loop keeps making small edits. This is a plateau, not convergence — the suite is moving, the score isn’t.
+- **Shallow audit:** The diagnostic passed too quickly, skipped dimensions, or didn't read deeply enough. Re-run with explicit depth — read every file, check every cross-reference. If still zero, accept candidate silence.
 
 Do not fabricate findings to justify continuing. Zero real findings is a valid and valuable result.
 
@@ -133,6 +134,8 @@ Run the Kaikaku skill. It handles its own DIAGNOSE → ENVISION → PLAN → VAL
 
 **If quick wins exist alongside the main methodology:**
 Before running the selected methodology, handle any high-confidence, zero-risk Muda findings (Type II waste with verified 0 callers). Pruning dead weight before improving or redesigning is always correct — less to improve, less to redesign.
+
+**Fix globally, not locally.** When a finding describes a pattern (e.g., "Skill X uses outdated phrasing Y"), search for every occurrence of pattern Y across the suite before declaring the fix complete. Repeated recurrences of the same finding across runs almost always mean the prior fix was applied to the one cited instance and not to its siblings. The verifier cannot catch this; the discipline is yours.
 
 ### Phase 4: CHRONICLE — Write to Ledgers
 
@@ -220,8 +223,8 @@ After chronicling, step back and analyze the GENBA.md data across runs. This is 
 | 4   | 7.5          | +0.1  | GPT-4o| Kaizen      |
 
 #### Velocity: [decelerating / steady / stalled]
-#### Convergence estimate: [score where delta → 0, based on trend]
-#### Recommendation: [continue kaizen / evaluate kaikaku / target reached]
+#### Silence signal: [no candidate silence yet / candidate silence run X / N consecutive distinct-evaluator silences toward Principle 3]
+#### Recommendation: [continue kaizen / evaluate kaikaku / schedule cross-model run for silence confirmation / target reached]
 ```
 
 **Qualitative analysis (all runs):**
@@ -244,6 +247,24 @@ After chronicling, step back and analyze the GENBA.md data across runs. This is 
 - [regression: X metrics regressed — cause: Y]
 ```
 
+### Phase 6: PERSIST — Commit to Git
+
+After a successful run (verify-suite.ps1 reports 0 failures), commit the current state to git so the disaster floor is never more than one run deep. This phase exists because Run 29 proved that uncommitted work is one `git checkout .` away from total loss.
+
+**Gate:** Only execute this phase if verify-suite.ps1 passed with 0 failures in the CHRONICLE phase. Never commit a broken state.
+
+**Procedure:**
+1. Stage all changed files in the suite root: `git add -A` from the skills directory.
+2. Commit with the message format: `TPS Skill Suite vX.Y.Z — Run N: <one-line summary>` where the summary matches the SCORECARD row's Result column.
+3. Create an annotated tag: `git tag -a vX.Y.Z -m "vX.Y.Z"`
+4. **Do not push.** Pushing is a shared-system action and requires explicit user consent. Report that the commit and tag are local and offer to push if the user wants.
+
+For version format conventions and verification of version-string completeness, reference the **project-increment** skill.
+
+**If the suite is not in a git repository**, skip this phase and note the limitation. Do not initialize a repository without user consent.
+
+**If staging reveals unrelated changes** (files outside the skills suite), warn the user and stage only the suite files rather than using a blanket `git add -A`.
+
 ## Rules
 
 - **Kata is an orchestrator, not a replacement.** It calls the individual skills — it doesn't duplicate their logic. If you need just Muda, use Muda directly. Kata is for when you want the full picture.
@@ -255,4 +276,5 @@ After chronicling, step back and analyze the GENBA.md data across runs. This is 
 - **Quick Muda wins before methodology.** Obvious waste (dead code, unused deps) should be pruned before running kaizen or kaikaku. Less to analyze, less to improve, less to redesign.
 - **Partial runs are fine.** User can request "just the diagnosis" (Phases 1-2), "diagnose and plan but don't execute" (Phases 1-2 + methodology planning), or the full cycle.
 - **Self-targeting is expected.** Running Kata on the TPS skills themselves is how the skill suite improves. GENBA.md entries for self-targeting runs are the experiment's data.
+- **Persist every run.** After REFLECT, commit to git (Phase 6). The disaster floor must never be more than one run deep. Do not push without explicit user consent.
 - **Context awareness.** A full Kata run can be large. If the target project is too big for a single run, scope the diagnosis to a specific module or layer. If context fills during execution, summarize intermediate findings and continue — don't silently drop phases. Tell the user when you're summarizing rather than reporting in full.

@@ -1,6 +1,6 @@
 ﻿---
 name: kaizen
-version: 1.15.0
+version: 1.21.0
 description: 'Kaizen (改善) — Iterative project improvement cycle — audit, rate, challenge blind spots, prioritize by ROI, research solutions, plan with solve-by-design thinking, implement highest-leverage changes, then re-audit. Includes blind spot analysis (what are we NOT seeing?) and cross-model validation (don''t let the same model grade its own work). Part of the TPS skill family: Muda (waste), Mura (unevenness), Muri (overburden), Kaizen (incremental), Kaikaku (radical), Kata (orchestrator). Repeats until rating ≥ target or audit finds only novelty gaps. USE WHEN: audit, review, rate, improve, make impressive, quality loop, iterate on quality, kaizen, evolve this, what would make this better, compare to state of art, ROI analysis, improvement cycle, blind spots, what am I missing.'
 argument-hint: 'Optional: specify target area (architecture, security, performance, etc.), target rating (default 8.5), or specific concern to focus on'
 ---
@@ -107,11 +107,11 @@ Score the project on a 1-10 scale across these dimensions. The number matters on
 - **Web apps/APIs:** Security ×2, Reliability ×1.5
 - **Research/experimental:** Innovation ×2, Documentation ×1.5
 - **CLI tools:** DX ×2, Documentation ×1.5
-- **Documents/instructions:** adapt the dimensions toward clarity, completeness, internal consistency, audience fit, actionability, depth, structure, and innovation. Equal weight unless context suggests otherwise.
+- **Documents/instructions:** adapt the dimensions toward clarity, completeness, internal consistency, audience fit, actionability, depth, structure, innovation, and trustworthiness. Equal weight unless context suggests otherwise.
 
 Calculate the weighted average. Don't hand-wave — show which weights you used if non-default.
 
-**For non-code targets** (documents, designs, instructions), replace the code dimensions with: clarity, completeness, internal consistency, audience fit, actionability, depth, structure, and innovation. For each, ask: does this document achieve its purpose for its intended audience? The scoring discipline stays the same: be honest, be specific, and show your reasoning.
+**For non-code targets** (documents, designs, instructions), replace the code dimensions with: clarity, completeness, internal consistency, audience fit, actionability, depth, structure, innovation, and trustworthiness. For each, ask: does this document achieve its purpose for its intended audience? The scoring discipline stays the same: be honest, be specific, and show your reasoning.
 
 **Cross-model validation:** Prefer evaluator independence. If multiple models are available, use one model for RATE and CHECK and another for ACT. If the same model must do both, note the limitation explicitly.
 
@@ -278,7 +278,8 @@ For each selected item, research and design a solution.
   - If Overall ≥ target (default 8.5): **"Target reached. The project scores X.X/10."**
   - If audit shows the project is novel/mature and the only gap is real-world usage: **"The project is novel and well-engineered. What remains is test runs and implementation proof — the code itself is there."**
   - If Phase 1 revealed fundamental brokenness (doesn't build, no working code, wrong problem entirely): **"The project needs foundational work before kaizen is useful. Recommended: [specific foundational fix] first, then invoke kaizen."**
-  - If two consecutive cycles show delta of 0 or within ±0.2: **"Converged. Further single-model cycles unlikely to help. Consider cross-model evaluation."**
+  - If two consecutive cycles show delta of 0 or within ±0.2 with the **same evaluator**: **"Local plateau. Further single-model cycles unlikely to help. Per Principle 3 (Convergence Is Silence) this is *not* convergence — convergence requires 3 consecutive runs by 3 distinct evaluators with the same score and zero artifact changes. Schedule a cross-model run."**
+  - If 3 consecutive runs by 3 distinct evaluators have the same score AND made zero artifact changes: **"Converged per Principle 3. The loop has nothing left to add."**
   - Otherwise: **"Current score: X.X. Invoke kaizen again for the next cycle."** List what the next cycle should focus on.
 
 **If a GENBA.md exists** in the skills suite root (`~/.copilot/skills/GENBA.md`) or the project root, prepend a summary entry so the active ledger stays newest-first:

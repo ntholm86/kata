@@ -1,6 +1,6 @@
 ﻿---
 name: mura
-version: 1.15.0
+version: 1.21.0
 description: 'Mura (斑) — Unevenness detection and leveling for software projects. Find inconsistencies in style, patterns, coverage, error handling, API design, naming, and quality distribution. Unevenness is the root cause of overburden (Muri) and waste (Muda). Adapted from Toyota Production System. Standalone skill — no dependencies. USE WHEN: inconsistent, uneven, mixed styles, naming conventions, standardize, level, harmonize, mura, why does this feel messy, normalize, make consistent, code style, pattern consistency.'
 argument-hint: 'Optional: specify focus area (naming, error handling, API style, test coverage, patterns), scope (full project, module, file pair), or reference standard to level against'
 ---
@@ -206,7 +206,7 @@ Execute the leveling plan. For each item:
 - [Did leveling reduce any Muri or Muda? Note it here]
 ```
 
-**If a GENBA.md exists**, prepend a summary entry so the active ledger stays newest-first:
+**If a GENBA.md exists** (look in the skills suite root `~/.copilot/skills/GENBA.md` or the project root), prepend a summary entry so the active ledger stays newest-first:
 
 ```markdown
 ### Mura — [date]

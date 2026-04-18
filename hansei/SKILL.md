@@ -1,6 +1,6 @@
 ﻿---
 name: hansei
-version: 1.15.0
+version: 1.21.0
 description: 'Hansei (反省) — Structured reflection on the improvement loop itself. Reads the GENBA.md trail and prior reports to surface recurring findings, blind spots, methodology effectiveness, and what the loop has been silently ignoring. Hansei is meta-Kaizen — it improves the improvement process, not the artifact. USE WHEN: reflect, retrospective, what are we missing, blind spots in the loop, why does this keep recurring, hansei, examine the trail, meta-improvement, loop critique, what hasn''t worked, why is the score plateauing.'
 argument-hint: 'Optional: scope (last N runs, full history, specific dimension), focus (recurring patterns, blind spots, methodology effectiveness, evaluator behavior)'
 ---
@@ -108,7 +108,7 @@ Output format:
 
 ### Phase 6: RECORD — Prepend to the Trail
 
-Hansei is itself part of the trail. Prepend to GENBA.md so the active ledger stays newest-first:
+Hansei is itself part of the trail. Prepend to GENBA.md (look in the skills suite root `~/.copilot/skills/GENBA.md` or the project root) so the active ledger stays newest-first:
 
 ```markdown
 ### Hansei — [date]
@@ -131,6 +131,6 @@ Then **stop**. Hansei surfaces insight. The user (or the next Kaizen/Kaikaku/Kat
 - **Silence is the highest-value phase.** Most reflections only find what's already visible. The discipline is finding what isn't.
 - **Cite the trail.** Every finding must reference specific runs. Hansei without citations is opinion.
 - **Periodic, not only reactive.** Schedule Hansei every N runs (default 5) even when nothing feels wrong. The blind spots are exactly when nothing feels wrong.
-- **Hansei can find that Hansei isn't helping.** If two consecutive Hansei runs surface no actionable findings, the loop has converged at the meta-level too. Name it and stop.
+- **Hansei can find that Hansei isn't helping.** If two consecutive Hansei runs surface no actionable findings, the loop is at a **meta-level plateau**. Per Principle 3 (Convergence Is Silence), this is *not* meta-convergence — that requires the same pattern to hold across distinct evaluators with zero artifact changes. Record the plateau, schedule a cross-model Hansei to confirm, and only declare meta-convergence after Principle 3's threshold is met.
 - **Don't add a skill on every Hansei.** The temptation will be strong. The bar for adding a new skill is: it fills a structural capability gap, not just a recurring topic.
 - **Chronicle in SCORECARD.md.** After reflection, the orchestrator (Kata) should update the high-level `SCORECARD.md` if the Hansei findings represent a major turning point or invalidation.

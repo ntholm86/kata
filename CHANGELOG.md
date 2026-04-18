@@ -9,6 +9,78 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [1.21.0] - 2026-04-18
+
+### Added
+
+- **`kata/SKILL.md` Phase 6: PERSIST:** New phase after REFLECT that commits the suite state to git after a successful run (0 verify-suite.ps1 failures). Commit message format: `TPS Skill Suite vX.Y.Z — Run N: <summary>`. Creates annotated tag. Does not push without explicit user consent. Prevents the Run 29 failure class where 5 runs of uncommitted work were lost to a single `git checkout .`.
+- **`kata/SKILL.md` Rules:** Added "Persist every run" rule referencing Phase 6.
+
+### Changed
+
+- **`kata/SKILL.md` description:** Updated to include "persist to git" in the skill purpose line.
+- **`kata/SKILL.md` opening line:** Changed from "Diagnose, decide, execute, chronicle" to "Diagnose, decide, execute, chronicle, persist."
+- **`project-increment` skill:** Now formally referenced by Kata Phase 6: PERSIST for git commit/tag conventions. No longer an orphan in the suite — it has a defined role as the authority for version-format conventions.
+
+## [1.20.0] - 2026-04-18
+
+### Added
+
+- **`verify-suite.ps1` Check 10 — Governing-document integrity:** Asserts that `PRINCIPLES.md` contains all three expected principles by heading (`## Principle 1: Commander's Intent`, `## Principle 2: Observable Autonomy`, `## Principle 3: Convergence Is Silence`). Fails if any are missing.
+- **`verify-suite.ps1` Check 11 — CHANGELOG version contiguity:** Parses `## [X.Y.Z]` release headings newest-first and asserts each step is exactly +1 patch, +1 minor (resetting patch to 0), or +1 major (resetting minor and patch). Fails on any gap, catching silently lost release entries.
+- **`verify-suite.ps1` Check 12 — SCORECARD↔GENBA per-run coverage:** For every non-`**Invalidated**` SCORECARD row, asserts a matching `## Run N` heading exists in GENBA. Warns on mismatches (does not fail, since older runs may be legitimately archived).
+
+### Fixed
+
+- **`PRINCIPLES.md`:** Restored Principle 3 (Convergence Is Silence) section, three-principle interaction diagram, and "all three principles" phrasing in the "For skill authors" lead. These were silently reverted during Run 29 when a `git checkout .` recovery shortcut undid Run 26's work.
+- **`CHANGELOG.md`:** Restored v1.16.0, v1.17.0, and v1.18.0 entries (silently lost during Run 29's git revert).
+- **`GENBA.md`:** Restored Run 26, Run 27, and Run 28 entries in newest-first order between Run 29 and Run 25 (silently lost during Run 29's git revert).
+- **`SCORECARD.md`:** Re-applied Run 26's deletion of the ~175-line "Key Deltas By Run" section (which Run 29's git revert had restored). Re-simplified "Current Status" to three stable bullets and removed the stale per-run delta-trajectory line from Cross-Model Notes (the run table is the source of truth).
+- **`kaizen/SKILL.md`:** Restored Run 28's `trustworthiness` in both non-code dimension lists (RATE phase weighting guide + "For non-code targets" paragraph) and Run 27's CHECK exit-condition rewrite (Principle 3 local-plateau vs true-convergence distinction).
+- **`kata/SKILL.md`:** Restored Run 27's zero-findings rewrite (candidate silence + Principle 3 silence counter), Run 27's REFLECT trend-analysis update (silence signal in place of convergence estimate), and Run 26's "Fix globally, not locally" rule in Phase 3 EXECUTE.
+- **`hansei/SKILL.md`:** Restored Run 27's meta-stop rewrite ("meta-level plateau pending Principle 3 confirmation") and Run 29's `~/.copilot/skills/GENBA.md` path lookup string in Phase 6 RECORD.
+- **`mura/SKILL.md`, `muri/SKILL.md`, `kaikaku/SKILL.md`:** Restored Run 29's `~/.copilot/skills/GENBA.md` path lookup string in REPORT phase.
+- **All 7 SKILL.md frontmatter versions:** Restored from regressed `1.15.0` to `1.20.0` (Runs 16-19 release tags retained in this CHANGELOG since their content is restored in this same release; v1.20.0 supersedes them all).
+
+### Documentation
+
+- **`GENBA.md` Run 30 entry:** Includes the mandatory periodic Hansei block (5 runs since Run 25). Hansei records the loop's primary blind spot — *mechanical verification cannot protect content it does not read* — and adds a binding operational rule: `git checkout .` / `git restore .` are forbidden as recovery shortcuts.
+
+## [1.19.0] - 2026-04-18
+
+### Fixed
+
+- **`mura`, `muri`, `kaikaku`, `hansei` skills REPORT/RECORD phase:** Added explicit `GENBA.md` location lookup string (`~/.copilot/skills/GENBA.md` or project root) to the prepend instructions. Without this path explicitly stated, these standalone tools orphan their ledgers when run without an orchestrator like Kata or Kaizen.
+
+## [1.18.0] - 2026-04-18
+
+### Fixed
+
+- **`kaizen` skill RATE phase:** Non-code target dimension lists (weighting guide and "For non-code targets" paragraph) now include `trustworthiness` as the 9th dimension, matching SCORECARD.md Scoring Rubric v1. The two prior mentions listed only 8 dimensions, omitting Trustworthiness — the dimension added in Run 17 specifically to capture verification infrastructure.
+
+## [1.17.0] - 2026-04-18
+
+### Changed
+
+- **`kaizen` skill CHECK exit condition:** Replaced the old `±0.2 for two cycles = converged` rule with the Principle 3 distinction between local plateau and true convergence. Kaizen now requires 3 consecutive runs, 3 distinct evaluators, same score, and zero artifact changes before using the word "converged."
+- **`kata` skill:** Zero-findings handling and REFLECT trend analysis now distinguish candidate silence from convergence and track a Principle 3 silence counter rather than a score-only convergence estimate.
+- **`hansei` skill:** Meta-level stopping guidance now treats repeated no-finding reflections as a plateau signal pending Principle 3-style cross-evaluator confirmation, rather than declaring meta-convergence after two same-pattern runs.
+
+### Fixed
+
+- **`SCORECARD.md`:** Added explicit pre-Principle-3 labeling to historical convergence language so the live ledger no longer contradicts the current "Convergence Is Silence" rule.
+
+## [1.16.0] - 2026-04-18
+
+### Added
+
+- **`kata` skill EXECUTE phase:** "Fix globally, not locally" rule — when a finding targets a pattern, search the entire target for all instances before marking it fixed. Prevents the multi-run recurrence pattern seen in Runs 22–24.
+
+### Removed
+
+- **`SCORECARD.md` Key Deltas By Run section:** ~175 lines of per-run narrative that duplicated `GENBA.md` at lower fidelity. Every run this section existed, it required manual synchronization and repeatedly drifted (Runs 19, 21, 25). The run table and `GENBA.md` are the authoritative records.
+- **`SCORECARD.md` Current Status narrative:** Replaced 4 run-specific bullets (which drifted every run) with 2 stable bullets pointing to source-of-truth locations. First net deletion in the suite's history — directly addresses Hansei Run 8 Finding 2 ("suite only grows").
+
 ## [1.15.0] - 2026-04-18
 
 ### Changed
