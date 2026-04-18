@@ -2,6 +2,51 @@
 ---
 
 ---
+## Run 38 — 2026-04-19
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.4 |
+| Trigger | User intent: rerun the lost GPT-5.4 standards validation |
+| Methodology | Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 1 |
+| Muri | — | — |
+| Muda | — | — |
+| Causal chains | — | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | **Timestamp-only integrity churn.** `verify-suite.ps1` rewrote `INTEGRITY.json` on every clean run by updating `last_verified` even when all tracked hashes and suite version were unchanged. That created artificial dirty state after verification, weakening the suite's CMMI configuration-management evidence and making Principle 3 candidate-silence runs noisier than they should be. | Mura | High | Yes | First |
+
+### Actions Taken
+- Updated `verify-suite.ps1` Check 7 to compare the full tracked snapshot and skip rewriting `INTEGRITY.json` when hashes and suite version are unchanged.
+- Kept added/removed/modified tracked-file reporting explicit so material snapshot changes still surface clearly.
+- Updated `STANDARDS.md` to reflect the stronger CM/PPQA claim: stable no-change baselines, not just broad file coverage.
+- Bumped all skill versions to v1.28.0 and recorded the rerun in the suite ledgers.
+
+### Outcome
+- Score: 10.0 → 10.0 (+0.0)
+- The standards claim is tighter now: the verifier no longer manufactures non-material configuration churn on clean runs.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite checks | 13 | 13 | 0 | No |
+| Rubric dimensions | 10 | 10 | 0 | No |
+| Hashed system files | 15 | 15 | 0 | No |
+| Dirty files after clean verify | 1 | 0 | -1 | No |
+
+### Observations
+- Run 37 fixed *coverage* of the integrity snapshot. Run 38 fixed *stability semantics* of that snapshot. Together they make the CM/PPQA claim materially stronger.
+- This was a second-order standards defect: the mapping text was mostly right, but the verifier's operational behavior still contradicted the idealized claim.
+
+---
 ## Run 37 — 2026-04-18
 
 | Field | Value |

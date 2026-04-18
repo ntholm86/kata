@@ -196,32 +196,67 @@ foreach ($ledger in @('GENBA.md', 'SCORECARD.md', 'CHANGELOG.md', 'PRINCIPLES.md
     }
 }
 
+$currentVersion = if ($unique.Count -eq 1) { $unique[0] } else { 'MISMATCH' }
+$shouldWriteSnapshot = $true
+
 if (Test-Path $hashFile) {
-    $stored = Get-Content $hashFile -Raw | ConvertFrom-Json
+    $stored = Get-Content $hashFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    $storedFiles = @{}
+    foreach ($prop in $stored.files.PSObject.Properties) {
+        $storedFiles[$prop.Name] = $prop.Value
+    }
+
+    $added = @()
+    $removed = @()
     $modified = @()
-    $current.GetEnumerator() | ForEach-Object {
-        $key = $_.Key
-        $val = $_.Value
-        $prev = $stored.files.PSObject.Properties | Where-Object { $_.Name -eq $key } | Select-Object -ExpandProperty Value
-        if ($prev -and $prev -ne $val) {
+
+    foreach ($key in $current.Keys) {
+        if (-not $storedFiles.ContainsKey($key)) {
+            $added += $key
+            continue
+        }
+
+        $val = $current[$key]
+        $prev = $storedFiles[$key]
+        if ($prev -ne $val) {
             $modified += $key
         }
     }
+
+    foreach ($key in $storedFiles.Keys) {
+        if (-not $current.Contains($key)) {
+            $removed += $key
+        }
+    }
+
+    if ($added.Count -gt 0) {
+        Info "Files added to snapshot: $($added -join ', ')"
+    }
+    if ($removed.Count -gt 0) {
+        Info "Files removed from snapshot: $($removed -join ', ')"
+    }
     if ($modified.Count -gt 0) {
         Info "Files modified since last snapshot: $($modified -join ', ')"
-    } else {
+    }
+
+    if ($added.Count -eq 0 -and $removed.Count -eq 0 -and $modified.Count -eq 0 -and $stored.suite_version -eq $currentVersion) {
         Pass 'All files match stored hashes'
+        $shouldWriteSnapshot = $false
     }
 }
 
-# Write new snapshot
-$snapshot = [ordered]@{
-    last_verified = (Get-Date -Format 'o')
-    suite_version = if ($unique.Count -eq 1) { $unique[0] } else { 'MISMATCH' }
-    files         = $current
+# Write new snapshot only when tracked content materially changed.
+if ($shouldWriteSnapshot) {
+    $snapshot = [ordered]@{
+        last_verified = (Get-Date -Format 'o')
+        suite_version = $currentVersion
+        files         = $current
+    }
+    $snapshot | ConvertTo-Json -Depth 3 | Set-Content $hashFile -Encoding UTF8
+    Pass "Hash snapshot written to INTEGRITY.json"
+} else {
+    Pass 'Hash snapshot unchanged; INTEGRITY.json not rewritten'
 }
-$snapshot | ConvertTo-Json -Depth 3 | Set-Content $hashFile -Encoding UTF8
-Pass "Hash snapshot written to INTEGRITY.json"
 
 # -- Check 8: Suite skill inventory -------------------------------------------
 Write-Host "[8/13] Suite skill inventory" -ForegroundColor White

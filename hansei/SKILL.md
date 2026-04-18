@@ -1,6 +1,6 @@
 ﻿---
 name: hansei
-version: 1.27.0
+version: 1.28.0
 description: 'Hansei (反省) — Structured reflection on the improvement loop itself. Reads the GENBA.md trail and prior reports to surface recurring findings, blind spots, methodology effectiveness, and what the loop has been silently ignoring. Hansei is meta-Kaizen — it improves the improvement process, not the artifact. USE WHEN: reflect, retrospective, what are we missing, blind spots in the loop, why does this keep recurring, hansei, examine the trail, meta-improvement, loop critique, what hasn''t worked, why is the score plateauing.'
 argument-hint: 'Optional: scope (last N runs, full history, specific dimension), focus (recurring patterns, blind spots, methodology effectiveness, evaluator behavior)'
 ---

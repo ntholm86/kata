@@ -9,6 +9,13 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [1.28.0] - 2026-04-19
+
+### Changed
+
+- **Stable integrity snapshots on clean runs:** `verify-suite.ps1` no longer rewrites `INTEGRITY.json` when tracked hashes and suite version are unchanged. This removes timestamp-only churn, keeps no-change verification runs clean, and strengthens the suite's configuration-management baseline semantics.
+- **STANDARDS.md revalidated by GPT-5.4:** The external-standard mapping now explicitly reflects that configuration-management evidence includes stable no-change baselines, not just broad snapshot coverage.
+
 ## [1.27.0] - 2026-04-18
 
 ### Changed

@@ -1,6 +1,6 @@
 ﻿---
 name: project-increment
-version: 1.27.0
+version: 1.28.0
 description: 'Perform a project version increment — review git changes, verify build, determine semver bump level (major/minor/patch), update version strings across all files, write changelog entry, update README. Optionally commit, tag, and push when explicitly requested. USE WHEN: releasing a version, bumping version, writing changelog, doing a project increment, preparing a release, version bump.'
 argument-hint: 'Optional: specify bump level (major, minor, patch) or let the skill determine it from changes'
 ---

@@ -35,14 +35,14 @@ Created Run 36 to make the alignment explicit and the gaps visible.
 | CMMI Practice Area | Suite Implementation | Level | Status |
 |--------------------|---------------------|:-----:|:------:|
 | **Requirements Management (REQM)** | PRINCIPLES.md defines 3 architectural constraints. Skills implement principles. verify-suite.ps1 validates mechanically | L3 | Meets |
-| **Process Quality Assurance (PPQA)** | verify-suite.ps1 (13 checks), metrics.ps1 (6 metrics), INTEGRITY.json (hash snapshots covering ledgers, standard docs, and verification scripts) | L3 | Meets |
-| **Configuration Management (CM)** | Git versioning, annotated tags, CHANGELOG.md (Keep a Changelog format), PERSIST phase after every run, script self-verification | L3 | Meets |
+| **Process Quality Assurance (PPQA)** | verify-suite.ps1 (13 checks), metrics.ps1 (6 metrics), INTEGRITY.json (hash snapshots covering ledgers, standard docs, and verification scripts without timestamp-only churn on no-change runs) | L3 | Meets |
+| **Configuration Management (CM)** | Git versioning, annotated tags, CHANGELOG.md (Keep a Changelog format), PERSIST phase after every run, script self-verification, stable no-change integrity baselines | L3 | Meets |
 | **Causal Analysis & Resolution (CAR)** | 3M causal chains (Mura causes Muri causes Muda). GENBA records root causes and whether fixes stuck. Recurrence detection across runs | L5 | Meets |
 | **Organizational Performance Management (OPM)** | METRICS_HISTORY.md tracks quantitative process baselines over time. metrics.ps1 computes statistical indicators. Trend alerts detect out-of-control conditions | L5 | Meets |
 | **Decision Analysis & Resolution (DAR)** | ROI-based finding prioritization. Mura-first principle. Kaizen vs Kaikaku selection criteria. Phase 2 CHALLENGE provides structured methodology selection | L3 | Meets |
 | **Quantitative Project Management (QPM)** | SCORECARD trajectory data. metrics.ps1 statistical analysis. Inter-rater agreement measurement. METRICS_HISTORY.md for SPC | L4 | Meets |
 
-**Assessment:** The suite implements practices from CMMI Levels 3-5. Key L5 capabilities (Causal Analysis, Organizational Performance Management) are present and instrumented. The primary gap is formal traceability (PRINCIPLES to skills to verification checks) which is implicit rather than documented. Since Kata Run 37, the integrity of the measurement tools themselves (`verify-suite.ps1`, `metrics.ps1`, `STANDARDS.md`, `METRICS_HISTORY.md`) is mechanically verified by the hash-snapshot, fulfilling rigorous CM/PPQA requirements. **Meets CMMI L4, partial L5.**
+**Assessment:** The suite implements practices from CMMI Levels 3-5. Key L5 capabilities (Causal Analysis, Organizational Performance Management) are present and instrumented. The primary gap is formal traceability (PRINCIPLES to skills to verification checks) which is implicit rather than documented. Since Kata Run 37, the integrity of the measurement tools themselves (`verify-suite.ps1`, `metrics.ps1`, `STANDARDS.md`, `METRICS_HISTORY.md`) is mechanically verified by the hash-snapshot, and since Kata Run 38 the snapshot remains stable on no-change runs rather than generating timestamp-only churn. **Meets CMMI L4, partial L5.**
 
 ### CMMI L5 Gap: Traceability Matrix
 
@@ -76,4 +76,4 @@ The relationship between PRINCIPLES (requirements), skills (implementation), and
 
 ---
 
-*This mapping was created during Kata Run 36 and validated/hardened in Kata Run 37 to ensure the verification tooling itself is formally configuration-managed.*
+*This mapping was created during Kata Run 36, validated/hardened in Kata Run 37 to ensure the verification tooling itself is formally configuration-managed, and refined in Run 38 to keep the integrity snapshot stable on no-change runs.*

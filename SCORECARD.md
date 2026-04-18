@@ -43,6 +43,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 35 | 2026-04-18 | Claude Opus 4.6 | 10.0 | 10.0 | +0.0 | 10.0 | Created metrics.ps1 (6 computable objective metrics), added Rubric v2 Calibration dimension, updated SCORECARD disclaimer with measurable calibration status. v1.25.0. |
 | 36 | 2026-04-18 | Claude Opus 4.6 | 10.0 | 10.0 | +0.0 | 10.0 | Benchmarked against PDCA/DMAIC/CMMI/NIST AI RMF. Added DMAIC Control phase (metrics history tracking with trend detection) and STANDARDS.md (external alignment mapping). v1.26.0. |
 | 37 | 2026-04-18 | Gemini 3.1 Pro (Preview) | 10.0 | 10.0 | +0.0 | 10.0 | Cross-model validation of STANDARDS.md. Identified CMMI PPQA/CM gap: measurement tools were not configuration-managed. Added verify-suite.ps1, metrics.ps1, METRICS_HISTORY.md, and STANDARDS.md to integrity hash snapshot. v1.27.0. |
+| 38 | 2026-04-19 | GPT-5.4 | 10.0 | 10.0 | +0.0 | 10.0 | Re-ran STANDARDS.md validation. Fixed verify-suite.ps1 timestamp-only INTEGRITY.json churn so clean runs keep stable CM baselines and candidate-silence runs can stay clean. v1.28.0. |
 
 ## Cross-Model Notes
 
