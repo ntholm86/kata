@@ -1,6 +1,6 @@
 ---
 name: muri
-version: 1.24.0
+version: 1.25.0
 description: 'Muri (無理) — Overburden detection and simplification for software projects. Find code, modules, functions, and architecture that are asked to do too much. God objects, deep nesting, high parameter counts, excessive responsibilities, overstretched modules. Overburden causes errors, slows development, and creates waste. Adapted from Toyota Production System. Standalone skill — no dependencies. USE WHEN: too complex, god object, do too much, simplify, decompose, split this, responsibilities, muri, overloaded, overburdened, SRP, single responsibility, this file is too big, too many parameters, spaghetti.'
 argument-hint: 'Optional: specify target (module, class, function, file), threshold overrides (max params, max lines, max responsibilities), or focus (structural vs cognitive overburden)'
 ---

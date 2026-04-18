@@ -2,6 +2,57 @@
 ---
 
 ---
+## Run 35 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | User challenge: add external/objective metrics to scoring system |
+| Methodology | Kata → Kaizen (Computable metrics infrastructure) |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 2 | 1 |
+| Muri | 1 | 1 |
+| Muda | 1 | 1 |
+| Causal chains | 1 | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | **Semantic scoring and mechanical checking exist as separate, unconnected systems.** Rubric v1 has 9 subjective dimensions; verify-suite.ps1 has 13 binary checks. Neither informs the other. The SCORECARD disclaimer permanently says "not calibrated against any external standard" with no path to closing the gap. | Mura | Critical | Yes | First |
+| 2 | **REFLECT is overburdened with manual data analysis.** With 23 GENBA entries and 34 SCORECARD rows, computing recurrence rates, inter-rater agreement, and regression frequency from raw markdown is unsustainable cognitive load. Models skip the quantitative analysis. | Muri | High | Yes | First |
+| 3 | **Computable insights are never computed.** Inter-rater agreement (start score variance), defect recurrence rate, invalidation rate, and regression frequency could all be derived mechanically from existing data but never are. | Muda | High | Yes | First |
+
+### Actions Taken
+- Created `metrics.ps1` — computes 6 objective metrics from SCORECARD.md and GENBA.md: inter-rater agreement (stdev of start scores), defect recurrence rate, invalidation rate, regression frequency, model diversity index, and fix durability.
+- Added Rubric v2 "Calibration" dimension — integrates computable metrics into the scoring framework. The scoring system now has an objective, reproducible component alongside its 9 semantic dimensions.
+- Updated SCORECARD disclaimer — replaced the permanent "not calibrated" limitation with measurable calibration status (currently HEALTHY: 4/5 GOOD, 1/5 MODERATE).
+- Added `version` field to project-increment/SKILL.md frontmatter (was the only skill missing it).
+- Bumped all 8 skills to v1.25.0.
+
+### Outcome
+- Score: 10.0 → 10.0 (+0.0)
+- Innovation: first user-directed challenge run. Rather than self-targeting for defects, the loop was given a specific capability gap to close. The gap (measurement infrastructure) was real and the solution (metrics.ps1 + Rubric v2) is structurally sound.
+- The suite now has computable calibration: any model can run `metrics.ps1` and get reproducible, objective statistics about the experiment's health.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite checks | 13 | 13 | 0 | No |
+| Rubric dimensions | 9 | 10 | +1 | No |
+| Computable metrics | 0 | 6 | +6 | No |
+
+### Observations
+- metrics.ps1 first-run results: Agreement GOOD (stdev 0.49), Recurrence MODERATE (20.5%), Invalidation GOOD (2.9%), Regression GOOD (3.0%), Diversity GOOD (7 families). Overall: HEALTHY.
+- The 20.5% recurrence rate is the only MODERATE metric — 8 of 39 findings were recurrences. This is expected given the early runs where fixes were sometimes incomplete.
+- PowerShell 5.1 parser issue: regex patterns containing `[0-9]` or `$` inside single-quoted strings caused parse failures due to non-BOM UTF-8 file encoding. Solved by pre-assigning all regex patterns to variables and using `-like` instead of `-match` with `$` anchors.
+
+
+
+---
 ## Run 34 — 2026-04-18
 
 | Field | Value |

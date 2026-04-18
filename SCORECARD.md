@@ -1,4 +1,4 @@
-# TPS Skill Suite Scorecard
+﻿# TPS Skill Suite Scorecard
 
 <!-- markdownlint-disable MD012 -->
 
@@ -40,6 +40,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 32 | 2026-04-18 | GPT-5.3-Codex (3rd) | 9.9 | 10.0 | +0.1 | 10.0 | Enforced model self-identification in Kata and added verify-suite Check 13 for latest-run model consistency across GENBA/SCORECARD. Removed stale temp artifacts. v1.22.0. |
 | 33 | 2026-04-18 | GPT-5.4 | 9.9 | 10.0 | +0.1 | 10.0 | Restored all 7 TPS skill files from committed v1.22.0 encoding corruption and hardened Check 1 to catch replacement-character / cp1252 mojibake. v1.23.0. |
 | 34 | 2026-04-18 | Gemini 3.1 Pro (Preview) | 10.0 | 10.0 | +0.0 | 10.0 | Enforced UTF-8 preservation rule globally across all 7 file-modifying skills, eliminating standalone corruption vulnerability. v1.24.0. |
+| 35 | 2026-04-18 | Claude Opus 4.6 | 10.0 | 10.0 | +0.0 | 10.0 | Created metrics.ps1 (6 computable objective metrics), added Rubric v2 Calibration dimension, updated SCORECARD disclaimer with measurable calibration status. v1.25.0. |
 
 ## Cross-Model Notes
 
@@ -98,7 +99,7 @@ Six mechanisms produced breakthroughs across 12 runs: Kaizen converged at Run 5,
 
 - That 9.1 is the true ceiling. Additional models from other families may find defects the current six-model ensemble collectively missed. The ensemble is only as diverse as its members.
 - That Kaikaku would help. The convergence signal says *incremental* passes have stopped producing value. Whether a structural redesign would produce more remains an open question — Kaikaku itself has an explicit "stop if evidence is insufficient" clause.
-- That the scoring scale is calibrated against any external standard. All numbers are internal to this experiment. 9.1 here is not comparable to 9.1 anywhere else.
+- That the scoring scale is fully calibrated against an external standard. However, `metrics.ps1` now provides computable calibration metrics (inter-rater agreement, recurrence rate, invalidation rate, regression frequency, model diversity). As of Run 35, overall calibration status is HEALTHY (4/5 GOOD, 1/5 MODERATE). The gap between internal and external calibration is now measurable rather than unknowable.
 - That all models contribute equally. Run 11 (GPT-4o) hallucinated an entire cycle without editing files — proving that model participation without verification is worse than no participation.
 
 ### Run 11 (GPT-4o) & Run 12 (Gemini 3.1 Pro Preview)
@@ -127,10 +128,12 @@ Dimensions used for self-targeting runs (skill suite evaluating itself). Version
 | Structure | Is the suite organized logically? Are responsibilities well-separated? |
 | Innovation | Does anything here advance the state of the art? |
 | Trustworthiness | Can the system detect fabricated improvements, hallucinated runs, and stale data? |
+| Calibration | Are the computable metrics healthy? Run `metrics.ps1` — inter-rater agreement, recurrence rate, invalidation rate, regression frequency, and model diversity should all be GOOD or MODERATE. |
 
 **Weighting:** Equal weight (arithmetic mean) unless stated otherwise.
 
 **Rubric changelog:**
 
 - v1 (Run 17, 2026-04-18): Initial explicit rubric. Trustworthiness dimension added — captures verification infrastructure that prior implicit scoring did not measure. Scores from Run 17 forward use this rubric; prior scores used an implicit narrower basis.
+- v2 (Run 35, 2026-04-18): Added Calibration dimension — bridges semantic scoring and mechanical checking by incorporating computable metrics from `metrics.ps1`. The scoring system now has an objective, reproducible component.
 

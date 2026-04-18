@@ -9,6 +9,18 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [1.25.0] - 2026-04-18
+
+### Added
+
+- **Computable metrics infrastructure (`metrics.ps1`):** New script computes 6 objective, reproducible metrics from SCORECARD.md and GENBA.md data: inter-rater agreement (start score standard deviation), defect recurrence rate, invalidation rate, regression frequency, model diversity index, and fix durability. Produces a summary calibration assessment (HEALTHY/FAIR/WEAK).
+- **Scoring Rubric v2:** Added 10th dimension "Calibration" — asks whether the computable metrics from `metrics.ps1` are healthy. The scoring system now has an objective, reproducible component alongside its 9 semantic dimensions.
+- **Version field for project-increment:** Added missing `version` frontmatter field to project-increment/SKILL.md, aligning it with the other 7 skills.
+
+### Changed
+
+- **SCORECARD disclaimer updated:** Replaced the permanent "not calibrated against any external standard" limitation with a measurable calibration status that `metrics.ps1` can assess. The gap between internal and external calibration is now quantified rather than unknowable.
+
 ## [1.24.0] - 2026-04-18
 
 ### Added

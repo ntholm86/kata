@@ -1,6 +1,6 @@
 ---
 name: muda
-version: 1.24.0
+version: 1.25.0
 description: 'Muda (無駄) — Waste elimination for software projects. Systematically find and remove what does not earn its maintenance cost. Adapted from Toyota Production System''s 7+1 waste types for codebases, documents, and designs. Standalone skill — no dependencies. USE WHEN: prune, simplify, what should I remove, reduce complexity, eliminate waste, dead code, unused, clean up, slim down, muda, declutter, lighten, trim, what here is unnecessary.'
 argument-hint: 'Optional: specify target (codebase, file, module, doc), focus area (deps, abstractions, tests, docs), or severity threshold (type-I only, type-II only, all)'
 ---

@@ -377,7 +377,7 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
         if (-not $latestBlock.Success) {
             Fail "Could not extract GENBA block for latest run $latestGenbaRun"
         } else {
-            $genbaModelMatch = [regex]::Match($latestBlock.Value, '(?m)^\|\s*Model\s*\|\s*(.*?)\s*\|$')
+            $genbaModelMatch = [regex]::Match($latestBlock.Value, '(?m)^\|\s*Model\s*\|\s*(.*?)\s*\|\s*$')
             if (-not $genbaModelMatch.Success) {
                 Fail "GENBA Run $latestGenbaRun missing '| Model | ... |' row"
             } else {
