@@ -1,6 +1,6 @@
----
+﻿---
 name: muda
-version: 1.26.0
+version: 1.27.0
 description: 'Muda (無駄) — Waste elimination for software projects. Systematically find and remove what does not earn its maintenance cost. Adapted from Toyota Production System''s 7+1 waste types for codebases, documents, and designs. Standalone skill — no dependencies. USE WHEN: prune, simplify, what should I remove, reduce complexity, eliminate waste, dead code, unused, clean up, slim down, muda, declutter, lighten, trim, what here is unnecessary.'
 argument-hint: 'Optional: specify target (codebase, file, module, doc), focus area (deps, abstractions, tests, docs), or severity threshold (type-I only, type-II only, all)'
 ---
@@ -194,3 +194,4 @@ Summarize what was done. This is the proof trail.
 - **Don't refactor.** Muda removes, it doesn't reshape. Refactoring is kaizen's job. If removal creates an opportunity to simplify what remains, note it — don't do it now.
 - **Partial passes are fine.** User can scope to one waste type ("just check dependencies"), one directory, or one confidence level ("only high-confidence items"). Match the user's intent.
 - **Track what you keep and why.** The "Challenged & Kept" section is as valuable as the removals. It's proof that remaining code was examined and justified — not just inherited.
+

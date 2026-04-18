@@ -42,6 +42,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 34 | 2026-04-18 | Gemini 3.1 Pro (Preview) | 10.0 | 10.0 | +0.0 | 10.0 | Enforced UTF-8 preservation rule globally across all 7 file-modifying skills, eliminating standalone corruption vulnerability. v1.24.0. |
 | 35 | 2026-04-18 | Claude Opus 4.6 | 10.0 | 10.0 | +0.0 | 10.0 | Created metrics.ps1 (6 computable objective metrics), added Rubric v2 Calibration dimension, updated SCORECARD disclaimer with measurable calibration status. v1.25.0. |
 | 36 | 2026-04-18 | Claude Opus 4.6 | 10.0 | 10.0 | +0.0 | 10.0 | Benchmarked against PDCA/DMAIC/CMMI/NIST AI RMF. Added DMAIC Control phase (metrics history tracking with trend detection) and STANDARDS.md (external alignment mapping). v1.26.0. |
+| 37 | 2026-04-18 | Gemini 3.1 Pro (Preview) | 10.0 | 10.0 | +0.0 | 10.0 | Cross-model validation of STANDARDS.md. Identified CMMI PPQA/CM gap: measurement tools were not configuration-managed. Added verify-suite.ps1, metrics.ps1, METRICS_HISTORY.md, and STANDARDS.md to integrity hash snapshot. v1.27.0. |
 
 ## Cross-Model Notes
 

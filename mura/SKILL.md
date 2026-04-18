@@ -1,6 +1,6 @@
----
+﻿---
 name: mura
-version: 1.26.0
+version: 1.27.0
 description: 'Mura (斑) — Unevenness detection and leveling for software projects. Find inconsistencies in style, patterns, coverage, error handling, API design, naming, and quality distribution. Unevenness is the root cause of overburden (Muri) and waste (Muda). Adapted from Toyota Production System. Standalone skill — no dependencies. USE WHEN: inconsistent, uneven, mixed styles, naming conventions, standardize, level, harmonize, mura, why does this feel messy, normalize, make consistent, code style, pattern consistency.'
 argument-hint: 'Optional: specify focus area (naming, error handling, API style, test coverage, patterns), scope (full project, module, file pair), or reference standard to level against'
 ---
@@ -225,3 +225,4 @@ Execute the leveling plan. For each item:
 - **Level toward the dominant pattern.** Unless there's a compelling reason not to, the cheapest and safest path is to make the outliers match the majority.
 - **Document the standard.** Once leveled, the dominant pattern becomes the official standard. If it's not already documented, add it to the project's conventions.
 - **Some unevenness is intentional.** Not all variation is accidental. If a deviation exists for a good reason (e.g., a performance-critical path using a different pattern), document it as an intentional exception, don't "level" it.
+

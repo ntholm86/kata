@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Mechanical integrity verification for the TPS Skill Suite.
 .DESCRIPTION
@@ -189,7 +189,7 @@ foreach ($skill in $skills) {
         $current[$rel] = (Get-FileHash $abs -Algorithm SHA256).Hash.Substring(0, 16)
     }
 }
-foreach ($ledger in @('GENBA.md', 'SCORECARD.md', 'CHANGELOG.md', 'PRINCIPLES.md')) {
+foreach ($ledger in @('GENBA.md', 'SCORECARD.md', 'CHANGELOG.md', 'PRINCIPLES.md', 'STANDARDS.md', 'METRICS_HISTORY.md', 'verify-suite.ps1', 'metrics.ps1')) {
     $abs = Join-Path $script:suiteRoot $ledger
     if (Test-Path $abs) {
         $current[$ledger] = (Get-FileHash $abs -Algorithm SHA256).Hash.Substring(0, 16)
@@ -427,3 +427,4 @@ if ($fc -gt 0) {
 
 Write-Host "`nAll checks passed." -ForegroundColor Green
 exit 0
+

@@ -9,6 +9,13 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [1.27.0] - 2026-04-18
+
+### Changed
+
+- **CMMI L3 Configuration Management/PPQA Gap Resolved:** Expanded `verify-suite.ps1` hash snapshot coverage (`INTEGRITY.json`) to include explicitly: `verify-suite.ps1` itself, `metrics.ps1`, `METRICS_HISTORY.md`, and `STANDARDS.md`. The suite now provides mechanical integrity validation over its own measurement and validation infrastructure.
+- **STANDARDS.md Revalidated:** Cross-model validation confirmed existing frameworks adherence, while closing the identified Traceability/PPQA verification gap for process tools.
+
 ## [1.26.0] - 2026-04-18
 
 ### Added

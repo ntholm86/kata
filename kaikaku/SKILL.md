@@ -1,6 +1,6 @@
----
+﻿---
 name: kaikaku
-version: 1.26.0
+version: 1.27.0
 description: 'Kaikaku (改革) — Radical redesign evaluation. When incremental improvement (kaizen) has converged or the architecture is fundamentally wrong, kaikaku asks: should we throw this away and rebuild? Evaluates whether the current system can reach the target through incremental changes or needs structural replacement. Produces a migration plan if redesign is warranted. USE WHEN: redesign, start over, rethink, rewrite this, architecture is wrong, kaizen isn''t working, converged too low, fundamental change, kaikaku, radical change, clean slate, rearchitect, pivot.'
 argument-hint: 'Optional: specify what feels wrong (architecture, data model, paradigm), target state if known, or constraints on the redesign (budget, timeline, backwards compatibility)'
 ---
@@ -231,3 +231,4 @@ Execute the migration plan phase by phase. After each phase:
 - **Run Muda first.** Before redesigning, eliminate waste. A system that looks like it needs kaikaku might just need aggressive pruning. Muda is cheaper — try it first.
 - **New baseline, then kaizen.** After kaikaku, immediately establish a new kaizen baseline. The redesigned system has its own improvement trajectory.
 - **Chronicle in SCORECARD.md.** After the run, the orchestrator (Kata) should update the high-level `SCORECARD.md` with the final outcome.
+

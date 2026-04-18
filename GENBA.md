@@ -2,6 +2,48 @@
 ---
 
 ---
+## Run 37 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | User intent: Validate STANDARDS.md as recommended by Run 36 Hansei |
+| Methodology | Kaizen |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 1 |
+| Muri | — | — |
+| Muda | — | — |
+| Causal chains | — | — |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | **Unverified Verification Tools (PPQA Gap)**. `STANDARDS.md` claims CMMI L3 Process Quality Assurance (PPQA) & Config Management (CM) using `verify-suite.ps1`. But `verify-suite.ps1`'s Check 7 hashes only ledgers and skills. `verify-suite.ps1` itself, `metrics.ps1`, `METRICS_HISTORY.md`, and `STANDARDS.md` were exempt from mechanical hash checks. The system could not mechanically detect tampering with its own verification tools. | Mura | High | Yes | First |
+
+### Actions Taken
+- Updated `verify-suite.ps1` Check 7 (File-hash snapshot) to include four new ledger and script dependencies: `STANDARDS.md`, `METRICS_HISTORY.md`, `verify-suite.ps1`, and `metrics.ps1`.
+- Regenerated `INTEGRITY.json` by running `verify-suite.ps1` to capture the new hashes.
+- Audited `STANDARDS.md` claims, found them mostly accurate (except for the gap addressed above), and explicitly updated it to state that verification tools are now configuration-managed.
+- Bumped all project versions to v1.27.0.
+
+### Outcome
+- Score: 10.0 → 10.0 (+0.0)
+- The suite's claim to CMMI L3 PPQA and CM is no longer hypocritical. The verification tooling protects the verification tooling.
+- Cross-model validation accomplished: an independent evaluator validated the previous evaluator's external standards mapping.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| verify-suite checks | 13 | 13 | 0 | No |
+| Rubric dimensions | 10 | 10 | 0 | No |
+| Computable metrics | 6 | 6 | 0 | No |
+| Hashed system files | 11 | 15 | +4 | No |
+
+---
 ## Run 36 — 2026-04-18
 
 | Field | Value |

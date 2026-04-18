@@ -1,6 +1,6 @@
----
+﻿---
 name: kata
-version: 1.26.0
+version: 1.27.0
 description: 'Kata (型) — Full TPS treatment orchestrator. Runs the complete Toyota Production System diagnostic and improvement cycle: diagnose with all 3M lenses (Mura → Muri → Muda in causal order), assess severity to select methodology (Kaizen for incremental, Kaikaku for radical), execute the selected methodology, chronicle results in GENBA.md, and persist to git. The meta-pattern — the routine of improvement itself. USE WHEN: full treatment, kata, TPS, give me everything, full diagnostic, complete analysis, run all lenses, comprehensive improvement, what does this project need.'
 argument-hint: 'Optional: specify target project/module, skip diagnosis if already done ("just run kaizen"), or focus the diagnosis ("only check the API layer")'
 ---
@@ -282,3 +282,4 @@ For version format conventions and verification of version-string completeness, 
 - **Self-identify every run.** The executing model identity must be stated at run start and must match between `GENBA.md` and `SCORECARD.md` for the same run number.
 - **Preserve UTF-8 on bulk edits.** When shell commands rewrite skill markdown or ledgers, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and Japanese glyphs into mojibake.
 - **Context awareness.** A full Kata run can be large. If the target project is too big for a single run, scope the diagnosis to a specific module or layer. If context fills during execution, summarize intermediate findings and continue — don't silently drop phases. Tell the user when you're summarizing rather than reporting in full.
+

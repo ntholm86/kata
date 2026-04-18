@@ -1,6 +1,6 @@
----
+﻿---
 name: kaizen
-version: 1.26.0
+version: 1.27.0
 description: 'Kaizen (改善) — Iterative project improvement cycle — audit, rate, challenge blind spots, prioritize by ROI, research solutions, plan with solve-by-design thinking, implement highest-leverage changes, then re-audit. Includes blind spot analysis (what are we NOT seeing?) and cross-model validation (don''t let the same model grade its own work). Part of the TPS skill family: Muda (waste), Mura (unevenness), Muri (overburden), Kaizen (incremental), Kaikaku (radical), Kata (orchestrator). Repeats until rating ≥ target or audit finds only novelty gaps. USE WHEN: audit, review, rate, improve, make impressive, quality loop, iterate on quality, kaizen, evolve this, what would make this better, compare to state of art, ROI analysis, improvement cycle, blind spots, what am I missing.'
 argument-hint: 'Optional: specify target area (architecture, security, performance, etc.), target rating (default 8.5), or specific concern to focus on'
 ---
@@ -307,3 +307,4 @@ For each selected item, research and design a solution.
 - **The target is configurable.** If the user specifies a target rating, use it. Default is 8.5.
 - **Partial cycles are allowed.** If the user only wants an audit ("just rate it"), run Phases 0–3 and stop. If they want a plan but no implementation, stop after Phase 5. Match the user's intent — don't force a full cycle.
 - **Know when to hand off.** If waste is the primary finding, suggest **Muda**. If unevenness dominates, suggest **Mura**. If overburden is the issue, suggest **Muri**. If kaizen converges below target, suggest **Kaikaku**. For the full diagnostic cycle, suggest **Kata**. Kaizen is incremental improvement — other tools exist for other problems.
+
