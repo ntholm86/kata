@@ -9,6 +9,13 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [1.24.0] - 2026-04-18
+
+### Added
+
+- **Global UTF-8 enforcement:** Added the mandatory Preserve UTF-8 on bulk edits rule to kaizen, kaikaku, mura, muri, muda, hansei, and project-increment. Previously, only the orchestrator (kata) possessed this rule, leaving standalone runs vulnerable to codebase corruption via PowerShell's default non-UTF8 encoding in bulk text replacements.
+
+
 ## [1.23.0] - 2026-04-18
 
 ### Changed

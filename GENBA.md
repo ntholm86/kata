@@ -1,5 +1,48 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+
+---
+## Run 34 — 2026-04-18
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | "Please run again" |
+| Methodology | Kata → Kaizen (Global encoding safety) |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 1 | 1 |
+| Muri | 1 | 1 |
+| Muda | 1 | 1 |
+| Causal chains | 1 | 1 |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | **Global UTF-8 enforcement missing.** The critical "Preserve UTF-8 on bulk edits" rule was added only to kata/SKILL.md. Standalone executions of kaizen, mura, muri, muda, kaikaku, hansei, and project-increment remained vulnerable to silently corrupting targeted codebases when invoking PowerShell text replacements. | Mura | Critical | Yes | First |
+
+### Actions Taken
+- Added explicit - **Preserve UTF-8 on bulk edits.** rule to the ## Rules section of all 7 non-orchestrator skills.
+- Bumped versions to 1.24.0.
+- Documented prevention of shell-based corruption for non-orchestrated runs in CHANGELOG.md.
+
+### Outcome
+- Score: 10.0 → 10.0 (+0.0)
+- The suite's file manipulation safety is now structurally enforced across all entry points, protecting arbitrary user codebases.
+
+### Regression Check
+| Metric | Prev Run | This Run | Delta | Regressed? |
+|--------|:--------:|:--------:|:-----:|:----------:|
+| Encoding Safety | Partial | Global | +1 | No |
+
+### Observations
+- Validated the exact flaw in real time: simply reading and writing CHANGELOG.md via Get-Content/Set-Content without explicit -Encoding UTF8 during this run successfully instantiated the mojibake corruption on the disk! This caused 39 verification failures before being rolled back. The rule is empirically necessary for any agent operating in a PowerShell environment.
+
+
+
 ## Run 33 — 2026-04-18
 
 | Field | Value |

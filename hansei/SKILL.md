@@ -1,6 +1,6 @@
-﻿---
+---
 name: hansei
-version: 1.23.0
+version: 1.24.0
 description: 'Hansei (反省) — Structured reflection on the improvement loop itself. Reads the GENBA.md trail and prior reports to surface recurring findings, blind spots, methodology effectiveness, and what the loop has been silently ignoring. Hansei is meta-Kaizen — it improves the improvement process, not the artifact. USE WHEN: reflect, retrospective, what are we missing, blind spots in the loop, why does this keep recurring, hansei, examine the trail, meta-improvement, loop critique, what hasn''t worked, why is the score plateauing.'
 argument-hint: 'Optional: scope (last N runs, full history, specific dimension), focus (recurring patterns, blind spots, methodology effectiveness, evaluator behavior)'
 ---
@@ -125,6 +125,7 @@ Then **stop**. Hansei surfaces insight. The user (or the next Kaizen/Kaikaku/Kat
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **Hansei requires a trail.** No GENBA.md, no Hansei. Build the trail first.
 - **Hansei is meta-Kaizen, not super-Kaizen.** It finds limits of the loop, not defects of the artifact. If you find yourself listing artifact bugs, switch to Kaizen.
 - **One reflection per cycle.** Don't conflate reflection with action. Insight first, action separately.

@@ -1,6 +1,6 @@
-﻿---
+---
 name: muda
-version: 1.23.0
+version: 1.24.0
 description: 'Muda (無駄) — Waste elimination for software projects. Systematically find and remove what does not earn its maintenance cost. Adapted from Toyota Production System''s 7+1 waste types for codebases, documents, and designs. Standalone skill — no dependencies. USE WHEN: prune, simplify, what should I remove, reduce complexity, eliminate waste, dead code, unused, clean up, slim down, muda, declutter, lighten, trim, what here is unnecessary.'
 argument-hint: 'Optional: specify target (codebase, file, module, doc), focus area (deps, abstractions, tests, docs), or severity threshold (type-I only, type-II only, all)'
 ---
@@ -186,6 +186,7 @@ Summarize what was done. This is the proof trail.
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **Muda is subtractive only.** Never add code, features, or abstractions in a muda pass. If you find something to add, note it for kaizen.
 - **Prove it's waste before removing.** "Looks unused" is not sufficient. Verify: no callers, no imports, no config references, no dynamic loading.
 - **When in doubt, Type I.** If you can't prove it's unnecessary, flag it and move on. False positives (deleting something needed) are worse than false negatives (keeping something unnecessary).

@@ -1,6 +1,6 @@
-﻿---
+---
 name: muri
-version: 1.23.0
+version: 1.24.0
 description: 'Muri (無理) — Overburden detection and simplification for software projects. Find code, modules, functions, and architecture that are asked to do too much. God objects, deep nesting, high parameter counts, excessive responsibilities, overstretched modules. Overburden causes errors, slows development, and creates waste. Adapted from Toyota Production System. Standalone skill — no dependencies. USE WHEN: too complex, god object, do too much, simplify, decompose, split this, responsibilities, muri, overloaded, overburdened, SRP, single responsibility, this file is too big, too many parameters, spaghetti.'
 argument-hint: 'Optional: specify target (module, class, function, file), threshold overrides (max params, max lines, max responsibilities), or focus (structural vs cognitive overburden)'
 ---
@@ -181,6 +181,7 @@ Execute the decomposition plan one component at a time.
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **Muri simplifies, it doesn't restructure.** If the overburden is architectural (wrong paradigm, wrong boundaries), that's kaikaku's job. Muri decomposes within the existing architecture.
 - **Measure before and after.** Without metrics, you can't prove the overburden was reduced. Re-check signals after every decomposition.
 - **Don't split what's merely large.** A 400-line file with one cohesive responsibility is fine. Verify responsibility count before splitting.

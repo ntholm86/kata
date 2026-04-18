@@ -1,6 +1,6 @@
-﻿---
+---
 name: mura
-version: 1.23.0
+version: 1.24.0
 description: 'Mura (斑) — Unevenness detection and leveling for software projects. Find inconsistencies in style, patterns, coverage, error handling, API design, naming, and quality distribution. Unevenness is the root cause of overburden (Muri) and waste (Muda). Adapted from Toyota Production System. Standalone skill — no dependencies. USE WHEN: inconsistent, uneven, mixed styles, naming conventions, standardize, level, harmonize, mura, why does this feel messy, normalize, make consistent, code style, pattern consistency.'
 argument-hint: 'Optional: specify focus area (naming, error handling, API style, test coverage, patterns), scope (full project, module, file pair), or reference standard to level against'
 ---
@@ -220,6 +220,7 @@ Execute the leveling plan. For each item:
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **Mura is about consistency, not correctness.** The goal is to have one way of doing things, even if a "better" way exists in isolation. The cost of inconsistency is often higher than the benefit of local optimization.
 - **Level toward the dominant pattern.** Unless there's a compelling reason not to, the cheapest and safest path is to make the outliers match the majority.
 - **Document the standard.** Once leveled, the dominant pattern becomes the official standard. If it's not already documented, add it to the project's conventions.

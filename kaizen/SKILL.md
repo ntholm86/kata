@@ -1,6 +1,6 @@
-﻿---
+---
 name: kaizen
-version: 1.23.0
+version: 1.24.0
 description: 'Kaizen (改善) — Iterative project improvement cycle — audit, rate, challenge blind spots, prioritize by ROI, research solutions, plan with solve-by-design thinking, implement highest-leverage changes, then re-audit. Includes blind spot analysis (what are we NOT seeing?) and cross-model validation (don''t let the same model grade its own work). Part of the TPS skill family: Muda (waste), Mura (unevenness), Muri (overburden), Kaizen (incremental), Kaikaku (radical), Kata (orchestrator). Repeats until rating ≥ target or audit finds only novelty gaps. USE WHEN: audit, review, rate, improve, make impressive, quality loop, iterate on quality, kaizen, evolve this, what would make this better, compare to state of art, ROI analysis, improvement cycle, blind spots, what am I missing.'
 argument-hint: 'Optional: specify target area (architecture, security, performance, etc.), target rating (default 8.5), or specific concern to focus on'
 ---
@@ -296,6 +296,7 @@ For each selected item, research and design a solution.
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **One cycle per invocation.** Don't try to loop internally. The user decides when to run the next cycle.
 - **Challenge phase is NOT optional.** Phase 3 (CHALLENGE) is where the real value is. Skipping it produces audits that confirm what you already see. The point is to find what you DON'T see.
 - **Evaluator independence.** The model that rates (Phase 2) and checks (Phase 7) should ideally differ from the model that implements (Phase 6). If they are the same, say so.

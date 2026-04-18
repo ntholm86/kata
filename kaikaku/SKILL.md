@@ -1,6 +1,6 @@
-﻿---
+---
 name: kaikaku
-version: 1.23.0
+version: 1.24.0
 description: 'Kaikaku (改革) — Radical redesign evaluation. When incremental improvement (kaizen) has converged or the architecture is fundamentally wrong, kaikaku asks: should we throw this away and rebuild? Evaluates whether the current system can reach the target through incremental changes or needs structural replacement. Produces a migration plan if redesign is warranted. USE WHEN: redesign, start over, rethink, rewrite this, architecture is wrong, kaizen isn''t working, converged too low, fundamental change, kaikaku, radical change, clean slate, rearchitect, pivot.'
 argument-hint: 'Optional: specify what feels wrong (architecture, data model, paradigm), target state if known, or constraints on the redesign (budget, timeline, backwards compatibility)'
 ---
@@ -223,6 +223,7 @@ Execute the migration plan phase by phase. After each phase:
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **Never skip Phase 1.** The diagnosis gate exists because most rewrites are unnecessary. Prove the need.
 - **Kaikaku is not an escape from kaizen.** It's triggered BY kaizen convergence. If you haven't run kaizen, run kaizen first.
 - **One structural change at a time.** Redesigning the data model AND the concurrency model AND the deployment architecture simultaneously is Muri. Sequence them.

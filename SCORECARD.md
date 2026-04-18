@@ -1,4 +1,4 @@
-﻿# TPS Skill Suite Scorecard
+# TPS Skill Suite Scorecard
 
 <!-- markdownlint-disable MD012 -->
 
@@ -39,6 +39,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 31 | 2026-04-18 | Claude Opus 4.6 (12th) | 9.8 | 9.9 | +0.1 | 10.0 | Added Kata Phase 6: PERSIST — git commit after every successful run. Disaster floor is now 1 run deep. project-increment skill gets formal role. v1.21.0. |
 | 32 | 2026-04-18 | GPT-5.3-Codex (3rd) | 9.9 | 10.0 | +0.1 | 10.0 | Enforced model self-identification in Kata and added verify-suite Check 13 for latest-run model consistency across GENBA/SCORECARD. Removed stale temp artifacts. v1.22.0. |
 | 33 | 2026-04-18 | GPT-5.4 | 9.9 | 10.0 | +0.1 | 10.0 | Restored all 7 TPS skill files from committed v1.22.0 encoding corruption and hardened Check 1 to catch replacement-character / cp1252 mojibake. v1.23.0. |
+| 34 | 2026-04-18 | Gemini 3.1 Pro (Preview) | 10.0 | 10.0 | +0.0 | 10.0 | Enforced UTF-8 preservation rule globally across all 7 file-modifying skills, eliminating standalone corruption vulnerability. v1.24.0. |
 
 ## Cross-Model Notes
 

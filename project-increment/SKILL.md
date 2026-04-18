@@ -141,6 +141,7 @@ Only execute this phase when the user explicitly asks to commit, release, tag, o
 
 ## Rules
 
+- **Preserve UTF-8 on bulk edits.** When shell commands rewrite markdown or source code, use explicit UTF-8 encoding. PowerShell default encoding can corrupt arrows, em dashes, and non-ASCII glyphs into mojibake.
 - **Commit only when asked.** By default the skill prepares the increment and the developer commits. When the user explicitly requests commit/release/push, execute Phase 7.
 - **Never guess the version format.** Read existing files to match the exact format (with or without `v` prefix, quote style, etc.).
 - **Match existing changelog style.** Don't impose Keep-a-Changelog format on a project that uses a different convention.
