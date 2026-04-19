@@ -9,6 +9,18 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [1.31.0] - 2026-04-19
+
+### Changed
+
+- **Kaikaku: Rubric v3 adopted (Run 42).** Replaced ad-hoc 10-dimension rubric (v1/v2) with standards-anchored 8-dimension rubric grounded in PDCA, DMAIC, CMMI L3-5, NIST AI RMF, and foundational theory (Auftragstaktik, Meaningful Human Control). Two organizational-theater dimensions removed (Traceability, Risk Governance). SPC merged into Measurement Validity. New dimension: Autonomous Reasoning Fidelity — measures Commander's Intent and Observable Autonomy.
+- **Cross-model reviewed before adoption.** GPT-5.4 reviewed ("Adopt with modifications" — 5 fixes applied) and Gemini 3.1 Pro Preview reviewed ("Approve for Adoption"). Three model families participated in design/review.
+- **SCORECARD.md updated.** Rubric v3 section appended with 8 dimensions, external anchors, scoring guidance, and explicit non-goals. Rubric changelog updated. Current Status notes v3 as active from Run 42 forward. All v1/v2 content preserved unchanged.
+
+### Added
+
+- **RUBRIC_V3_PROPOSAL.md.** Full Kaikaku proposal documenting diagnosis, design principles, dimension rationale, migration plan, cross-model review addenda, and adoption status.
+
 ## [1.30.0] - 2026-04-19
 
 ### Documentation / Reflection

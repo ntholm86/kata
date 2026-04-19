@@ -47,6 +47,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 39 | 2026-04-19 | Gemini 2.5 Pro | 10.0 | N/A | N/A | TPS Skill Suite | **Invalidated** — Re-claimed Run 38's already-shipped INTEGRITY.json timestamp-churn fix as new work. Same defect class as Run 11. See Run 40 for the invalidation and process fix. |
 | 40 | 2026-04-19 | Claude Opus 4.7 | 10.0 | 10.0 | +0.0 | TPS Skill Suite | Invalidated Run 39 (hallucinated/duplicate run). Added mandatory Prior-run delta check to Kata Phase 1 GRASP (`git log` + CHANGELOG inspection). v1.29.0. |
 | 41 | 2026-04-19 | Claude Opus 4.7 | 10.0 | 10.0 | +0.0 | TPS Skill Suite (loop) | **Hansei run.** 4 meta-findings: hallucination only caught by next model, 9-run score plateau, 33-run-deferred external-target finding, 35 consecutive Kaizen runs. Most important: the loop has only ever validated itself. v1.30.0. |
+| 42 | 2026-04-19 | Claude Opus 4.6 | 10.0 (v2) | 10.0 (v2) | +0.0 | TPS Skill Suite | **Kaikaku: Rubric v3 adopted.** Standards-anchored 8-dimension rubric replaces ad-hoc v1/v2 (10 dims). Cross-model reviewed by GPT-5.4 + Gemini 3.1 Pro Preview. Predicted v3 baseline: ~7.2. v1.31.0. |
 
 ## Cross-Model Notes
 
@@ -60,7 +61,8 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 ## Current Status
 
 - The run table above is the source of truth for per-run scores and outcomes; `GENBA.md` is the source of truth for per-run findings, actions, and reasoning.
-- Scoring uses Rubric v1 (introduced Run 17) for all runs from Run 17 forward. Pre-v1 scores used an implicit narrower basis and are not directly comparable.
+- **Scoring uses Rubric v3 (adopted Run 42) for all runs from Run 42 forward.** Runs 17-41 used Rubric v1/v2 (10 dimensions). Pre-v1 scores used an implicit narrower basis. v3 scores are not directly comparable to v1/v2 scores — a v3 baseline of ~7.2 is expected and by design (see RUBRIC_V3_PROPOSAL.md).
+- v1/v2 scores are preserved unchanged in the run table for auditability.
 - Principle 3 silence counter: 0/3 (resets on any artifact change). See PRINCIPLES.md §3 for the convergence definition.
 
 ## Historical Snapshot (Through Run 13)
@@ -138,8 +140,37 @@ Dimensions used for self-targeting runs (skill suite evaluating itself). Version
 
 **Weighting:** Equal weight (arithmetic mean) unless stated otherwise.
 
+## Scoring Rubric (v3)
+
+Adopted Run 42 (2026-04-19). Standards-anchored 8-dimension rubric. Full rationale and cross-model review trail in `RUBRIC_V3_PROPOSAL.md`.
+
+| # | Dimension | External Anchor(s) | What to evaluate |
+|---|-----------|--------------------|-----------------|
+| 1 | Process Completeness | PDCA, DMAIC | Does each Kata run execute all phases and produce phase-specific artifacts? |
+| 2 | Causal Analysis | DMAIC Analyze, CMMI CAR (L5) | % of findings that identify root cause, not symptom. Recurrence rate is the inverse metric. |
+| 3 | Measurement Validity | DMAIC Measure/Control, CMMI QPM (L4) | Are metrics operationally defined, thresholds justified, values reproducible, trends tracked? |
+| 4 | Configuration Management | CMMI CM (L3) | Artifacts versioned, tagged, hash-snapshotted. INTEGRITY.json stable. CHANGELOG contiguous. Can you recover from a bad run? |
+| 5 | Cross-Evaluator Reliability | DMAIC Measure (Gauge R&R), Principle 3 | Inter-rater agreement and model diversity (via `metrics.ps1`). Finding overlap across families (currently manual). |
+| 6 | Instruction Clarity | CMMI REQM (L3) | Can any competent LLM follow without ambiguity? Are PRINCIPLES unambiguous and complete? |
+| 7 | Convergence Integrity | NIST AI RMF MEASURE, Principle 3 | Does the loop honor its stopping condition? Score changes correlate with artifact changes? No fabricated improvements? |
+| 8 | Autonomous Reasoning Fidelity | Auftragstaktik, Meaningful Human Control, Trust Calibration (Lee & See 2004), PRINCIPLES.md §1-2 | **(1) Freedom of thought:** remove examples and thresholds — would a competent agent still know what to do? **(2) Trail integrity:** can an absent human reconstruct what the agent did, why, and whether to trust it, from the GENBA trail alone? |
+
+**Weighting:** Equal weight (arithmetic mean).
+
+**Dimension #8 scoring guidance** (from GPT-5.4 review):
+- 10: skills consistently define destination without prescribing route; GENBA trail independently reconstructable end-to-end
+- 7-8: mostly open, minor prescriptive drift; trail strong but with occasional thin reasoning
+- 4-6: mixed open reasoning and checklist behavior; trail incomplete in important places
+- 0-3: heavily prescriptive or poorly observable; autonomy not trustworthy
+
+**Explicit non-goals** (removed dimensions with documented rationale):
+- **Formal Traceability** (CMMI L5): Out of scored scope. 3 principles and 7 skills do not require a formal matrix. Acknowledged gap against CMMI L5.
+- **Risk Governance** (NIST AI RMF): No production deployment, no user-safety risk. Quality risks caught by Convergence Integrity (#7) and verifier.
+- **Innovation**: No quality framework measures novelty. Valuable but unmeasurable by standards. Kept in v1 Internal Quality appendix.
+
 **Rubric changelog:**
 
 - v1 (Run 17, 2026-04-18): Initial explicit rubric. Trustworthiness dimension added — captures verification infrastructure that prior implicit scoring did not measure. Scores from Run 17 forward use this rubric; prior scores used an implicit narrower basis.
 - v2 (Run 35, 2026-04-18): Added Calibration dimension — bridges semantic scoring and mechanical checking by incorporating computable metrics from `metrics.ps1`. The scoring system now has an objective, reproducible component.
+- v3 (Run 42, 2026-04-19): **Kaikaku — standards-anchored rubric.** Replaced ad-hoc 10-dimension rubric with 8 dimensions grounded in PDCA, DMAIC, CMMI L3-5, NIST AI RMF, and foundational theory (Auftragstaktik, Meaningful Human Control). Cross-model reviewed by GPT-5.4 and Gemini 3.1 Pro Preview before adoption. See RUBRIC_V3_PROPOSAL.md for full rationale, review addenda, and migration plan. Expected score drop from 10.0 to ~7.2 is by design — the new rubric measures capabilities the old one was blind to.
 

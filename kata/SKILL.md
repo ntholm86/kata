@@ -1,6 +1,6 @@
 ﻿---
 name: kata
-version: 1.30.0
+version: 1.31.0
 description: 'Kata (型) — Full TPS treatment orchestrator. Runs the complete Toyota Production System diagnostic and improvement cycle: diagnose with all 3M lenses (Mura → Muri → Muda in causal order), assess severity to select methodology (Kaizen for incremental, Kaikaku for radical), execute the selected methodology, chronicle results in GENBA.md, and persist to git. The meta-pattern — the routine of improvement itself. USE WHEN: full treatment, kata, TPS, give me everything, full diagnostic, complete analysis, run all lenses, comprehensive improvement, what does this project need.'
 argument-hint: 'Optional: specify target project/module, skip diagnosis if already done ("just run kaizen"), or focus the diagnosis ("only check the API layer")'
 ---

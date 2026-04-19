@@ -1,6 +1,6 @@
 ﻿---
 name: kaikaku
-version: 1.30.0
+version: 1.31.0
 description: 'Kaikaku (改革) — Radical redesign evaluation. When incremental improvement (kaizen) has converged or the architecture is fundamentally wrong, kaikaku asks: should we throw this away and rebuild? Evaluates whether the current system can reach the target through incremental changes or needs structural replacement. Produces a migration plan if redesign is warranted. USE WHEN: redesign, start over, rethink, rewrite this, architecture is wrong, kaizen isn''t working, converged too low, fundamental change, kaikaku, radical change, clean slate, rearchitect, pivot.'
 argument-hint: 'Optional: specify what feels wrong (architecture, data model, paradigm), target state if known, or constraints on the redesign (budget, timeline, backwards compatibility)'
 ---
