@@ -52,6 +52,8 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 44 | 2026-04-19 | Claude Opus 4.6 | 7.75 (v3) | 7.875 (v3) | +0.125 | TPS Skill Suite | 4 Kaizen fixes: Shiken added to verify-suite siblingMap (8-skill coverage), Kaikaku stale Phase 0 ref, project-increment broken semver.md link, RUBRIC_V3_PROPOSAL traceability text. Dims 6+8 up from prior-session Shiken/trail fixes now first scored. v1.33.0. |
 | 45 | 2026-04-19 | Claude Opus 4.6 | N/A | N/A | N/A | Kiroku (external) | **First external target.** Kaikaku: built multi-resolution reasoning trail convention (3 layers, 4 fidelity tiers). 6 artifacts created. 12 findings (5 Mura, 3 Muri, 4 Muda). 4/6 Intent criteria met, 2 partial (platform fidelity). GENBA in target project. |
 | 46 | 2026-04-19 | Claude Opus 4.6 | N/A | N/A | N/A | Kiroku (external) | Kaizen: 7 fixes — stale statuses, DEC numbering scheme (R-prefix for retroactive), timestamp convention honesty, core principle dedup, session metadata update. Convention stabilizing. |
+| 47 | 2026-04-19 | Claude Opus 4.6 | 7.875 (v3) | 6.875 (v3, intended) | -1.0 | TPS Skill Suite v2 | **Kaikaku rebuild.** Re-derived from Principles alone: 8 skills -> 5. Self-score captured the intended artifact; Run 48 later found shipped integrity defects in the live files. v2.0.0. |
+| 48 | 2026-04-19 | GPT-5.4 | N/A | N/A | N/A | TPS Skill Suite v2 | **Cross-model validation.** Found shipped v2.0.0 integrity regressions (4 concatenated skill files, retired skills still live, verifier still on 8-skill/v1 layout). Fixed and released v2.0.1. |
 
 ## Cross-Model Notes
 
@@ -60,11 +62,13 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 - Run 4 de-anchored fresh read: Claude Opus 4.7 also scored the suite at 8.4 independently — second Claude model in a row to land on the same pre-fix baseline. Found two new issues three prior evaluators had missed (Kaizen continuous cross-phase numbering, Muri SCOPE prescriptive table). This is the strongest cross-model datapoint: two different models reading independently arrived at the same score AND surfaced different genuine defects, proving the ensemble is surfacing things no single evaluator catches.
 - Run 5 return visit: Claude Opus 4.6 (which ran Run 1 at 8.0) returned and scored the post-improvement suite at 8.7 with zero actionable findings and zero edits. First run in the experiment with no changes. The same model that started the loop can now confirm the loop worked.
 - Run 22 return visit: GPT-5.4 xhigh (which ran Run 2 at 8.4 → 8.6) returned after twenty runs and found a process/mechanism seam rather than a content gap: GENBA update guidance said append while the active ledger and verifier assumed newest-first, and Check 9 still matched Hansei by free text rather than explicit section structure. Late-cycle cross-model returns still surface real defects.
+- Run 48 post-rebuild validation: GPT-5.4 was the first fresh model family to read the shipped v2 suite. It immediately found two critical release-integrity defects the authoring model missed: four live skill files had legacy v1 bodies appended beneath the new rebuild content, and the suite still exposed retired standalone skills plus an 8-skill verifier. This moved Tier 2 W1 (Transferability) and W4 (Observer Satisfaction) from Untested to Pass in MEASUREMENT.md.
 - The trajectory is durable on the run table above. Future runs append a row there with model identity, score delta, and a one-line reason the score moved.
 
 ## Current Status
 
 - The run table above is the source of truth for per-run scores and outcomes; `GENBA.md` is the source of truth for per-run findings, actions, and reasoning.
+- The current live release is **v2.0.1**. Run 47 records the rebuild itself; Run 48 records the first cross-model validation and the repair of the shipped v2.0.0 artifact.
 - **Scoring uses Rubric v3 (adopted Run 42) for all runs from Run 42 forward.** Runs 17-41 used Rubric v1/v2 (10 dimensions). Pre-v1 scores used an implicit narrower basis. v3 scores are not directly comparable to v1/v2 scores — a v3 baseline of ~7.2 is expected and by design (see RUBRIC_V3_PROPOSAL.md).
 - v1/v2 scores are preserved unchanged in the run table for auditability.
 - Principle 3 silence counter: 0/3 (resets on any artifact change). See PRINCIPLES.md §3 for the convergence definition.

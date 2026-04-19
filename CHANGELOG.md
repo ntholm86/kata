@@ -9,6 +9,26 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-04-19
+
+### Fixed
+
+- **Cross-model validation repaired the shipped v2 artifact.** `kata`, `kaizen`, `kaikaku`, and `hansei` had been committed with legacy v1.34.0 bodies appended beneath the new v2 content. The live files were rewritten cleanly as v2.0.1.
+- **Retired legacy skill files removed from the live suite.** `mura`, `muri`, `muda`, and `project-increment` no longer exist in the suite root as runnable skills. v1 reference material remains under `v1_archive/`.
+- **project-increment reference material preserved before retirement.** Its semver reference was archived to `v1_archive/project-increment-semver.md`.
+- **Mechanical verification aligned to the 5-skill suite.** `verify-suite.ps1` now validates the live v2 inventory (`kata`, `kaizen`, `kaikaku`, `hansei`, `shiken`) instead of the retired 8-skill layout.
+- **Ledger checks now ignore external-target rows when verifying the skill-suite trail.** SCORECARD rows for Kiroku no longer masquerade as missing GENBA history for the suite itself.
+
+## [2.0.0] - 2026-04-19
+
+### Changed
+
+- **Skills rebuilt from PRINCIPLES.md and PROBLEM.md alone.** The suite was re-derived from the constitutional layer rather than incrementally patched from v1.34.0.
+- **8 skills became 5.** The live suite is now `kata`, `kaizen`, `kaikaku`, `hansei`, and `shiken`.
+- **Mura, Muri, and Muda were absorbed into Kaizen as diagnostic vocabulary.** They are no longer intended to be invoked as standalone workflows.
+- **project-increment was retired as a reasoning skill.** Release/versioning guidance became archived reference material rather than part of the live autonomous-reasoning suite.
+- **Kiroku trail and measurement framework added for the rebuild.** `REBUILD_INTENT.md`, `MEASUREMENT.md`, and TRAIL artifacts document the rebuild rationale, constraints, and outcomes.
+
 ## [1.34.0] - 2026-04-19
 
 ### Changed

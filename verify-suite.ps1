@@ -44,7 +44,7 @@ function Test-BareText {
     return ($stripped -match $Pattern)
 }
 
-$skills = @('kata', 'kaizen', 'kaikaku', 'mura', 'muri', 'muda', 'hansei', 'shiken')
+$skills = @('kata', 'kaizen', 'kaikaku', 'hansei', 'shiken')
 
 Write-Host "`n=== TPS Skill Suite - Mechanical Integrity Check ===" -ForegroundColor Cyan
 Write-Host "Suite root: $script:suiteRoot"
@@ -95,14 +95,11 @@ foreach ($skill in $skills) {
 # -- Check 3: Cross-reference completeness ------------------------------------
 Write-Host "[3/13] Cross-reference completeness" -ForegroundColor White
 $siblingMap = @{
-    kata    = @('Kaizen', 'Kaikaku', 'Mura', 'Muri', 'Muda', 'Hansei', 'Shiken')
-    kaizen  = @('Kata', 'Kaikaku', 'Mura', 'Muri', 'Muda', 'Hansei', 'Shiken')
-    kaikaku = @('Kata', 'Kaizen', 'Mura', 'Muri', 'Muda', 'Hansei', 'Shiken')
-    mura    = @('Kata', 'Kaizen', 'Kaikaku', 'Muri', 'Muda', 'Hansei', 'Shiken')
-    muri    = @('Kata', 'Kaizen', 'Kaikaku', 'Mura', 'Muda', 'Hansei', 'Shiken')
-    muda    = @('Kata', 'Kaizen', 'Kaikaku', 'Mura', 'Muri', 'Hansei', 'Shiken')
-    hansei  = @('Kata', 'Kaizen', 'Kaikaku', 'Mura', 'Muri', 'Muda', 'Shiken')
-    shiken  = @('Kata', 'Kaizen', 'Kaikaku', 'Mura', 'Muri', 'Muda', 'Hansei')
+    kata    = @('Kaizen', 'Kaikaku', 'Hansei', 'Shiken')
+    kaizen  = @('Kata', 'Kaikaku', 'Hansei', 'Shiken')
+    kaikaku = @('Kata', 'Kaizen', 'Hansei', 'Shiken')
+    hansei  = @('Kata', 'Kaizen', 'Kaikaku', 'Shiken')
+    shiken  = @('Kata', 'Kaizen', 'Kaikaku', 'Hansei')
 }
 foreach ($skill in $skills) {
     $path = Join-Path $script:suiteRoot "$skill\SKILL.md"
@@ -113,7 +110,7 @@ foreach ($skill in $skills) {
             Fail "$skill/SKILL.md missing bold reference to **$sib**"
         }
     }
-    Pass "$skill references all 7 siblings"
+    Pass "$skill references all $($siblingMap[$skill].Count) siblings"
 }
 
 # -- Check 4: Version alignment -----------------------------------------------
@@ -146,13 +143,26 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
     $gRuns = ([regex]::Matches($gContent, '## Run \d+')).Count
 
     $sContent = Get-Content $scorecardPath -Raw
-    $sRows = ([regex]::Matches($sContent, '(?m)^\|\s*\d+\s*\|')).Count
-    $invalidatedRows = ([regex]::Matches($sContent, '(?m)^\|\s*\d+\s*\|.*\*\*Invalidated\*\*')).Count
+    $tpsRows = @()
+    $invalidatedRows = 0
+    foreach ($m in [regex]::Matches($sContent, '(?m)^\|\s*(\d+)\s*\|[^\n]*$')) {
+        $row = $m.Value
+        if ($row -match '\*\*Invalidated\*\*') {
+            $invalidatedRows++
+        }
 
-    if ($gRuns -ne $sRows) {
-        Warn "GENBA has $gRuns run entries, SCORECARD has $sRows rows ($invalidatedRows invalidated row(s); mismatch can also come from archived or lost history)"
+        $parts = $row -split '\|'
+        if ($parts.Count -lt 8) { continue }
+        $target = $parts[7].Trim()
+        if ($target -notlike '*external*') {
+            $tpsRows += [int]$m.Groups[1].Value
+        }
+    }
+
+    if ($gRuns -ne $tpsRows.Count) {
+        Warn "GENBA has $gRuns run entries, SCORECARD has $($tpsRows.Count) TPS Skill Suite rows ($invalidatedRows invalidated row(s); external-target rows ignored)"
     } else {
-        Pass "GENBA ($gRuns) and SCORECARD ($sRows) counts match"
+        Pass "GENBA ($gRuns) and SCORECARD ($($tpsRows.Count)) TPS Skill Suite counts match"
     }
 } else {
     if (-not (Test-Path $genbaPath))     { Warn 'GENBA.md not found' }
@@ -380,19 +390,24 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
     foreach ($m in [regex]::Matches($gContent, '(?m)^## Run (\d+)')) {
         $genbaRuns += [int]$m.Groups[1].Value
     }
-    # Collect non-invalidated SCORECARD rows: "| N | YYYY-MM-DD | ... | <not Invalidated> |"
+    # Collect non-invalidated SCORECARD rows for this target only.
     $scorecardRows = @()
     foreach ($m in [regex]::Matches($sContent, '(?m)^\|\s*(\d+)\s*\|[^\n]*$')) {
         $row = $m.Value
         if ($row -notmatch '\*\*Invalidated\*\*') {
-            $scorecardRows += [int]$m.Groups[1].Value
+            $parts = $row -split '\|'
+            if ($parts.Count -lt 8) { continue }
+            $target = $parts[7].Trim()
+            if ($target -notlike '*external*') {
+                $scorecardRows += [int]$m.Groups[1].Value
+            }
         }
     }
     $missingFromGenba = @($scorecardRows | Where-Object { $genbaRuns -notcontains $_ } | Sort-Object)
     if ($missingFromGenba.Count -gt 0) {
-        Warn "SCORECARD lists runs with no GENBA entry: $($missingFromGenba -join ', ') (likely archived/lost history; investigate)"
+        Warn "SCORECARD lists TPS Skill Suite runs with no GENBA entry: $($missingFromGenba -join ', ')"
     } else {
-        Pass "Every non-invalidated SCORECARD row has a matching GENBA entry"
+        Pass "Every non-invalidated TPS Skill Suite SCORECARD row has a matching GENBA entry"
     }
 } else {
     Pass 'SCORECARD/GENBA coverage check skipped (one or both missing)'

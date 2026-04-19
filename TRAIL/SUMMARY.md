@@ -1,33 +1,33 @@
 ﻿# Trail Summary
 
-*Last updated: 2026-04-19 - skills-rebuild session*
+*Last updated: 2026-04-19 - skills-v2-cross-validation session*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---
 
-**One-line status:** Skills v2.0.0 written - 5 skills derived from Principles (down from 8). Tier 1 self-score: 6.875/10. Needs cross-model validation and infrastructure rebuild.
+**One-line status:** Skills v2.0.1 validated by GPT-5.4 - shipped v2.0.0 integrity regressions repaired, live suite now truly 5 skills, and Tier 2 W1/W4 are now Pass.
 
 ## Direction
 
-The TPS Skill Suite has been rebuilt from PRINCIPLES.md and PROBLEM.md alone. The system determined that 5 skills are needed (Kata, Kaizen, Kaikaku, Hansei, Shiken), down from 8. The three diagnostic lenses (Mura, Muri, Muda) are now vocabulary within Kaizen, not standalone skills. Project-increment was removed as a non-reasoning utility.
+The TPS Skill Suite has now completed its first post-rebuild cross-model validation. GPT-5.4 reviewed the shipped v2.0.0 artifact and found two release-integrity regressions the authoring model missed: four live skill files had legacy v1 bodies appended beneath the new v2 content, and the suite still exposed retired standalone skill files plus an 8-skill verifier. Those defects were corrected in v2.0.1. The live suite is now actually the 5-skill system described by the rebuild trail.
 
 ## Recent Decisions
 
-1. **Diagnostic lenses are vocabulary, not skills** (DEC-007) - Mura/Muri/Muda absorbed into Kaizen's diagnostic phase as "thinking tools, not a procedure."
-2. **Five skills, not eight** (DEC-008) - Kata, Kaizen, Kaikaku, Hansei, Shiken. The absorbed skills were always invoked through Kata, never independently.
-3. **Vocabulary embedded, not referenced** (DEC-009) - Unevenness/overburden/waste are sections within Kaizen, not external references.
+1. **Shipped-v2 defects are a patch release, not erased history** (DEC-010) - The rebuild stands, but the wrong artifact shipped. The correction is v2.0.1.
+2. **Retired standalone skills removed from live suite** (DEC-011) - `mura`, `muri`, `muda`, and `project-increment` now live only in the archive, not beside active skills.
+3. **Verifier aligned to the 5-skill suite** (DEC-012) - Mechanical checks and ledger coverage rules now match the actual live artifact.
 
 ## Self-Evaluation
 
-Tier 1 (Rubric v3): 6.875/10. Strong on Instruction Clarity (9) and ARF (9). Weak on Configuration Management (5) and Cross-Evaluator Reliability (4) - expected at this stage.
+Tier 1: Run 47's 6.875/10 was a self-score of the intended rebuild artifact. Run 48 found that the shipped v2.0.0 artifact still contained critical integrity defects, so that score should be read as "intended state," not "shipped state." v2.0.1 repairs the shipped state; a formal post-fix cross-model rescore remains pending.
 
-Tier 2 (W4 - Observer Satisfaction): Self-assessed Pass. The trail contains reasoning, decisions with alternatives, and honest evaluation. Caveat: self-assessed, requires independent validation.
+Tier 2: W1 (Transferability) and W4 (Observer Satisfaction) are now Pass. A fresh model family successfully used the rebuilt suite and the trail to identify and correct real defects without the authoring model present.
 
 ## Integrity Notes
 
-- All skills written fresh from Principles. v1.34.0 archived but not consulted during writing.
-- Self-evaluation scores are honest but single-model. Dims 4 and 5 will improve mechanically with infrastructure and cross-model validation.
-- The score drop from 7.875 to 6.875 is expected: the new suite lacks infrastructure that the old suite accumulated over 44 runs.
+- The rebuild reasoning was sound; the defect was release integrity.
+- Cross-model validation proved load-bearing immediately by catching defects the authoring model missed in the shipped artifact.
+- The live suite, verifier, and measurement framework now all describe the same 5-skill system.
 
 ## Observer Guide
 

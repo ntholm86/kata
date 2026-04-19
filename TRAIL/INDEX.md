@@ -1,6 +1,6 @@
-# Decision Index
+﻿# Decision Index
 
-*Last updated: 2026-04-19 - skills-rebuild session*
+*Last updated: 2026-04-19 - skills-v2-cross-validation session*
 
 ---
 
@@ -82,7 +82,7 @@
 - **Fidelity:** reconstructed
 - **Participants:** human, Claude Opus 4.6
 - **Decision:** Suite reduced to 5 skills (Kata, Kaizen, Kaikaku, Hansei, Shiken). Mura/Muri/Muda absorbed into Kaizen. Project-increment removed (utility, not reasoning).
-- **Rationale:** The 3 diagnostic skills were always invoked through Kata, never independently. Project-increment doesn't embody any Principle.
+- **Rationale:** The 3 diagnostic skills were always invoked through Kata, never independently. Project-increment does not embody any Principle.
 - **Alternatives considered:** Keep 8 skills, keep 6, keep 3
 - **Status:** active
 
@@ -94,4 +94,34 @@
 - **Decision:** Unevenness/overburden/waste described as sections within Kaizen's Diagnose phase, labeled "thinking tools, not a procedure."
 - **Rationale:** When writing Kaizen, the lenses emerged as natural sections. This is the Commander's Intent test: an agent would know to look for these without being told to invoke separate skills.
 - **Alternatives considered:** Reference external directories as supplementary reading, include extended examples
+- **Status:** active
+
+### DEC-010: Cross-model validation defects become patch release v2.0.1
+- **Date:** 2026-04-19
+- **Session:** [skills-v2-cross-validation](sessions/2026-04-19-skills-v2-cross-validation.md)
+- **Fidelity:** reconstructed
+- **Participants:** human, GPT-5.4
+- **Decision:** Treat the shipped-v2 integrity defects as a patch release (`v2.0.1`), not as a rewrite of the rebuild history.
+- **Rationale:** The rebuild reasoning remains valid, but the shipped artifact was wrong. A patch release preserves the real trail while correcting the live state.
+- **Alternatives considered:** Rewrite the trail as if the defect never shipped, invalidate the rebuild entirely
+- **Status:** active
+
+### DEC-011: Retired standalone skills removed from live suite
+- **Date:** 2026-04-19
+- **Session:** [skills-v2-cross-validation](sessions/2026-04-19-skills-v2-cross-validation.md)
+- **Fidelity:** reconstructed
+- **Participants:** human, GPT-5.4
+- **Decision:** Remove live `mura`, `muri`, `muda`, and `project-increment` skill files from the suite root. Preserve reference material only in `v1_archive/`.
+- **Rationale:** The rebuild's 5-skill claim must be true on disk, not only in the narrative.
+- **Alternatives considered:** Leave warning stubs in place, keep contradictory live directories
+- **Status:** active
+
+### DEC-012: Mechanical verifier aligns to the 5-skill suite
+- **Date:** 2026-04-19
+- **Session:** [skills-v2-cross-validation](sessions/2026-04-19-skills-v2-cross-validation.md)
+- **Fidelity:** reconstructed
+- **Participants:** human, GPT-5.4
+- **Decision:** `verify-suite.ps1` now validates the live 5-skill suite and excludes external-target SCORECARD rows when checking skill-suite GENBA coverage.
+- **Rationale:** Mechanical truth must match suite reality. Otherwise the verifier itself becomes a source of false evidence.
+- **Alternatives considered:** Leave verifier on the 8-skill layout until a later run, keep permanent warnings for external-target rows
 - **Status:** active

@@ -1,7 +1,7 @@
 # Measurement Framework
 
-**Version:** 0.1.0
-**Status:** Draft - designed during rebuild-planning session, not yet validated
+**Version:** 0.1.1
+**Status:** Active - first cross-model validation evidence recorded
 
 ## Two Tiers
 
@@ -68,15 +68,15 @@ Tier 1 (Skill Quality)     Tier 2 (Work Quality)
 
 ---
 
-## Current State (TPS Skill Suite v1.34.0)
+## Current State (TPS Skill Suite v2.0.1)
 
 | Tier | Status |
 |------|--------|
-| Tier 1 (Skill Quality) | 7.875/10 (Rubric v3). 46 runs, 7 model families. |
-| W1 (Transferability) | **Untested.** Multiple models have *run* the skills, but always on the same target (the skills themselves). No model has used the skills on an external project without the authoring model present. |
-| W2 (External Target Efficacy) | **Partial.** Runs 45-46 targeted Kiroku, but with the same model and the project was designed by that model. Not a true external target. |
-| W3 (Reasoning vs. Compliance) | **Untested.** No Intent-only baseline has ever been compared against the full skills. |
-| W4 (Observer Satisfaction) | **Untested.** No fresh observer has ever read a trail and independently assessed comprehension. |
-| W5 (Time to Value) | **Untested.** No baseline measurement of time-to-value with vs. without skills. |
+| Tier 1 (Skill Quality) | **6.875/10 self-score at rebuild (Run 47), then cross-model integrity defects found and corrected in v2.0.1.** Formal post-fix cross-model rescore still pending. |
+| W1 (Transferability) | **Pass.** GPT-5.4, acting as a fresh model family after the Claude-authored rebuild, read the v2 skills, found real shipped defects, and corrected them without the authoring model present. Evidence: Run 48 / `TRAIL/sessions/2026-04-19-skills-v2-cross-validation.md`. |
+| W2 (External Target Efficacy) | **Partial.** Runs 45-46 targeted Kiroku, but with the same model and the project was designed by that model. Still not a true external-target pass. |
+| W3 (Reasoning vs. Compliance) | **Untested.** No Intent-only baseline has yet been compared against the full skill texts. |
+| W4 (Observer Satisfaction) | **Pass.** A fresh model reconstructed what happened from the trail alone, identified contradictions between the claimed 5-skill suite and the shipped artifact, and produced repair work from the recorded evidence. |
+| W5 (Time to Value) | **Untested.** No baseline measurement of time-to-value with vs. without the skills yet exists. |
 
-**Bottom line:** The suite has strong Tier 1 metrics and zero validated Tier 2 metrics. It is well-built but unproven.
+**Bottom line:** Tier 2 is no longer zero. The suite now has evidence for transferability and observer comprehension, but external-target efficacy, reasoning-vs-compliance discrimination, and time-to-value remain open.

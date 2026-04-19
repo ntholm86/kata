@@ -1,5 +1,56 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+## Run 48 - 2026-04-19
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.4 |
+| Trigger | "ok now you are nother model - please proceed" (cross-model validation required by REBUILD_INTENT.md) |
+| Methodology | Kata -> Kaizen (cross-model validation) |
+
+### 3M Diagnosis Summary
+| Lens | Findings | Critical/High |
+|------|:--------:|:-------------:|
+| Mura | 3 | 3 |
+| Muri | 0 | 0 |
+| Muda | 2 | 1 |
+| Causal chains | 2 | - |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Four live v2 skill files (`kata`, `kaizen`, `kaikaku`, `hansei`) were shipped with legacy v1.34.0 bodies appended beneath the new rebuild content | Mura | Critical | Yes | First |
+| 2 | The live suite still exposed retired standalone skill files (`mura`, `muri`, `muda`, `project-increment`), contradicting the rebuild's 5-skill claim | Mura/Muda | Critical | Yes | First |
+| 3 | `verify-suite.ps1` and `INTEGRITY.json` still modeled the v1 8-skill suite (`suite_version: 1.34.0`) instead of the rebuilt 5-skill suite | Mura | High | Yes | First |
+| 4 | Ledger checks treated external-target SCORECARD rows as if they were missing GENBA history for the skill suite | Muda | Medium | Yes | First |
+| 5 | Release bookkeeping was stale after the rebuild: CHANGELOG lacked 2.0.0, MEASUREMENT still described v1.34.0 as current, and SCORECARD had no Run 47 row | Mura/Muda | High | Yes | First |
+
+### Actions Taken
+- Recreated the 5 live skill files cleanly at v2.0.1.
+- Removed live `mura`, `muri`, `muda`, and `project-increment` artifacts from the suite root.
+- Archived the surviving project-increment semver reference to `v1_archive/project-increment-semver.md`.
+- Updated `verify-suite.ps1` to the live 5-skill inventory and made ledger checks ignore external-target SCORECARD rows when validating the skill-suite trail.
+- Updated CHANGELOG, MEASUREMENT, SCORECARD, and TRAIL artifacts to reflect the repaired release state.
+
+### Outcome
+- Release repaired: v2.0.0 -> v2.0.1
+- Tier 2 outcome: **W1 Pass** (Transferability) and **W4 Pass** (Observer Satisfaction)
+- No full post-fix Rubric v3 rescore in this run; the purpose of the cycle was release-integrity correction and cross-model validation.
+
+### Observations
+- Run 47's self-score described the intended rebuild artifact, not the actual shipped on-disk artifact.
+- Cross-model validation proved load-bearing immediately: the first fresh evaluator found critical release-integrity defects the authoring model missed.
+
+### Hansei
+- **Scope:** Runs 47-48 (rebuild plus first fresh-model validation)
+- **Model:** GPT-5.4
+- **Findings:** 1 crystallized
+- **Most important finding:** The loop scored the intended rebuild artifact before verifying the shipped artifact, so the first fresh evaluator had to catch release-integrity defects the authoring model missed.
+- **Recommended next move:** Treat fresh-model validation of the live files and verifier alignment as part of every future rebuild closeout, not as optional follow-up.
+- **Loop status:** healthier - a real blind spot was surfaced and corrected, but a post-fix cross-model rescore is still pending.
+
+---
 ## Run 47 — 2026-04-19
 
 | Field | Value |

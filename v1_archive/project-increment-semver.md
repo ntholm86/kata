@@ -36,10 +36,10 @@ MAJOR.MINOR.PATCH
 
 **Pre-1.0 (`0.x.y`)**: Semver spec allows breaking changes in minor bumps. In practice, treat `0.x` bumps like major bumps and `0.x.y` like minor/patch. Be explicit in the changelog.
 
-**Adding a field to structured output** (JSON, API response): If consumers parse the output, adding a new field is technically minor (additive). But if consumers use strict parsing (e.g., `additionalProperties: false`), it's major. Use judgment.
+**Adding a field to structured output** (JSON, API response): If consumers parse the output, adding a new field is technically minor (additive). But if consumers use strict parsing (e.g., `additionalProperties: false`), it is major. Use judgment.
 
 **Changing error messages**: Patch, unless users programmatically parse error text (then arguably major).
 
 **Changing the order of output**: Patch if unordered, potentially major if order was part of the contract.
 
-**Internal dependency major bump**: Only major for your project if it changes YOUR public API surface. If your users don't interact with that dependency, it can be patch/minor.
+**Internal dependency major bump**: Only major for your project if it changes YOUR public API surface. If your users do not interact with that dependency, it can be patch/minor.
