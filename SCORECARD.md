@@ -50,6 +50,8 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 42 | 2026-04-19 | Claude Opus 4.6 | 10.0 (v2) | 10.0 (v2) | +0.0 | TPS Skill Suite | **Kaikaku: Rubric v3 adopted.** Standards-anchored 8-dimension rubric replaces ad-hoc v1/v2 (10 dims). Cross-model reviewed by GPT-5.4 + Gemini 3.1 Pro Preview. Predicted v3 baseline: ~7.2. v1.31.0. |
 | 43 | 2026-04-19 | Claude Opus 4.6 | 7.75 (v3) | 7.75 (v3) | +0.0 | TPS Skill Suite | **First v3 scoring run.** 5 Kaizen fixes (STANDARDS.md stale claims, Kaizen frontmatter, GENBA location string 4→1 phrasing, Kata UTF-8 wording, Historical Snapshot caveat). v3 baseline: 7.75. Weakest: Convergence Integrity (5). v1.32.0. |
 | 44 | 2026-04-19 | Claude Opus 4.6 | 7.75 (v3) | 7.875 (v3) | +0.125 | TPS Skill Suite | 4 Kaizen fixes: Shiken added to verify-suite siblingMap (8-skill coverage), Kaikaku stale Phase 0 ref, project-increment broken semver.md link, RUBRIC_V3_PROPOSAL traceability text. Dims 6+8 up from prior-session Shiken/trail fixes now first scored. v1.33.0. |
+| 45 | 2026-04-19 | Claude Opus 4.6 | N/A | N/A | N/A | Kiroku (external) | **First external target.** Kaikaku: built multi-resolution reasoning trail convention (3 layers, 4 fidelity tiers). 6 artifacts created. 12 findings (5 Mura, 3 Muri, 4 Muda). 4/6 Intent criteria met, 2 partial (platform fidelity). GENBA in target project. |
+| 46 | 2026-04-19 | Claude Opus 4.6 | N/A | N/A | N/A | Kiroku (external) | Kaizen: 7 fixes — stale statuses, DEC numbering scheme (R-prefix for retroactive), timestamp convention honesty, core principle dedup, session metadata update. Convention stabilizing. |
 
 ## Cross-Model Notes
 
