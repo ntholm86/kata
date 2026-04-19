@@ -1,6 +1,26 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
 
+### Shiken — 2026-04-19 (self-target)
+- **Target:** Shiken skill (shiken/SKILL.md) — self-targeting litmus test
+- **Model:** Claude Opus 4.6
+- **Baseline source:** Skill text + analogous GENBA entries from TPS family (no prior Shiken runs exist)
+- **Seams identified:** 6 — (1) formulaic seam-finding, (2) probe-type coverage as compliance theater, (3) non-discriminative contrasts, (4) validation rubber-stamping, (5) no-baseline handling, (6) meta-recursion boundary
+- **Probes constructed:** 5
+- **Probe types used:** Underspecification, Adversarial compliance ×2, Contradiction, Scope boundary
+- **Most discriminative probe:** "The Obvious Five" — does the agent produce exactly one probe per type (compliance) or match probe distribution to actual seams (reasoning)?
+- **Open question:** All probes test Shiken's construction phase; the identification phase (finding seams not named in the skill text) is untested because no prior runs exist to reveal what seams are typically found vs. missed.
+
+### Shiken — 2026-04-19 (Kaizen target)
+- **Target:** Kaizen skill (kaizen/SKILL.md) — first non-self Shiken run
+- **Model:** Claude Opus 4.6
+- **Baseline source:** 43 GENBA runs (35+ Kaizen-shaped), kaizen/SKILL.md procedure, SCORECARD trajectory
+- **Seams identified:** 6 — (1) predictable OBSERVE sampling, (2) fixed RATE dimensions, (3) CHALLENGE follows question list, (4) ROI scoring as assertion, (5) formulaic exit condition, (6) solve-by-design as label
+- **Probes constructed:** 5
+- **Probe types used:** Adversarial compliance ×2, Distribution shift, Contradiction, Hybrid (underspecification + distribution shift)
+- **Most discriminative probe:** "The Pre-Optimized Target" — can the agent conclude zero changes are needed, or does it always produce changes because that's what improvement skills do?
+- **Open question:** No probe tests the CHECK phase (re-auditing and de-anchoring). An agent could reason through Phases 1-6 and rubber-stamp Phase 7. Deferring to next probe set.
+
 ---
 ## Run 43 — 2026-04-19
 
