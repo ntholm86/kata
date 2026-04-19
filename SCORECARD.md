@@ -159,14 +159,14 @@ Adopted Run 42 (2026-04-19). Standards-anchored 8-dimension rubric. Full rationa
 | 5 | Cross-Evaluator Reliability | DMAIC Measure (Gauge R&R), Principle 3 | Inter-rater agreement and model diversity (via `metrics.ps1`). Finding overlap across families (currently manual). |
 | 6 | Instruction Clarity | CMMI REQM (L3) | Can any competent LLM follow without ambiguity? Are PRINCIPLES unambiguous and complete? |
 | 7 | Convergence Integrity | NIST AI RMF MEASURE, Principle 3 | Does the loop honor its stopping condition? Score changes correlate with artifact changes? No fabricated improvements? |
-| 8 | Autonomous Reasoning Fidelity | Auftragstaktik, Meaningful Human Control, Trust Calibration (Lee & See 2004), PRINCIPLES.md §1-2 | **(1) Freedom of thought:** remove examples and thresholds — would a competent agent still know what to do? **(2) Trail integrity:** can an absent human reconstruct what the agent did, why, and whether to trust it, from the GENBA trail alone? |
+| 8 | Autonomous Reasoning Fidelity | Auftragstaktik, Meaningful Human Control, Trust Calibration (Lee & See 2004), PRINCIPLES.md §1-2 | **(1) Freedom of thought:** remove examples and thresholds — would a competent agent still know what to do? **(2) Trail integrity:** can each observer class (5-second, 2-minute, 30-minute) reconstruct what the agent did, why, and whether to trust it, at the resolution their time budget allows? Evidence must exist at multiple resolutions; self-authored layers must be marked. |
 
 **Weighting:** Equal weight (arithmetic mean).
 
-**Dimension #8 scoring guidance** (from GPT-5.4 review):
-- 10: skills consistently define destination without prescribing route; GENBA trail independently reconstructable end-to-end
-- 7-8: mostly open, minor prescriptive drift; trail strong but with occasional thin reasoning
-- 4-6: mixed open reasoning and checklist behavior; trail incomplete in important places
+**Dimension #8 scoring guidance** (from GPT-5.4 review, updated for P2 resolution requirement):
+- 10: skills consistently define destination without prescribing route; multi-resolution trail (full + indexed + digested) exists for each observer class; fidelity and self-authorship explicitly marked
+- 7-8: mostly open, minor prescriptive drift; trail exists at multiple resolutions but with gaps (e.g., missing fidelity marking or thin indexed layer)
+- 4-6: mixed open reasoning and checklist behavior; trail exists at single resolution only, or self-authorship unmarked
 - 0-3: heavily prescriptive or poorly observable; autonomy not trustworthy
 
 **Explicit non-goals** (removed dimensions with documented rationale):
