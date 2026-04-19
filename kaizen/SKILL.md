@@ -282,7 +282,7 @@ For each selected item, research and design a solution.
   - If 3 consecutive runs by 3 distinct evaluators have the same score AND made zero artifact changes: **"Converged per Principle 3. The loop has nothing left to add."**
   - Otherwise: **"Current score: X.X. Invoke kaizen again for the next cycle."** List what the next cycle should focus on.
 
-**If a GENBA.md exists** in the skills suite root (`~/.copilot/skills/GENBA.md`) or the project root, prepend a summary entry so the active ledger stays newest-first:
+**Trail follows the target.** If the target is the skill suite itself, prepend to `~/.copilot/skills/GENBA.md`. If the target is an external project, prepend to `GENBA.md` in the target project's root — create it if it doesn't exist. Each project owns its own improvement history:
 
 ```markdown
 ### Kaizen — [date]

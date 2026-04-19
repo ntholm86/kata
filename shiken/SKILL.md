@@ -165,7 +165,7 @@ Revise probes that fail validation. Document why.
 
 ### Phase 5: RECORD — Prepend to the Trail
 
-Shiken is itself part of the trail. **If a GENBA.md exists** in the skills suite root (`~/.copilot/skills/GENBA.md`) or the project root, prepend an entry:
+Shiken is itself part of the trail. **Trail follows the target.** If the target is the skill suite itself, prepend to `~/.copilot/skills/GENBA.md`. If the target is an external project, prepend to `GENBA.md` in the target project's root — create it if it doesn't exist. Each project owns its own improvement history:
 
 ```markdown
 ### Shiken — [date]

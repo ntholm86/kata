@@ -146,7 +146,7 @@ Before running the selected methodology, handle any high-confidence, zero-risk M
 After execution, record the full run in the project ledgers. This is the experimental ledger — the proof trail of what was done, why, and what happened.
 
 **Step 1: Update GENBA.md**
-Location: Look for GENBA.md in the skills suite root (`~/.copilot/skills/GENBA.md`) or the project root. If neither exists, create one in the skills suite root.
+Location: **Trail follows the target.** If the target is the skill suite itself (path under `~/.copilot/skills/`), write to `~/.copilot/skills/GENBA.md`. If the target is an external project, write to `GENBA.md` in the target project's root — create it if it doesn't exist. External projects get their own improvement history; the skill suite's GENBA tracks only its own evolution.
 Prepend the detailed entry for the run so the active ledger stays newest-first.
 
 **Step 2: Update SCORECARD.md**

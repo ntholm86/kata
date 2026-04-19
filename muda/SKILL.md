@@ -172,7 +172,7 @@ Summarize what was done. This is the proof trail.
 | 1 | plugin_loader.py | Community plugins in active development |
 ```
 
-**If a GENBA.md exists** in the skills suite root (`~/.copilot/skills/GENBA.md`) or the project root, prepend a summary entry so the active ledger stays newest-first:
+**Trail follows the target.** If the target is the skill suite itself, prepend to `~/.copilot/skills/GENBA.md`. If the target is an external project, prepend to `GENBA.md` in the target project's root — create it if it doesn't exist. Each project owns its own improvement history:
 
 ```markdown
 ### Muda — [date]
