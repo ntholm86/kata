@@ -1,33 +1,34 @@
 ﻿# Trail Summary
 
-*Last updated: 2026-04-19 - skills-v2-cross-validation session*
+*Last updated: 2026-04-20 - external-runs-and-restructuring session*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---
 
-**One-line status:** Skills v2.0.1 validated by GPT-5.4 - shipped v2.0.0 integrity regressions repaired, live suite now truly 5 skills, and Tier 2 W1/W4 are now Pass.
+**One-line status:** Suite v2.0.1 validated against two external targets (datakit, mathkit), Hansei identified 4 structural issues, all 4 fixed, kiroku promoted to skill.
 
 ## Direction
 
-The TPS Skill Suite has now completed its first post-rebuild cross-model validation. GPT-5.4 reviewed the shipped v2.0.0 artifact and found two release-integrity regressions the authoring model missed: four live skill files had legacy v1 bodies appended beneath the new v2 content, and the suite still exposed retired standalone skill files plus an 8-skill verifier. Those defects were corrected in v2.0.1. The live suite is now actually the 5-skill system described by the rebuild trail.
+The skills suite completed its first external-target validation: Kata runs on datakit and mathkit found and fixed real bugs (bool/int validation, operator precedence). Hansei reflection across both runs identified structural issues in the trail architecture — audit trail fragmentation, spec/implementation entanglement, decision recording quality degradation, and observer comprehension gaps. All four were addressed. Kiroku (trail management tooling) was moved into the skills suite as a full skill with SKILL.md, eliminating the separate kiroku repo and ensuring agents are prompted to record evidence trails during all substantive work.
 
 ## Recent Decisions
 
-1. **Shipped-v2 defects are a patch release, not erased history** (DEC-010) - The rebuild stands, but the wrong artifact shipped. The correction is v2.0.1.
-2. **Retired standalone skills removed from live suite** (DEC-011) - `mura`, `muri`, `muda`, and `project-increment` now live only in the archive, not beside active skills.
-3. **Verifier aligned to the 5-skill suite** (DEC-012) - Mechanical checks and ledger coverage rules now match the actual live artifact.
+1. **Run Hansei after 2 external targets, not more targets** — Two runs gave enough signal to reflect. More runs without reflection risks repeating mistakes.
+2. **Move GENBA.md into TRAIL/** — Evidence belongs in one place, not split between project root and TRAIL/.
+3. **Separate spec from implementation in PRINCIPLES.md** — Principles define what Observable Autonomy requires, not how to provide it.
+4. **Add decision quality enforcement** — kiroku-validate warns on sparse rationale (finding: quality degraded under speed).
+5. **Add TRAIL/README.md with glossary and reading guide** — Observers who don't know the system need an entry point.
+6. **Kiroku is a skill, not just tooling** — It has a "when" and a "how"; as a skill, the agent is told to invoke it; as tooling, nobody remembered.
 
 ## Self-Evaluation
 
-Tier 1: Run 47's 6.875/10 was a self-score of the intended rebuild artifact. Run 48 found that the shipped v2.0.0 artifact still contained critical integrity defects, so that score should be read as "intended state," not "shipped state." v2.0.1 repairs the shipped state; a formal post-fix cross-model rescore remains pending.
-
-Tier 2: W1 (Transferability) and W4 (Observer Satisfaction) are now Pass. A fresh model family successfully used the rebuilt suite and the trail to identify and correct real defects without the authoring model present.
+External validation proved the suite finds real bugs and produces usable trails. Hansei proved the improvement loop can self-correct structural issues. The gap: this session's reasoning was nearly lost because kiroku wasn't invoked at session start — the trail was written retroactively. Future sessions should start with `kiroku-start.ps1`.
 
 ## Integrity Notes
 
-- The rebuild reasoning was sound; the defect was release integrity.
-- Cross-model validation proved load-bearing immediately by catching defects the authoring model missed in the shipped artifact.
-- The live suite, verifier, and measurement framework now all describe the same 5-skill system.
+- This session's trail (2026-04-20-external-runs-and-restructuring.md) was written retroactively near the end of the conversation. All prior sessions were also reconstructed, but this one has a longer gap between events and recording.
+- 5 files in the skills repo remain uncommitted from the prior session (DELEGABILITY_CONTRACT.md, PLAIN_LANGUAGE_THESIS.md, SUITE_TRANSFORMATION.md, WORKED_EXAMPLE_DATAKIT.md, TRAIL/sessions/2026-04-19-delegability-core-thesis.md).
+- datakit and mathkit GENBA.md files are at project root (pre-restructuring convention). Future runs should place them in TRAIL/GENBA.md.
 
 ## Observer Guide
 
