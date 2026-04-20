@@ -3,6 +3,54 @@
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
 ---
+## Run 66 - 2026-04-20 - External target (apikit)
+
+| Field | Value |
+|-------|-------|
+| Target | apikit (FastAPI demo at `c:\git\apikit`) — not the skills suite |
+| Model | Claude Opus 4.7 |
+| Trigger | User-requested external Kata cycle to validate suite usability on a non-skills-suite, non-leifoglenedk repo |
+| Methodology | Kata → Kaizen |
+
+### Independence Gate
+This is **not** a suite-self-evaluation run. No suite-level score is asserted. The entry exists to record the methodology validation, not to advance the P3 silence counter (which remains 1/3 from Run 63).
+
+### What was done (in apikit)
+- Picked apikit from the suggested candidate list. Justification: small (~80 LOC source, 0.25s test runtime), self-acknowledged debt in README, CHANGELOG showing 10 evo releases adding tests for known bugs without fixing the source.
+- Started a Kiroku session in `c:\git\apikit\TRAIL\` (not in the skills suite).
+- Diagnosed via the three Kaizen lenses; the highest-signal finding was unevenness — `Store.find_user_by_email` and `Store.find_user_by_username` existed and were tested but never called from `create_user`. Half the feature was written; the integration step was missing.
+- Decided on a single highest-leverage fix: wire up uniqueness, return `409 Conflict`, rewrite the 6 tests that asserted the bug as canonical behavior. Bundled empty-tag and validation fixes into deferred findings rather than executing them — Kaizen's "single highest-leverage change" framing actively prevented scope creep.
+- apikit shipped as v0.1.11 (committed `d552a2e` in apikit's repo). 102/102 tests pass after the change (net -2 from intentional test consolidation).
+
+### Methodology validation — did the suite help, get in the way, or both?
+
+**Helped:**
+1. **`[!DECISION]` markers forced explicit alternatives consideration.** Without them I would have shipped the first plan I formed; with them I had to articulate "fix all three defects at once" as an alternative and reject it.
+2. **Kaizen's "single highest-leverage change" framing prevented scope bundling.** Two other defects (empty-tag handler, missing username/email validation) are real and known; the discipline to defer them produced a cleaner, more reviewable diff and a record of what was deliberately not done.
+3. **Target Condition prompt surfaced an inference that would otherwise have been silent.** I had no human-stated Target Condition; the skill required me to record one, and I marked it agent-inferred. Without that prompt, my interpretation would have looked authoritative.
+4. **`kiroku-start.ps1 -Project <target>` worked correctly first try** and put the trail in the target repo. The cross-repo separation worked exactly as PRINCIPLES.md describes.
+5. **The three Kaizen diagnostic lenses (unevenness/overburden/waste) held up** under the "use whichever reveals what matters, use none if the situation calls for something else" instruction. Only unevenness was the actual root cause; nothing forced me to manufacture findings in the other two categories.
+
+**Got in the way:** Nothing material. One mild gap (below) is a vocabulary suggestion, not friction.
+
+**Gap exposed (suggestion, not defect):**
+- The suite has no named diagnostic lens for "load-bearing wrong tests" — tests that explicitly assert defects as canonical behavior. This is a recurring API-target situation. The suite handled it correctly through reasoning (the original test docstrings said "BUG:", which I treated as a load-bearing breadcrumb), but a named term ("test-locked defect" or "asserted regression") would compress future runs and make the pattern recognizable across targets. Suggested for the next Hansei trigger.
+
+**P1 (Commander's Intent) test on this run:** I removed prescriptive specifics from the skills before acting and asked whether the destination was still discoverable. It was. The skill said "select the methodology" and "derive measurements from what this target is" — both required me to reason from apikit's actual context (a benchmark target with bug-asserting tests) rather than from a generic checklist.
+
+**P2 (Observable Autonomy) test on this run:** The Kiroku session in `c:\git\apikit\TRAIL\sessions\2026-04-20-kaizen-apikit-bug-fixes.md` contains the full reasoning trail (intent, target selection rationale, diagnosis, all 6 decisions with alternatives considered, execution log, deferred findings, and methodology notes). An observer reading only that file can reconstruct what I did, why, and whether to trust it — without consulting this GENBA entry or the chat transcript.
+
+**Process-level finding for evo (not actioned):** evo has shipped 10 versions of apikit adding *tests for known bugs* without ever generating a source fix. This is the highest-impact insight surfaced by the run — not a defect in apikit and not a defect in the skill suite, but a defect in evo's reward signal. Recorded in apikit's TRAIL for visibility; outside this Kata's authority to act on.
+
+### Outcome (skills suite)
+- `verify-suite.ps1`: **0 failures, 0 warnings**
+- `metrics.ps1`: P3 silence counter still **1/3** (this run is not a convergence datapoint)
+- No changes to skills suite files were required to complete the external run. The suite was usable as-is.
+
+### Assessment
+The TPS Skill Suite v2.4.0 is **usable on an external target without modification**. It produced a real, useful change to apikit (closed a correctness defect, eliminated two dead helpers, removed 6 bug-asserting tests). The discipline added by Commander's Intent + Observable Autonomy was net-positive, not bureaucratic. One vocabulary gap is worth a Hansei prompt next time the trigger fires; nothing else from this run requires a suite change.
+
+---
 ## Run 65 - 2026-04-20
 
 | Field | Value |
