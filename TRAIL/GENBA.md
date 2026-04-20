@@ -1,5 +1,40 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+## Run 50 - 2026-04-20
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (kiroku, kata, PRINCIPLES, trail tooling) |
+| Model | Claude Opus 4.6 |
+| Trigger | Human wants P2 ready for colleague adoption; kiroku SKILL.md is implementation-first |
+| Methodology | Kata → Kaizen (kiroku rewrite + trail tooling improvements) |
+
+### Findings
+- kiroku/SKILL.md opened with script parameters, not with why trails matter — colleague-hostile
+- P2 "Narrate, don't summarize" conflated content fidelity with delivery timing
+- Trail INDEX format was verbose (8 lines/decision), lacked inline rationale
+- Orphaned sessions required manual one-by-one closure
+- Kata SKILL.md lacked Target Condition concept
+
+### Actions
+- Rewrote kiroku/SKILL.md v1.0.0 → v2.0.0: principle-first structure (Why → What → How → Reference)
+- Fixed PRINCIPLES.md P2: replaced "Narrate, don't summarize" with "Record reasoning, not just results"
+- Added Target Condition to kata/SKILL.md Steps 1 and 3
+- Compact INDEX format (4 lines/decision) with inline rationale/alternatives extraction
+- Full ISO 8601 timestamps in kiroku-index.ps1
+- Added `-All` flag to kiroku-close.ps1 for batch orphan closure
+- Fixed HTML comment false positives in kiroku-validate.ps1 and kiroku-index.ps1
+- Closed 4 orphaned sessions, tightened SUMMARY/GENBA/INDEX formats
+- Also completed leifoglenedk Run 2 constants migration (separate target, same conversation)
+
+### Verification
+- kiroku-validate: 0 failures, 1 warning (4 historical sparse rationale)
+- leifoglenedk: build passes, 44/44 tests pass
+
+### Assessment
+Suite is ready for colleague-facing use. kiroku now explains why before how. Trail tooling is production-quality.
+
+---
 ## Run 49 - 2026-04-20
 
 | Field | Value |

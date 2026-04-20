@@ -5,15 +5,43 @@
     Path to the session file to close. If omitted, finds the most recent in-progress session.
 .PARAMETER Project
     Path to the target project containing TRAIL/
+.PARAMETER All
+    Close all in-progress sessions (orphan cleanup).
 #>
 param(
     [string]$SessionFile,
-    [string]$Project = (Get-Location).Path
+    [string]$Project = (Get-Location).Path,
+    [switch]$All
 )
 
 $sessionsDir = Join-Path (Join-Path $Project "TRAIL") "sessions"
 
-# Find the session file
+# Find the session file(s)
+if ($All) {
+    $candidates = Get-ChildItem -Path $sessionsDir -Filter "*.md" -ErrorAction SilentlyContinue |
+        Where-Object {
+            $c = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+            $c -match 'status:\s*in-progress'
+        }
+    if (-not $candidates) {
+        Write-Host "No in-progress sessions found."
+        exit 0
+    }
+    $timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssK"
+    $closed = 0
+    foreach ($file in $candidates) {
+        $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
+        $content = $content -replace 'status:\s*in-progress', "status: closed`nclosed: $timestamp"
+        [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::UTF8)
+        Write-Host "Closed: $($file.Name)"
+        $closed++
+    }
+    Write-Host "`nClosed $closed orphaned session(s) at $timestamp"
+    Write-Host "Rebuilding decision index..."
+    & (Join-Path (Split-Path $PSCommandPath) "kiroku-index.ps1") -Project $Project
+    exit 0
+}
+
 if (-not $SessionFile) {
     # Find the most recent in-progress session
     $candidates = Get-ChildItem -Path $sessionsDir -Filter "*.md" -ErrorAction SilentlyContinue |

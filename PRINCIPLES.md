@@ -73,7 +73,7 @@ Where verbatim capture is impossible (e.g., platform limitations prevent transcr
 
 **In practice:**
 
-- **Narrate, don't summarize.** An agent running a skill should produce output as it works — what it's examining, what it's finding, what it's deciding, why. Not a final report after the fact. The human watching the observatory should be able to follow the agent's reasoning in real time.
+- **Record reasoning, not just results.** An agent running a skill should capture what it examined, what it found, what it decided, and why — not produce a polished summary after the fact. The constraint is *content fidelity* (the reasoning was recorded) not *delivery timing* (the human watched live). A post-review trail with complete reasoning establishes trust just as well as real-time observation.
 - **Show the reasoning, not just the conclusion.** "I removed `utils/helpers.py` because no module imports it and its tests are orphaned" — not just "Removed 1 file." The *why* is what makes the action observable.
 - **Make uncertainty visible.** When the agent isn't sure, it should say so explicitly. "This might be dead code, but I can't trace the dynamic import in `loader.py` — flagging for human review" is more trustworthy than silent confidence.
 - **Record everything.** The proof trail is not optional documentation. Every autonomous operation produces a trail entry. Every entry is comparable to the prior entry. The trajectory is visible. This is what makes the improvement loop provable.

@@ -1,41 +1,35 @@
 ﻿# Trail Summary
 
-*Last updated: 2026-04-20 - kata-self-target-gpt54-xhigh session*
+*Last updated: 2026-04-20 - kaizen-kiroku-rewrite session*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---
 
-**One-line status:** Suite v2.0.1 validated against two external targets, kiroku promoted to skill, and target-repo trail routing is now explicit: direct chat work and Kata share the same `TARGET_REPO/TRAIL/`.
+**One-line status:** Suite v2.0.1 stable. Kiroku SKILL.md rewritten to v2.0.0 (principle-first). P2 "Narrate" bullet corrected to separate content fidelity from delivery timing. Trail tooling improved (compact INDEX, ISO timestamps, orphan batch-close).
+
+## Target Condition
+
+Bring P2 (Observable Autonomy) to colleagues' daily work. The skill files must be readable by someone with no prior context.
 
 ## Direction
 
-The skills suite completed its first external-target validation: Kata runs on datakit and mathkit found and fixed real bugs (bool/int validation, operator precedence). Hansei reflection across both runs identified structural issues in the trail architecture — audit trail fragmentation, spec/implementation entanglement, decision recording quality degradation, and observer comprehension gaps. All four were addressed. Kiroku (trail management tooling) was moved into the skills suite as a full skill with SKILL.md, eliminating the separate kiroku repo and ensuring agents are prompted to record evidence trails during all substantive work. The latest self-targeting Kaizen pass clarified the key invariant: the canonical trail is keyed by the target repository, not by whether work was initiated from direct chat or Kata. The skills suite now follows that rule itself by storing its live run ledger in `TRAIL/GENBA.md`.
+Kiroku SKILL.md was restructured from implementation-first (script parameters before reasoning) to principle-first (Evidence → Trust → Autonomy dependency, then multi-resolution evidence, then scripts as reference). PRINCIPLES.md P2 was corrected: "Narrate, don't summarize" replaced with "Record reasoning, not just results" — the constraint is content fidelity, not delivery timing. Trail tooling received multiple improvements: compact 4-line INDEX format with inline rationale extraction, full ISO 8601 timestamps, `-All` flag for batch-closing orphaned sessions, and HTML comment filtering in validate.
 
-## Recent Decisions
+## Key Decisions
 
-1. **Run Hansei after 2 external targets, not more targets** — Two runs gave enough signal to reflect. More runs without reflection risks repeating mistakes.
-2. **Move GENBA.md into TRAIL/** — Evidence belongs in one place, not split between project root and TRAIL/.
-3. **Separate spec from implementation in PRINCIPLES.md** — Principles define what Observable Autonomy requires, not how to provide it.
-4. **Add decision quality enforcement** — kiroku-validate warns on sparse rationale (finding: quality degraded under speed).
-5. **Add TRAIL/README.md with glossary and reading guide** — Observers who don't know the system need an entry point.
-6. **Kiroku is a skill, not just tooling** — It has a "when" and a "how"; as a skill, the agent is told to invoke it; as tooling, nobody remembered.
-7. **Canonical trail is target-repo keyed** — direct chat work and Kata runs on the same repo must append to the same `TARGET_REPO/TRAIL/`; the skills suite now follows that rule itself.
+- [DEC-031](INDEX.md) Restructure kiroku/SKILL.md principle-first: Why → What → How → Reference
+- [DEC-028](INDEX.md) Make target-repo routing explicit at every activation point
+- P2 correction: real-time observation is not required for trust — post-review is equally valid
 
-## Self-Evaluation
+See [INDEX.md](INDEX.md) for the full 31-decision index.
 
-External validation proved the suite finds real bugs and produces usable trails. Hansei proved the improvement loop can self-correct structural issues. The gap from the prior session was that target-repo routing still had to be inferred. That is now explicit in the global instruction, in Kata, and in Kiroku, and the skills suite itself now uses `TRAIL/GENBA.md` as its live ledger.
+## Open Concerns
+
+- SUMMARY.md and GENBA.md require manual agent updates after each run — user expected these to be automatic
+- 4 historical decisions still have sparse rationale (inherited from reconstructed sessions)
+- Skills suite changes uncommitted to git
 
 ## Integrity Notes
 
-- This session's trail (2026-04-20-external-runs-and-restructuring.md) was written retroactively near the end of the conversation. All prior sessions were also reconstructed, but this one has a longer gap between events and recording.
-- 5 files in the skills repo remain uncommitted from the prior session (DELEGABILITY_CONTRACT.md, PLAIN_LANGUAGE_THESIS.md, SUITE_TRANSFORMATION.md, WORKED_EXAMPLE_DATAKIT.md, TRAIL/sessions/2026-04-19-delegability-core-thesis.md).
-- datakit and mathkit GENBA.md files are at project root (pre-restructuring convention). Future runs should place them in TRAIL/GENBA.md.
-
-## Observer Guide
-
-| Time Budget | Read |
-|-------------|------|
-| 5 seconds | One-line status above |
-| 2 minutes | This full summary |
-| 30 minutes | [Decision Index](INDEX.md) + session transcript |
-| Unlimited | [Session transcripts](sessions/) chronologically |
+- This summary was updated during the same conversation that produced the changes it describes
+- All sessions in this trail are at reconstructed fidelity

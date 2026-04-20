@@ -60,7 +60,12 @@ Write-Host "`nCheck 3: Decision count consistency"
 $sessionDecisions = 0
 foreach ($file in $sessionFiles) {
     $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
-    $sessionDecisions += ([regex]::Matches($content, '\[!DECISION\]')).Count
+    $lines = $content -split "`n"
+    foreach ($line in $lines) {
+        if ($line -match '\[!DECISION\]' -and $line -notmatch '<!--' -and $line -notmatch '^\s*Mark decisions') {
+            $sessionDecisions++
+        }
+    }
 }
 
 $indexDecisions = 0

@@ -21,6 +21,7 @@ Understand the target before acting on it.
 - What state is it in? Read its history if one exists (TRAIL/, changelogs, prior runs).
 - What has been tried before? What worked? What did not?
 - What is the triggering concern? (User request, periodic review, prior-run finding)
+- Does a **Target Condition** exist in `TRAIL/SUMMARY.md`? If yes, it guides all decisions this run. If no, ask the human: *"Where do you want this project to end up?"* Record their answer in `SUMMARY.md` under `## Target Condition`.
 
 If this target has a `TRAIL/` directory, read `TRAIL/GENBA.md` for the most recent run entries. If a prior run exists, verify its claims: check that changes it reported are actually present. Do not anchor to a prior run's score.
 
@@ -38,7 +39,7 @@ For each finding: identify the root cause, not just the symptom. "This function 
 
 ### 3. Decide
 
-Based on the diagnosis, select the methodology:
+Based on the diagnosis, select the methodology. If a Target Condition exists, evaluate each option against it — does this move the target closer?
 
 - **Kaizen** - the target needs incremental improvement. The structure is sound; specific things need fixing. This is the most common case.
 - **Kaikaku** - the target's structure cannot reach its goals through incremental changes. It needs redesign. This is rare and must be justified.
@@ -71,18 +72,24 @@ After execution, close the session:
 
 After execution, update the target's audit trail. All trail artifacts live in a single `TRAIL/` directory:
 
-- **`TRAIL/GENBA.md`** — the run ledger. Prepend the new entry (newest-first). Every entry includes:
+- **`TRAIL/GENBA.md`** — the run ledger. Prepend the new entry (newest-first). Keep entries compact (~10 lines max). Every entry includes:
   - Run number, date, model identity
-  - What was found (findings with root causes)
-  - What was done (actions taken)
-  - What changed (concrete diffs, not vague descriptions)
-  - Assessment (current state, score if applicable)
+  - What was found (key findings only — root causes, not exhaustive lists)
+  - What was done (actions taken — omit file manifests, `git log` has those)
+  - Verification result (build/tests pass/fail)
+  - Assessment (one sentence: current state, what remains)
 
 - **`TRAIL/sessions/`** — the session transcript. Mark decisions with `[!DECISION]` (include rationale and alternatives considered), realizations with `[!REALIZATION]`, reversals with `[!REVERSAL]`.
 
 - **`TRAIL/INDEX.md`** — auto-generated decision index. Run `kiroku-index.ps1` after closing the session.
 
-- **`TRAIL/SUMMARY.md`** — executive digest. Updated after each run. Must not duplicate GENBA content — SUMMARY gives direction and cross-run context; GENBA gives per-run evidence.
+- **`TRAIL/SUMMARY.md`** — executive digest. Updated after each run. Must not duplicate GENBA or INDEX content. Contains:
+  - One-line status
+  - Target Condition (human-stated desired end-state, if provided)
+  - Direction (current methodology and why)
+  - Key decisions (max 3 strategic ones — link to INDEX for full list)
+  - Open concerns
+  - Integrity warning
 
 The observer looks at one directory. CHANGELOG.md stays outside TRAIL/ — it serves project users, not process observers.
 
