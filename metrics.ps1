@@ -14,6 +14,7 @@
       4. Regression frequency    -- how often does a run damage the suite?
       5. Model diversity index   -- how many distinct model families have participated?
       6. Fix durability          -- what fraction of runs produced lasting improvements?
+      7. P3 silence counter      -- consecutive zero-delta runs and distinct evaluators (computed, not asserted)
 
     Threshold rationale (CMMI QPM L4 -- operationally defined):
       Agreement (stdev of de-anchored start scores):
@@ -286,6 +287,70 @@ Write-Host "    Positive-delta runs  : $positive"
 Write-Host "    Neutral-delta runs   : $neutral"
 Write-Host "    Negative-delta runs  : $regressions"
 Write-Host "    Durability           : $durability% of runs produced lasting improvement"
+
+# ---------------------------------------------------------------------------
+# Metric 7: Principle 3 Convergence Silence Counter (computed, not asserted)
+# ---------------------------------------------------------------------------
+# Walks SCORECARD rows backward from the most recent valid scored run.
+# A run contributes to silence if its delta is +0.0 (zero score change).
+# The chain is broken by any non-zero delta, invalidated row, or N/A delta.
+# Distinct model families in the chain are also counted -- P3 requires
+# >= 3 consecutive silent runs from >= 3 distinct evaluators.
+#
+# This metric exists to detect drift between the asserted SCORECARD counter
+# and the actual chain. Convergence cannot be self-narrated -- it must be
+# derivable from the data.
+Write-Host ""
+Write-Host "[7] P3 Convergence Silence Counter" -ForegroundColor White
+$silentChain = @()
+$zeroDeltaPattern = '^\+?-?0\.0+$'
+# Walk backward through ALL rows (valid + invalidated), break on invalidation or non-zero
+for ($i = $rows.Count - 1; $i -ge 0; $i--) {
+    $r = $rows[$i]
+    if ($r.Result -match $invalidPattern) { break }
+    if ($r.Delta -eq 'N/A' -or $r.Delta -eq '') { break }
+    if ($r.Delta -notmatch $zeroDeltaPattern) { break }
+    $silentChain += $r
+}
+$silentRuns = $silentChain.Count
+$silentFamilies = @{}
+foreach ($r in $silentChain) {
+    $family = $r.Model -replace $stripPattern, '' -replace $stripPattern2, ''
+    $family = $family.Trim()
+    $silentFamilies[$family] = $true
+}
+$silentDistinct = $silentFamilies.Count
+
+# Parse asserted counter from SCORECARD
+$assertedPattern = 'Principle 3 silence counter:\s*(\d+)/(\d+)'
+$assertedRuns = $null
+$assertedThreshold = 3
+if ($scContent -match $assertedPattern) {
+    $assertedRuns = [int]$Matches[1]
+    $assertedThreshold = [int]$Matches[2]
+}
+
+Write-Host "    Computed silent chain : $silentRuns consecutive zero-delta runs"
+Write-Host "    Distinct families     : $silentDistinct"
+if ($null -ne $assertedRuns) {
+    Write-Host "    Asserted counter      : $assertedRuns/$assertedThreshold (from SCORECARD)"
+} else {
+    Write-Host "    Asserted counter      : not found in SCORECARD"
+}
+
+$convergenceMet = ($silentRuns -ge $assertedThreshold) -and ($silentDistinct -ge $assertedThreshold)
+if ($convergenceMet) {
+    Write-Host "    Assessment            : CONVERGED -- $silentRuns silent runs, $silentDistinct distinct families" -ForegroundColor Green
+} elseif ($silentRuns -eq 0) {
+    Write-Host "    Assessment            : ACTIVE -- last run produced score change, counter at 0" -ForegroundColor Cyan
+} else {
+    Write-Host "    Assessment            : APPROACHING -- $silentRuns/$assertedThreshold silent runs, $silentDistinct/$assertedThreshold distinct families" -ForegroundColor Yellow
+}
+
+# Drift detection between asserted and computed
+if ($null -ne $assertedRuns -and $assertedRuns -ne $silentRuns) {
+    Write-Host "    *** DRIFT -- asserted $assertedRuns/$assertedThreshold but computed $silentRuns ***" -ForegroundColor Red
+}
 
 # ---------------------------------------------------------------------------
 # Summary

@@ -9,6 +9,14 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+### Added
+
+- **metrics.ps1 Metric 7: P3 Convergence Silence Counter.** Computes consecutive zero-delta runs and distinct evaluators in the silence chain from SCORECARD data. Detects drift between the asserted counter and the computed value. Convergence is now derivable from data instead of self-asserted. (Run 59)
+
+### Changed
+
+- **kata/SKILL.md Convergence section tightened.** "produce the same assessment" → "produce the same score (within a defined tolerance)" — mirrors PRINCIPLES.md §3 precisely. Added explicit reference to `metrics.ps1` as the computation source for the silence counter. (Run 59)
+
 ## [2.3.0] - 2026-04-20
 
 ### Added

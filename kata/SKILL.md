@@ -114,11 +114,11 @@ Commit the changes to version control. The disaster recovery floor is one run de
 
 Kata honors Principle 3. Convergence requires three simultaneous conditions:
 
-1. Three or more consecutive evaluations by distinct evaluators produce the same assessment
+1. Three or more consecutive evaluations by distinct evaluators produce the same score (within a defined tolerance)
 2. Zero artifact changes in each of those evaluations
 3. Each evaluator scored independently without consulting prior scores
 
-When these conditions are met, record the convergence and stop. Do not manufacture findings to justify continued execution.
+When these conditions are met, record the convergence and stop. Do not manufacture findings to justify continued execution. The P3 silence counter is computed by `metrics.ps1` from SCORECARD data — it is not asserted by the agent. If the asserted counter drifts from the computed value, the metrics output flags it.
 
 ## Periodic Hansei
 
