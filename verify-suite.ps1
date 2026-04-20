@@ -187,26 +187,30 @@ $genbaPath = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'GENBA.md'
 $scorecardPath = Join-Path $script:suiteRoot 'SCORECARD.md'
 if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
     $gContent = Get-Content $genbaPath -Raw
-    $gRuns = ([regex]::Matches($gContent, '(?m)^## Run \d+')).Count
+    $genbaRunNumbers = @([regex]::Matches($gContent, '(?m)^## Run (\d+)') | ForEach-Object { [int]$_.Groups[1].Value })
+    $gRuns = $genbaRunNumbers.Count
 
     $sContent = Get-Content $scorecardPath -Raw
     $scorecardRunRows = @(Get-ScorecardRunRows -Content $sContent)
-    $tpsRows = @()
+    $genbaTrackedRows = @()
     $invalidatedRows = 0
     foreach ($row in $scorecardRunRows) {
         if ($row.Result -match '\*\*Invalidated\*\*') {
             $invalidatedRows++
         }
 
-        if ($row.Target -notlike '*external*') {
-            $tpsRows += $row.Run
+        # GENBA is the suite-level ledger. It tracks all TPS Skill Suite rows,
+        # plus selected external-target methodology-validation runs that are
+        # explicitly recorded in the suite ledger (for example Run 62).
+        if ($row.Target -eq 'TPS Skill Suite' -or $genbaRunNumbers -contains $row.Run) {
+            $genbaTrackedRows += $row.Run
         }
     }
 
-    if ($gRuns -ne $tpsRows.Count) {
-        Warn "TRAIL/GENBA.md has $gRuns run entries, SCORECARD has $($tpsRows.Count) TPS Skill Suite rows ($invalidatedRows invalidated row(s); external-target rows ignored)"
+    if ($gRuns -ne $genbaTrackedRows.Count) {
+        Warn "TRAIL/GENBA.md has $gRuns run entries, SCORECARD has $($genbaTrackedRows.Count) rows that should be represented in the suite GENBA ($invalidatedRows invalidated row(s))"
     } else {
-        Pass "TRAIL/GENBA.md ($gRuns) and SCORECARD ($($tpsRows.Count)) TPS Skill Suite counts match"
+        Pass "TRAIL/GENBA.md ($gRuns) and SCORECARD ($($genbaTrackedRows.Count)) suite-GENBA-tracked row counts match"
     }
 } else {
     if (-not (Test-Path $genbaPath))     { Warn 'TRAIL/GENBA.md not found' }

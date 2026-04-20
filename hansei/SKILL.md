@@ -43,6 +43,26 @@ What has the loop NOT been looking at?
 - Has the loop been measuring input quality (how good is the skill file?) but not output quality (how good is the work the skill produces)?
 - Are there observer classes (from Principle 2) whose perspective has never been represented?
 
+### Intent Drift
+
+Has the system drifted from its original purpose?
+
+- Compare the current Target Condition (if stated) against what the loop is actually optimizing for. Are they still aligned?
+- Have the measurements evolved so far from their original derivation that they no longer measure what was intended?
+- Is the loop optimizing for its own metrics rather than the human's actual goal?
+- Have goals, constraints, or assumptions changed since the loop started — and has the loop adapted, or is it still chasing the original framing?
+
+### Retirement
+
+What no longer earns its existence in the improvement process itself?
+
+- Are there goals that were achieved long ago and no longer need tracking?
+- Are there metrics or measurements that no longer discriminate — they've been at ceiling so long they add overhead without signal?
+- Are there constraints that were once relevant but no longer apply (e.g., compatibility with a tool version that's been retired)?
+- Are there tests, checks, or verification steps that have never failed and never will — cost without value?
+
+Retirement is not deletion from history — it is moving things from "active" to "archived" so the loop stays lean. The trail records what was retired and why.
+
 ### Methodology Effectiveness
 
 Is the improvement process itself well-designed?

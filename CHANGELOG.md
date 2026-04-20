@@ -11,6 +11,11 @@ and this project adheres to a custom versioning scheme.
 
 ### Added
 
+- **metrics.ps1 Metrics 8-10: Session Elapsed Time, Transcript Size, GENBA Growth Rate.** Three new operational metrics derived from existing trail data. Session elapsed time uses Kiroku frontmatter timestamps; transcript size measures per-session KB; GENBA growth rate tracks ledger scaling. All include CMMI-anchored thresholds. (Design discussion)
+- **hansei/SKILL.md: Intent Drift section.** Detects when goals, metrics, or system behavior drift from original intent. Asks whether the loop is optimizing for its own metrics rather than the human's actual goal. (Design discussion)
+- **hansei/SKILL.md: Retirement section.** Formal process for retiring goals, metrics, constraints, or checks that no longer provide signal. Keeps the loop lean over time. (Design discussion)
+- **kata/SKILL.md: Assumption surfacing + constraint identification in Phase 1 (Grasp).** Two new bullets requiring explicit surfacing of unstated assumptions and mapping of hard/soft constraints before deriving measurements. (Design discussion)
+- **kata/SKILL.md: Operational metrics as improvement targets in Phase 1 (Grasp).** The loop's own efficiency metrics (elapsed time, transcript size, artifact growth) are now explicitly part of the measurement scheme. If they trend poorly, the loop diagnoses and addresses its own resource consumption rather than having efficiency tactics coded into skill logic. (Design discussion)
 - **metrics.ps1 Metric 7: P3 Convergence Silence Counter.** Computes consecutive zero-delta runs and distinct evaluators in the silence chain from SCORECARD data. Detects drift between the asserted counter and the computed value. Convergence is now derivable from data instead of self-asserted. (Run 59)
 - **kaizen/SKILL.md: explicit silence-valid guidance.** After the three diagnostic lenses: "Silence is a valid outcome." In Self-Evaluate: silence recorded as convergence evidence, not failure. Addresses Hansei Run 60 F#1 (incentive structure incompatible with stopping condition). (Run 61)
 - **kata/SKILL.md: pre-flight CM check in Execute step.** Agents now verify the latest GENBA entry's claims before modifying files, catching inter-run drift proactively instead of reactively. Addresses Hansei Run 60 F#2 (CM drift structural). (Run 61)
@@ -22,12 +27,18 @@ and this project adheres to a custom versioning scheme.
 - **verify-suite.ps1 Check 9 restructured from cadence to signal-based.** Fixed 5-run Hansei cadence check replaced with sustained-plateau detection: walks SCORECARD rows backward, counts consecutive zero-delta runs, warns at ≥3. Uses `Get-ScorecardRunRows` object model. (Run 61)
 - **metrics.ps1 Metric 7 now skips non-scoring rows when computing the P3 silence chain.** External-target rows and explicitly excluded follow-up audits no longer falsely reset the computed counter; invalidated and non-zero scored runs still break the chain. (Run 64)
 
+### Fixed
+
+- **verify-suite.ps1 Check 5 now counts suite-GENBA-tracked rows instead of excluding every `*external*` target row.** Kiroku external runs that live only in their target trails remain excluded, while methodology-validation runs intentionally recorded in the suite GENBA (for example Run 62) are included. This removes the stale false-warning state and returns the suite to 0 failures, 0 warnings. (Run 65)
+- **kiroku-validate.ps1 Check 7 now counts only real missing evidence fields, not arbitrary narrative mentions of `*not recorded*`.** This prevents false positives when a decision honestly discusses historical `*not recorded*` gaps in prose. Genuine missing `Rationale:` or `Alternatives:` fields are still warned. (Run 65)
+
 ### Reflection
 
 - **Run 60 Hansei (no skill behavior changes).** Periodic loop reflection. 4 new findings: incentive structure incompatible with stopping condition; inter-run CM drift recurring as structural pattern; external-target finding now 19 runs deferred (Run 41 F#3 still open); cadence-driven Hansei risks compliance shape. Most Important Finding unchanged from Runs 41 and 54. Recommendations queued for Runs 61 (silence test) and 62 (external target). See `TRAIL/GENBA.md` Run 60 entry. (Run 60)
 - **Run 62 external target (leifoglenedk).** First genuine external-target run. Kata→Kaizen on C# ASP.NET MVC driving school platform. Added 16 business logic tests (60/60 pass). Security findings flagged. Addresses Run 41 F#3 (20-run-deferred external target). Methodology validated: no skill modifications needed. See `TRAIL/GENBA.md` Run 62 entry and `C:\git\leifoglenedk\TRAIL\`. (Run 62)
 - **Run 63 silence (no changes).** First genuine silence run. Read all 5 skill files + PRINCIPLES + README + SCORECARD rubric + CHANGELOG. Found 6 observations — all design tensions inherent in principle-first systems, none actionable. Zero artifact changes. P3 silence counter: 0 → 1. (Run 63)
 - **Run 64 non-independent cross-model follow-up.** Different model family, but prior scores were visible in the same conversation, so the run does not qualify for Principle 3 convergence accounting. Fixed stale `TRAIL/SUMMARY.md` counter text, repaired `metrics.ps1` Metric 7 so non-scoring rows do not reset the silence chain, and clarified in `PRINCIPLES.md` + `kata/SKILL.md` that same-conversation model switches are not independent assessment. P3 remains 1/3. (Run 64)
+- **Run 65 non-independent GPT-5.4 file-read follow-up.** Fresh read of the live suite artifacts surfaced two tool defects rather than ledger defects: `verify-suite.ps1` Check 5 still excluded all `*external*` target rows even though the suite GENBA intentionally records Run 62 for methodology validation, and `kiroku-validate.ps1` Check 7 counted any raw `*not recorded*` substring in the index, including explanatory prose. Both parser rules were fixed. `verify-suite.ps1` now passes with 0 failures, 0 warnings, and `kiroku-validate.ps1` warns only on the 4 genuine historical alternatives gaps. P3 remains 1/3 because the run was not an independent convergence evaluation. (Run 65)
 
 ## [2.3.0] - 2026-04-20
 

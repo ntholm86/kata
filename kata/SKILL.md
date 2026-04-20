@@ -21,6 +21,8 @@ Understand the target before acting on it.
 - What state is it in? Read its history if one exists (TRAIL/, changelogs, prior runs).
 - What has been tried before? What worked? What did not?
 - What is the triggering concern? (User request, periodic review, prior-run finding)
+- What assumptions are being made — by the human, by the agent, by prior runs? Surface them explicitly. An unstated assumption that turns out wrong is more damaging than a stated one.
+- What constraints apply? Hard limits (safety, legal, compatibility) and soft limits (time budget, acceptable complexity, performance targets). Constraints that aren't identified early become surprises later.
 - Does a **Target Condition** exist in `TRAIL/SUMMARY.md`? If yes, it guides all decisions this run. If no, ask the human: *"Where do you want this project to end up?"* Record their answer in `SUMMARY.md` under `## Target Condition`.
 
 If this target has a `TRAIL/` directory, read `TRAIL/GENBA.md` for the most recent run entries. If a prior run exists, verify its claims: check that changes it reported are actually present. Do not anchor to a prior run's score.
@@ -34,6 +36,8 @@ If this target has a `TRAIL/` directory, read `TRAIL/GENBA.md` for the most rece
 Do not prescribe the measurements in advance. Derive them from what you find. State each measurement and why it matters for this target. If a prior run on this target established a measurement scheme (recorded in GENBA), inherit it unless you have reason to revise — and if you revise, record the revision as a `[!DECISION]` with rationale.
 
 If a formal scoring rubric exists for this target (e.g., Rubric v3 in SCORECARD.md for the skill suite), use it. Rubrics are one form of measurement scheme — pre-agreed, externally anchored. They don't replace context-derived measurements; they complement them.
+
+The loop's own operational metrics (elapsed time, transcript size, artifact growth) are measurements too. If they trend poorly, that is a finding — the loop should diagnose and address its own resource consumption the same way it addresses any other deficiency.
 
 ### 2. Diagnose
 

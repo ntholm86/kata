@@ -2,7 +2,8 @@
 .SYNOPSIS
     Start a new Kiroku session. Creates a session transcript file with metadata header.
 .PARAMETER Slug
-    Short identifier for the session (e.g., "measurement-redesign", "skills-rebuild")
+    Short identifier for the session (e.g., "measurement-redesign", "skills-rebuild").
+    If omitted, auto-generates a timestamp-based slug (e.g., "session-1708").
 .PARAMETER Project
     Path to the target project. Trail goes into $Project/TRAIL/sessions/
     Defaults to current directory.
@@ -12,9 +13,11 @@
     Expected fidelity level: verbatim, reconstructed, mixed. Default: reconstructed
 .EXAMPLE
     .\kiroku-start.ps1 -Slug "measurement-redesign" -Project "C:\Users\admin\.copilot\skills" -Participants "human, Claude Opus 4.6"
+.EXAMPLE
+    .\kiroku-start.ps1 -Project "C:\git\my-app"
+    # Auto-generates slug like "session-1708"
 #>
 param(
-    [Parameter(Mandatory)]
     [string]$Slug,
     
     [string]$Project = (Get-Location).Path,
@@ -24,6 +27,11 @@ param(
     [ValidateSet("verbatim", "reconstructed", "mixed")]
     [string]$Fidelity = "reconstructed"
 )
+
+# Auto-generate slug if not provided
+if (-not $Slug) {
+    $Slug = "session-$(Get-Date -Format 'HHmm')"
+}
 
 $date = Get-Date -Format "yyyy-MM-dd"
 $timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssK"

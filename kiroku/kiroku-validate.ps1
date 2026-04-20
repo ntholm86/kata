@@ -135,7 +135,10 @@ foreach ($file in $sessionFiles) {
 Write-Host "`nCheck 7: Decision recording quality"
 if (Test-Path $indexPath) {
     $indexContent = [System.IO.File]::ReadAllText($indexPath, [System.Text.Encoding]::UTF8)
-    $sparseDecisions = ([regex]::Matches($indexContent, '\*not recorded')).Count
+    # Count only actual rationale/alternatives fields marked as not recorded.
+    # A narrative mention of the phrase inside a decision should not create a false warning.
+    $missingFieldPattern = '(?m)^(?:- \*\*)?(?:Rationale|Alternatives(?: considered)?)(?::\*\*|:)\s+\*not recorded(?: at decision point)?\*'
+    $sparseDecisions = ([regex]::Matches($indexContent, $missingFieldPattern)).Count
     if ($sparseDecisions -gt 0) {
         Warn "$sparseDecisions decision(s) have missing rationale or alternatives - enrich at decision time"
     } else {

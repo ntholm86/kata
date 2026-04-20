@@ -1,5 +1,45 @@
 ﻿<!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+## Run 65 - 2026-04-20
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.4 |
+| Trigger | User-requested fresh Kata→Kaizen evaluation in the current workspace |
+| Methodology | Kata → Kaizen |
+
+### Independence Gate
+This run is **not** a valid Principle 3 convergence datapoint. The evaluation happened in the same conversation that already contained prior scores, run summaries, and the Run 64 follow-up. The suite was read directly from files, but the evaluator was not de-anchored for convergence accounting.
+
+### Measurements
+No independent score assigned for Run 65.
+
+Mechanical state after the fix:
+- `verify-suite.ps1`: 0 failures, 0 warnings
+- `metrics.ps1` Metric 7: P3 silence counter remains **1/3**
+
+### Diagnosis
+- Read the live skill files, constitutional/supporting artifacts, and suite trail artifacts directly from the repository.
+- The suite's only actionable defect was in `verify-suite.ps1` Check 5. It counted SCORECARD rows by excluding every target string containing `external`, but the suite GENBA intentionally records Run 62 as a methodology-validation external-target run.
+- That stale filter produced a false warning: GENBA had 62 run entries while SCORECARD counted only 61 rows as suite-tracked, even though no ledger entry was missing.
+- Final trail validation exposed a second tool defect in `kiroku-validate.ps1` Check 7. It counted any raw `*not recorded*` substring anywhere in `TRAIL/INDEX.md`, so an explanatory narrative mention of the phrase inflated the genuine historical warning count.
+
+### Actions
+- Reworked Check 5 to count the SCORECARD rows that should be represented in the suite GENBA: all `TPS Skill Suite` rows plus any additional rows explicitly present in the suite GENBA.
+- Tightened `kiroku-validate.ps1` Check 7 so it only counts actual rationale/alternatives fields marked `*not recorded*`.
+- Re-ran `verify-suite.ps1` and `metrics.ps1` after the fix.
+
+### Outcome
+- `verify-suite.ps1`: **0 failures, 0 warnings**
+- `metrics.ps1`: P3 silence counter still **1/3**
+- `kiroku-validate.ps1`: 0 failures, 1 warning (**4 historical decisions still say `Alternatives: *not recorded*` in older sessions**)
+- No additional actionable defects surfaced in the live suite artifacts after the verifier fix.
+
+### Assessment
+Fresh file-read surfaced two real parser defects in the suite tooling rather than defects in the ledgers themselves. The suite is mechanically clean under `verify-suite.ps1`; the remaining non-convergence gap is fresh-session independence, and the remaining Kiroku warning is historical evidence debt rather than a new Run 65 defect.
+
+---
 ## Run 64 - 2026-04-20
 
 | Field | Value |

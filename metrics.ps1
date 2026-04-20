@@ -15,6 +15,9 @@
       5. Model diversity index   -- how many distinct model families have participated?
       6. Fix durability          -- what fraction of runs produced lasting improvements?
       7. P3 silence counter      -- consecutive zero-delta runs and distinct evaluators (computed, not asserted)
+      8. Session elapsed time    -- how long do sessions take? (model speed, suite overhead)
+      9. Transcript size         -- how large are session transcripts? (effort/context cost proxy)
+     10. GENBA growth rate       -- is the ledger becoming a scaling bottleneck?
 
     Threshold rationale (CMMI QPM L4 -- operationally defined):
       Agreement (stdev of de-anchored start scores):
@@ -353,6 +356,106 @@ if ($convergenceMet) {
 # Drift detection between asserted and computed
 if ($null -ne $assertedRuns -and $assertedRuns -ne $silentRuns) {
     Write-Host "    *** DRIFT -- asserted $assertedRuns/$assertedThreshold but computed $silentRuns ***" -ForegroundColor Red
+}
+
+# ---------------------------------------------------------------------------
+# Metric 8: Elapsed Time per Session
+# ---------------------------------------------------------------------------
+Write-Host ""
+Write-Host "[8] Session Elapsed Time" -ForegroundColor White
+$sessionsDir = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'sessions'
+$sessionDurations = @()
+if (Test-Path $sessionsDir) {
+    $sessionFiles = Get-ChildItem $sessionsDir -Filter '*.md' -ErrorAction SilentlyContinue
+    foreach ($sf in $sessionFiles) {
+        $sfContent = Get-Content $sf.FullName -Raw -Encoding UTF8
+        # Timestamps are in YAML frontmatter: started: and closed: fields
+        $startMatch = [regex]::Match($sfContent, '(?m)^started:\s*(.+)')
+        $closedMatch = [regex]::Match($sfContent, '(?m)^closed:\s*(.+)')
+        if ($startMatch.Success -and $closedMatch.Success) {
+            try {
+                $startTime = [DateTimeOffset]::Parse($startMatch.Groups[1].Value.Trim())
+                $closedTime = [DateTimeOffset]::Parse($closedMatch.Groups[1].Value.Trim())
+                $elapsed = $closedTime - $startTime
+                if ($elapsed.TotalMinutes -gt 0 -and $elapsed.TotalHours -lt 24) {
+                    $sessionDurations += [PSCustomObject]@{
+                        File     = $sf.Name
+                        Minutes  = [Math]::Round($elapsed.TotalMinutes, 1)
+                    }
+                }
+            } catch { }
+        }
+    }
+}
+if ($sessionDurations.Count -ge 1) {
+    $avgMin = [Math]::Round(($sessionDurations | Measure-Object -Property Minutes -Average).Average, 1)
+    $minMin = [Math]::Round(($sessionDurations | Measure-Object -Property Minutes -Minimum).Minimum, 1)
+    $maxMin = [Math]::Round(($sessionDurations | Measure-Object -Property Minutes -Maximum).Maximum, 1)
+    Write-Host "    Closed sessions  : $($sessionDurations.Count)"
+    Write-Host "    Average duration : $avgMin min"
+    Write-Host "    Range            : $minMin min to $maxMin min"
+    if ($avgMin -le 15) {
+        Write-Host "    Assessment       : GOOD -- sessions are fast (<= 15 min avg)" -ForegroundColor Green
+    } elseif ($avgMin -le 30) {
+        Write-Host "    Assessment       : MODERATE -- sessions are reasonable (15-30 min avg)" -ForegroundColor Yellow
+    } else {
+        Write-Host "    Assessment       : POOR -- sessions are slow (> 30 min avg)" -ForegroundColor Red
+    }
+} else {
+    Write-Host "    No closed sessions with timestamps found"
+}
+
+# ---------------------------------------------------------------------------
+# Metric 9: Transcript Size (proxy for effort/context cost)
+# ---------------------------------------------------------------------------
+Write-Host ""
+Write-Host "[9] Transcript Size" -ForegroundColor White
+if (Test-Path $sessionsDir) {
+    $sessionSizes = @(Get-ChildItem $sessionsDir -Filter '*.md' -ErrorAction SilentlyContinue |
+        Select-Object Name, @{N='KB'; E={[Math]::Round($_.Length / 1024, 1)}})
+    if ($sessionSizes.Count -ge 1) {
+        $avgKB = [Math]::Round(($sessionSizes | Measure-Object -Property KB -Average).Average, 1)
+        $totalKB = [Math]::Round(($sessionSizes | Measure-Object -Property KB -Sum).Sum, 1)
+        $maxSession = $sessionSizes | Sort-Object -Property KB -Descending | Select-Object -First 1
+        Write-Host "    Total sessions   : $($sessionSizes.Count)"
+        Write-Host "    Avg size         : $avgKB KB"
+        Write-Host "    Total trail size : $totalKB KB"
+        Write-Host "    Largest session  : $($maxSession.Name) ($($maxSession.KB) KB)"
+        if ($avgKB -le 5) {
+            Write-Host "    Assessment       : GOOD -- sessions are concise (<= 5 KB avg)" -ForegroundColor Green
+        } elseif ($avgKB -le 10) {
+            Write-Host "    Assessment       : MODERATE -- sessions are reasonable (5-10 KB avg)" -ForegroundColor Yellow
+        } else {
+            Write-Host "    Assessment       : POOR -- sessions are large (> 10 KB avg), review for bloat" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "    No session files found"
+    }
+} else {
+    Write-Host "    TRAIL/sessions/ not found"
+}
+
+# ---------------------------------------------------------------------------
+# Metric 10: GENBA Growth Rate
+# ---------------------------------------------------------------------------
+Write-Host ""
+Write-Host "[10] GENBA Growth Rate" -ForegroundColor White
+if (Test-Path $genbaPath) {
+    $genbaSize = [Math]::Round((Get-Item $genbaPath).Length / 1024, 1)
+    $genbaRunCount = @([regex]::Matches($gContent, '(?m)^##\s+Run\s+\d+')).Count
+    $perRunKB = if ($genbaRunCount -gt 0) { [Math]::Round($genbaSize / $genbaRunCount, 1) } else { 0 }
+    Write-Host "    GENBA size       : $genbaSize KB"
+    Write-Host "    Run entries      : $genbaRunCount"
+    Write-Host "    Avg per entry    : $perRunKB KB"
+    if ($genbaSize -le 50) {
+        Write-Host "    Assessment       : GOOD -- GENBA is manageable (<= 50 KB)" -ForegroundColor Green
+    } elseif ($genbaSize -le 100) {
+        Write-Host "    Assessment       : MODERATE -- GENBA is growing (50-100 KB), consider archival" -ForegroundColor Yellow
+    } else {
+        Write-Host "    Assessment       : POOR -- GENBA exceeds 100 KB, archival recommended" -ForegroundColor Red
+    }
+} else {
+    Write-Host "    TRAIL/GENBA.md not found"
 }
 
 # ---------------------------------------------------------------------------
