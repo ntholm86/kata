@@ -9,6 +9,11 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+### Added
+
+- **Dimension Trajectory table in SCORECARD.md.** Per-dimension end-of-run scores for all v3-scored runs, showing which dimensions drove each delta. Populated from GENBA for Runs 43, 44, 47, 51, 52. Scheme column tracks measurement methodology changes across runs.
+- **Kata Step 5: Dimension Trajectory instruction.** Agents now populate the Dimension Trajectory table when recording a scored run. Directly addresses P2 (Observable Autonomy) at indexed resolution.
+
 ## [2.2.0] - 2026-04-20
 
 ### Added

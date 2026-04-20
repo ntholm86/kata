@@ -37,7 +37,7 @@ skills/
   STANDARDS.md            # External framework alignment (PDCA, DMAIC, CMMI, NIST)
   SCORECARD.md            # Cross-model evaluation trajectory
   CHANGELOG.md            # Release history
-  verify-suite.ps1        # Mechanical integrity checks (13 checks)
+  verify-suite.ps1        # Mechanical integrity checks (14 checks)
   metrics.ps1             # Computable objective metrics
   TRAIL/                  # Evidence trail for the suite itself
   v1_archive/             # Historical v1 skill files and rebuild documents
