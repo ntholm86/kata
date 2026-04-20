@@ -14,6 +14,11 @@ and this project adheres to a custom versioning scheme.
 - **Dimension Trajectory table in SCORECARD.md.** Per-dimension end-of-run scores for all v3-scored runs, showing which dimensions drove each delta. Populated from GENBA for Runs 43, 44, 47, 51, 52. Scheme column tracks measurement methodology changes across runs.
 - **Kata Step 5: Dimension Trajectory instruction.** Agents now populate the Dimension Trajectory table when recording a scored run. Directly addresses P2 (Observable Autonomy) at indexed resolution.
 
+### Fixed
+
+- **Scoped SCORECARD parsing in `metrics.ps1` to the main run table.** Dimension Trajectory and rubric tables no longer inflate run counts or distort derived metrics.
+- **Hardened `verify-suite.ps1` SCORECARD and correlation checks.** Run-consuming checks now read the main run table instead of numeric tables generally, GENBA run counting is anchored to top-level headings, and Check 14 is snapshot-aware so clean re-verification of an already-recorded scored run does not warn spuriously.
+
 ## [2.2.0] - 2026-04-20
 
 ### Added

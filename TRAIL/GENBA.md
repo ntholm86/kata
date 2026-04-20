@@ -1,5 +1,50 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+## Run 55 - 2026-04-20
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | GPT-5.4 |
+| Trigger | Follow Hansei Run 54 recommendation: first non-Claude v3 scoring run |
+| Methodology | Kata → Kaizen |
+
+### Measurements (Rubric v3 — inherited from Run 53)
+
+| # | Dimension | Start | End | Δ |
+|---|-----------|:-----:|:---:|:-:|
+| 1 | Process Completeness | 8 | 8 | — |
+| 2 | Causal Analysis | 8 | 8 | — |
+| 3 | Measurement Validity | 7 | 8 | +1 |
+| 4 | Configuration Management | 8 | 9 | +1 |
+| 5 | Cross-Evaluator Reliability | 7 | 7 | — |
+| 6 | Instruction Clarity | 9 | 9 | — |
+| 7 | Convergence Integrity | 8 | 8 | — |
+| 8 | ARF | 8 | 8 | — |
+| | **Mean** | **7.875** | **8.125** | **+0.25** |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | `metrics.ps1` parses any numeric SCORECARD row as a run row, so the Dimension Trajectory and rubric tables inflate run count and distort metrics (e.g. total runs, invalidation rate, model diversity). | Mura | High | Yes | First |
+| 2 | `verify-suite.ps1` Check 5 has the same SCORECARD over-read bug, and also counts `### Run 41 Meta-Findings Status` inside Hansei as a top-level GENBA run because the regex is not line-anchored. Produces a false ledger warning. | Mura | High | Yes | First |
+| 3 | `verify-suite.ps1` Check 14 warns on clean re-verification of a scored run because it compares the latest score delta to *current* hash diffs, not to whether that scored run is already represented in the stored snapshot. | Mura | Medium | Yes | First |
+
+### Actions Taken
+- Scoped `metrics.ps1` SCORECARD parsing to the main run table only.
+- Centralized `verify-suite.ps1` SCORECARD run-table parsing so checks consume the main run table, not trajectory or rubric tables.
+- Anchored GENBA run counting in `verify-suite.ps1` to top-level `## Run N` headings only.
+- Made `verify-suite.ps1` Check 14 snapshot-aware so clean re-verification of an already-recorded scored run passes instead of warning.
+- Removed two polluted `METRICS_HISTORY.md` rows produced by the broken parser (`Runs=57` and `Runs=60`).
+- Re-ran verifier: 14 checks, 0 failures, 0 warnings.
+- Re-ran metrics with corrected parser against the recorded Run 55 state: total runs 55, invalidation 3.6%, model diversity 7 families, overall FAIR.
+
+### Outcome
+- Dims 3 and 4 improved: the measurement and integrity tooling now matches the post-Dimension-Trajectory SCORECARD shape.
+- First non-Claude v3 scoring run completed. D5 remains 7: cross-family v3 scoring now exists, but overlap is still manual and the v3 ensemble is still thin.
+- This is a genuine cross-model late-cycle catch: the Claude runs that added the new SCORECARD table did not re-scope the parsers to the new artifact shape.
+
+---
 ## Run 54 (Hansei) - 2026-04-20
 
 | Field | Value |

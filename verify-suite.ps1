@@ -45,6 +45,52 @@ function Test-BareText {
     return ($stripped -match $Pattern)
 }
 
+function Get-ScorecardRunRows {
+    param([string]$Content)
+
+    $rows = @()
+    $inRunTable = $false
+    foreach ($line in ($Content -split "`r?`n")) {
+        if (-not $inRunTable) {
+            if ($line -match '^\|\s*Run\s*\|\s*Date\s*\|\s*Model\s*\|\s*Start Score\s*\|\s*End Score\s*\|\s*Delta\s*\|\s*Target\s*\|\s*Result\s*\|') {
+                $inRunTable = $true
+            }
+            continue
+        }
+
+        if ($line -match '^##\s+') {
+            break
+        }
+
+        if ($line -match '^\|\s*:?-+:?\s*\|') {
+            continue
+        }
+
+        if ($line -notmatch '^\|\s*(\d+)\s*\|') {
+            continue
+        }
+
+        $cells = ($line.TrimStart('| ').TrimEnd('| ') -split '\s*\|\s*')
+        if ($cells.Count -lt 8) {
+            continue
+        }
+
+        $rows += [PSCustomObject]@{
+            Run        = [int]$cells[0]
+            Date       = $cells[1]
+            Model      = $cells[2]
+            StartScore = $cells[3]
+            EndScore   = $cells[4]
+            Delta      = $cells[5]
+            Target     = $cells[6]
+            Result     = ($cells[7..($cells.Count - 1)] -join ' | ')
+            Raw        = $line.Trim()
+        }
+    }
+
+    return $rows
+}
+
 $skills = @('kata', 'kaizen', 'kaikaku', 'hansei', 'shiken')
 
 Write-Host "`n=== TPS Skill Suite - Mechanical Integrity Check ===" -ForegroundColor Cyan
@@ -141,22 +187,19 @@ $genbaPath = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'GENBA.md'
 $scorecardPath = Join-Path $script:suiteRoot 'SCORECARD.md'
 if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
     $gContent = Get-Content $genbaPath -Raw
-    $gRuns = ([regex]::Matches($gContent, '## Run \d+')).Count
+    $gRuns = ([regex]::Matches($gContent, '(?m)^## Run \d+')).Count
 
     $sContent = Get-Content $scorecardPath -Raw
+    $scorecardRunRows = @(Get-ScorecardRunRows -Content $sContent)
     $tpsRows = @()
     $invalidatedRows = 0
-    foreach ($m in [regex]::Matches($sContent, '(?m)^\|\s*(\d+)\s*\|[^\n]*$')) {
-        $row = $m.Value
-        if ($row -match '\*\*Invalidated\*\*') {
+    foreach ($row in $scorecardRunRows) {
+        if ($row.Result -match '\*\*Invalidated\*\*') {
             $invalidatedRows++
         }
 
-        $parts = $row -split '\|'
-        if ($parts.Count -lt 8) { continue }
-        $target = $parts[7].Trim()
-        if ($target -notlike '*external*') {
-            $tpsRows += [int]$m.Groups[1].Value
+        if ($row.Target -notlike '*external*') {
+            $tpsRows += $row.Run
         }
     }
 
@@ -210,9 +253,22 @@ foreach ($ledger in @('TRAIL/GENBA.md', 'SCORECARD.md', 'CHANGELOG.md', 'PRINCIP
 
 $currentVersion = if ($unique.Count -eq 1) { $unique[0] } else { 'MISMATCH' }
 $shouldWriteSnapshot = $true
+$storedLatestScoredRun = $null
+$currentLatestScoredRun = $null
+
+if (Test-Path $scorecardPath) {
+    $currentScorecardRows = @(Get-ScorecardRunRows -Content (Get-Content $scorecardPath -Raw -Encoding UTF8))
+    $currentScoredRows = @($currentScorecardRows | Where-Object { $_.Delta -notmatch 'N/A' })
+    if ($currentScoredRows.Count -gt 0) {
+        $currentLatestScoredRun = ($currentScoredRows | Measure-Object -Property Run -Maximum).Maximum
+    }
+}
 
 if (Test-Path $hashFile) {
     $stored = Get-Content $hashFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($stored.PSObject.Properties.Name -contains 'latest_scored_run' -and $stored.latest_scored_run -ne $null) {
+        $storedLatestScoredRun = [int]$stored.latest_scored_run
+    }
     $storedFiles = @{}
     foreach ($prop in $stored.files.PSObject.Properties) {
         $storedFiles[$prop.Name] = $prop.Value
@@ -260,9 +316,10 @@ if (Test-Path $hashFile) {
 # Write new snapshot only when tracked content materially changed.
 if ($shouldWriteSnapshot) {
     $snapshot = [ordered]@{
-        last_verified = (Get-Date -Format 'o')
-        suite_version = $currentVersion
-        files         = $current
+        last_verified     = (Get-Date -Format 'o')
+        suite_version     = $currentVersion
+        latest_scored_run = $currentLatestScoredRun
+        files             = $current
     }
     $snapshot | ConvertTo-Json -Depth 3 | Set-Content $hashFile -Encoding UTF8
     Pass "Hash snapshot written to INTEGRITY.json"
@@ -393,15 +450,9 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
     }
     # Collect non-invalidated SCORECARD rows for this target only.
     $scorecardRows = @()
-    foreach ($m in [regex]::Matches($sContent, '(?m)^\|\s*(\d+)\s*\|[^\n]*$')) {
-        $row = $m.Value
-        if ($row -notmatch '\*\*Invalidated\*\*') {
-            $parts = $row -split '\|'
-            if ($parts.Count -lt 8) { continue }
-            $target = $parts[7].Trim()
-            if ($target -notlike '*external*') {
-                $scorecardRows += [int]$m.Groups[1].Value
-            }
+    foreach ($row in (Get-ScorecardRunRows -Content $sContent)) {
+        if ($row.Result -notmatch '\*\*Invalidated\*\*' -and $row.Target -notlike '*external*') {
+            $scorecardRows += $row.Run
         }
     }
     $missingFromGenba = @($scorecardRows | Where-Object { $genbaRuns -notcontains $_ } | Sort-Object)
@@ -419,6 +470,7 @@ Write-Host "[13/14] Latest-run model identity consistency" -ForegroundColor Whit
 if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
     $gContent = Get-Content $genbaPath -Raw
     $sContent = Get-Content $scorecardPath -Raw
+    $scorecardRunRows = @(Get-ScorecardRunRows -Content $sContent)
 
     $runMatches = [regex]::Matches($gContent, '(?m)^## Run (\d+)')
     if ($runMatches.Count -eq 0) {
@@ -437,22 +489,17 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
                 if ([string]::IsNullOrWhiteSpace($genbaModel) -or $genbaModel -match '^\[.*\]$') {
                     Fail "GENBA Run $latestGenbaRun model is empty or placeholder: '$genbaModel'"
                 } else {
-                    $scoreRowMatch = [regex]::Match($sContent, "(?m)^\|\s*$latestGenbaRun\s*\|[^\n]*$")
-                    if (-not $scoreRowMatch.Success) {
+                        $scoreRow = @($scorecardRunRows | Where-Object { $_.Run -eq $latestGenbaRun } | Select-Object -First 1)
+                        if ($scoreRow.Count -eq 0) {
                         Fail "SCORECARD missing row for latest GENBA run $latestGenbaRun"
                     } else {
-                        $parts = $scoreRowMatch.Value -split '\|'
-                        if ($parts.Count -lt 4) {
-                            Fail "SCORECARD Run $latestGenbaRun row is malformed"
-                        } else {
-                            $scoreModel = $parts[3].Trim()
+                            $scoreModel = $scoreRow[0].Model.Trim()
                             if ([string]::IsNullOrWhiteSpace($scoreModel) -or $scoreModel -match '^\[.*\]$') {
                                 Fail "SCORECARD Run $latestGenbaRun model is empty or placeholder: '$scoreModel'"
                             } elseif ($scoreModel -ne $genbaModel) {
                                 Fail "Latest run model mismatch for Run $latestGenbaRun GENBA='$genbaModel' vs SCORECARD='$scoreModel'"
                             } else {
                                 Pass "Latest run model identity is consistent for Run $latestGenbaRun ($genbaModel)"
-                            }
                         }
                     }
                 }
@@ -467,19 +514,8 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
 Write-Host "[14/14] Score-change / artifact-change correlation" -ForegroundColor White
 if ((Test-Path $scorecardPath) -and (Test-Path $hashFile)) {
     $sContent = Get-Content $scorecardPath -Raw -Encoding UTF8
-    # Find the latest scored run (non-N/A delta)
-    $scoredRows = @()
-    foreach ($line in ($sContent -split "`n")) {
-        if ($line -match '^\|\s*(\d+)\s*\|') {
-            $cells = ($line.TrimStart('| ').TrimEnd('| ') -split '\s*\|\s*')
-            if ($cells.Count -ge 6 -and $cells[5] -notmatch 'N/A') {
-                $scoredRows += [PSCustomObject]@{
-                    Run   = [int]$cells[0]
-                    Delta = $cells[5]
-                }
-            }
-        }
-    }
+    # Find the latest scored run (non-N/A delta) in the main run table only.
+    $scoredRows = @(Get-ScorecardRunRows -Content $sContent | Where-Object { $_.Delta -notmatch 'N/A' })
     if ($scoredRows.Count -ge 1) {
         $latest = $scoredRows | Sort-Object Run -Descending | Select-Object -First 1
         $deltaVal = 0.0
@@ -489,8 +525,10 @@ if ((Test-Path $scorecardPath) -and (Test-Path $hashFile)) {
         # A non-zero score delta with zero artifact changes (or vice versa) is suspicious
         # The hash check (Check 7) already flags modified files -- we cross-reference
         $hasArtifactChanges = ($null -ne $modified -and $modified.Count -gt 0) -or ($null -ne $added -and $added.Count -gt 0) -or ($null -ne $removed -and $removed.Count -gt 0)
-        if ([Math]::Abs($deltaVal) -gt 0 -and -not $hasArtifactChanges) {
+        if ([Math]::Abs($deltaVal) -gt 0 -and -not $hasArtifactChanges -and $storedLatestScoredRun -ne $latest.Run) {
             Warn "Run $($latest.Run) reports delta $($latest.Delta) but INTEGRITY.json shows no artifact changes -- verify score is justified by prior-run fixes"
+        } elseif ([Math]::Abs($deltaVal) -gt 0 -and -not $hasArtifactChanges -and $storedLatestScoredRun -eq $latest.Run) {
+            Pass "Latest scored run (Run $($latest.Run)) is already reflected in the current snapshot"
         } else {
             Pass "Score-change/artifact-change correlation is consistent for latest scored run (Run $($latest.Run), delta $($latest.Delta))"
         }

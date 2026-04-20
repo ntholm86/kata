@@ -69,9 +69,26 @@ if (-not (Test-Path $scorecardPath)) {
 
 $scContent = Get-Content $scorecardPath -Raw -Encoding UTF8
 
-# Extract rows by splitting pipe-delimited cells (robust against spaces in score fields)
+# Extract only the main run table rows. SCORECARD also contains numeric rubric and
+# trajectory tables that must not be counted as run records.
 $rows = @()
-foreach ($line in ($scContent -split "`n")) {
+$inRunTable = $false
+foreach ($line in ($scContent -split "`r?`n")) {
+    if (-not $inRunTable) {
+        if ($line -match '^\|\s*Run\s*\|\s*Date\s*\|\s*Model\s*\|\s*Start Score\s*\|\s*End Score\s*\|\s*Delta\s*\|\s*Target\s*\|\s*Result\s*\|') {
+            $inRunTable = $true
+        }
+        continue
+    }
+
+    if ($line -match '^##\s+') {
+        break
+    }
+
+    if ($line -match '^\|\s*:?-+:?\s*\|') {
+        continue
+    }
+
     if ($line -match '^\|\s*(\d+)\s*\|') {
         # Strip leading/trailing pipes and split by remaining pipes
         $cells = ($line.TrimStart('| ').TrimEnd('| ') -split '\s*\|\s*')

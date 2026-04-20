@@ -60,6 +60,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 52 | 2026-04-20 | Claude Opus 4.6 | 7.875 (v3) | 8.125 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** Focused on weak dims. Justified metrics thresholds (CMMI/ICC/Six Sigma anchors). Added verify-suite Check 14 (score/artifact correlation for P3). Cleaned METRICS_HISTORY. Dims 3,7 improved. |
 | 53 | 2026-04-20 | Claude Opus 4.6 | 8.125 (v3) | 8.125 (v3) | +0.0 | TPS Skill Suite | **Kaizen.** P2 verification run. Fixed README stale check count (13→14), CHANGELOG [Unreleased] gap, SUMMARY staleness. Sub-threshold CM housekeeping. |
 | 54 | 2026-04-20 | Claude Opus 4.6 | 8.125 (v3) | 8.125 (v3) | +0.0 | TPS Skill Suite (loop) | **Hansei.** 4 new meta-findings: Claude dominance (9/13 runs), CM drift from inter-run changes, post-rebuild Shiken absent, SCORECARD growing. Run 41's 4 findings all addressed. Recommendation: next run by different model family. |
+| 55 | 2026-04-20 | GPT-5.4 | 7.875 (v3) | 8.125 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** First non-Claude v3 scoring run. Found parser blind spot introduced by Dimension Trajectory: `metrics.ps1` and `verify-suite.ps1` treated trajectory/rubric rows as run rows; verifier also miscounted Hansei subsection headings as runs. Dims 3,4 improved. |
 
 ## Dimension Trajectory (Rubric v3)
 
@@ -73,6 +74,7 @@ Per-dimension end-of-run scores for all v3-scored runs. Shows which dimensions d
 | 51 | 8 | 8 | 7 | 9 | 7 | 9 | 7 | 8 | 7.875 | v3 + measurement protocol |
 | 52 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
 | 53 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
+| 55 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
 
 **Key:**
 - **D1-D8** — Rubric v3 dimensions (full names in Scoring Rubric v3 below).
@@ -88,6 +90,7 @@ Dimension scores are the **end-of-run** state (post-improvement). For start/end/
 - Run 5 return visit: Claude Opus 4.6 (which ran Run 1 at 8.0) returned and scored the post-improvement suite at 8.7 with zero actionable findings and zero edits. First run in the experiment with no changes. The same model that started the loop can now confirm the loop worked.
 - Run 22 return visit: GPT-5.4 xhigh (which ran Run 2 at 8.4 → 8.6) returned after twenty runs and found a process/mechanism seam rather than a content gap: GENBA update guidance said append while the active ledger and verifier assumed newest-first, and Check 9 still matched Hansei by free text rather than explicit section structure. Late-cycle cross-model returns still surface real defects.
 - Run 48 post-rebuild validation: GPT-5.4 was the first fresh model family to read the shipped v2 suite. It immediately found two critical release-integrity defects the authoring model missed: four live skill files had legacy v1 bodies appended beneath the new rebuild content, and the suite still exposed retired standalone skills plus an 8-skill verifier. This moved Tier 2 W1 (Transferability) and W4 (Observer Satisfaction) from Untested to Pass in MEASUREMENT.md.
+- Run 55 first v3 cross-model scoring: GPT-5.4 followed Hansei's recommendation and did the first non-Claude v3 scoring pass. It found a parser blind spot introduced by the new SCORECARD Dimension Trajectory: both `metrics.ps1` and `verify-suite.ps1` still treated any numeric SCORECARD row as a run row, and Check 5 also over-counted Hansei subsection headings as top-level runs. Fresh-family scoring is still surfacing real defects late in the cycle.
 - The trajectory is durable on the run table above. Future runs append a row there with model identity, score delta, and a one-line reason the score moved.
 
 ## Current Status
