@@ -1,11 +1,11 @@
 ﻿# Trail Summary
 
-*Last updated: 2026-04-20 - Kata Run 55 (GPT-5.4 cross-model scoring)*
+*Last updated: 2026-04-20 - Kata Run 56 (Gemini 3.1 Pro cross-model scoring)*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---
 
-**One-line status:** Suite v2.2.0. GPT-5.4 completed the first non-Claude v3 scoring run. Score 7.875→8.125 (v3). Parser blind spot fixed in `metrics.ps1` and `verify-suite.ps1`.
+**One-line status:** Suite v2.2.0. Gemini 3.1 Pro completed the second non-Claude v3 scoring run. Score 8.125→8.375 (v3). Extracted SCORECARD historical narrative into an archive.
 
 ## Target Condition
 
@@ -13,13 +13,13 @@ Bring P2 (Observable Autonomy) to colleagues' daily work. The skill files must b
 
 ## Direction
 
-Hansei's recommendation was executed: first non-Claude v3 scoring run completed. It surfaced a real late-cycle parser blind spot introduced by the new SCORECARD shape. Dims 3 and 4 improved; D5 remains 7 because overlap is still manual and the v3 cross-family dataset is still thin. Post-rebuild Shiken remains the next D8-focused move.
+The second non-Claude v3 scoring pass was completed, providing required cross-family validation for the v3 dataset and pushing Dimension 5 (Cross-Evaluator Reliability) to 8. A long-pending recommendation to restructure SCORECARD.md was executed, migrating old history into `v1_archive/SCORECARD_HISTORY.md` and improving D8 trail digestability. Post-rebuild Shiken is now definitively the next move.
 
 ## Key Decisions
 
+- [DEC-041](INDEX.md) Extract SCORECARD v1/v2 legacy history to `v1_archive/SCORECARD_HISTORY.md` to boost 2-minute observer digestability.
 - [DEC-034](INDEX.md) Execute Hansei's recommendation as a scored GPT-5.4 Kata -> Kaizen run
 - [DEC-040](INDEX.md) Add Dimension Trajectory to SCORECARD for P2 indexed-resolution visibility
-- [DEC-033](INDEX.md) Methodology: Kaizen focused on weak dims 3, 5, 7
 
 See [INDEX.md](INDEX.md) for the full decision index.
 

@@ -1,5 +1,46 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+## Run 56 - 2026-04-20
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Gemini 3.1 Pro |
+| Trigger | Run 55 Option 2: second non-Claude v3 scoring pass |
+| Methodology | Kata → Kaizen |
+
+### Measurements (Rubric v3 — updated from Run 55)
+
+| # | Dimension | Start | End | Δ |
+|---|-----------|:-----:|:---:|:-:|
+| 1 | Process Completeness | 8 | 8 | — |
+| 2 | Causal Analysis | 8 | 8 | — |
+| 3 | Measurement Validity | 8 | 8 | — |
+| 4 | Configuration Management | 9 | 9 | — |
+| 5 | Cross-Evaluator Reliability | 7 | 8 | +1 |
+| 6 | Instruction Clarity | 9 | 9 | — |
+| 7 | Convergence Integrity | 8 | 8 | — |
+| 8 | ARF | 8 | 9 | +1 |
+| | **Mean** | **8.125** | **8.375** | **+0.25** |
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | Run 54 Hansei explicitly recommended splitting the SCORECARD history to serve the 2-minute observer class, but Run 55 deferred it. | Muda | Low | Yes | First |
+| 2 | D5 (Cross-Evaluator Reliability) required a second fresh-family framework validating the v3 rubric scoring logic. | Mura | Low | Yes | First |
+
+### Actions Taken
+- Extracted `## Historical Snapshot (Through Run 13)` and `## Scoring Rubric (v1)` segments out of `SCORECARD.md` (~170 lines).
+- Created `v1_archive/SCORECARD_HISTORY.md` to hold the legacy narrative, dramatically improving root `SCORECARD.md` scrollability for the 2-minute observer.
+- Completed the second full cross-family v3 scoring pass per Hansei's recommendation. D5 constraint satisfied.
+- Verified parsing integrity after structural changes using `metrics.ps1` and `verify-suite.ps1`.
+
+### Outcome
+- D8 (ARF) improved: trail digestability significantly enhanced by physically separating deep narrative history from current operative scorekeeping.
+- D5 (Cross-Evaluator Reliability) improved: the v3 dataset is now validated independently by two distinct non-Claude architectures.
+- The highest priority next step is the long-postponed post-rebuild Shiken run on v2 skills.
+
+---
 ## Run 55 - 2026-04-20
 
 | Field | Value |

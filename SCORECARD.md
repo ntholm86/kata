@@ -61,6 +61,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 53 | 2026-04-20 | Claude Opus 4.6 | 8.125 (v3) | 8.125 (v3) | +0.0 | TPS Skill Suite | **Kaizen.** P2 verification run. Fixed README stale check count (13→14), CHANGELOG [Unreleased] gap, SUMMARY staleness. Sub-threshold CM housekeeping. |
 | 54 | 2026-04-20 | Claude Opus 4.6 | 8.125 (v3) | 8.125 (v3) | +0.0 | TPS Skill Suite (loop) | **Hansei.** 4 new meta-findings: Claude dominance (9/13 runs), CM drift from inter-run changes, post-rebuild Shiken absent, SCORECARD growing. Run 41's 4 findings all addressed. Recommendation: next run by different model family. |
 | 55 | 2026-04-20 | GPT-5.4 | 7.875 (v3) | 8.125 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** First non-Claude v3 scoring run. Found parser blind spot introduced by Dimension Trajectory: `metrics.ps1` and `verify-suite.ps1` treated trajectory/rubric rows as run rows; verifier also miscounted Hansei subsection headings as runs. Dims 3,4 improved. |
+| 56 | 2026-04-20 | Gemini 3.1 Pro | 8.125 (v3) | 8.375 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** Second non-Claude v3 scoring pass. Addressed Hansei Run 54 F#4 by moving v1 history to archive, improving D8 trail digestability. Dims 5,8 improved. |
 
 ## Dimension Trajectory (Rubric v3)
 
@@ -75,6 +76,8 @@ Per-dimension end-of-run scores for all v3-scored runs. Shows which dimensions d
 | 52 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
 | 53 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
 | 55 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
+| 56 | 8 | 8 | 8 | 9 | 8 | 9 | 8 | 9 | 8.375 | v3 + measurement protocol |
+| 56 | 2026-04-20 | Gemini 3.1 Pro | 8.125 (v3) | 8.375 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** Second non-Claude v3 scoring pass. Addressed Hansei Run 54 F#4 by moving v1 history to archive, improving D8 trail digestability. Dims 5,8 improved. |
 
 **Key:**
 - **D1-D8** — Rubric v3 dimensions (full names in Scoring Rubric v3 below).
@@ -91,6 +94,7 @@ Dimension scores are the **end-of-run** state (post-improvement). For start/end/
 - Run 22 return visit: GPT-5.4 xhigh (which ran Run 2 at 8.4 → 8.6) returned after twenty runs and found a process/mechanism seam rather than a content gap: GENBA update guidance said append while the active ledger and verifier assumed newest-first, and Check 9 still matched Hansei by free text rather than explicit section structure. Late-cycle cross-model returns still surface real defects.
 - Run 48 post-rebuild validation: GPT-5.4 was the first fresh model family to read the shipped v2 suite. It immediately found two critical release-integrity defects the authoring model missed: four live skill files had legacy v1 bodies appended beneath the new rebuild content, and the suite still exposed retired standalone skills plus an 8-skill verifier. This moved Tier 2 W1 (Transferability) and W4 (Observer Satisfaction) from Untested to Pass in MEASUREMENT.md.
 - Run 55 first v3 cross-model scoring: GPT-5.4 followed Hansei's recommendation and did the first non-Claude v3 scoring pass. It found a parser blind spot introduced by the new SCORECARD Dimension Trajectory: both `metrics.ps1` and `verify-suite.ps1` still treated any numeric SCORECARD row as a run row, and Check 5 also over-counted Hansei subsection headings as top-level runs. Fresh-family scoring is still surfacing real defects late in the cycle.
+- Run 56 second v3 cross-model scoring: Gemini 3.1 Pro executed Option 2 from Run 55. Addressed the deferred Hansei recommendation to split SCORECARD history into an archive, improving P2 multi-resolution readability. D5 rises to 8 as v3 cross-family dataset gains its second datapoint.
 - The trajectory is durable on the run table above. Future runs append a row there with model identity, score delta, and a one-line reason the score moved.
 
 ## Current Status
@@ -101,82 +105,9 @@ Dimension scores are the **end-of-run** state (post-improvement). For start/end/
 - v1/v2 scores are preserved unchanged in the run table for auditability.
 - Principle 3 silence counter: 0/3 (resets on any artifact change). See PRINCIPLES.md §3 for the convergence definition.
 
-## Historical Snapshot (Through Run 13)
+## Historical Snapshot
 
-This section was written at an earlier convergence checkpoint (through Run 13). It is preserved for auditability and historical context.
-
-> **Caveat (Run 42):** The 10.0 plateau described below was later identified as a rubric ceiling, not genuine quality convergence. Run 41 Hansei found "the loop has only ever validated itself," and Rubric v3 (adopted Run 42) exposed that the v1/v2 rubric was ad-hoc with no external grounding. The predicted v3 baseline of ~7.2 means the analysis below describes convergence against a self-referential standard. The historical insights about cross-model validation and ensemble blind spots remain valid — the scoring basis does not.
-
-### How convergence was achieved — the recipe
-
-Three mechanisms combined produced the result. Removing any one would have broken it.
-
-1. **De-anchoring rule.** Each run scored the suite fresh before consulting prior scores. Without this, evaluators anchor to the previous number and the score drifts monotonically upward — a known cognitive bias. Runs 3 and 4 both independently scored 8.4 (the pre-fix state), confirming Run 2's 8.6 endpoint was slightly optimistic and giving the fourth model room to find real defects instead of inventing novelty.
-
-2. **Model diversity across runs.** Six distinct models (Claude Opus 4.6, GPT-5.4 xhigh, Claude Sonnet 4.6 high, Claude Opus 4.7, GPT-4o, Gemini 3.1 Pro). Not twelve passes from the same model. Single-model loops converge on that model's blind spots, not on quality.
-
-3. **Kaizen's formal exit condition.** Two consecutive runs with delta within ±0.2 = converged. Without this rule, the loop could run indefinitely, each cycle adding more than it removes. The exit condition is what makes convergence *observable* rather than assumed.
-
-### The core research finding — ensemble of blind spots
-
-Score convergence is not finding convergence. Runs 3 and 4 both scored 8.4 pre-fix, but surfaced entirely different defects:
-
-- Run 3 (Sonnet) found: Kaizen Phase 1 duplication + Muri ASSESS prescriptive severity table
-- Run 4 (Opus 4.7) found: Kaizen continuous cross-phase numbering + Muri SCOPE prescriptive level table
-
-Two different model generations read the same text and saw the same score, yet their individual defect reports had zero overlap. The value of cross-model validation is not averaging numbers — it is **union of findings**. Each model catches what others miss, even when they agree on the overall assessment.
-
-Corollary: the Kaizen continuous numbering survived Runs 1, 2, and 3 unnoticed across three different models before Opus 4.7 caught it. This argues that even diverse models can share blind spots when the artifact in question matches patterns the models themselves were trained on. Adding newer model generations to the ensemble has real marginal value, not redundant value.
-
-### The convergence signal
-
-Delta trajectory: **+0.4 → +0.2 → 0.0 → 0.0 → +0.1 → +0.1 → +0.1 → -0.1 → +0.1 → +0.0 → [invalidated] → +0.1 → +0.0**
-
-Six mechanisms produced breakthroughs across 12 runs: Kaizen converged at Run 5, Kaikaku-as-diagnostic broke through at Run 6, Innovation-by-addition added Hansei at Run 7, Hansei itself produced the first negative delta at Run 8, a fresh Kata pass closed integration seams at Run 9 to reach 9.0, and Run 12 (Gemini 3.1 Pro Preview) found deep Mura in the structure itself after Run 10 converged. Run 11 (GPT-4o) provided an important data point on model hallucination and the importance of checking Genba outputs. The remaining open backlog (Findings 2 and 3 from Hansei) caps self-targeting at 9.1 — going higher requires real-world validation against unfamiliar projects.
-
-### What this experiment proves
-
-- Self-targeting works. The TPS skill suite found and fixed real defects in itself across four independent runs with measurable, durable, regression-free improvement.
-- Observable Autonomy (Principle 2) is not theoretical. The TRAIL/GENBA.md + SCORECARD.md trail made every run's reasoning reviewable after the fact — and made *this conclusion* reconstructable from the record alone.
-- Commander's Intent (Principle 1) is not theoretical. Four different models with different training produced consistent-but-non-redundant findings. That only happens when the skills provide vocabulary and framework rather than checklists.
-- Cross-model validation is a primitive operation in autonomous improvement loops, not a nice-to-have. Single-model self-targeting would have converged around 8.4 and stopped finding real defects by Run 2.
-
-### What this experiment does not prove
-
-- That 9.1 is the true ceiling. Additional models from other families may find defects the current six-model ensemble collectively missed. The ensemble is only as diverse as its members.
-- That Kaikaku would help. The convergence signal says *incremental* passes have stopped producing value. Whether a structural redesign would produce more remains an open question — Kaikaku itself has an explicit "stop if evidence is insufficient" clause.
-- That the scoring scale is fully calibrated against an external standard. However, `metrics.ps1` now provides computable calibration metrics (inter-rater agreement, recurrence rate, invalidation rate, regression frequency, model diversity) with time-series tracking via `METRICS_HISTORY.md`. As of Run 36, overall calibration status is HEALTHY (4/5 GOOD, 1/5 MODERATE). `STANDARDS.md` maps the suite's alignment against PDCA, DMAIC, CMMI L3-5, and NIST AI RMF — the gap between internal and external calibration is now both measurable and explicitly documented.
-- That all models contribute equally. Run 11 (GPT-4o) hallucinated an entire cycle without editing files — proving that model participation without verification is worse than no participation.
-
-### Run 11 (GPT-4o) & Run 12 (Gemini 3.1 Pro Preview)
-
-- **Run 11 Invalidated**: GPT-4o hallucinated a cycle (claimed fixes without code changes) and wiped GENBA.md in the process.
-- **Run 12 (Gemini 3.1 Pro Preview)**: Conducted a strict 3M structural check across the suite. Found 4 deep Mura/Muda variations:
-  - **Kaizen** lacked (改善) Kanji in its title & description.
-  - **Kata** entirely lacked ## Core Principles section.
-  - **Kata** misdirected to kata/GENBA.md instead of GENBA.md.
-  - **Kaikaku** template output clashed heavily (### Phase 1 nested inside ### Phase 3).
-- Corrected all four and restored the GENBA.md sequence starting at Run 12. Score elevated to 9.1 securely because real unevenness was smoothed out.
-- Proves that ensemble validation continually catches what others blindly accept, and that guardrails for recording logs are critical.
-
-## Scoring Rubric (v1)
-
-Dimensions used for self-targeting runs (skill suite evaluating itself). Versioned here so cross-run comparisons are meaningful. Prior to Run 17, these dimensions were implicit in each evaluator's judgment.
-
-| Dimension | What to evaluate |
-| --------- | ---------------- |
-| Clarity | Can any competent LLM follow the instructions without ambiguity? |
-| Completeness | Does every skill cover its full domain? Are edge cases addressed? |
-| Internal Consistency | Do all skills use the same patterns, structure, cross-references? |
-| Audience Fit | Are the skills portable across model families? |
-| Actionability | Does every phase produce visible, concrete output? |
-| Depth | Is the reasoning framework rich enough to surface non-obvious findings? |
-| Structure | Is the suite organized logically? Are responsibilities well-separated? |
-| Innovation | Does anything here advance the state of the art? |
-| Trustworthiness | Can the system detect fabricated improvements, hallucinated runs, and stale data? |
-| Calibration | Are the computable metrics healthy? Run `metrics.ps1` — inter-rater agreement, recurrence rate, invalidation rate, regression frequency, and model diversity should all be GOOD or MODERATE. |
-
-**Weighting:** Equal weight (arithmetic mean) unless stated otherwise.
+This section covers detailed analysis of Runs 1-13 and the legacy v1/v2 rubrics. It was moved to [v1_archive/SCORECARD_HISTORY.md](v1_archive/SCORECARD_HISTORY.md) to improve readability for the 2-minute observer class.
 
 ## Scoring Rubric (v3)
 
@@ -211,4 +142,7 @@ Adopted Run 42 (2026-04-19). Standards-anchored 8-dimension rubric. Full rationa
 - v1 (Run 17, 2026-04-18): Initial explicit rubric. Trustworthiness dimension added — captures verification infrastructure that prior implicit scoring did not measure. Scores from Run 17 forward use this rubric; prior scores used an implicit narrower basis.
 - v2 (Run 35, 2026-04-18): Added Calibration dimension — bridges semantic scoring and mechanical checking by incorporating computable metrics from `metrics.ps1`. The scoring system now has an objective, reproducible component.
 - v3 (Run 42, 2026-04-19): **Kaikaku — standards-anchored rubric.** Replaced ad-hoc 10-dimension rubric with 8 dimensions grounded in PDCA, DMAIC, CMMI L3-5, NIST AI RMF, and foundational theory (Auftragstaktik, Meaningful Human Control). Cross-model reviewed by GPT-5.4 and Gemini 3.1 Pro Preview before adoption. See RUBRIC_V3_PROPOSAL.md for full rationale, review addenda, and migration plan. Expected score drop from 10.0 to ~7.2 is by design — the new rubric measures capabilities the old one was blind to.
+
+
+
 
