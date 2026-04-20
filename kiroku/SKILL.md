@@ -103,6 +103,18 @@ This structure implements the three evidence resolutions required by Principle 2
 
 ## During a session
 
+### Intent (required — fill before starting work)
+
+The session template includes an **Intent** section between Trigger and Exchange Log. The agent must fill this before proceeding to work. It has three parts:
+
+- **Human intent (verbatim):** What the human actually said. Quote directly. This is the ground truth that an observer uses to judge whether the agent's work was responsive.
+- **Agent interpretation:** How the agent parsed that request into a concrete plan. What assumptions were made? What ambiguities were resolved and how?
+- **Scope & constraints:** Boundaries stated by the human ("don't touch config", "make a backup", "this is production") plus any unstated constraints the agent inferred.
+
+The Intent section answers the question no other artifact can: *was the work that was done actually what was asked for?*
+
+### Markers
+
 While working, the agent maintains the session transcript by recording:
 
 - **`[!DECISION]`** — A choice that could have gone differently. Include rationale and alternatives on the following lines.

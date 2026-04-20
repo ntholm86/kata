@@ -115,7 +115,22 @@ status: in-progress
 
 ## Trigger
 
-<!-- What initiated this session? What Intent or goal? -->
+<!-- What initiated this session? What was the human's actual request? -->
+
+## Intent
+
+<!-- Required. The agent must fill this section before proceeding to work.
+
+**Human intent (verbatim or near-verbatim):**
+What the human actually said/asked for. Quote directly when possible.
+
+**Agent interpretation:**
+How the agent parsed that into a concrete plan. What assumptions were made?
+
+**Scope & constraints:**
+Any boundaries stated by the human (e.g., "don't touch config", "make a backup first",
+"this is production"). Also note any unstated constraints the agent inferred.
+-->
 
 ## Exchange Log
 
