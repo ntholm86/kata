@@ -1,5 +1,46 @@
 <!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 ---
+## Run 51 - 2026-04-20
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite |
+| Model | Claude Opus 4.6 |
+| Trigger | First scored self-targeting run with context-derived measurement protocol (v2.2.0) |
+| Methodology | Kata → Kaizen |
+
+### Measurements (Rubric v3, 8 dimensions — first measurement-protocol run)
+
+| # | Dimension | Start | End | Δ |
+|---|-----------|:-----:|:---:|:-:|
+| 1 | Process Completeness | 8 | 8 | — |
+| 2 | Causal Analysis | 8 | 8 | — |
+| 3 | Measurement Validity | 6 | 7 | +1 |
+| 4 | Configuration Management | 8 | 9 | +1 |
+| 5 | Cross-Evaluator Reliability | 7 | 7 | — |
+| 6 | Instruction Clarity | 9 | 9 | — |
+| 7 | Convergence Integrity | 7 | 7 | — |
+| 8 | ARF | 8 | 8 | — |
+| | **Mean** | **7.625** | **7.875** | **+0.25** |
+
+Prior run measurements: N/A (first measurement-protocol run — this establishes the baseline).
+
+### Findings
+| # | Finding | Lens | Severity | Fixed? | Recurred? |
+|---|---------|------|:--------:|:------:|:---------:|
+| 1 | metrics.ps1 SCORECARD parser uses `(\S+)` for score fields — can't capture `7.875 (v3)`. Inter-Rater Agreement reports mean=10.35, range=8-48. Model Diversity parses full row as family name. 11 rows silently dropped. | Mura | High | Yes | First |
+| 2 | SCORECARD Current Status says v2.1.0 — should be v2.2.0 | Muda | Low | Yes | Run 13 |
+
+### Actions Taken
+- Replaced regex-based SCORECARD parser with split-based parser in metrics.ps1. All 50 rows now parse correctly. 0 POOR metrics (was 1).
+- Updated SCORECARD Current Status to v2.2.0.
+
+### Outcome
+- Dims 3 (Measurement Validity) and 4 (Configuration Management) improved.
+- First scored run since Run 44. Measurement baseline established for future delta tracking.
+- Silence counter: 0/3 (artifact changes made).
+
+---
 ## Run 50 - 2026-04-20
 
 | Field | Value |

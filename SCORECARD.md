@@ -56,6 +56,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 48 | 2026-04-19 | GPT-5.4 | N/A | N/A | N/A | TPS Skill Suite v2 | **Cross-model validation.** Found shipped v2.0.0 integrity regressions (4 concatenated skill files, retired skills still live, verifier still on 8-skill/v1 layout). Fixed and released v2.0.1. |
 | 49 | 2026-04-20 | GPT-5.4 xhigh | N/A | N/A | N/A | TPS Skill Suite | **Kaizen.** Canonicalized trail routing by target repo so direct chat work and Kata runs share `TARGET_REPO/TRAIL/`; migrated the live suite ledger to `TRAIL/GENBA.md` and updated verifier/metrics to match. |
 | 50 | 2026-04-20 | Claude Opus 4.6 | N/A | N/A | N/A | TPS Skill Suite | **Kaizen.** Added root README.md (entry point for newcomers). Archived 7 journey documents to v1_archive/. Root files 17→10. v2.2.0. |
+| 51 | 2026-04-20 | Claude Opus 4.6 | 7.625 (v3) | 7.875 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** First scored run with measurement protocol. Fixed metrics.ps1 parser (regex→split, 11 silently-dropped rows recovered, 0 POOR metrics). SCORECARD version v2.1.0→v2.2.0. Dims 3,4 improved. |
 
 ## Cross-Model Notes
 
@@ -70,7 +71,7 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 ## Current Status
 
 - The run table above is the source of truth for per-run scores and outcomes; `TRAIL/GENBA.md` is the source of truth for per-run findings, actions, and reasoning.
-- The current live release is **v2.1.0**. Run 47 rebuilt the suite (v2.0.0); Run 48 repaired shipped defects (v2.0.1); subsequent sessions rewrote kiroku principle-first and separated GENBA ownership (v2.1.0).
+- The current live release is **v2.2.0**. Run 47 rebuilt the suite (v2.0.0); Run 48 repaired shipped defects (v2.0.1); subsequent sessions rewrote kiroku principle-first and separated GENBA ownership (v2.1.0); Run 50 added README, archived journey docs, and implemented context-derived measurement protocol (v2.2.0).
 - **Scoring uses Rubric v3 (adopted Run 42) for all runs from Run 42 forward.** Runs 17-41 used Rubric v1/v2 (10 dimensions). Pre-v1 scores used an implicit narrower basis. v3 scores are not directly comparable to v1/v2 scores — a v3 baseline of ~7.2 is expected and by design (see RUBRIC_V3_PROPOSAL.md).
 - v1/v2 scores are preserved unchanged in the run table for auditability.
 - Principle 3 silence counter: 0/3 (resets on any artifact change). See PRINCIPLES.md §3 for the convergence definition.

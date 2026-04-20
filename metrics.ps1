@@ -37,19 +37,24 @@ if (-not (Test-Path $scorecardPath)) {
 
 $scContent = Get-Content $scorecardPath -Raw -Encoding UTF8
 
-# Extract rows: | N | date | model | start | end | delta | target | result |
-$scorePattern = '(?m)^\|\s*(\d+)\s*\|\s*(\S+)\s*\|\s*(.+?)\s*\|\s*(\S+)\s*\|\s*(\S+)\s*\|\s*(\S+)\s*\|\s*(\S+)\s*\|\s*(.+?)\s*\|'
+# Extract rows by splitting pipe-delimited cells (robust against spaces in score fields)
 $rows = @()
-foreach ($m in [regex]::Matches($scContent, $scorePattern)) {
-    $rows += [PSCustomObject]@{
-        Run        = [int]$m.Groups[1].Value
-        Date       = $m.Groups[2].Value
-        Model      = $m.Groups[3].Value.Trim()
-        StartScore = $m.Groups[4].Value.Trim()
-        EndScore   = $m.Groups[5].Value.Trim()
-        Delta      = $m.Groups[6].Value.Trim()
-        Target     = $m.Groups[7].Value.Trim()
-        Result     = $m.Groups[8].Value.Trim()
+foreach ($line in ($scContent -split "`n")) {
+    if ($line -match '^\|\s*(\d+)\s*\|') {
+        # Strip leading/trailing pipes and split by remaining pipes
+        $cells = ($line.TrimStart('| ').TrimEnd('| ') -split '\s*\|\s*')
+        if ($cells.Count -ge 8) {
+            $rows += [PSCustomObject]@{
+                Run        = [int]$cells[0]
+                Date       = $cells[1]
+                Model      = $cells[2]
+                StartScore = $cells[3]
+                EndScore   = $cells[4]
+                Delta      = $cells[5]
+                Target     = $cells[6]
+                Result     = ($cells[7..($cells.Count - 1)] -join ' | ')
+            }
+        }
     }
 }
 
