@@ -184,10 +184,17 @@ if ($unique.Count -gt 1) {
 # -- Check 5: GENBA / SCORECARD consistency ------------------------------------
 Write-Host "[5/14] Ledger consistency" -ForegroundColor White
 $genbaPath = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'GENBA.md'
+$genbaArchivePath = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'GENBA_ARCHIVE.md'
 $scorecardPath = Join-Path $script:suiteRoot 'SCORECARD.md'
 if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
-    $gContent = Get-Content $genbaPath -Raw
-    $genbaRunNumbers = @([regex]::Matches($gContent, '(?m)^## Run (\d+)') | ForEach-Object { [int]$_.Groups[1].Value })
+    $gContent = Get-Content $genbaPath -Raw -Encoding UTF8
+    # Combine active + archive GENBA content for full run history
+    $gFullContent = $gContent
+    if (Test-Path $genbaArchivePath) {
+        $gArchiveContent = Get-Content $genbaArchivePath -Raw -Encoding UTF8
+        $gFullContent = $gContent + "`n" + $gArchiveContent
+    }
+    $genbaRunNumbers = @([regex]::Matches($gFullContent, '(?m)^## Run (\d+)') | ForEach-Object { [int]$_.Groups[1].Value })
     $gRuns = $genbaRunNumbers.Count
 
     $sContent = Get-Content $scorecardPath -Raw
@@ -248,7 +255,7 @@ foreach ($skill in $skills) {
         $current[$rel] = (Get-FileHash $abs -Algorithm SHA256).Hash.Substring(0, 16)
     }
 }
-foreach ($ledger in @('TRAIL/GENBA.md', 'SCORECARD.md', 'CHANGELOG.md', 'PRINCIPLES.md', 'PROBLEM.md', 'STANDARDS.md', 'METRICS_HISTORY.md', 'verify-suite.ps1', 'metrics.ps1')) {
+foreach ($ledger in @('TRAIL/GENBA.md', 'TRAIL/GENBA_ARCHIVE.md', 'SCORECARD.md', 'CHANGELOG.md', 'PRINCIPLES.md', 'PROBLEM.md', 'STANDARDS.md', 'METRICS_HISTORY.md', 'verify-suite.ps1', 'metrics.ps1')) {
     $abs = Join-Path $script:suiteRoot $ledger
     if (Test-Path $abs) {
         $current[$ledger] = (Get-FileHash $abs -Algorithm SHA256).Hash.Substring(0, 16)
@@ -349,8 +356,10 @@ if ($nonTps.Count -gt 0) {
 # -- Check 9: Periodic-Hansei signal detection --------------------------------
 Write-Host "[9/14] Periodic-Hansei cadence" -ForegroundColor White
 if (Test-Path $genbaPath) {
-    $gContent = Get-Content $genbaPath -Raw
-    $runBlocks = [regex]::Matches($gContent, '(?ms)^## Run (\d+).*?(?=^## Run \d+|\z)')
+    # Use combined active + archive content for full Hansei history
+    $gCheckContent = $gFullContent
+    if ($null -eq $gCheckContent) { $gCheckContent = Get-Content $genbaPath -Raw -Encoding UTF8 }
+    $runBlocks = [regex]::Matches($gCheckContent, '(?ms)^## Run (\d+).*?(?=^## Run \d+|\z)')
     $latestRun = $null
     $lastHanseiRun = $null
 
@@ -464,11 +473,13 @@ if (Test-Path $changelogPath) {
 # -- Check 12: SCORECARD <-> GENBA per-run coverage ----------------------------
 Write-Host "[12/14] SCORECARD <-> GENBA per-run coverage" -ForegroundColor White
 if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
-    $gContent = Get-Content $genbaPath -Raw
+    # Use combined active + archive for full run coverage
+    $gCheck12Content = $gFullContent
+    if ($null -eq $gCheck12Content) { $gCheck12Content = Get-Content $genbaPath -Raw -Encoding UTF8 }
     $sContent = Get-Content $scorecardPath -Raw
-    # Collect run numbers from GENBA "## Run N" headings
+    # Collect run numbers from GENBA "## Run N" headings (active + archive)
     $genbaRuns = @()
-    foreach ($m in [regex]::Matches($gContent, '(?m)^## Run (\d+)')) {
+    foreach ($m in [regex]::Matches($gCheck12Content, '(?m)^## Run (\d+)')) {
         $genbaRuns += [int]$m.Groups[1].Value
     }
     # Collect non-invalidated SCORECARD rows for this target only.
@@ -491,7 +502,8 @@ if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
 # -- Check 13: Latest-run model identity consistency --------------------------
 Write-Host "[13/14] Latest-run model identity consistency" -ForegroundColor White
 if ((Test-Path $genbaPath) -and (Test-Path $scorecardPath)) {
-    $gContent = Get-Content $genbaPath -Raw
+    # Latest run is always in the active GENBA file (not archive)
+    $gContent = Get-Content $genbaPath -Raw -Encoding UTF8
     $sContent = Get-Content $scorecardPath -Raw
     $scorecardRunRows = @(Get-ScorecardRunRows -Content $sContent)
 

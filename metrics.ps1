@@ -117,16 +117,23 @@ $invalidated = @($rows | Where-Object { $_.Result -match $invalidPattern })
 $valid = @($rows | Where-Object { $_.Result -notmatch $invalidPattern })
 
 # ---------------------------------------------------------------------------
-# Parse TRAIL/GENBA.md for recurrence data
+# Parse TRAIL/GENBA.md (active + archive) for recurrence data
 # ---------------------------------------------------------------------------
 $genbaPath = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'GENBA.md'
+$genbaArchivePath = Join-Path (Join-Path $script:suiteRoot 'TRAIL') 'GENBA_ARCHIVE.md'
 $recurrenceCount = 0
 $totalFindings = 0
 if (Test-Path $genbaPath) {
     $gContent = Get-Content $genbaPath -Raw -Encoding UTF8
+    # Combine active + archive for full recurrence analysis
+    $gFullContent = $gContent
+    if (Test-Path $genbaArchivePath) {
+        $gArchiveContent = Get-Content $genbaArchivePath -Raw -Encoding UTF8
+        $gFullContent = $gContent + "`n" + $gArchiveContent
+    }
     # Count findings rows that have "Run N" in the Recurred? column (not "First")
     $findingPattern = '(?m)^\|\s*\d+\s*\|.*?\|\s*(First|Run \d+)\s*\|'
-    $findingRows = [regex]::Matches($gContent, $findingPattern)
+    $findingRows = [regex]::Matches($gFullContent, $findingPattern)
     $totalFindings = $findingRows.Count
     $recurredPattern = 'Run \d+'
     foreach ($fr in $findingRows) {
@@ -444,15 +451,21 @@ if (Test-Path $genbaPath) {
     $genbaSize = [Math]::Round((Get-Item $genbaPath).Length / 1024, 1)
     $genbaRunCount = @([regex]::Matches($gContent, '(?m)^##\s+Run\s+\d+')).Count
     $perRunKB = if ($genbaRunCount -gt 0) { [Math]::Round($genbaSize / $genbaRunCount, 1) } else { 0 }
-    Write-Host "    GENBA size       : $genbaSize KB"
-    Write-Host "    Run entries      : $genbaRunCount"
-    Write-Host "    Avg per entry    : $perRunKB KB"
+    Write-Host "    Active GENBA     : $genbaSize KB ($genbaRunCount entries, $perRunKB KB/entry)"
+    if (Test-Path $genbaArchivePath) {
+        $archiveSize = [Math]::Round((Get-Item $genbaArchivePath).Length / 1024, 1)
+        $archiveRunCount = @([regex]::Matches($gArchiveContent, '(?m)^##\s+Run\s+\d+')).Count
+        $totalSize = [Math]::Round($genbaSize + $archiveSize, 1)
+        $totalRuns2 = $genbaRunCount + $archiveRunCount
+        Write-Host "    Archive GENBA    : $archiveSize KB ($archiveRunCount entries)"
+        Write-Host "    Total (all time) : $totalSize KB ($totalRuns2 entries)"
+    }
     if ($genbaSize -le 50) {
-        Write-Host "    Assessment       : GOOD -- GENBA is manageable (<= 50 KB)" -ForegroundColor Green
+        Write-Host "    Assessment       : GOOD -- active GENBA is manageable (<= 50 KB)" -ForegroundColor Green
     } elseif ($genbaSize -le 100) {
-        Write-Host "    Assessment       : MODERATE -- GENBA is growing (50-100 KB), consider archival" -ForegroundColor Yellow
+        Write-Host "    Assessment       : MODERATE -- active GENBA is growing (50-100 KB), consider archival" -ForegroundColor Yellow
     } else {
-        Write-Host "    Assessment       : POOR -- GENBA exceeds 100 KB, archival recommended" -ForegroundColor Red
+        Write-Host "    Assessment       : POOR -- active GENBA exceeds 100 KB, archival recommended" -ForegroundColor Red
     }
 } else {
     Write-Host "    TRAIL/GENBA.md not found"
