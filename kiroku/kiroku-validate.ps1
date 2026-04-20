@@ -29,8 +29,9 @@ if (Test-Path $summaryPath) { Pass "SUMMARY.md exists" } else { Fail "SUMMARY.md
 if (Test-Path $indexPath) { Pass "INDEX.md exists" } else { Fail "INDEX.md missing" }
 if (Test-Path $sessionsDir) { Pass "sessions/ directory exists" } else { Fail "sessions/ directory missing" }
 
+# GENBA.md is optional — owned by Kata, not kiroku
 $genbaPath = Join-Path $trailDir "GENBA.md"
-if (Test-Path $genbaPath) { Pass "GENBA.md exists" } else { Warn "GENBA.md missing (run ledger not in TRAIL/)" }
+if (Test-Path $genbaPath) { Pass "GENBA.md exists (methodology-specific, managed by Kata)" }
 
 $readmePath = Join-Path $trailDir "README.md"
 if (Test-Path $readmePath) { Pass "README.md exists (observer entry point)" } else { Warn "README.md missing (no observer entry point)" }

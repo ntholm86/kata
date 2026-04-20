@@ -1,6 +1,6 @@
 ---
 name: kiroku
-version: 2.0.0
+version: 2.1.0
 description: 'Evidence trail management. Start sessions, record decisions during work, close sessions, index decisions, validate trail integrity. The implementation of Observable Autonomy (Principle 2). USE WHEN: start session, record trail, kiroku, audit trail, evidence, close session, validate trail, begin work, observable autonomy, track decisions.'
 argument-hint: 'Specify the target project path where TRAIL/ should be managed'
 ---
@@ -82,13 +82,14 @@ Every target project gets one `TRAIL/` directory. All evidence lives there:
 target-project/
   TRAIL/
     README.md    — Observer entry point (what is this, how to read it)
-    SUMMARY.md   — Cross-run executive digest (digested resolution)
-    GENBA.md     — Per-run evidence ledger (indexed resolution)
+    SUMMARY.md   — Executive digest (digested resolution)
     INDEX.md     — Decision index, auto-generated (indexed resolution)
     sessions/    — Full session transcripts (full resolution)
 ```
 
 The observer looks at one directory. Everything is there.
+
+Other skills may add their own artifacts to `TRAIL/` (e.g., Kata adds `GENBA.md` as a run ledger). Kiroku manages the core evidence layer; methodology-specific artifacts belong to the skill that needs them.
 
 ## When to use this
 
@@ -154,7 +155,7 @@ Scans all session files for `[!DECISION]` markers. Extracts decision text, ratio
 ```
 
 Validates 7 checks:
-1. Trail structure (SUMMARY, INDEX, sessions/, GENBA, README exist)
+1. Trail structure (SUMMARY, INDEX, sessions/, README exist)
 2. Session fidelity headers present
 3. Decision count consistency (sessions vs INDEX)
 4. Summary freshness and self-authorship warning
@@ -170,6 +171,5 @@ VS Code Copilot Chat does not expose an API for exporting conversation transcrip
 
 1. Run `kiroku-close.ps1` to finalize the session
 2. Update `TRAIL/SUMMARY.md` with current status
-3. Update `TRAIL/GENBA.md` with a run entry
-4. Run `kiroku-validate.ps1` to check consistency
-5. Commit the TRAIL/ changes alongside any code changes
+3. Run `kiroku-validate.ps1` to check consistency
+4. Commit the TRAIL/ changes alongside any code changes
