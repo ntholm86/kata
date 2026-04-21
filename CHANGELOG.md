@@ -9,6 +9,10 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+### Fixed
+
+- **`SCORECARD.md`: Added missing row for Run 70 (Shiken, non-scoring).** Run 70 was recorded in GENBA but had no SCORECARD row, causing verify-suite.ps1 Check 13 to fail. Convention (established by Run 57 and all external-target runs) requires rows for all runs; "non-scoring" describes the N/A dimension values, not the absence of a row. (Run 71)
+
 ## [2.6.0] - 2026-04-21
 
 ### Added

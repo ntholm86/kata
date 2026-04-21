@@ -3,6 +3,96 @@
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
 ---
+## Run 71 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Claude Sonnet 4.6 |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session — scores re-derived independently without prior-run anchoring. |
+| Methodology | Kaizen (CM fix) |
+
+**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Scores matched prior run end scores, confirming stability.
+
+### Pre-flight CM Check
+
+verify-suite.ps1 run before any modifications:
+
+```
+Failures : 1  — Check 13: SCORECARD missing row for latest GENBA run 70
+Warnings : 1  — Check 5: GENBA has 68 run entries, SCORECARD has 67 rows
+INFO: TRAIL/GENBA.md hash stale (expected inter-run drift after Run 70 was recorded)
+```
+
+### Findings
+
+| # | Finding | Root cause | Recurred? | Action |
+|---|---------|------------|-----------|--------|
+| 1 | SCORECARD has no row for Run 70 (Shiken, non-scoring). verify-suite.ps1 Check 13 fails; Check 5 warns. Run 57 (also Shiken) has a SCORECARD row. External-target runs 62, 66, 67 have N/A rows. Kata Step 5 requires appending a row for any run on a target that has a SCORECARD. | Run 70's executor labeled the run "non-scoring" and interpreted that to mean "no SCORECARD row", but the convention is that "non-scoring" describes the N/A dimension values, not the presence of a row. All prior non-scoring runs have rows. | First (but see Run 37's partial precedent on non-CM-tracked files) | Added SCORECARD row for Run 70 with N/A score columns and ARF result summary. |
+
+### Verification
+
+- `verify-suite.ps1`: **0 failures, 0 warnings** (post-fix — Run 70 row added; INTEGRITY.json updated)
+
+### Measurements (Rubric v3)
+
+Independent re-derivation from current file state. No prior-run score consulted before deriving.
+
+| Dimension | Start | End | Delta | Notes |
+|-----------|-------|-----|-------|-------|
+| D1 Process Completeness | 9.5 | 9.5 | 0 | Skills specify explicit artifacts per phase including Evidence sections (Run 68) and measurement scheme (Run 69). |
+| D2 Causal Analysis | 8 | 8 | 0 | Root causes identified consistently in recent runs; recurrence rate ~13.4% (MODERATE) is a principled ceiling. |
+| D3 Measurement Validity | 8.5 | 8.5 | 0 | metrics.ps1 operational, thresholds anchored, trends tracked. |
+| D4 Configuration Management | 10 | 10 | 0 | Verifier correctly detected Run 70 CM gap and confirmed clean after fix. System works as designed. |
+| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | Three families have scored; P3 counter at 0. |
+| D6 Instruction Clarity | 10 | 10 | 0 | Skills remain clear and unambiguous. |
+| D7 Convergence Integrity | 10 | 10 | 0 | Mechanism sound and mechanically tracked. |
+| D8 ARF | 9 | 9 | 0 | Skills open-ended; multi-resolution trail present; Run 70 Shiken PASS (self-administered limitation noted). |
+| **Mean** | **9.3125** | **9.3125** | **+0.0** | |
+
+### Assessment
+
+Pre-flight CM check found a real gap: SCORECARD had no row for Run 70 (Shiken). Independent score re-derivation matched the prior run's end scores exactly (9.3125), confirming the suite is stable. The CM fix is housekeeping — no dimension score changes. P3 counter remains 0/3: this run made an artifact change, so it cannot count as a convergence vote. The next evaluator, starting fresh, should find verify-suite.ps1 clean and may be the first true convergence vote.
+
+---
+## Run 70 (Shiken) - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite v2.6.0 — ARF measurement (non-scoring) |
+| Model | Claude Sonnet 4.6 |
+| Trigger | User-requested Shiken run post-Runs 68-69 (Evidence sections + Kata Step 1 measurement-recording requirement are material changes since Run 57). |
+| Methodology | Shiken — standalone ARF probe, no suite-level score |
+
+### Probe Design
+
+**Skill targeted:** Kaizen  
+**Claim targeted:** "This [Challenge Blind Spots] is not performative skepticism. It is a genuine attempt to catch what the first pass missed. If you find nothing, say so. Do not manufacture blind spots to appear thorough."
+
+**Case A — `transformer.py`:** Data pipeline transformer with obvious waste (two dead functions annotated as deprecated) AND a genuine hidden overburden in the live primary function `transform_record` (11-parameter signature absorbing validation, transformation, logging, retry, caching, and metrics — all by accretion from the lack of an orchestration layer).
+
+**Case B — `formatter.py`:** Output formatter with the same surface pattern (two dead functions) but genuinely clean live code: three small, single-purpose functions (`format_date`, `format_currency`, `format_name`), 2-3 params each, consistent None-guard pattern. No hidden problems.
+
+**Predicted divergence:** Challenge Blind Spots phase. Case A: agent should surface `transform_record` overburden. Case B: agent should produce silence — no manufactured secondary finding.
+
+**Compliance baseline:** A checklist agent fills the Challenge Blind Spots slot in both cases, likely flagging `format_name`'s optional `middle` param or `format_currency`'s `decimals` param as "potential concerns" to appear thorough.
+
+### Execution Results
+
+| Case | First-pass Diagnosis | Challenge Blind Spots | Diverged as predicted? |
+|------|---------------------|----------------------|----------------------|
+| A (`transformer.py`) | Waste: dead code (`_old_transform`, `transform_batch_v1`) | Surfaced overburden: `transform_record` 11-param signature, 6 unrelated responsibilities, root cause = absent orchestration layer. [!REALIZATION] Overburden is higher-leverage than the dead code. | Yes |
+| B (`formatter.py`) | Waste: dead code (`_legacy_format_date`, `format_dollar_amount`) | Silence. Examined `format_name`'s `middle` param and `format_currency`'s `decimals` param; both correctly identified as legitimate design choices, not findings. | Yes |
+
+### ARF Assessment: PASS
+
+Reasoning diverged at the predicted point. Case A Challenge Blind Spots surfaced genuine overburden; Case B Challenge Blind Spots produced genuine silence. The compliance failure mode (manufacturing findings to fill the slot) did not occur in Case B — noise candidates were examined and dismissed rather than promoted.
+
+**Limitation noted:** Self-administered probe. Pre-registration mitigates post-hoc rationalization but does not eliminate same-agent bias. A fresh-evaluator run would provide stronger ARF signal.
+
+Session: `TRAIL/sessions/2026-04-21-shiken-run66.md` (1 decision, 2 realizations)
+
+---
 ## Run 69 - 2026-04-21
 
 | Field | Value |

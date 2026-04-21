@@ -1,6 +1,6 @@
 ﻿# Trail Summary
 
-*Last updated: 2026-04-21 - Run 69: Kata Step 1 measurement-scheme recording + SCORECARD Dimension Trajectory start→end format + Derived column; D1 +0.5, v2.6.0.*
+*Last updated: 2026-04-21 - Run 71: CM fix — added missing SCORECARD row for Run 70 (Shiken); verify-suite.ps1 0 failures, 0 warnings. Score 9.3125→9.3125 (+0.0). P3 counter 0/3 (artifact change).*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---
@@ -23,7 +23,7 @@
 
 ---
 
-**One-line status:** Suite v2.6.0 scores 9.3125/10 (v3). Runs 68+69 both closed P2 gaps: individual skills now specify observable trail outputs; SCORECARD Dimension Trajectory now shows start→end scores + derived measurements. P3 counter at 0/3 (non-zero delta). D1 at 9.5 — highest ever.
+**One-line status:** Suite v2.6.0 scores 9.3125/10 (v3). Run 71 found and fixed a CM gap (missing SCORECARD row for Run 70 Shiken run); independently re-derived scores match prior run. P3 counter 0/3 (artifact change — not a silence run).
 
 ## Target Condition
 
@@ -31,17 +31,17 @@ Bring P2 (Observable Autonomy) to colleagues' daily work. The skill files must b
 
 ## Direction
 
-Run 69 continues the P2 observability work from Run 68. Run 68 fixed what individual skills must deposit in the trail; Run 69 fixes what SCORECARD must show about those measurements (before AND after, for all measurement types including derived). The Dimension Trajectory now uses start→end format from Run 69 forward, making start scores scannable without visiting GENBA.
+Run 71 was a CM fix run: pre-flight verify-suite.ps1 found Check 13 failing (missing SCORECARD row for Run 70). Fixed. Independently re-derived scores matched 9.3125 exactly. P3 counter stays at 0/3 because an artifact change was made.
 
 Remaining work:
 - D2 (Causal Analysis) static at 8 since Run 51 — recurrence rate 13.4% MODERATE.
-- P3 needs 3 consecutive zero-delta runs from distinct evaluators in fresh sessions. Both Runs 68 and 69 produced positive deltas; counter remains 0/3.
+- P3 needs 3 consecutive zero-delta, zero-artifact-change runs from distinct evaluators in fresh sessions. Next evaluator starting fresh should find verify-suite.ps1 clean (0 failures, 0 warnings) and may be the first genuine convergence vote.
 
 ## Key Decisions
 
+- [!DECISION] Run 71 SCORECARD row (2026-04-21): Add missing SCORECARD row for Run 70 (Shiken). Root cause: executor labeled run "non-scoring" and skipped the row, but the convention (established by Run 57 Shiken + all external target rows) requires rows for ALL runs. verify-suite.ps1 Check 13 detected the gap. Fix: N/A row added. Alternatives: (a) accept the gap — rejected, verifier failing is not background noise; (b) change convention so non-scoring runs skip rows — rejected, existing convention is correct. (Run 71)
 - [!DECISION] Run 69 Kaizen: Changed SCORECARD Dimension Trajectory from end-only to start→end format + added Derived column. Added Kata Step 1 "Record the measurement scheme" paragraph. Updated Kata Step 5 to specify start→end format. Root cause: observer had to reconstruct start scores and derived measurements from GENBA + prior runs — violates P2. All 5 skills bumped to v2.6.0. D1 9→9.5. P3 counter 0/3.
 - [!DECISION] Run 68 Evidence sections (2026-04-21): Add observer-centric `## Evidence` sections to Kaizen, Kaikaku, Hansei, Shiken. Each section states what an observer should find in the trail — without prescribing the reasoning process (P1 compliant). Root cause: observable outputs were defined only at Kata orchestration level, leaving individual skill execution unspecified for trail consumers. Alternatives: (a) silence — rejected, real gap; (b) prescriptive step-lists — rejected, violates P1. (Run 68)
-- [!DECISION] Run 68 Metric 11 fix (2026-04-21): Correct SUMMARY.md date format (DD-MM-YYYY → YYYY-MM-DD) and add GOOD case to metrics.ps1 for checkpoint-acknowledged + no Review Log row. Root cause: date format mismatch + assessment logic gap. Alternative: require Review Log row — rejected, that's the human's responsibility; the fix honors the checkpoint evidence that IS there. (Run 68)
 - [!DECISION] Standardization direction (2026-04-21): adopt a two-layer model for clarity under human-context uncertainty: (1) fixed canonical framework steps for execution and auditability, (2) audience-adaptive evidence presentation for practitioners, deployers, regulators, and other observer contexts.
 - [!DECISION] Stop condition met for Kata P2 observability mission (2026-04-21): keep the change set minimal and stop after clean verification because additional controls would add complexity more than trust value at current scale. Evidence: overlap start is explicitly blocked, stale sessions closed, validator clean, suite verifier clean, and trail overhead remains sub-100 ms for validation at current history size.
 - [!DECISION] Kiroku hardening scope (2026-04-21): implement only high-ROI controls that reduce silent trail-gap risk with low workflow drag: (1) block concurrent open sessions by default in `kiroku-start.ps1`; (2) upgrade `kiroku-validate.ps1` to fail on stale SUMMARY/INDEX, multi-open or stale active sessions, and scope mismatch; (3) add secret-hygiene scan and runtime guardrail reporting. Rationale: maximum trust-risk reduction per unit complexity and runtime cost, while preserving backward readability of historical artifacts.
@@ -56,7 +56,7 @@ See [INDEX.md](INDEX.md) for the full decision index.
 ## Open Concerns
 
 - SUMMARY.md requires manual agent updates after each session
-- P3 silence counter reset to 0/3 — next qualifying evaluator must start in a fresh conversation/session with no prior scores in context
+- P3 silence counter at 0/3 — next qualifying evaluator must start in a fresh conversation/session with no prior scores in context; verify-suite.ps1 is now clean (0 failures, 0 warnings)
 - D2 (Causal Analysis) static at 8 since Run 51 — Hansei Run 60 F#4 noted possible anchoring; may represent a principled ceiling
 - Review Log in this SUMMARY.md has no rows; human reviewer (Nils Holmager, 2026-04-20) populated the checkpoint but not the Review Log table
 
