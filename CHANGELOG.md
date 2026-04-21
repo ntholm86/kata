@@ -9,6 +9,18 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [2.6.0] - 2026-04-21
+
+### Added
+
+- **`kata/SKILL.md`: "Record the measurement scheme" paragraph in Step 1.** Kata Step 1 ("Grasp the Situation") now requires recording the measurement scheme before moving to Diagnosis. Specifies: what is being measured and why, whether the scheme is inherited or revised (inherited = one sentence; revised = `[!DECISION]`), and the observer test — reading only the GENBA entry should answer "what was this run measured against?" without consulting prior runs. Closes the gap where derived measurements were done but not deposited in the trail. (Run 69)
+- **`SCORECARD.md` Dimension Trajectory: `start→end` format + `Derived` column.** Dimension Trajectory table now uses `start→end` per cell from Run 69 forward (e.g., `8→9`). New `Derived` column captures any measurements beyond Rubric v3 D1–D8 with their own `start→end` scores. Historical rows (Runs 43–68) retain end-only format with `*(end-only)*` annotation; start scores for those runs are in `TRAIL/GENBA.md`. (Run 69)
+
+### Changed
+
+- **`kata/SKILL.md` Step 5 Record: SCORECARD Dimension Trajectory guidance updated.** Now specifies `start→end` format for all measurements (rubric + derived) and the `Derived` column requirement. Observer reading the Dimension Trajectory row alone should be able to verify the run's claimed delta without consulting GENBA. (Run 69)
+- All 5 skill files bumped from v2.5.0 → v2.6.0 to maintain version alignment (Check 4). (Run 69)
+
 ## [2.5.0] - 2026-04-21
 
 ### Added

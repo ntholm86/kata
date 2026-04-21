@@ -1,6 +1,6 @@
 ---
 name: kata
-version: 2.5.0
+version: 2.6.0
 description: 'Orchestrate an improvement cycle: diagnose, select methodology, execute, record, persist. The meta-pattern that connects all skills into a coherent workflow. USE WHEN: improve, audit, review, full treatment, kata, run the loop, comprehensive improvement, what does this project need.'
 argument-hint: 'Specify the target (project, file, system) and optionally a focus area or concern'
 ---
@@ -38,6 +38,12 @@ Do not prescribe the measurements in advance. Derive them from what you find. St
 If a formal scoring rubric exists for this target (e.g., Rubric v3 in SCORECARD.md for the skill suite), use it. Rubrics are one form of measurement scheme — pre-agreed, externally anchored. They don't replace context-derived measurements; they complement them.
 
 The loop's own operational metrics (elapsed time, transcript size, artifact growth) are measurements too. If they trend poorly, that is a finding — the loop should diagnose and address its own resource consumption the same way it addresses any other deficiency.
+
+**Record the measurement scheme.** This is Step 1's observable output — without it, an observer cannot verify what the run was measured against. Before moving to Diagnosis, write a brief measurement scheme statement in this run's GENBA entry:
+- What is being measured and why each measurement matters for this target.
+- Whether this inherits or revises a prior run's scheme. If inheriting unchanged, one sentence suffices: *"Inheriting Rubric v3 — no revision."* If revising, record it as `[!DECISION]` with rationale.
+
+An observer reading only the GENBA entry should be able to answer *"what was this run measured against and why?"* without consulting the kiroku session or prior runs.
 
 ### 2. Diagnose
 
@@ -96,7 +102,7 @@ After execution, update the target's audit trail. All trail artifacts live in a 
   - Measurements (what was measured, the scores, and the delta from prior run — this is what makes the gap visible and drives the next run)
   - Assessment (one sentence: current state, what remains)
 
-- **SCORECARD Dimension Trajectory** — if the target has a SCORECARD with a Dimension Trajectory table, append a row with the end-of-run per-dimension scores. The run table shows only the mean; the Dimension Trajectory shows which dimensions moved. This is the indexed-resolution view for P2: a human scanning the scorecard can see what changed without reading GENBA.
+- **SCORECARD Dimension Trajectory** — if the target has a SCORECARD with a Dimension Trajectory table, append a row with **start→end scores for every measurement** (format: `start→end`, e.g., `8→9`). This applies to both rubric dimensions and any derived measurements recorded in Step 1. Use the `Derived` column for any measurements beyond the standard rubric — list each as `Name: start→end`. The run table shows only the mean; the Dimension Trajectory shows which specific dimensions moved, where each started, and what was measured at all. An observer reading the Dimension Trajectory row alone should be able to verify the run's claimed delta without consulting GENBA.
 
 - **`TRAIL/sessions/`** — the session transcript. Mark decisions with `[!DECISION]` (include rationale and alternatives considered), realizations with `[!REALIZATION]`, reversals with `[!REVERSAL]`.
 

@@ -1,6 +1,6 @@
 ---
 name: kaikaku
-version: 2.5.0
+version: 2.6.0
 description: 'Radical redesign evaluation. When incremental improvement has converged too low or the architecture is fundamentally wrong, Kaikaku determines whether to redesign and produces a migration plan if warranted. USE WHEN: redesign, start over, rethink, rewrite, architecture is wrong, kaizen isnt working, converged too low, fundamental change, kaikaku, radical change, clean slate, rearchitect, pivot.'
 argument-hint: 'Specify the target to evaluate for radical redesign and optionally the evidence that incremental improvement is insufficient'
 ---

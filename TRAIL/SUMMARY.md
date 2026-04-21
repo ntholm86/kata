@@ -1,6 +1,6 @@
 ﻿# Trail Summary
 
-*Last updated: 2026-04-21 - Run 68: Evidence sections added to 4 skill files; metrics.ps1 Metric 11 false-POOR eliminated; D1 +1, P3 counter reset to 0/3.*
+*Last updated: 2026-04-21 - Run 69: Kata Step 1 measurement-scheme recording + SCORECARD Dimension Trajectory start→end format + Derived column; D1 +0.5, v2.6.0.*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---
@@ -23,7 +23,7 @@
 
 ---
 
-**One-line status:** Suite v2.5.0 scores 9.0625/10 (v3). D1 reaches 9 for the first time — Evidence sections in all 4 individual skills now make trail output requirements explicit. P3 counter reset to 0/3 by Run 68's +0.125 delta; next convergence attempt must start fresh.
+**One-line status:** Suite v2.6.0 scores 9.3125/10 (v3). Runs 68+69 both closed P2 gaps: individual skills now specify observable trail outputs; SCORECARD Dimension Trajectory now shows start→end scores + derived measurements. P3 counter at 0/3 (non-zero delta). D1 at 9.5 — highest ever.
 
 ## Target Condition
 
@@ -31,14 +31,15 @@ Bring P2 (Observable Autonomy) to colleagues' daily work. The skill files must b
 
 ## Direction
 
-Run 68 is the first scoring run after Runs 63–67. Run 63 was the first genuine silence run (P3 counter 0→1); Runs 64–65 were same-conversation follow-ups (not P3 datapoints); Runs 66–67 were external-target methodology-validation runs. Run 68 produced delta +0.125 (D1 +1 from Evidence sections), resetting the P3 silence chain to 0/3. The next qualifying evaluator must start a fresh conversation/session with no prior scores in context.
+Run 69 continues the P2 observability work from Run 68. Run 68 fixed what individual skills must deposit in the trail; Run 69 fixes what SCORECARD must show about those measurements (before AND after, for all measurement types including derived). The Dimension Trajectory now uses start→end format from Run 69 forward, making start scores scannable without visiting GENBA.
 
 Remaining work:
-- D2 (Causal Analysis) static at 8 — may represent a principled ceiling until recurrence rate improves below 10%.
-- P3 silence counter reset to 0/3 — requires 3 consecutive zero-delta runs from distinct evaluators in fresh sessions.
+- D2 (Causal Analysis) static at 8 since Run 51 — recurrence rate 13.4% MODERATE.
+- P3 needs 3 consecutive zero-delta runs from distinct evaluators in fresh sessions. Both Runs 68 and 69 produced positive deltas; counter remains 0/3.
 
 ## Key Decisions
 
+- [!DECISION] Run 69 Kaizen: Changed SCORECARD Dimension Trajectory from end-only to start→end format + added Derived column. Added Kata Step 1 "Record the measurement scheme" paragraph. Updated Kata Step 5 to specify start→end format. Root cause: observer had to reconstruct start scores and derived measurements from GENBA + prior runs — violates P2. All 5 skills bumped to v2.6.0. D1 9→9.5. P3 counter 0/3.
 - [!DECISION] Run 68 Evidence sections (2026-04-21): Add observer-centric `## Evidence` sections to Kaizen, Kaikaku, Hansei, Shiken. Each section states what an observer should find in the trail — without prescribing the reasoning process (P1 compliant). Root cause: observable outputs were defined only at Kata orchestration level, leaving individual skill execution unspecified for trail consumers. Alternatives: (a) silence — rejected, real gap; (b) prescriptive step-lists — rejected, violates P1. (Run 68)
 - [!DECISION] Run 68 Metric 11 fix (2026-04-21): Correct SUMMARY.md date format (DD-MM-YYYY → YYYY-MM-DD) and add GOOD case to metrics.ps1 for checkpoint-acknowledged + no Review Log row. Root cause: date format mismatch + assessment logic gap. Alternative: require Review Log row — rejected, that's the human's responsibility; the fix honors the checkpoint evidence that IS there. (Run 68)
 - [!DECISION] Standardization direction (2026-04-21): adopt a two-layer model for clarity under human-context uncertainty: (1) fixed canonical framework steps for execution and auditability, (2) audience-adaptive evidence presentation for practitioners, deployers, regulators, and other observer contexts.

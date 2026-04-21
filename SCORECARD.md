@@ -74,33 +74,34 @@ Persistent cross-model trajectory for Kata self-targeting runs on the TPS skills
 | 66 | 2026-04-20 | Claude Opus 4.7 | N/A | N/A | N/A | apikit (external) | **Kata→Kaizen on external target.** Second external-target run (after Run 62 leifoglenedk). Picked apikit (FastAPI demo) for fast feedback + clear self-acknowledged debt + benchmark-target context. Diagnosed via the 3 Kaizen lenses; unevenness was root cause (dead `find_user_by_*` helpers never wired to `create_user`). Fixed duplicate-user creation, returned 409 Conflict, rewrote 6 bug-asserting tests to assert correct behavior. Shipped apikit v0.1.11 in apikit's repo (commit `d552a2e`). 102/102 tests pass. Suite was usable as-is, no skill modifications required. Methodology gap noted (no named lens for "load-bearing wrong tests"). P3 unchanged (1/3) — this is not a suite-self-evaluation. |
 | 67 | 2026-04-21 | Claude Opus 4.6 | N/A | N/A | N/A | evo (external) | **Kaizen on external target (scoped).** Follow-up to Run 66's process-level finding. Added mechanical bug-asserting-test detector to evo (`src/evo/bug_asserting_tests.py` + injection in `core/analyze.py` + 10 tests). Pure-regex over `tests/**/*.py` for 7 conservative markers; injects findings as high-priority `Weakness` entries gated on `Category.BUG_FIX`. Zero changes to fitness, strategy, prompts, propose, decide, or reward shape. Full evo suite: 2088 passed (was 2078). Falsified via smoke against post-Run-66 apikit: detector found **5 still-undetected bug-asserting test files** — proving the change addresses real, not synthetic, debt. P3 unchanged (1/3). |
 | 68 | 2026-04-21 | Claude Sonnet 4.6 | 8.9375 (v3) | 9.0625 (v3) | +0.125 | TPS Skill Suite | **Kaizen.** Added `## Evidence` sections to Kaizen, Kaikaku, Hansei, Shiken — observer-centric statement of what the trail must contain, closing D1 ceiling at 8 since Run 51. Fixed `metrics.ps1` Metric 11 false-POOR: corrected SUMMARY.md date format (DD-MM-YYYY → YYYY-MM-DD) and added GOOD case for checkpoint-acknowledged + no Review Log row. All 5 skills bumped to v2.5.0. D1 +1. P3 counter resets to 0/3. |
+| 69 | 2026-04-21 | Claude Sonnet 4.6 | 9.0625 (v3) | 9.3125 (v3) | +0.25 | TPS Skill Suite | **Kaizen.** User identified P2 gap: derived measurements are not visible in SCORECARD — observer must stitch together from GENBA + prior runs, violating Observable Autonomy. Two fixes: (1) Added "Record the measurement scheme" paragraph to Kata Step 1 — requires recording what is measured, why, and inherited/revised status directly in the GENBA entry. (2) Changed SCORECARD Dimension Trajectory from end-only to `start→end` format + added `Derived` column for non-rubric measurements. Updated Kata Step 5 to specify this format. All 5 skills bumped to v2.6.0. D1 +0.5 (Kata Step 1 now has explicit observable output). P3 counter resets to 0/3. |
 
 ## Dimension Trajectory (Rubric v3)
 
-Per-dimension end-of-run scores for all v3-scored runs. Shows which dimensions drove each delta — the run table above shows only the mean. Measurement scheme noted per run; if a run revises the scheme, the revision is a `[!DECISION]` in GENBA.
+Per-dimension scores for all v3-scored self-targeting runs. **Runs 43–68 (historical):** end-of-run scores only — start scores are in `TRAIL/GENBA.md`. **From Run 69 forward:** `start→end` format per cell (e.g., `8→9` means dimension opened at 8, closed at 9). `Derived` column lists any measurements beyond Rubric v3 D1–D8 with their own `start→end` scores; `—` if the run used the rubric exclusively. If a run revises the measurement scheme, that is a `[!DECISION]` in GENBA.
 
-| Run | D1 Proc | D2 Cause | D3 Meas | D4 CM | D5 XEval | D6 Clarity | D7 Conv | D8 ARF | Mean | Scheme |
-|:---:|:-------:|:--------:|:-------:|:-----:|:--------:|:----------:|:-------:|:------:|:----:|--------|
-| 43 | 9 | 8 | 7 | 10 | 7 | 8 | 5 | 8 | 7.75 | v3 baseline |
-| 44 | 9 | 8 | 7 | 10 | 7 | 8.5 | 5 | 8.5 | 7.875 | v3 baseline |
-| 47 | 7 | 8 | 6 | 5 | 4 | 9 | 7 | 9 | 6.875 | v3 post-rebuild |
-| 51 | 8 | 8 | 7 | 9 | 7 | 9 | 7 | 8 | 7.875 | v3 + measurement protocol |
-| 52 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
-| 53 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
-| 55 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol |
-| 56 | 8 | 8 | 8 | 9 | 8 | 9 | 8 | 9 | 8.375 | v3 + measurement protocol |
-| 57 | 8 | 8 | 8 | 9 | 8 | 9 | 8 | 9 | 8.375 | v3 + measurement protocol |
-| 58 | 8 | 8 | 8 | 9.5 | 8 | 9 | 8 | 9 | 8.4375 | v3 + measurement protocol |
-| 59 | 8 | 8 | 8.5 | 9.5 | 8 | 9.5 | 9 | 9 | 8.6875 | v3 + measurement protocol |
-| 61 | 8 | 8 | 8.5 | 10 | 8 | 10 | 10 | 9 | 8.9375 | v3 + measurement protocol |
-| 63 | 8 | 8 | 8.5 | 10 | 8 | 10 | 10 | 9 | 8.9375 | v3 + measurement protocol |
-| 68 | 9 | 8 | 8.5 | 10 | 8 | 10 | 10 | 9 | 9.0625 | v3 + measurement protocol |
+| Run | D1 Proc | D2 Cause | D3 Meas | D4 CM | D5 XEval | D6 Clarity | D7 Conv | D8 ARF | Mean | Scheme | Derived |
+|:---:|:-------:|:--------:|:-------:|:-----:|:--------:|:----------:|:-------:|:------:|:----:|--------|:-------:|
+| 43 | 9 | 8 | 7 | 10 | 7 | 8 | 5 | 8 | 7.75 | v3 baseline | *(end-only)* |
+| 44 | 9 | 8 | 7 | 10 | 7 | 8.5 | 5 | 8.5 | 7.875 | v3 baseline | *(end-only)* |
+| 47 | 7 | 8 | 6 | 5 | 4 | 9 | 7 | 9 | 6.875 | v3 post-rebuild | *(end-only)* |
+| 51 | 8 | 8 | 7 | 9 | 7 | 9 | 7 | 8 | 7.875 | v3 + measurement protocol | *(end-only)* |
+| 52 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol | *(end-only)* |
+| 53 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol | *(end-only)* |
+| 55 | 8 | 8 | 8 | 9 | 7 | 9 | 8 | 8 | 8.125 | v3 + measurement protocol | *(end-only)* |
+| 56 | 8 | 8 | 8 | 9 | 8 | 9 | 8 | 9 | 8.375 | v3 + measurement protocol | *(end-only)* |
+| 57 | 8 | 8 | 8 | 9 | 8 | 9 | 8 | 9 | 8.375 | v3 + measurement protocol | *(end-only)* |
+| 58 | 8 | 8 | 8 | 9.5 | 8 | 9 | 8 | 9 | 8.4375 | v3 + measurement protocol | *(end-only)* |
+| 59 | 8 | 8 | 8.5 | 9.5 | 8 | 9.5 | 9 | 9 | 8.6875 | v3 + measurement protocol | *(end-only)* |
+| 61 | 8 | 8 | 8.5 | 10 | 8 | 10 | 10 | 9 | 8.9375 | v3 + measurement protocol | *(end-only)* |
+| 63 | 8 | 8 | 8.5 | 10 | 8 | 10 | 10 | 9 | 8.9375 | v3 + measurement protocol | *(end-only)* |
+| 68 | 9 | 8 | 8.5 | 10 | 8 | 10 | 10 | 9 | 9.0625 | v3 + measurement protocol | *(end-only)* |
+| 69 | 9→9.5 | 8→8 | 8.5→8.5 | 10→10 | 8→8 | 10→10 | 10→10 | 9→9 | 9.0625→9.3125 | v3 + measurement protocol | — |
 
 **Key:**
 - **D1-D8** — Rubric v3 dimensions (full names in Scoring Rubric v3 below).
 - **Scheme** — Measurement scheme used. "v3 baseline" = Rubric v3 adopted at Run 42. "v3 post-rebuild" = re-scored after Kaikaku (Run 47). "v3 + measurement protocol" = context-derived measurements formally recorded in GENBA per Kata Step 1 (Run 51+).
-
-Dimension scores are the **end-of-run** state (post-improvement). For start/end/delta per dimension within a single run, see `TRAIL/GENBA.md`.
+- **Derived** — Additional measurements beyond D1–D8 derived by the agent for the specific run target. `—` = rubric only. `*(end-only)*` = historical row recorded before the start→end schema was introduced (Run 69). Start scores for historical rows are in `TRAIL/GENBA.md`.
 
 ## Cross-Model Notes
 
@@ -122,15 +123,16 @@ Dimension scores are the **end-of-run** state (post-improvement). For start/end/
 - Run 64 GPT-5.4 (non-independent follow-up): Different model family, but **not** a valid convergence datapoint because prior scores were already visible in the same conversation. Found stale P3 counter text in `TRAIL/SUMMARY.md`, exposed a Metric 7 bug where trailing non-scoring rows falsely reset the silence chain, and led to an explicit clarification in `PRINCIPLES.md` and `kata/SKILL.md`: changing models inside an existing conversation does not satisfy independent assessment. P3 remains 1/3.
 - Run 65 GPT-5.4 (non-independent follow-up): Continued the fresh file-read in the same conversation, so still not a valid convergence datapoint. Surfaced two real tooling seams the trail had normalized: Check 5 was excluding every `*external*` target row even though the suite GENBA intentionally records Run 62 as methodology validation, and Kiroku Check 7 was counting any raw `*not recorded*` substring in the index, including explanatory prose. Fixed both parser rules. The suite now passes `verify-suite.ps1` with 0 failures, 0 warnings, and `kiroku-validate.ps1` warns only on the 4 genuine historical alternatives gaps. P3 remains 1/3.
 - Run 66 Claude Opus 4.7 (external target): Second external-target run after Run 62 leifoglenedk. Target apikit (FastAPI demo, ~80 LOC source, 104→102 tests after intentional consolidation). Kata→Kaizen cycle applied without any skill modifications — suite was usable as-is. Three Kaizen diagnostic lenses correctly converged on a single root cause (unevenness — dead helpers never wired to `create_user`); fix wired the helpers, mapped collisions to 409 Conflict, rewrote 6 tests that asserted the bug as canonical behavior. Shipped apikit v0.1.11 in apikit's repo (commit `d552a2e`); apikit TRAIL/ session captures the full reasoning. Methodology gap noted (no named diagnostic lens for "load-bearing wrong tests" — tests that lock defects in as canonical). Highest-impact insight surfaced was process-level for evo (its pipeline ships tests for known bugs without ever fixing source), recorded in apikit's TRAIL but outside this Kata's authority. This run does not change the TPS suite score and does not advance the P3 counter.
+- Run 69 Claude Sonnet 4.6: User identified P2 gap in SCORECARD — derived measurements and start scores were not visible; observer had to reconstruct from GENBA + prior runs. Two structural fixes: Kata Step 1 now requires recording the measurement scheme explicitly in GENBA; SCORECARD Dimension Trajectory changed from end-only to start→end format with a new Derived column for non-rubric measurements. D1 rises 9→9.5. P3 counter remains 0/3 (non-zero delta).
 - The trajectory is durable on the run table above. Future runs append a row there with model identity, score delta, and a one-line reason the score moved.
 
 ## Current Status
 
 - The run table above is the source of truth for per-run scores and outcomes; `TRAIL/GENBA.md` is the source of truth for per-run findings, actions, and reasoning.
-- The current live release is **v2.4.0**. Run 47 rebuilt the suite (v2.0.0); Run 48 repaired shipped defects (v2.0.1); subsequent sessions rewrote kiroku principle-first and separated GENBA ownership (v2.1.0); Run 50 added README, archived journey docs, and implemented context-derived measurement protocol (v2.2.0); Run 58 completed the accumulated CHANGELOG for Runs 51–57 and released v2.3.0; v2.4.0 (2026-04-20) narrows the framing to "evidence substrate", adds an Out-of-Scope section to PROBLEM.md, introduces Metric 11 (reviewer engagement), splits GENBA into active + archive, and consolidates the Run 59-65 Unreleased items.
+- The current live release is **v2.6.0**. Run 47 rebuilt the suite (v2.0.0); Run 48 repaired shipped defects (v2.0.1); subsequent sessions rewrote kiroku principle-first and separated GENBA ownership (v2.1.0); Run 50 added README, archived journey docs, and implemented context-derived measurement protocol (v2.2.0); Run 58 completed the accumulated CHANGELOG for Runs 51–57 and released v2.3.0; v2.4.0 (2026-04-20) narrows the framing to "evidence substrate", adds an Out-of-Scope section to PROBLEM.md, introduces Metric 11 (reviewer engagement), splits GENBA into active + archive, and consolidates the Run 59-65 Unreleased items; v2.5.0 (2026-04-21) added Evidence sections to 4 individual skills and fixed Metric 11 false-POOR; v2.6.0 (2026-04-21) added Kata Step 1 measurement-scheme recording requirement, changed SCORECARD Dimension Trajectory to start→end format, and added Derived column.
 - **Scoring uses Rubric v3 (adopted Run 42) for all runs from Run 42 forward.** Runs 17-41 used Rubric v1/v2 (10 dimensions). Pre-v1 scores used an implicit narrower basis. v3 scores are not directly comparable to v1/v2 scores — a v3 baseline of ~7.2 is expected and by design (see RUBRIC_V3_PROPOSAL.md).
 - v1/v2 scores are preserved unchanged in the run table for auditability.
-- Principle 3 silence counter: 0/3 (Run 68 produced delta +0.125, breaking the zero-delta chain from Run 63. The next convergence attempt must begin in a fresh conversation with no prior scores in context. See PRINCIPLES.md §3 for the convergence definition.)
+- Principle 3 silence counter: 0/3 (Runs 68 and 69 both produced positive deltas, resetting the chain. The next convergence attempt must begin in a fresh conversation with no prior scores in context. See PRINCIPLES.md §3 for the convergence definition.)
 
 ## Historical Snapshot
 

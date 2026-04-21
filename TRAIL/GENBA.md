@@ -3,6 +3,47 @@
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
 ---
+## Run 69 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Claude Sonnet 4.6 |
+| Trigger | User observation: "derived measurements are not clearly visible in the trail — you have to stitch it together, this violates Principle 2." |
+| Methodology | Kaizen |
+
+**Measurement Scheme:** Inheriting Rubric v3 — no revision. D6 (Instruction Clarity) and D1 (Process Completeness) are the relevant dimensions for this change.
+
+### Findings
+
+| # | Finding | Root cause | Recurred? | Action |
+|---|---------|------------|-----------|--------|
+| 1 | Kata Step 1 ("Derive measurements") has no explicit output requirement. The agent derives measurements but is not told to record them in the GENBA entry. An observer reading the GENBA entry sees dimension *scores* but not the measurement *scheme* — what is measured, why, whether it was inherited or revised. To know what a run was measured against, an observer must reconstruct it from SCORECARD history, prior runs, or the kiroku session. Violates P2 (Observable Autonomy). | Step 1 specifies a thinking activity ("derive measurements") but not a trail artifact ("record what you derived"). The Evidence section added in Run 68 covered individual skills; Kata's own Step 1 output was missed. | First | Added "Record the measurement scheme" paragraph to Kata Step 1. Specifies: what to record, the minimum for inherited vs revised schemes, and the observer test — "reading only the GENBA entry should answer the question without consulting prior runs." |
+
+### Verification
+
+- `verify-suite.ps1`: **0 failures, 0 warnings**
+- All 5 skills at v2.6.0; Check 4 passes; INTEGRITY.json updated
+
+### Measurements (Rubric v3)
+
+| Dimension | Start | End | Delta | Notes |
+|-----------|-------|-----|-------|-------|
+| D1 Process Completeness | 9 | 9.5 | +0.5 | Kata Step 1 now has an explicit output artifact — the measurement scheme statement. Previously the only Step 1 output was implicit (it shaped the Findings). |
+| D2 Causal Analysis | 8 | 8 | 0 | |
+| D3 Measurement Validity | 8.5 | 8.5 | 0 | |
+| D4 Configuration Management | 10 | 10 | 0 | 0/0 failures; INTEGRITY.json updated |
+| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | |
+| D6 Instruction Clarity | 10 | 10 | 0 | Kata Step 1 is now clearer on what to produce; ceiling already held |
+| D7 Convergence Integrity | 10 | 10 | 0 | P3 counter resets to 0/3 (non-zero delta) |
+| D8 ARF | 9 | 9 | 0 | |
+| **Mean** | **9.0625** | **9.3125** | **+0.25** | |
+
+### Assessment
+
+The user identified a real P2 gap: Kata Step 1 told agents to *derive* measurements but not to *record* them. The observable output was missing — exactly the same structural problem Run 68 fixed for individual skills, but at the orchestration layer. Adding the recording requirement closes the gap: every GENBA entry going forward must include a measurement scheme statement, making the question "what was this run measured against?" answerable from the GENBA entry alone.
+
+---
 ## Run 68 - 2026-04-21
 
 | Field | Value |
