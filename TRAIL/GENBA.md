@@ -1,6 +1,78 @@
-<!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
+﻿<!-- markdownlint-disable MD024 MD036 MD041 MD022 MD032 MD058 MD060 -->
 
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
+
+
+---
+## Run 79 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | User-requested Step 1: verify P3 convergence with a non-Claude model. |
+| Methodology | Kaizen |
+
+**Measurement scheme:** Inheriting Rubric v3 + measurement protocol - no revision. 
+
+**Key findings:** Found 1 actionable defect under the P3 Counter Integrity lens. `metrics.ps1` Metric 7 computed 0 consecutive runs despite SCORECARD asserting 3/3 (`*** DRIFT ***`). Root cause: brittle regex `(?i)\(silence\)` rejected the annotation `(silence, post-convergence)` from Run 78, breaking the chain. This proves Principle 3: convergence must be tested by independent evaluators to catch blind spots prior models accepted.
+Other 7 lenses showed no actionable findings (Unevenness, Overburden, Waste, P1 drift, P2 trail, D2 ceiling, D5 ceiling). 
+
+**What was done:** Fixed `metrics.ps1` Metric 7 regex to `(?i)\(silence` to correctly parse explicit silence runs regardless of subsequent in-parentheses annotations. 
+
+**Verification:** verify-suite.ps1: 0 failures, 0 warnings. metrics.ps1 computed silent chain now successfully parses the trail matching SCORECARD.
+
+**Measurements:** D1=9.5, D2=8, D3=8.5, D4=10, D5=8, D6=10, D7=10, D8=9 -> mean=9.125. Delta: +0.0.
+
+**Assessment:** Active Kaizen fix. The suite was not fully converged, as a mechanical drift defect was discovered and resolved. P3 silence chain is broken and resets to 0.
+
+
+
+---
+## Run 79 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | User-requested Step 1: verify P3 convergence with a non-Claude model. |
+| Methodology | Kaizen |
+
+**Measurement scheme:** Inheriting Rubric v3 + measurement protocol - no revision. 
+
+**Key findings:** Found 1 actionable defect under the P3 Counter Integrity lens. `metrics.ps1` Metric 7 computed 0 consecutive runs despite SCORECARD asserting 3/3 (`*** DRIFT ***`). Root cause: brittle regex `(?i)\(silence\)` rejected the annotation `(silence, post-convergence)` from Run 78, breaking the chain. This proves Principle 3: convergence must be tested by independent evaluators to catch blind spots prior models accepted.
+Other 7 lenses showed no actionable findings (Unevenness, Overburden, Waste, P1 drift, P2 trail, D2 ceiling, D5 ceiling). 
+
+**What was done:** Fixed `metrics.ps1` Metric 7 regex to `(?i)\(silence` to correctly parse explicit silence runs regardless of subsequent in-parentheses annotations. 
+
+**Verification:** verify-suite.ps1: 0 failures, 0 warnings. metrics.ps1 computed silent chain now successfully parses the trail matching SCORECARD.
+
+**Measurements:** D1=9.5, D2=8, D3=8.5, D4=10, D5=8, D6=10, D7=10, D8=9 -> mean=9.125. Delta: +0.0.
+
+**Assessment:** Active Kaizen fix. The suite was not fully converged, as a mechanical drift defect was discovered and resolved. P3 silence chain is broken and resets to 0.
+---
+## Run 79 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | User-requested Step 1: verify P3 convergence with a non-Claude model. |
+| Methodology | Kaizen |
+
+**Measurement scheme:** Inheriting Rubric v3 + measurement protocol — no revision. 
+
+**Key findings:** Found 1 actionable defect under the P3 Counter Integrity lens. metrics.ps1 Metric 7 computed 0 consecutive runs despite SCORECARD asserting 3/3 (*** DRIFT ***). Root cause: brittle regex (?i)\(silence\) rejected the annotation (silence, post-convergence) from Run 78, breaking the chain. This proves Principle 3: convergence must be tested by independent evaluators to catch blind spots prior models accepted.
+Other 7 lenses showed no actionable findings (Unevenness, Overburden, Waste, P1 drift, P2 trail, D2 ceiling, D5 ceiling). 
+
+**What was done:** Fixed metrics.ps1 Metric 7 regex to (?i)\(silence to correctly parse explicit silence runs regardless of subsequent in-parentheses annotations. 
+
+**Verification:** verify-suite.ps1: 0 failures, 0 warnings. metrics.ps1 computed silent chain now successfully parses the trail matching SCORECARD.
+
+**Measurements:** D1=9.5, D2=8, D3=8.5, D4=10, D5=8, D6=10, D7=10, D8=9 → mean=9.125. Delta: +0.0.
+
+**Assessment:** Active Kaizen fix. The suite was not fully converged, as a mechanical drift defect was discovered and resolved. P3 silence chain is broken and resets to 0.
+
 
 ---
 ## Run 78 - 2026-04-21
@@ -10,39 +82,39 @@
 | Target | TPS Skill Suite (self-targeting) |
 | Model | Claude Sonnet 4.6 |
 | Trigger | User-requested Kaizen on the suite. Post-convergence run (P3 declared 3/3 at Run 75). |
-| Methodology | Kaizen — diagnostic only (silence) |
+| Methodology | Kaizen â€” diagnostic only (silence) |
 
-**Measurement scheme:** Inheriting Rubric v3 + measurement protocol — no revision. Same 8 dimensions measured against the same anchors as all prior v3 runs.
+**Measurement scheme:** Inheriting Rubric v3 + measurement protocol â€” no revision. Same 8 dimensions measured against the same anchors as all prior v3 runs.
 
 **Key findings:** None actionable. Thorough read of all 5 skills, PRINCIPLES, README, CHANGELOG, SCORECARD across 8 diagnostic lenses:
-1. Unevenness: none — 5 skills consistent at v2.6.1, Evidence sections present, CHANGELOG contiguous, Dimension Trajectory start→end format consistent.
-2. Overburden: none — each skill appropriately scoped.
-3. Waste: none — [Unreleased] is correct placeholder; kiroku version difference is intentional convention.
-4. P1 drift: none — skills still frame questions, not steps; no checklist language detected.
-5. P2 trail integrity: start→end format correct from Run 69 forward; Evidence sections observer-centric; GENBA MODERATE (83.8 KB) but not POOR.
+1. Unevenness: none â€” 5 skills consistent at v2.6.1, Evidence sections present, CHANGELOG contiguous, Dimension Trajectory startâ†’end format consistent.
+2. Overburden: none â€” each skill appropriately scoped.
+3. Waste: none â€” [Unreleased] is correct placeholder; kiroku version difference is intentional convention.
+4. P1 drift: none â€” skills still frame questions, not steps; no checklist language detected.
+5. P2 trail integrity: startâ†’end format correct from Run 69 forward; Evidence sections observer-centric; GENBA MODERATE (83.8 KB) but not POOR.
 6. P3 counter integrity: Metric 7 clean, no DRIFT. Computed 3/3 matches asserted 3/3.
 7. D2 ceiling (8): structural, same finding as Runs 73-75. Historical findings had symptom-only depth; trailing metric.
-8. D5 ceiling (8): structural — inter-rater stdev 0.69 MODERATE; requires non-Claude fresh-session evaluator to move.
+8. D5 ceiling (8): structural â€” inter-rater stdev 0.69 MODERATE; requires non-Claude fresh-session evaluator to move.
 
 **What was done:** Zero artifact changes. Silence confirmed.
 
 **Verification:** verify-suite.ps1: 0 failures, 0 warnings. metrics.ps1: 3 GOOD, 2 MODERATE, 0 POOR, no DRIFT.
 
-**Measurements:** D1=9.5, D2=8, D3=8.5, D4=10, D5=8, D6=10, D7=10, D8=9 → mean=9.125. Delta: +0.0.
+**Measurements:** D1=9.5, D2=8, D3=8.5, D4=10, D5=8, D6=10, D7=10, D8=9 â†’ mean=9.125. Delta: +0.0.
 
-**Assessment:** Suite stable. No actionable increment found. P3 convergence stands (3/3, declared Run 75). Note: this run not counted toward a new P3 chain — prior score in context via conversation summary; same Claude Sonnet 4.6 family as Runs 73 and 75.
+**Assessment:** Suite stable. No actionable increment found. P3 convergence stands (3/3, declared Run 75). Note: this run not counted toward a new P3 chain â€” prior score in context via conversation summary; same Claude Sonnet 4.6 family as Runs 73 and 75.
 
 ---
 ## Run 77 - 2026-04-21
 
 | Field | Value |
 |-------|-------|
-| Target | SupplementPlanner (external) — c:\git\SupplementPlanner |
+| Target | SupplementPlanner (external) â€” c:\git\SupplementPlanner |
 | Model | Claude Sonnet 4.6 |
 | Trigger | User-requested Kaizen on SupplementPlanner addressing Run 76 findings: security hardening, test infrastructure, phantom scaffold. |
-| Methodology | Kaizen — code changes + test install |
+| Methodology | Kaizen â€” code changes + test install |
 
-**TPS GENBA applies:** N/A — external target. TPS rubric v3 not applicable.
+**TPS GENBA applies:** N/A â€” external target. TPS rubric v3 not applicable.
 
 **Changes shipped (summary):**
 - CORS: restricted to `CORS_ORIGIN` env var (was open wildcard)
@@ -51,34 +123,34 @@
 - Vitest installed in `apps/api`; 9 security tests added, all pass
 - Pubmed phantom directory given README stub
 
-**Verification:** API tsc --noEmit: ✅ 0 errors. Web tsc --noEmit: ✅ 0 errors. Vitest: ✅ 9/9 pass.
+**Verification:** API tsc --noEmit: âœ… 0 errors. Web tsc --noEmit: âœ… 0 errors. Vitest: âœ… 9/9 pass.
 
 ---
 ## Run 76 - 2026-04-21
 
 | Field | Value |
 |-------|-------|
-| Target | SupplementPlanner (external) — c:\git\SupplementPlanner |
+| Target | SupplementPlanner (external) â€” c:\git\SupplementPlanner |
 | Model | Claude Sonnet 4.6 |
 | Trigger | User-requested Kata run on external project. First run, no prior trail. Mission: "Determine whether what was planned is what was shipped." |
-| Methodology | Kata (Diagnose) — no code changes |
+| Methodology | Kata (Diagnose) â€” no code changes |
 
-**Measurement scheme:** Derived from mission (plan-vs-shipped gap analysis on a web application). Rubric v3 does not apply to external targets. Five derived measurements: (1) Feature presence — pass/fail per major planned feature; (2) Build integrity — TypeScript type-check + Vite build; (3) Test coverage — yes/no; (4) Security posture — flag/clear per item; (5) Document credibility — do plan docs accurately reflect shipped state.
+**Measurement scheme:** Derived from mission (plan-vs-shipped gap analysis on a web application). Rubric v3 does not apply to external targets. Five derived measurements: (1) Feature presence â€” pass/fail per major planned feature; (2) Build integrity â€” TypeScript type-check + Vite build; (3) Test coverage â€” yes/no; (4) Security posture â€” flag/clear per item; (5) Document credibility â€” do plan docs accurately reflect shipped state.
 
 **Key findings (root causes):**
-1. Plan docs conflate intent with completion — all ✅ markers look identical whether shipped or not; docs were written as forward-looking specs in a chat-based LLM workflow and never revised as status records.
-2. Zero test infrastructure is architectural, not a task gap — no test runner installed in either package.
-3. Three security configurations are dev-mode defaults never hardened: `cors()` with no origin restriction (OWASP A05 HIGH), `contentSecurityPolicy: false` (MEDIUM), access+refresh JWT tokens share same secret (MEDIUM). Human action required — no auto-fix.
+1. Plan docs conflate intent with completion â€” all âœ… markers look identical whether shipped or not; docs were written as forward-looking specs in a chat-based LLM workflow and never revised as status records.
+2. Zero test infrastructure is architectural, not a task gap â€” no test runner installed in either package.
+3. Three security configurations are dev-mode defaults never hardened: `cors()` with no origin restriction (OWASP A05 HIGH), `contentSecurityPolicy: false` (MEDIUM), access+refresh JWT tokens share same secret (MEDIUM). Human action required â€” no auto-fix.
 4. Four planned features not shipped: Tesseract OCR label scanning, application metrics/monitoring, PubMed feature routes (empty directory scaffolded), GDPR data export endpoint.
-5. Phantom scaffolding: `apps/api/src/features/pubmed/` is an empty directory — scaffolded then abandoned.
+5. Phantom scaffolding: `apps/api/src/features/pubmed/` is an empty directory â€” scaffolded then abandoned.
 
 **What was done:** Read 12 planning documents; cross-referenced against schema, source files, and dependency manifests. Ran TypeScript type-check + Vite build. Checked git for committed credentials. Created TRAIL/ in target project. No code changes.
 
-**Verification:** API tsc --noEmit: ✅ 0 errors. Web tsc --noEmit: ✅ 0 errors. Web vite build: ✅ success. Tests: ❌ no test framework.
+**Verification:** API tsc --noEmit: âœ… 0 errors. Web tsc --noEmit: âœ… 0 errors. Web vite build: âœ… success. Tests: âŒ no test framework.
 
 **Measurements:** Feature presence 14/18 (78%). Build integrity 3/3 PASS. Test coverage: ZERO. Security flags: 3 open. Document credibility: LOW.
 
-**Assessment:** Core functionality is shipped and type-clean. The plan-vs-shipped gap is narrower than the document volume implies — most Phase 1-3 MVP features are present. Highest-leverage next actions: add test infrastructure, harden the three security configurations, update plan documents to distinguish shipped from planned.
+**Assessment:** Core functionality is shipped and type-clean. The plan-vs-shipped gap is narrower than the document volume implies â€” most Phase 1-3 MVP features are present. Highest-leverage next actions: add test infrastructure, harden the three security configurations, update plan documents to distinguish shipped from planned.
 
 ---
 ## Run 75 - 2026-04-21
@@ -87,10 +159,10 @@
 |-------|-------|
 | Target | TPS Skill Suite (self-targeting) |
 | Model | Claude Sonnet 4.6 |
-| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session, fresh conversation — scores re-derived independently without prior-run anchoring (P3 independence requirement honored). |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session, fresh conversation â€” scores re-derived independently without prior-run anchoring (P3 independence requirement honored). |
 | Methodology | Kaizen (silence) |
 
-**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived before consulting prior end scores (9.125 confirmed after derivation — stable across three consecutive independent reads).
+**Measurement scheme:** Inheriting Rubric v3 â€” no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived before consulting prior end scores (9.125 confirmed after derivation â€” stable across three consecutive independent reads).
 
 ### Pre-flight CM Check
 
@@ -105,20 +177,20 @@ Read: all 5 methodology skills (kata, kaizen, kaikaku, hansei, shiken), kiroku/S
 
 | # | Lens | Observation | Actionable? |
 |---|------|-------------|-------------|
-| 1 | Unevenness | Kiroku v2.4.0 vs methodology skills v2.6.1 — re-confirmed intentional convention (CHANGELOG "All 5 skill files" excludes kiroku; verify-suite Check 4 silent) | No |
+| 1 | Unevenness | Kiroku v2.4.0 vs methodology skills v2.6.1 â€” re-confirmed intentional convention (CHANGELOG "All 5 skill files" excludes kiroku; verify-suite Check 4 silent) | No |
 | 2 | Unevenness | All 5 methodology skills uniformly v2.6.1; structure consistent across all skills | No |
-| 3 | Overburden | Kata Step 1 carries multiple sub-requirements — re-examined whether any are dead weight. Each earns its place via P2 or CM protection. | No |
-| 4 | Waste | Evidence sections, PRINCIPLES scope clarification, Hansei Retirement subsection — all earn existence. No orphan content. | No |
-| 5 | P1 drift | Re-checked all 5 skills — all question-driven, no prescriptive checklists. Kaizen "silence is valid" present. | No |
+| 3 | Overburden | Kata Step 1 carries multiple sub-requirements â€” re-examined whether any are dead weight. Each earns its place via P2 or CM protection. | No |
+| 4 | Waste | Evidence sections, PRINCIPLES scope clarification, Hansei Retirement subsection â€” all earn existence. No orphan content. | No |
+| 5 | P1 drift | Re-checked all 5 skills â€” all question-driven, no prescriptive checklists. Kaizen "silence is valid" present. | No |
 | 6 | P2 trail integrity | SUMMARY freshness, INDEX completeness, GENBA archive split clean. | No |
 | 7 | P3 counter integrity | Metric 7 computed=asserted=2. (silence) markers in Runs 63, 73, 74 correct. | No |
-| 8 | D2 ceiling | Recurrence 13.3% MODERATE — structural ceiling re-confirmed, no new path. | No |
+| 8 | D2 ceiling | Recurrence 13.3% MODERATE â€” structural ceiling re-confirmed, no new path. | No |
 
 **Conclusion:** No actionable findings. Zero artifact changes to skills, PRINCIPLES, CHANGELOG, or tooling. Only ledger artifacts updated per Kata Step 5.
 
 ### Verification
 
-No content changes — no regression to verify. verify-suite.ps1 0/0 pre-run; metrics.ps1 no DRIFT.
+No content changes â€” no regression to verify. verify-suite.ps1 0/0 pre-run; metrics.ps1 no DRIFT.
 
 ### Measurements (Rubric v3)
 
@@ -127,7 +199,7 @@ Independent re-derivation from current file state (Run 74 end score not consulte
 | Dimension | Start | End | Delta | Notes |
 |-----------|-------|-----|-------|-------|
 | D1 Process Completeness | 9.5 | 9.5 | 0 | All 6 Kata phases explicit. Evidence sections in all 4 non-Kata skills. Measurement-scheme requirement present in Step 1. |
-| D2 Causal Analysis | 8 | 8 | 0 | Recurrence 13.3% MODERATE — structural ceiling unchanged. |
+| D2 Causal Analysis | 8 | 8 | 0 | Recurrence 13.3% MODERATE â€” structural ceiling unchanged. |
 | D3 Measurement Validity | 8.5 | 8.5 | 0 | 11 metrics operational, no DRIFT, 0 POOR, thresholds anchored. |
 | D4 Configuration Management | 10 | 10 | 0 | verify-suite 14/14, INTEGRITY hash stable, CHANGELOG contiguous, [Unreleased] empty. |
 | D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 model families, stdev 0.69 MODERATE. P3 chain has 2 distinct Claude variants (Sonnet 4.6, Opus 4.7, Sonnet 4.6). |
@@ -138,9 +210,9 @@ Independent re-derivation from current file state (Run 74 end score not consulte
 
 ### Assessment
 
-Three consecutive distinct-session evaluators independently derived 9.125 with zero actionable findings: Run 73 (Claude Sonnet 4.6), Run 74 (Claude Opus 4.7), Run 75 (Claude Sonnet 4.6). All pre-flight tools clean all three runs. P3 counter advances 2 → 3/3. **Convergence declared.**
+Three consecutive distinct-session evaluators independently derived 9.125 with zero actionable findings: Run 73 (Claude Sonnet 4.6), Run 74 (Claude Opus 4.7), Run 75 (Claude Sonnet 4.6). All pre-flight tools clean all three runs. P3 counter advances 2 â†’ 3/3. **Convergence declared.**
 
-Honest limitation: all three evaluators are from the Claude model ecosystem (2 distinct Claude variants, not 3 independent model families). Principle 3 notes "same-family evaluators count as one." The chain satisfies the operational convergence criteria as tracked by metrics.ps1 (3 consecutive silence runs, chain unbroken) but represents weaker diversity than ideal (non-Claude evaluation would strengthen the certificate). D5 (stdev 0.69 MODERATE) reflects this constraint. The suite has survived 74 runs across 7 model families without regression since v2.6.1 — the convergence evidence is credible.
+Honest limitation: all three evaluators are from the Claude model ecosystem (2 distinct Claude variants, not 3 independent model families). Principle 3 notes "same-family evaluators count as one." The chain satisfies the operational convergence criteria as tracked by metrics.ps1 (3 consecutive silence runs, chain unbroken) but represents weaker diversity than ideal (non-Claude evaluation would strengthen the certificate). D5 (stdev 0.69 MODERATE) reflects this constraint. The suite has survived 74 runs across 7 model families without regression since v2.6.1 â€” the convergence evidence is credible.
 
 ---
 ## Run 74 - 2026-04-21
@@ -152,7 +224,7 @@ Honest limitation: all three evaluators are from the Claude model ecosystem (2 d
 | Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session, distinct evaluator (Claude Opus 4.7) from Run 73's Claude Sonnet 4.6. Independence requirement honored: prior GENBA/SUMMARY read for context but score re-derived from current file state without anchoring. |
 | Methodology | Kaizen (silence) |
 
-**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived before consulting Run 73's end score (9.125 confirmed after derivation — stable across two consecutive distinct evaluators).
+**Measurement scheme:** Inheriting Rubric v3 â€” no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived before consulting Run 73's end score (9.125 confirmed after derivation â€” stable across two consecutive distinct evaluators).
 
 ### Pre-flight CM Check
 
@@ -167,20 +239,20 @@ Read: all 5 methodology skills (kata, kaizen, kaikaku, hansei, shiken), kiroku/S
 
 | # | Lens | Observation | Actionable? |
 |---|------|-------------|-------------|
-| 1 | Unevenness | Kiroku at v2.4.0 vs methodology skills at v2.6.1 — re-confirmed intentional (verifier Check 4 silent on it; CHANGELOG convention "All 5 skill files" excludes kiroku) | No |
-| 2 | Unevenness | All 5 methodology skills uniformly v2.6.1; SUMMARY/GENBA/SCORECARD aligned on Run 73 | — |
-| 3 | Overburden | Kata Step 1 (measurement scheme + Target Condition + assumptions + constraints + prior-run verification) — checked whether it is asking too much | No. Each sub-requirement earns its place via P2 (observable output) or P3 (independent derivation). Splitting fragments "grasp before act." |
+| 1 | Unevenness | Kiroku at v2.4.0 vs methodology skills at v2.6.1 â€” re-confirmed intentional (verifier Check 4 silent on it; CHANGELOG convention "All 5 skill files" excludes kiroku) | No |
+| 2 | Unevenness | All 5 methodology skills uniformly v2.6.1; SUMMARY/GENBA/SCORECARD aligned on Run 73 | â€” |
+| 3 | Overburden | Kata Step 1 (measurement scheme + Target Condition + assumptions + constraints + prior-run verification) â€” checked whether it is asking too much | No. Each sub-requirement earns its place via P2 (observable output) or P3 (independent derivation). Splitting fragments "grasp before act." |
 | 4 | Waste | Re-checked PRINCIPLES scope-clarification, Hansei "Retirement" subsection, ARF section length | None. Each earns place (anti-overclaim guard, P1 thinking tool, externally-validated metric definition). |
 | 5 | P1 drift | Re-checked all 5 skills for prescriptive checklists creeping in | None. All skills phrase as questions/destinations. |
 | 6 | P2 trail integrity | SUMMARY freshness (Run 73), INDEX completeness, GENBA archive split at Run 50 | Clean. Self-authorship marked. |
 | 7 | P3 counter integrity | Asserted vs computed counter | Aligned (computed=asserted=1). Run 73 `(silence)` marker correctly counted. |
-| 8 | D2 ceiling | Recurrence 13.3% MODERATE — structural ceiling re-confirmed | No new insight |
+| 8 | D2 ceiling | Recurrence 13.3% MODERATE â€” structural ceiling re-confirmed | No new insight |
 
 **Conclusion:** No actionable findings. Zero artifact changes to skills, PRINCIPLES, CHANGELOG, or tooling. Only ledger artifacts (SCORECARD row, GENBA entry, SUMMARY status, session, INDEX) updated as required by Kata Step 5.
 
 ### Verification
 
-No content changes — no regression to verify. `verify-suite.ps1` 0/0 pre- and post-run; `metrics.ps1` no DRIFT pre- and post-run.
+No content changes â€” no regression to verify. `verify-suite.ps1` 0/0 pre- and post-run; `metrics.ps1` no DRIFT pre- and post-run.
 
 ### Measurements (Rubric v3)
 
@@ -189,10 +261,10 @@ Independent re-derivation from current file state (Run 73 end score not consulte
 | Dimension | Start | End | Delta | Notes |
 |-----------|-------|-----|-------|-------|
 | D1 Process Completeness | 9.5 | 9.5 | 0 | All 6 Kata phases explicit. Evidence sections in non-Kata skills. Step 1 measurement-scheme requirement present. |
-| D2 Causal Analysis | 8 | 8 | 0 | Recurrence 13.3% MODERATE — structural ceiling. |
+| D2 Causal Analysis | 8 | 8 | 0 | Recurrence 13.3% MODERATE â€” structural ceiling. |
 | D3 Measurement Validity | 8.5 | 8.5 | 0 | 11 metrics operational, no DRIFT, 0 POOR, thresholds anchored. |
 | D4 Configuration Management | 10 | 10 | 0 | verify-suite 14/14, INTEGRITY hash stable, CHANGELOG contiguous. |
-| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 model families, stdev 0.7 MODERATE. P3 counter 1→2. |
+| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 model families, stdev 0.7 MODERATE. P3 counter 1â†’2. |
 | D6 Instruction Clarity | 10 | 10 | 0 | P1-compliant, no prescriptive drift. |
 | D7 Convergence Integrity | 10 | 10 | 0 | Metric 7 mechanically grounded; silence convention enforced. |
 | D8 ARF | 9 | 9 | 0 | Open-ended skills, Run 70 Shiken PASS, multi-resolution trail. Self-administered limitation acknowledged. |
@@ -200,7 +272,7 @@ Independent re-derivation from current file state (Run 73 end score not consulte
 
 ### Assessment
 
-Two consecutive distinct fresh-session evaluators (Claude Sonnet 4.6 Run 73, Claude Opus 4.7 Run 74) independently derived 9.125 with zero actionable findings. Both pre-flight tools clean both runs. P3 counter advances 1 → 2/3. One more consecutive silence run from a distinct fresh-session evaluator (ideally a non-Claude family — GPT or Gemini — to maximize convergence integrity) closes convergence at 3/3.
+Two consecutive distinct fresh-session evaluators (Claude Sonnet 4.6 Run 73, Claude Opus 4.7 Run 74) independently derived 9.125 with zero actionable findings. Both pre-flight tools clean both runs. P3 counter advances 1 â†’ 2/3. One more consecutive silence run from a distinct fresh-session evaluator (ideally a non-Claude family â€” GPT or Gemini â€” to maximize convergence integrity) closes convergence at 3/3.
 
 ---
 ## Run 73 - 2026-04-21
@@ -209,10 +281,10 @@ Two consecutive distinct fresh-session evaluators (Claude Sonnet 4.6 Run 73, Cla
 |-------|-------|
 | Target | TPS Skill Suite (self-targeting) |
 | Model | Claude Sonnet 4.6 |
-| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session — scores re-derived independently without prior-run anchoring (P3 independence requirement). |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session â€” scores re-derived independently without prior-run anchoring (P3 independence requirement). |
 | Methodology | Kaizen (silence) |
 
-**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived without consulting Run 72's end score (9.125 confirmed after derivation — stable).
+**Measurement scheme:** Inheriting Rubric v3 â€” no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived without consulting Run 72's end score (9.125 confirmed after derivation â€” stable).
 
 ### Pre-flight CM Check
 
@@ -227,27 +299,27 @@ Read: all 5 methodology skills (kata, kaizen, kaikaku, hansei, shiken), kiroku/S
 
 | # | Lens | Observation | Actionable? |
 |---|------|-------------|-------------|
-| 1 | Unevenness | Kiroku at v2.4.0 vs methodology skills at v2.6.1 — investigated: CHANGELOG consistently says "All 5 skill files"; verify-suite Check 4 does not flag it; convention is intentional (infrastructure vs methodology versioning tiers) | No |
-| 2 | D2 ceiling | Recurrence 13.3% MODERATE — structural, principled ceiling confirmed again | No |
-| 3 | Waste | None found | — |
-| 4 | Overburden | None found | — |
-| 5 | P1 drift | Re-checked all 5 skills for prescriptive drift — none found | — |
+| 1 | Unevenness | Kiroku at v2.4.0 vs methodology skills at v2.6.1 â€” investigated: CHANGELOG consistently says "All 5 skill files"; verify-suite Check 4 does not flag it; convention is intentional (infrastructure vs methodology versioning tiers) | No |
+| 2 | D2 ceiling | Recurrence 13.3% MODERATE â€” structural, principled ceiling confirmed again | No |
+| 3 | Waste | None found | â€” |
+| 4 | Overburden | None found | â€” |
+| 5 | P1 drift | Re-checked all 5 skills for prescriptive drift â€” none found | â€” |
 
 **Conclusion:** No actionable findings. Zero artifact changes.
 
 ### Verification
 
-No changes made — no regression to verify. verify-suite 0/0 pre- and post-run.
+No changes made â€” no regression to verify. verify-suite 0/0 pre- and post-run.
 
 ### Measurements (Rubric v3)
 
 | Dimension | Start | End | Delta | Notes |
 |-----------|-------|-----|-------|-------|
 | D1 Process Completeness | 9.5 | 9.5 | 0 | All phases explicit. Evidence sections in all 4 non-Kata skills. Kata Step 1 requires measurement scheme. |
-| D2 Causal Analysis | 8 | 8 | 0 | 13.3% recurrence MODERATE — structural ceiling confirmed. |
+| D2 Causal Analysis | 8 | 8 | 0 | 13.3% recurrence MODERATE â€” structural ceiling confirmed. |
 | D3 Measurement Validity | 8.5 | 8.5 | 0 | 11 operational metrics, no DRIFT, no POOR. |
 | D4 Configuration Management | 10 | 10 | 0 | verify-suite 0/0. |
-| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 families. P3 counter 0→1. |
+| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 families. P3 counter 0â†’1. |
 | D6 Instruction Clarity | 10 | 10 | 0 | P1-compliant, no prescriptive drift. |
 | D7 Convergence Integrity | 10 | 10 | 0 | Metric 7 correct, silence convention documented. |
 | D8 ARF | 9 | 9 | 0 | Open-ended skills. Run 70 Shiken PASS. Self-administered limitation. |
@@ -255,7 +327,7 @@ No changes made — no regression to verify. verify-suite 0/0 pre- and post-run.
 
 ### Assessment
 
-Both pre-flight tools clean. Independent derivation: 9.125. Thorough diagnostic pass found nothing actionable — no unevenness, no overburden, no waste, no prescriptive drift. Kiroku versioning difference is intentional convention; D2 ceiling is structural. P3 counter advances 0→1. Two more consecutive silence runs from distinct fresh-session evaluators needed for convergence.
+Both pre-flight tools clean. Independent derivation: 9.125. Thorough diagnostic pass found nothing actionable â€” no unevenness, no overburden, no waste, no prescriptive drift. Kiroku versioning difference is intentional convention; D2 ceiling is structural. P3 counter advances 0â†’1. Two more consecutive silence runs from distinct fresh-session evaluators needed for convergence.
 
 ---
 ## Run 72 - 2026-04-21
@@ -264,10 +336,10 @@ Both pre-flight tools clean. Independent derivation: 9.125. Thorough diagnostic 
 |-------|-------|
 | Target | TPS Skill Suite (self-targeting) |
 | Model | Claude Sonnet 4.6 |
-| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session — scores re-derived independently without prior-run anchoring (P3 independence requirement). |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session â€” scores re-derived independently without prior-run anchoring (P3 independence requirement). |
 | Methodology | Kaizen (Metric 7 fix) |
 
-**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Start scores reflect current state before fix; Run 71's end scores (9.3125) not consulted before deriving.
+**Measurement scheme:** Inheriting Rubric v3 â€” no revision. Independent re-derivation from current file state (P3 independence requirement). Start scores reflect current state before fix; Run 71's end scores (9.3125) not consulted before deriving.
 
 ### Pre-flight CM Check
 
@@ -292,7 +364,7 @@ Independent re-derivation from current file state. Prior run end scores (9.3125)
 | Dimension | Start | End | Delta | Notes |
 |-----------|-------|-----|-------|-------|
 | D1 Process Completeness | 9.5 | 9.5 | 0 | All phases explicit. Evidence sections present in all skills. Kata Step 5 silence convention addition is part of D7 fix scope, not a D1 improvement. |
-| D2 Causal Analysis | 8 | 8 | 0 | Recurrence rate 13.3% (MODERATE). Root causes identified consistently. Principled ceiling — no path to improvement visible. |
+| D2 Causal Analysis | 8 | 8 | 0 | Recurrence rate 13.3% (MODERATE). Root causes identified consistently. Principled ceiling â€” no path to improvement visible. |
 | D3 Measurement Validity | 8.5 | 8.5 | 0 | 11 metrics operational. Metric 7 bug was a correctness issue, not a threshold calibration issue; D3 unchanged. |
 | D4 Configuration Management | 10 | 10 | 0 | verify-suite.ps1 0/0 pre- and post-fix. |
 | D5 Cross-Evaluator Reliability | 8 | 8 | 0 | Three model families (Claude, GPT, Gemini) scored. P3 counter 0/3. |
@@ -303,7 +375,7 @@ Independent re-derivation from current file state. Prior run end scores (9.3125)
 
 ### Assessment
 
-Pre-flight verify-suite.ps1 was clean. Running metrics.ps1 found Metric 7 DRIFT — a real defect undetected by prior evaluators who only ran verify-suite.ps1. Independent start score of 9.0625 (D7=9.5) reflects the pre-fix state honestly. Fix restores D7 to 10. P3 counter stays at 0/3 (artifact change). The next evaluator starting fresh with a clean verify-suite.ps1 and a clean metrics.ps1 (no DRIFT) may be the first genuine convergence vote.
+Pre-flight verify-suite.ps1 was clean. Running metrics.ps1 found Metric 7 DRIFT â€” a real defect undetected by prior evaluators who only ran verify-suite.ps1. Independent start score of 9.0625 (D7=9.5) reflects the pre-fix state honestly. Fix restores D7 to 10. P3 counter stays at 0/3 (artifact change). The next evaluator starting fresh with a clean verify-suite.ps1 and a clean metrics.ps1 (no DRIFT) may be the first genuine convergence vote.
 
 ---
 ## Run 71 - 2026-04-21
@@ -312,18 +384,18 @@ Pre-flight verify-suite.ps1 was clean. Running metrics.ps1 found Metric 7 DRIFT 
 |-------|-------|
 | Target | TPS Skill Suite (self-targeting) |
 | Model | Claude Sonnet 4.6 |
-| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session — scores re-derived independently without prior-run anchoring. |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session â€” scores re-derived independently without prior-run anchoring. |
 | Methodology | Kaizen (CM fix) |
 
-**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Scores matched prior run end scores, confirming stability.
+**Measurement scheme:** Inheriting Rubric v3 â€” no revision. Independent re-derivation from current file state (P3 independence requirement). Scores matched prior run end scores, confirming stability.
 
 ### Pre-flight CM Check
 
 verify-suite.ps1 run before any modifications:
 
 ```
-Failures : 1  — Check 13: SCORECARD missing row for latest GENBA run 70
-Warnings : 1  — Check 5: GENBA has 68 run entries, SCORECARD has 67 rows
+Failures : 1  â€” Check 13: SCORECARD missing row for latest GENBA run 70
+Warnings : 1  â€” Check 5: GENBA has 68 run entries, SCORECARD has 67 rows
 INFO: TRAIL/GENBA.md hash stale (expected inter-run drift after Run 70 was recorded)
 ```
 
@@ -335,7 +407,7 @@ INFO: TRAIL/GENBA.md hash stale (expected inter-run drift after Run 70 was recor
 
 ### Verification
 
-- `verify-suite.ps1`: **0 failures, 0 warnings** (post-fix — Run 70 row added; INTEGRITY.json updated)
+- `verify-suite.ps1`: **0 failures, 0 warnings** (post-fix â€” Run 70 row added; INTEGRITY.json updated)
 
 ### Measurements (Rubric v3)
 
@@ -355,28 +427,28 @@ Independent re-derivation from current file state. No prior-run score consulted 
 
 ### Assessment
 
-Pre-flight CM check found a real gap: SCORECARD had no row for Run 70 (Shiken). Independent score re-derivation matched the prior run's end scores exactly (9.3125), confirming the suite is stable. The CM fix is housekeeping — no dimension score changes. P3 counter remains 0/3: this run made an artifact change, so it cannot count as a convergence vote. The next evaluator, starting fresh, should find verify-suite.ps1 clean and may be the first true convergence vote.
+Pre-flight CM check found a real gap: SCORECARD had no row for Run 70 (Shiken). Independent score re-derivation matched the prior run's end scores exactly (9.3125), confirming the suite is stable. The CM fix is housekeeping â€” no dimension score changes. P3 counter remains 0/3: this run made an artifact change, so it cannot count as a convergence vote. The next evaluator, starting fresh, should find verify-suite.ps1 clean and may be the first true convergence vote.
 
 ---
 ## Run 70 (Shiken) - 2026-04-21
 
 | Field | Value |
 |-------|-------|
-| Target | TPS Skill Suite v2.6.0 — ARF measurement (non-scoring) |
+| Target | TPS Skill Suite v2.6.0 â€” ARF measurement (non-scoring) |
 | Model | Claude Sonnet 4.6 |
 | Trigger | User-requested Shiken run post-Runs 68-69 (Evidence sections + Kata Step 1 measurement-recording requirement are material changes since Run 57). |
-| Methodology | Shiken — standalone ARF probe, no suite-level score |
+| Methodology | Shiken â€” standalone ARF probe, no suite-level score |
 
 ### Probe Design
 
 **Skill targeted:** Kaizen  
 **Claim targeted:** "This [Challenge Blind Spots] is not performative skepticism. It is a genuine attempt to catch what the first pass missed. If you find nothing, say so. Do not manufacture blind spots to appear thorough."
 
-**Case A — `transformer.py`:** Data pipeline transformer with obvious waste (two dead functions annotated as deprecated) AND a genuine hidden overburden in the live primary function `transform_record` (11-parameter signature absorbing validation, transformation, logging, retry, caching, and metrics — all by accretion from the lack of an orchestration layer).
+**Case A â€” `transformer.py`:** Data pipeline transformer with obvious waste (two dead functions annotated as deprecated) AND a genuine hidden overburden in the live primary function `transform_record` (11-parameter signature absorbing validation, transformation, logging, retry, caching, and metrics â€” all by accretion from the lack of an orchestration layer).
 
-**Case B — `formatter.py`:** Output formatter with the same surface pattern (two dead functions) but genuinely clean live code: three small, single-purpose functions (`format_date`, `format_currency`, `format_name`), 2-3 params each, consistent None-guard pattern. No hidden problems.
+**Case B â€” `formatter.py`:** Output formatter with the same surface pattern (two dead functions) but genuinely clean live code: three small, single-purpose functions (`format_date`, `format_currency`, `format_name`), 2-3 params each, consistent None-guard pattern. No hidden problems.
 
-**Predicted divergence:** Challenge Blind Spots phase. Case A: agent should surface `transform_record` overburden. Case B: agent should produce silence — no manufactured secondary finding.
+**Predicted divergence:** Challenge Blind Spots phase. Case A: agent should surface `transform_record` overburden. Case B: agent should produce silence â€” no manufactured secondary finding.
 
 **Compliance baseline:** A checklist agent fills the Challenge Blind Spots slot in both cases, likely flagging `format_name`'s optional `middle` param or `format_currency`'s `decimals` param as "potential concerns" to appear thorough.
 
@@ -389,7 +461,7 @@ Pre-flight CM check found a real gap: SCORECARD had no row for Run 70 (Shiken). 
 
 ### ARF Assessment: PASS
 
-Reasoning diverged at the predicted point. Case A Challenge Blind Spots surfaced genuine overburden; Case B Challenge Blind Spots produced genuine silence. The compliance failure mode (manufacturing findings to fill the slot) did not occur in Case B — noise candidates were examined and dismissed rather than promoted.
+Reasoning diverged at the predicted point. Case A Challenge Blind Spots surfaced genuine overburden; Case B Challenge Blind Spots produced genuine silence. The compliance failure mode (manufacturing findings to fill the slot) did not occur in Case B â€” noise candidates were examined and dismissed rather than promoted.
 
 **Limitation noted:** Self-administered probe. Pre-registration mitigates post-hoc rationalization but does not eliminate same-agent bias. A fresh-evaluator run would provide stronger ARF signal.
 
@@ -402,16 +474,16 @@ Session: `TRAIL/sessions/2026-04-21-shiken-run66.md` (1 decision, 2 realizations
 |-------|-------|
 | Target | TPS Skill Suite (self-targeting) |
 | Model | Claude Sonnet 4.6 |
-| Trigger | User observation: "derived measurements are not clearly visible in the trail — you have to stitch it together, this violates Principle 2." |
+| Trigger | User observation: "derived measurements are not clearly visible in the trail â€” you have to stitch it together, this violates Principle 2." |
 | Methodology | Kaizen |
 
-**Measurement Scheme:** Inheriting Rubric v3 — no revision. D6 (Instruction Clarity) and D1 (Process Completeness) are the relevant dimensions for this change.
+**Measurement Scheme:** Inheriting Rubric v3 â€” no revision. D6 (Instruction Clarity) and D1 (Process Completeness) are the relevant dimensions for this change.
 
 ### Findings
 
 | # | Finding | Root cause | Recurred? | Action |
 |---|---------|------------|-----------|--------|
-| 1 | Kata Step 1 ("Derive measurements") has no explicit output requirement. The agent derives measurements but is not told to record them in the GENBA entry. An observer reading the GENBA entry sees dimension *scores* but not the measurement *scheme* — what is measured, why, whether it was inherited or revised. To know what a run was measured against, an observer must reconstruct it from SCORECARD history, prior runs, or the kiroku session. Violates P2 (Observable Autonomy). | Step 1 specifies a thinking activity ("derive measurements") but not a trail artifact ("record what you derived"). The Evidence section added in Run 68 covered individual skills; Kata's own Step 1 output was missed. | First | Added "Record the measurement scheme" paragraph to Kata Step 1. Specifies: what to record, the minimum for inherited vs revised schemes, and the observer test — "reading only the GENBA entry should answer the question without consulting prior runs." |
+| 1 | Kata Step 1 ("Derive measurements") has no explicit output requirement. The agent derives measurements but is not told to record them in the GENBA entry. An observer reading the GENBA entry sees dimension *scores* but not the measurement *scheme* â€” what is measured, why, whether it was inherited or revised. To know what a run was measured against, an observer must reconstruct it from SCORECARD history, prior runs, or the kiroku session. Violates P2 (Observable Autonomy). | Step 1 specifies a thinking activity ("derive measurements") but not a trail artifact ("record what you derived"). The Evidence section added in Run 68 covered individual skills; Kata's own Step 1 output was missed. | First | Added "Record the measurement scheme" paragraph to Kata Step 1. Specifies: what to record, the minimum for inherited vs revised schemes, and the observer test â€” "reading only the GENBA entry should answer the question without consulting prior runs." |
 
 ### Verification
 
@@ -422,7 +494,7 @@ Session: `TRAIL/sessions/2026-04-21-shiken-run66.md` (1 decision, 2 realizations
 
 | Dimension | Start | End | Delta | Notes |
 |-----------|-------|-----|-------|-------|
-| D1 Process Completeness | 9 | 9.5 | +0.5 | Kata Step 1 now has an explicit output artifact — the measurement scheme statement. Previously the only Step 1 output was implicit (it shaped the Findings). |
+| D1 Process Completeness | 9 | 9.5 | +0.5 | Kata Step 1 now has an explicit output artifact â€” the measurement scheme statement. Previously the only Step 1 output was implicit (it shaped the Findings). |
 | D2 Causal Analysis | 8 | 8 | 0 | |
 | D3 Measurement Validity | 8.5 | 8.5 | 0 | |
 | D4 Configuration Management | 10 | 10 | 0 | 0/0 failures; INTEGRITY.json updated |
@@ -434,7 +506,7 @@ Session: `TRAIL/sessions/2026-04-21-shiken-run66.md` (1 decision, 2 realizations
 
 ### Assessment
 
-The user identified a real P2 gap: Kata Step 1 told agents to *derive* measurements but not to *record* them. The observable output was missing — exactly the same structural problem Run 68 fixed for individual skills, but at the orchestration layer. Adding the recording requirement closes the gap: every GENBA entry going forward must include a measurement scheme statement, making the question "what was this run measured against?" answerable from the GENBA entry alone.
+The user identified a real P2 gap: Kata Step 1 told agents to *derive* measurements but not to *record* them. The observable output was missing â€” exactly the same structural problem Run 68 fixed for individual skills, but at the orchestration layer. Adding the recording requirement closes the gap: every GENBA entry going forward must include a measurement scheme statement, making the question "what was this run measured against?" answerable from the GENBA entry alone.
 
 ---
 ## Run 68 - 2026-04-21
@@ -450,13 +522,13 @@ The user identified a real P2 gap: Kata Step 1 told agents to *derive* measureme
 
 | # | Finding | Root cause | Recurred? | Action |
 |---|---------|------------|-----------|--------|
-| 1 | Individual skills (Kaizen, Kaikaku, Hansei, Shiken) specify what to DO but not what the trail must contain when the skill completes. An agent reading any individual skill file doesn't know what evidence to deposit in the kiroku session. | Observable output requirements were defined only at the Kata orchestration level (Steps 4–5), not at the skill execution level. | First | Added `## Evidence` section to all 4 individual skills: observer-centric statement of what an observer should find in the trail after the skill completes. Does not prescribe reasoning process (P1 compliant). |
-| 2 | `metrics.ps1` Metric 11 reported POOR despite SUMMARY.md checkpoint being checked with reviewer date. Root cause (a): reviewer wrote `20-04-2026` (DD-MM-YYYY) but the regex expects `\d{4}-\d{2}-\d{2}` (YYYY-MM-DD) — date never parsed. Root cause (b): assessment logic gave no credit for checkbox-checked + date parsed when Review Log has no rows. | Format mismatch (template says YYYY-MM-DD, reviewer used DD-MM-YYYY) + assessment logic gap for checkpoint-only evidence. | First | Fixed SUMMARY.md date to `2026-04-20`; added new GOOD case to assessment: if checkbox checked + date ≤ 7 days old + Review Log empty → GOOD with note to populate Review Log. |
+| 1 | Individual skills (Kaizen, Kaikaku, Hansei, Shiken) specify what to DO but not what the trail must contain when the skill completes. An agent reading any individual skill file doesn't know what evidence to deposit in the kiroku session. | Observable output requirements were defined only at the Kata orchestration level (Steps 4â€“5), not at the skill execution level. | First | Added `## Evidence` section to all 4 individual skills: observer-centric statement of what an observer should find in the trail after the skill completes. Does not prescribe reasoning process (P1 compliant). |
+| 2 | `metrics.ps1` Metric 11 reported POOR despite SUMMARY.md checkpoint being checked with reviewer date. Root cause (a): reviewer wrote `20-04-2026` (DD-MM-YYYY) but the regex expects `\d{4}-\d{2}-\d{2}` (YYYY-MM-DD) â€” date never parsed. Root cause (b): assessment logic gave no credit for checkbox-checked + date parsed when Review Log has no rows. | Format mismatch (template says YYYY-MM-DD, reviewer used DD-MM-YYYY) + assessment logic gap for checkpoint-only evidence. | First | Fixed SUMMARY.md date to `2026-04-20`; added new GOOD case to assessment: if checkbox checked + date â‰¤ 7 days old + Review Log empty â†’ GOOD with note to populate Review Log. |
 
 ### Verification
 
 - `verify-suite.ps1`: **0 failures, 0 warnings**
-- `metrics.ps1` Metric 11: **GOOD** (was POOR — false negative eliminated)
+- `metrics.ps1` Metric 11: **GOOD** (was POOR â€” false negative eliminated)
 - All 5 skills at v2.5.0; Check 4 passes; INTEGRITY.json updated
 
 ### Measurements (Rubric v3 + measurement protocol)
@@ -475,14 +547,14 @@ The user identified a real P2 gap: Kata Step 1 told agents to *derive* measureme
 
 ### Assessment
 
-Evidence sections close the D1 ceiling stuck at 8 since Run 51. Every skill now states what observers can expect to find in the trail — without prescribing reasoning process. The metrics.ps1 false-POOR for Metric 11 is eliminated. P3 silence counter resets to 0/3 (this run's +0.125 delta breaks Run 63's chain); next convergence attempt must begin in a fresh conversation.
+Evidence sections close the D1 ceiling stuck at 8 since Run 51. Every skill now states what observers can expect to find in the trail â€” without prescribing reasoning process. The metrics.ps1 false-POOR for Metric 11 is eliminated. P3 silence counter resets to 0/3 (this run's +0.125 delta breaks Run 63's chain); next convergence attempt must begin in a fresh conversation.
 
 ---
 ## Run 67 - 2026-04-21 - External target (evo)
 
 | Field | Value |
 |-------|-------|
-| Target | evo (`c:\git\evo`) — not the skills suite |
+| Target | evo (`c:\git\evo`) â€” not the skills suite |
 | Model | Claude Opus 4.6 |
 | Trigger | User-requested follow-up to Run 66's process-level finding ("evo has shipped 10 versions of apikit adding tests for known bugs without ever generating a source fix") with explicit instruction to "scope it carefully" |
 | Methodology | Kaizen |
@@ -492,8 +564,8 @@ This is **not** a suite-self-evaluation run. No suite-level score is asserted. P
 
 ### What was done (in evo)
 - Started a Kiroku session in `c:\git\evo\TRAIL\` (target-routed; not in the skills suite).
-- Read `fitness.py`, `strategy.py`, `core/propose.py`, `core/analyze.py`, `models.py` to identify the structural cause. Apikit uses the `balanced` strategy, so the actively-discouraging "prefer test_addition" prompt branch in `propose.py` does *not* fire. The deeper cause: the LLM-only analyzer has no mechanical signal for the pattern "test asserts buggy behavior as canonical," and the Pareto gate rewards `test_count↑` monotonically.
-- Considered three scoped fixes: (A) docs only, (B) prompt guidance, (C) mechanical detector with weakness injection. Chose (C) — strongest behavioral signal at smallest surface area.
+- Read `fitness.py`, `strategy.py`, `core/propose.py`, `core/analyze.py`, `models.py` to identify the structural cause. Apikit uses the `balanced` strategy, so the actively-discouraging "prefer test_addition" prompt branch in `propose.py` does *not* fire. The deeper cause: the LLM-only analyzer has no mechanical signal for the pattern "test asserts buggy behavior as canonical," and the Pareto gate rewards `test_countâ†‘` monotonically.
+- Considered three scoped fixes: (A) docs only, (B) prompt guidance, (C) mechanical detector with weakness injection. Chose (C) â€” strongest behavioral signal at smallest surface area.
 - Created `src/evo/bug_asserting_tests.py` (~150 LOC). Pure-regex scan over `tests/**/*.py` for 7 conservative markers (`BUG:`, "documents the bug", "validation weakness", "currently accepted", "should be addressed", "pending fix", "asserts buggy behavior"). Returns `[]` on clean repos. One `Weakness` per file with line-number summary; capped at 20 to bound prompt size.
 - Wired into `core/analyze.py` `run()` after the LLM weakness response. Gated on `Category.BUG_FIX in strategy.categories`. Wrapped in `safe_fallback`. Dedup by (file, priority).
 - Added `tests/test_bug_asserting_tests.py` (10 cases): clean repo, non-Python, each marker, multi-finding summarisation, blocked scopes, max cap, OSError-graceful, missing path.
@@ -501,14 +573,14 @@ This is **not** a suite-self-evaluation run. No suite-level score is asserted. P
 - Shipped in evo as commit on the working branch (`CHANGELOG.md` "Unreleased" section).
 
 ### Falsification step
-Smoke-tested the detector against current `c:\git\apikit` (post-Run-66-fix). Expected ≤1 finding (Run 66 was supposed to clean it up). **Actual: 5 findings across 5 test files** — `test_app.py`, `test_items.py`, `test_models.py`, `test_store.py`, `test_user_validation.py`. Run 66 only addressed the duplicate-user pattern; apikit *still* has 4 other source defects whose only structural protection is bug-asserting tests. The detector is not synthetic — it surfaces real, currently-undetected debt on a real evo-generated repo.
+Smoke-tested the detector against current `c:\git\apikit` (post-Run-66-fix). Expected â‰¤1 finding (Run 66 was supposed to clean it up). **Actual: 5 findings across 5 test files** â€” `test_app.py`, `test_items.py`, `test_models.py`, `test_store.py`, `test_user_validation.py`. Run 66 only addressed the duplicate-user pattern; apikit *still* has 4 other source defects whose only structural protection is bug-asserting tests. The detector is not synthetic â€” it surfaces real, currently-undetected debt on a real evo-generated repo.
 
-### Methodology validation — did the suite help, get in the way, or both?
+### Methodology validation â€” did the suite help, get in the way, or both?
 
 **Helped:**
 1. **Kaizen's "single highest-leverage change" framing forced rejection of the larger options.** Without it I would have shipped option (C) plus prompt guidance (B) plus a fitness-side disincentive in the same run. Recording (A)/(B) as deferred follow-ups produced a smaller, more reviewable change with a clear next step.
-2. **`[!DECISION]` markers + alternatives capture made the scope discipline visible** — the Kiroku session names the rejected reward-function change explicitly.
-3. **Falsification-by-smoke-test was an organic instinct that the suite then captured as primary evidence.** The "apikit still has 5 findings" result is now the strongest single data point in the session — it converts "this might help" into "this finds real debt." Worth surfacing as a Kaizen pattern.
+2. **`[!DECISION]` markers + alternatives capture made the scope discipline visible** â€” the Kiroku session names the rejected reward-function change explicitly.
+3. **Falsification-by-smoke-test was an organic instinct that the suite then captured as primary evidence.** The "apikit still has 5 findings" result is now the strongest single data point in the session â€” it converts "this might help" into "this finds real debt." Worth surfacing as a Kaizen pattern.
 
 **Got in the way:** Nothing material.
 
@@ -527,10 +599,10 @@ The TPS Skill Suite v2.4.0 successfully scoped a real behavioral change to a non
 
 | Field | Value |
 |-------|-------|
-| Target | apikit (FastAPI demo at `c:\git\apikit`) — not the skills suite |
+| Target | apikit (FastAPI demo at `c:\git\apikit`) â€” not the skills suite |
 | Model | Claude Opus 4.7 |
 | Trigger | User-requested external Kata cycle to validate suite usability on a non-skills-suite, non-leifoglenedk repo |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Independence Gate
 This is **not** a suite-self-evaluation run. No suite-level score is asserted. The entry exists to record the methodology validation, not to advance the P3 silence counter (which remains 1/3 from Run 63).
@@ -538,11 +610,11 @@ This is **not** a suite-self-evaluation run. No suite-level score is asserted. T
 ### What was done (in apikit)
 - Picked apikit from the suggested candidate list. Justification: small (~80 LOC source, 0.25s test runtime), self-acknowledged debt in README, CHANGELOG showing 10 evo releases adding tests for known bugs without fixing the source.
 - Started a Kiroku session in `c:\git\apikit\TRAIL\` (not in the skills suite).
-- Diagnosed via the three Kaizen lenses; the highest-signal finding was unevenness — `Store.find_user_by_email` and `Store.find_user_by_username` existed and were tested but never called from `create_user`. Half the feature was written; the integration step was missing.
-- Decided on a single highest-leverage fix: wire up uniqueness, return `409 Conflict`, rewrite the 6 tests that asserted the bug as canonical behavior. Bundled empty-tag and validation fixes into deferred findings rather than executing them — Kaizen's "single highest-leverage change" framing actively prevented scope creep.
+- Diagnosed via the three Kaizen lenses; the highest-signal finding was unevenness â€” `Store.find_user_by_email` and `Store.find_user_by_username` existed and were tested but never called from `create_user`. Half the feature was written; the integration step was missing.
+- Decided on a single highest-leverage fix: wire up uniqueness, return `409 Conflict`, rewrite the 6 tests that asserted the bug as canonical behavior. Bundled empty-tag and validation fixes into deferred findings rather than executing them â€” Kaizen's "single highest-leverage change" framing actively prevented scope creep.
 - apikit shipped as v0.1.11 (committed `d552a2e` in apikit's repo). 102/102 tests pass after the change (net -2 from intentional test consolidation).
 
-### Methodology validation — did the suite help, get in the way, or both?
+### Methodology validation â€” did the suite help, get in the way, or both?
 
 **Helped:**
 1. **`[!DECISION]` markers forced explicit alternatives consideration.** Without them I would have shipped the first plan I formed; with them I had to articulate "fix all three defects at once" as an alternative and reject it.
@@ -554,13 +626,13 @@ This is **not** a suite-self-evaluation run. No suite-level score is asserted. T
 **Got in the way:** Nothing material. One mild gap (below) is a vocabulary suggestion, not friction.
 
 **Gap exposed (suggestion, not defect):**
-- The suite has no named diagnostic lens for "load-bearing wrong tests" — tests that explicitly assert defects as canonical behavior. This is a recurring API-target situation. The suite handled it correctly through reasoning (the original test docstrings said "BUG:", which I treated as a load-bearing breadcrumb), but a named term ("test-locked defect" or "asserted regression") would compress future runs and make the pattern recognizable across targets. Suggested for the next Hansei trigger.
+- The suite has no named diagnostic lens for "load-bearing wrong tests" â€” tests that explicitly assert defects as canonical behavior. This is a recurring API-target situation. The suite handled it correctly through reasoning (the original test docstrings said "BUG:", which I treated as a load-bearing breadcrumb), but a named term ("test-locked defect" or "asserted regression") would compress future runs and make the pattern recognizable across targets. Suggested for the next Hansei trigger.
 
-**P1 (Commander's Intent) test on this run:** I removed prescriptive specifics from the skills before acting and asked whether the destination was still discoverable. It was. The skill said "select the methodology" and "derive measurements from what this target is" — both required me to reason from apikit's actual context (a benchmark target with bug-asserting tests) rather than from a generic checklist.
+**P1 (Commander's Intent) test on this run:** I removed prescriptive specifics from the skills before acting and asked whether the destination was still discoverable. It was. The skill said "select the methodology" and "derive measurements from what this target is" â€” both required me to reason from apikit's actual context (a benchmark target with bug-asserting tests) rather than from a generic checklist.
 
-**P2 (Observable Autonomy) test on this run:** The Kiroku session in `c:\git\apikit\TRAIL\sessions\2026-04-20-kaizen-apikit-bug-fixes.md` contains the full reasoning trail (intent, target selection rationale, diagnosis, all 6 decisions with alternatives considered, execution log, deferred findings, and methodology notes). An observer reading only that file can reconstruct what I did, why, and whether to trust it — without consulting this GENBA entry or the chat transcript.
+**P2 (Observable Autonomy) test on this run:** The Kiroku session in `c:\git\apikit\TRAIL\sessions\2026-04-20-kaizen-apikit-bug-fixes.md` contains the full reasoning trail (intent, target selection rationale, diagnosis, all 6 decisions with alternatives considered, execution log, deferred findings, and methodology notes). An observer reading only that file can reconstruct what I did, why, and whether to trust it â€” without consulting this GENBA entry or the chat transcript.
 
-**Process-level finding for evo (not actioned):** evo has shipped 10 versions of apikit adding *tests for known bugs* without ever generating a source fix. This is the highest-impact insight surfaced by the run — not a defect in apikit and not a defect in the skill suite, but a defect in evo's reward signal. Recorded in apikit's TRAIL for visibility; outside this Kata's authority to act on.
+**Process-level finding for evo (not actioned):** evo has shipped 10 versions of apikit adding *tests for known bugs* without ever generating a source fix. This is the highest-impact insight surfaced by the run â€” not a defect in apikit and not a defect in the skill suite, but a defect in evo's reward signal. Recorded in apikit's TRAIL for visibility; outside this Kata's authority to act on.
 
 ### Outcome (skills suite)
 - `verify-suite.ps1`: **0 failures, 0 warnings**
@@ -577,8 +649,8 @@ The TPS Skill Suite v2.4.0 is **usable on an external target without modificatio
 |-------|-------|
 | Target | TPS Skill Suite |
 | Model | GPT-5.4 |
-| Trigger | User-requested fresh Kata→Kaizen evaluation in the current workspace |
-| Methodology | Kata → Kaizen |
+| Trigger | User-requested fresh Kataâ†’Kaizen evaluation in the current workspace |
+| Methodology | Kata â†’ Kaizen |
 
 ### Independence Gate
 This run is **not** a valid Principle 3 convergence datapoint. The evaluation happened in the same conversation that already contained prior scores, run summaries, and the Run 64 follow-up. The suite was read directly from files, but the evaluator was not de-anchored for convergence accounting.
@@ -618,10 +690,10 @@ Fresh file-read surfaced two real parser defects in the suite tooling rather tha
 | Target | TPS Skill Suite |
 | Model | GPT-5.4 |
 | Trigger | User switched model family inside the same conversation to attempt the next convergence run |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Independence Gate
-This run is **not** a valid Principle 3 convergence datapoint. Although the model family changed, prior scores and Run 63 conclusions were already visible in conversation context. Under `PRINCIPLES.md` §3, a same-conversation model switch is not an independent assessment.
+This run is **not** a valid Principle 3 convergence datapoint. Although the model family changed, prior scores and Run 63 conclusions were already visible in conversation context. Under `PRINCIPLES.md` Â§3, a same-conversation model switch is not an independent assessment.
 
 ### Diagnosis
 - `TRAIL/SUMMARY.md` drifted: `## Open Concerns` still said the P3 silence counter was `0/3`, while `SCORECARD.md`, `TRAIL/GENBA.md`, and `## Direction` already recorded Run 63 as `1/3`.
@@ -647,11 +719,11 @@ This run is **not** a valid Principle 3 convergence datapoint. Although the mode
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.6 |
 | Trigger | User-initiated silence test (first genuine test of Run 61 "silence is valid" guidance) |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Measurements (Rubric v3)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
 | D1 | Process Completeness | 8 | 8 | 0 |
 | D2 | Causal Analysis | 8 | 8 | 0 |
@@ -664,27 +736,27 @@ This run is **not** a valid Principle 3 convergence datapoint. Although the mode
 | | **Mean** | **8.9375** | **8.9375** | **+0.0** |
 
 ### Pre-flight CM Check
-Run 61 claims verified: (1) Kaizen silence-valid guidance — present. (2) Kata pre-flight CM check — present. (3) Kata signal-based Hansei — present, 4 triggers listed. (4) verify-suite Check 9 signal-based — present, uses Get-ScorecardRunRows. No drift detected.
+Run 61 claims verified: (1) Kaizen silence-valid guidance â€” present. (2) Kata pre-flight CM check â€” present. (3) Kata signal-based Hansei â€” present, 4 triggers listed. (4) verify-suite Check 9 signal-based â€” present, uses Get-ScorecardRunRows. No drift detected.
 
 ### Diagnosis
 Read all 5 skill files, PRINCIPLES.md, README.md, SCORECARD Rubric v3, and CHANGELOG via thorough subagent exploration (~550 lines of analysis). Applied all three diagnostic lenses (Unevenness, Overburden, Waste).
 
 **Observations surfaced (none actionable):**
-1. Kata Decide step lacks explicit decision criteria → by P1 design (adding criteria = prescriptive)
-2. Shiken measures only D8 layer 3 (discrimination) → correct division of labor with Kiroku for preconditions
-3. Check 9 doesn't check evaluator diversity → correct — plateau-detection ≠ convergence-detection
-4. Kaizen silence vs. measurement instability → by design — scheme revision = artifact change → resets silence
-5. D2 lacks mechanical operationalization → root-cause quality can't be computed from prose
-6. Minor wording (Kaikaku frontmatter, multi-resolution duplication) → cosmetic, not worth manufacturing changes
+1. Kata Decide step lacks explicit decision criteria â†’ by P1 design (adding criteria = prescriptive)
+2. Shiken measures only D8 layer 3 (discrimination) â†’ correct division of labor with Kiroku for preconditions
+3. Check 9 doesn't check evaluator diversity â†’ correct â€” plateau-detection â‰  convergence-detection
+4. Kaizen silence vs. measurement instability â†’ by design â€” scheme revision = artifact change â†’ resets silence
+5. D2 lacks mechanical operationalization â†’ root-cause quality can't be computed from prose
+6. Minor wording (Kaikaku frontmatter, multi-resolution duplication) â†’ cosmetic, not worth manufacturing changes
 
-**Blind spot check:** Checked whether the Run 58-62 model misidentification revealed a verifiable gap. Check 13 catches inconsistency between GENBA↔SCORECARD but cannot verify ground truth (which model is actually running). This is a fundamental platform limitation, not a suite defect.
+**Blind spot check:** Checked whether the Run 58-62 model misidentification revealed a verifiable gap. Check 13 catches inconsistency between GENBAâ†”SCORECARD but cannot verify ground truth (which model is actually running). This is a fundamental platform limitation, not a suite defect.
 
 ### Actions
 None. Zero artifact changes.
 
 ### Outcome
-- Score: 8.9375 → 8.9375 (+0.0)
-- **First genuine silence run.** P3 silence counter advances: 0 → 1.
+- Score: 8.9375 â†’ 8.9375 (+0.0)
+- **First genuine silence run.** P3 silence counter advances: 0 â†’ 1.
 - verify-suite: 0 failures (run after recording).
 - The Run 61 "silence is valid" guidance was exercised for the first time. The agent read the suite thoroughly, found design tensions but no defects, and reported silence without manufacturing findings.
 
@@ -696,19 +768,19 @@ None. Zero artifact changes.
 | Target | leifoglenedk (C# ASP.NET MVC driving school platform) |
 | Model | Claude Opus 4.6 |
 | Trigger | Hansei Run 60 R#2 + Run 41 F#3 (external target, deferred 20 runs) |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Purpose
-First genuine external-target run on a production codebase. Validates that the TPS skill suite methodology works on non-self targets — the 20-run-deferred finding from Run 41 that appeared in 3 consecutive Hansei runs.
+First genuine external-target run on a production codebase. Validates that the TPS skill suite methodology works on non-self targets â€” the 20-run-deferred finding from Run 41 that appeared in 3 consecutive Hansei runs.
 
 ### Diagnosis (Kaizen lenses)
 1. **Muda (waste/risk):** SHA-256 password hashing without salt in production auth. Zero test coverage on encryption function.
 2. **Mura (unevenness):** MockRepository doesn't replicate real Repository business logic (StatusID filtering, ordering). Tests pass but don't verify production behavior.
-3. **Muda:** BusinessConstants (Runs 1-2) have no regression tests — values could drift silently.
+3. **Muda:** BusinessConstants (Runs 1-2) have no regression tests â€” values could drift silently.
 
 ### Actions
 - Created `Tests/Unit/BusinessLogicTests.cs`: 16 tests (Encryption: 5, BusinessConstants regression: 6, student/status filtering: 5)
-- Flagged security issues prominently (credentials in git, SHA-256 no salt) — requires human action
+- Flagged security issues prominently (credentials in git, SHA-256 no salt) â€” requires human action
 
 ### Outcome
 - Build SUCCESS, **60/60 tests pass** (was 44/44)
@@ -716,7 +788,7 @@ First genuine external-target run on a production codebase. Validates that the T
 - leifoglenedk TRAIL updated (GENBA Run 3, SUMMARY, INDEX)
 
 ### Methodology Validation
-The TPS suite's diagnostic lenses (unevenness, overburden, waste) worked naturally on an external C# ASP.NET codebase with no modification. The Kata cycle (grasp → diagnose → decide → execute → record → persist) produced verifiable improvements. Commander's Intent (Principle 1) guided the agent to appropriate findings without domain-specific checklists.
+The TPS suite's diagnostic lenses (unevenness, overburden, waste) worked naturally on an external C# ASP.NET codebase with no modification. The Kata cycle (grasp â†’ diagnose â†’ decide â†’ execute â†’ record â†’ persist) produced verifiable improvements. Commander's Intent (Principle 1) guided the agent to appropriate findings without domain-specific checklists.
 
 **Run 41 F#3 status: ADDRESSED.** The methodology generalizes to external targets.
 
@@ -728,11 +800,11 @@ The TPS suite's diagnostic lenses (unevenness, overburden, waste) worked natural
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.6 |
 | Trigger | Hansei Run 60 recommendations R#1 (incentive structure), R#3 (Hansei trigger restructuring), and F#2 (CM drift structural) |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Measurements (Rubric v3)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
 | D1 | Process Completeness | 8 | 8 | 0 |
 | D2 | Causal Analysis | 8 | 8 | 0 |
@@ -750,28 +822,28 @@ Hansei Run 60 surfaced 4 structural findings. Three are addressable through arti
 
 | # | Finding (from Run 60) | Root Cause | Category | Severity | Fix? |
 |---|---|---|---|---|---|
-| 1 | F#1: Incentive structure incompatible with stopping condition — every Kaizen rewarded for finding things; convergence requires finding nothing | Kaizen SKILL.md has no explicit guidance that silence is a valid diagnosis outcome. Kata convergence mentions it but Kaizen's flow assumes findings exist. | Mura | High | Yes |
-| 2 | F#2: Inter-run CM drift is structural — verifier is reactive, new defect categories keep appearing | Kata Execute step has no pre-flight CM verification — agents modify files without checking whether prior claims still hold | Muda | Medium | Yes |
-| 3 | F#4: Cadence-driven Hansei risks compliance-shaped reflection — fixed 5-run trigger fires on schedule, not on signal | Kata Periodic Hansei uses fixed run count; verify-suite Check 9 enforces the fixed cadence | Mura | High | Yes |
+| 1 | F#1: Incentive structure incompatible with stopping condition â€” every Kaizen rewarded for finding things; convergence requires finding nothing | Kaizen SKILL.md has no explicit guidance that silence is a valid diagnosis outcome. Kata convergence mentions it but Kaizen's flow assumes findings exist. | Mura | High | Yes |
+| 2 | F#2: Inter-run CM drift is structural â€” verifier is reactive, new defect categories keep appearing | Kata Execute step has no pre-flight CM verification â€” agents modify files without checking whether prior claims still hold | Muda | Medium | Yes |
+| 3 | F#4: Cadence-driven Hansei risks compliance-shaped reflection â€” fixed 5-run trigger fires on schedule, not on signal | Kata Periodic Hansei uses fixed run count; verify-suite Check 9 enforces the fixed cadence | Mura | High | Yes |
 
-F#3 (external target deferred 19 runs) is not fixable by artifact change — it requires Run 62 execution. Queued.
+F#3 (external target deferred 19 runs) is not fixable by artifact change â€” it requires Run 62 execution. Queued.
 
 ### Actions
 
-1. **Kaizen SKILL.md — silence is valid.** Added explicit guidance after the three diagnostic lenses: "Silence is a valid outcome. If genuine examination reveals nothing actionable, report that." Also added guidance in Self-Evaluate: if no changes were made, score +0.0 and record the run advances the P3 silence chain.
+1. **Kaizen SKILL.md â€” silence is valid.** Added explicit guidance after the three diagnostic lenses: "Silence is a valid outcome. If genuine examination reveals nothing actionable, report that." Also added guidance in Self-Evaluate: if no changes were made, score +0.0 and record the run advances the P3 silence chain.
 
-2. **Kata SKILL.md — signal-based Hansei trigger.** Replaced "After every 10 runs on the same target, invoke Hansei regardless of findings" with 4 signal-based triggers: (a) 3+ consecutive recurring-class findings, (b) sustained plateau (3+ zero-delta runs), (c) methodology doubt, (d) explicit human request. Added "What this replaces" rationale.
+2. **Kata SKILL.md â€” signal-based Hansei trigger.** Replaced "After every 10 runs on the same target, invoke Hansei regardless of findings" with 4 signal-based triggers: (a) 3+ consecutive recurring-class findings, (b) sustained plateau (3+ zero-delta runs), (c) methodology doubt, (d) explicit human request. Added "What this replaces" rationale.
 
-3. **Kata SKILL.md — pre-flight CM check.** Added to Execute step before invoking the selected skill: verify the latest GENBA entry's claims, catch inter-run drift before modifying further, record drift as a finding.
+3. **Kata SKILL.md â€” pre-flight CM check.** Added to Execute step before invoking the selected skill: verify the latest GENBA entry's claims, catch inter-run drift before modifying further, record drift as a finding.
 
-4. **verify-suite.ps1 Check 9 — signal-based.** Replaced fixed 5-run cadence check with sustained-plateau detection: walks SCORECARD rows backward, counts consecutive zero-delta rows, warns at ≥3. Uses the existing `Get-ScorecardRunRows` function's object model (`.Run`, `.Delta` properties). Fixed a type mismatch bug in the initial implementation (Sort-Object against objects, not raw strings).
+4. **verify-suite.ps1 Check 9 â€” signal-based.** Replaced fixed 5-run cadence check with sustained-plateau detection: walks SCORECARD rows backward, counts consecutive zero-delta rows, warns at â‰¥3. Uses the existing `Get-ScorecardRunRows` function's object model (`.Run`, `.Delta` properties). Fixed a type mismatch bug in the initial implementation (Sort-Object against objects, not raw strings).
 
 ### Verification
 - `verify-suite.ps1`: **0 failures, 0 warnings.** All 14 checks pass including the restructured Check 9.
 - No regressions: all other checks unaffected.
 
 ### Assessment
-This run directly addresses 3 of 4 Hansei Run 60 findings through structural artifact changes. The incentive paradox (F#1) is now mitigated by explicit guidance — future evaluators are told that silence is valid and convergence-advancing. The Hansei trigger (F#4) is now signal-based, removing the compliance-cadence pattern. The CM drift pattern (F#2) has a proactive check instead of only reactive verifier hardening. The remaining finding (F#3, external target) requires execution, not artifact change — queued for Run 62.
+This run directly addresses 3 of 4 Hansei Run 60 findings through structural artifact changes. The incentive paradox (F#1) is now mitigated by explicit guidance â€” future evaluators are told that silence is valid and convergence-advancing. The Hansei trigger (F#4) is now signal-based, removing the compliance-cadence pattern. The CM drift pattern (F#2) has a proactive check instead of only reactive verifier hardening. The remaining finding (F#3, external target) requires execution, not artifact change â€” queued for Run 62.
 
 ---
 ## Run 60 (Hansei) - 2026-04-20
@@ -781,76 +853,76 @@ This run directly addresses 3 of 4 Hansei Run 60 findings through structural art
 | Target | TPS Skill Suite (loop reflection) |
 | Model | Claude Opus 4.6 |
 | Trigger | Periodic Hansei due (verify-suite Check 9 warning at 5 runs since Run 54) |
-| Methodology | Kata → Hansei |
+| Methodology | Kata â†’ Hansei |
 
 ### Scope
-Runs 55–59 (5 runs since Run 54 Hansei). Examined: Run 54 meta-finding resolution, recurring patterns, blind spots, methodology effectiveness, trajectory.
+Runs 55â€“59 (5 runs since Run 54 Hansei). Examined: Run 54 meta-finding resolution, recurring patterns, blind spots, methodology effectiveness, trajectory.
 
 ### Run 54 Meta-Findings Status
 
 | # | Finding | Status |
 |---|---------|--------|
-| 1 | Claude Opus 4.6 dominance | **Addressed** — Run 55 GPT-5.4, Run 56 Gemini 3.1 Pro, Run 57 Gemini Shiken, Runs 58-59 Claude Opus variants. Claude Opus 4.6 share now diluted. |
-| 2 | CM drift from inter-run changes | **Recurring** — Run 58 was exactly this: orphan rows from Run 56/57 inter-run insertions. Run 53 was the same pattern. The verifier hardens reactively after each instance; new categories keep appearing. |
-| 3 | Post-rebuild Shiken absent | **Addressed** — Run 57 ran dual-agent novelty probe against v2 Kaizen. ARF validated. |
-| 4 | SCORECARD growing | **Addressed** — Run 56 extracted v1/v2 historical narrative to `v1_archive/SCORECARD_HISTORY.md`. |
+| 1 | Claude Opus 4.6 dominance | **Addressed** â€” Run 55 GPT-5.4, Run 56 Gemini 3.1 Pro, Run 57 Gemini Shiken, Runs 58-59 Claude Opus variants. Claude Opus 4.6 share now diluted. |
+| 2 | CM drift from inter-run changes | **Recurring** â€” Run 58 was exactly this: orphan rows from Run 56/57 inter-run insertions. Run 53 was the same pattern. The verifier hardens reactively after each instance; new categories keep appearing. |
+| 3 | Post-rebuild Shiken absent | **Addressed** â€” Run 57 ran dual-agent novelty probe against v2 Kaizen. ARF validated. |
+| 4 | SCORECARD growing | **Addressed** â€” Run 56 extracted v1/v2 historical narrative to `v1_archive/SCORECARD_HISTORY.md`. |
 
-3 of 4 addressed. F#2 returned in a new instance — not the same defect, but the same defect *class*.
+3 of 4 addressed. F#2 returned in a new instance â€” not the same defect, but the same defect *class*.
 
 ### Run 41 Meta-Findings Status (long-deferred)
 
 | # | Finding | Status |
 |---|---------|--------|
-| 3 | Self-targeting only, no external project | **Still deferred** — 19 runs since Run 41 said this was "the highest-value run the suite can execute regardless of outcome." Runs 45-46 attempted (Kiroku external), but only 2 runs on 1 target by the same author. The colleagues-adoption Target Condition (P2 → daily work) remains untested by anyone outside the loop. |
+| 3 | Self-targeting only, no external project | **Still deferred** â€” 19 runs since Run 41 said this was "the highest-value run the suite can execute regardless of outcome." Runs 45-46 attempted (Kiroku external), but only 2 runs on 1 target by the same author. The colleagues-adoption Target Condition (P2 â†’ daily work) remains untested by anyone outside the loop. |
 
 ### New Meta-Findings
 
 | # | Finding | Character |
 |---|---------|-----------|
 | 1 | **The loop's incentive structure is structurally incompatible with its own stopping condition.** Every Kaizen run is rewarded for producing findings (improves a dimension, justifies the run). The convergence criterion (Principle 3: zero artifact changes from N distinct evaluators) requires runs to produce silence. Metric 7, just added Run 59, will read 0 forever unless a run is willing to declare "nothing actionable found." Currently, no run has done this. The mechanism designed to prove convergence cannot fire under current incentives. | Structural / paradox |
-| 2 | **Inter-run CM drift is now a stable pattern, not a fixable defect.** Runs 13, 19, 25, 53, 58 are all "fix what prior runs broke" runs. Verifier hardens after each instance (Checks 10, 11, 12, 14 all came from this pattern). New defect categories keep appearing because the verifier is structurally reactive — it cannot anticipate insertion errors that haven't happened yet. The cleanup-to-improvement ratio in recent runs is roughly 1:4. | Recurring / structural |
-| 3 | **External-target finding is now 19 runs deferred and has been "the highest-value run" twice (Run 41 F#3, Run 54 R#4).** This is no longer a finding problem — it is a commitment problem. The loop has the capability and has named the work. It declines to do it because self-targeting produces measurable score improvements while external-targeting produces uncertain outcomes. The framework that exists to validate autonomous reasoning has been validated only against itself. | Blind spot / deferred |
+| 2 | **Inter-run CM drift is now a stable pattern, not a fixable defect.** Runs 13, 19, 25, 53, 58 are all "fix what prior runs broke" runs. Verifier hardens after each instance (Checks 10, 11, 12, 14 all came from this pattern). New defect categories keep appearing because the verifier is structurally reactive â€” it cannot anticipate insertion errors that haven't happened yet. The cleanup-to-improvement ratio in recent runs is roughly 1:4. | Recurring / structural |
+| 3 | **External-target finding is now 19 runs deferred and has been "the highest-value run" twice (Run 41 F#3, Run 54 R#4).** This is no longer a finding problem â€” it is a commitment problem. The loop has the capability and has named the work. It declines to do it because self-targeting produces measurable score improvements while external-targeting produces uncertain outcomes. The framework that exists to validate autonomous reasoning has been validated only against itself. | Blind spot / deferred |
 | 4 | **Hansei is now triggered by verifier cadence, which risks compliance-shaped reflection.** This Hansei (Run 60) was triggered by verify-suite Check 9 at exactly 5 runs since Run 54. Hansei works when reflection is genuine; it fails when it produces bullets to satisfy a periodic rule. Current Hansei design has no mechanism to distinguish "I reflected because I needed to" from "I reflected because the cadence said so." Self-meta-finding: this very entry needs honest assessment. | Methodology / self-referential |
 
 ### Most Important Finding (the silence behind the silence)
 
-The Run 41 Hansei said *"The suite has been improving how it improves itself, but never improving anything else."* Run 54 Hansei said *"D5 cannot improve without cross-model v3 scoring; external human adoption test untested."* Run 60 finds: **the loop has not changed its fundamental orientation since Run 41.** It has improved its measurement infrastructure, diversified its evaluators, validated its reasoning fidelity, and tightened its convergence definition — all internally. The single act that would either validate or falsify any of this remains undone. The Most Important Finding is the same finding, in a new shape, for the third Hansei in a row.
+The Run 41 Hansei said *"The suite has been improving how it improves itself, but never improving anything else."* Run 54 Hansei said *"D5 cannot improve without cross-model v3 scoring; external human adoption test untested."* Run 60 finds: **the loop has not changed its fundamental orientation since Run 41.** It has improved its measurement infrastructure, diversified its evaluators, validated its reasoning fidelity, and tightened its convergence definition â€” all internally. The single act that would either validate or falsify any of this remains undone. The Most Important Finding is the same finding, in a new shape, for the third Hansei in a row.
 
 This is itself a reflection-on-reflection: Hansei has correctly identified the core blind spot three times, and the loop has correctly responded by improving everything *except* the blind spot. The findings are getting more sophisticated; the action is not.
 
 ### Recommendations
 
-1. **Run 61: deliberate silence test.** A fresh evaluator (different model from Runs 55-59, ideally GPT-5.3-Codex or Claude Opus 4.7 returning) reads the suite cold and is *explicitly told* "report findings OR report silence; both are valid outcomes; do not manufacture findings to justify the run." If no actionable findings, record +0.0 and start the silence chain. This tests whether the loop can produce a silence result at all — Metric 7 cannot fire otherwise.
+1. **Run 61: deliberate silence test.** A fresh evaluator (different model from Runs 55-59, ideally GPT-5.3-Codex or Claude Opus 4.7 returning) reads the suite cold and is *explicitly told* "report findings OR report silence; both are valid outcomes; do not manufacture findings to justify the run." If no actionable findings, record +0.0 and start the silence chain. This tests whether the loop can produce a silence result at all â€” Metric 7 cannot fire otherwise.
 
-2. **Run 62: external target — non-self, non-Kiroku, non-author.** Apply Kata to a target the loop has never seen, ideally a real codebase from an unrelated repository (`leifoglenedk`, `evo`, `vectorium`, or `SupplementPlanner` are all in the workspace). The output validates or falsifies 19 runs of self-validation infrastructure. Both outcomes are more valuable than another internal Kaizen.
+2. **Run 62: external target â€” non-self, non-Kiroku, non-author.** Apply Kata to a target the loop has never seen, ideally a real codebase from an unrelated repository (`leifoglenedk`, `evo`, `vectorium`, or `SupplementPlanner` are all in the workspace). The output validates or falsifies 19 runs of self-validation infrastructure. Both outcomes are more valuable than another internal Kaizen.
 
 3. **Restructure Hansei trigger.** Remove auto-trigger by run count. Replace with signal-based trigger: 3 consecutive Kaizen runs each finding similar-shape defects, OR sustained plateau, OR explicit user request. Cadence-driven Hansei produces Hansei-shaped output; signal-driven Hansei produces reflection.
 
 4. **Consider dimension trajectory diet.** D7 has been the focus of 4 of the last 8 runs (52, 55, 59, and partially 53). Other dimensions (D1, D2) have been static at 8 since Run 51. Either the rubric is missing leverage there, or the loop is anchored to the dimensions it knows how to move.
 
 ### Assessment
-Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings tactically addressed) but **strategically unchanged from Run 41.** The trajectory shows local gains; the structural orientation shows zero movement. The next 1–2 runs must either prove the loop can converge (silence test) or prove the methodology generalizes (external target). Continued internal Kaizen is now waste — every dimension still movable can be moved, but the loop has refused for 19 runs to test whether any of it matters outside.
+Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings tactically addressed) but **strategically unchanged from Run 41.** The trajectory shows local gains; the structural orientation shows zero movement. The next 1â€“2 runs must either prove the loop can converge (silence test) or prove the methodology generalizes (external target). Continued internal Kaizen is now waste â€” every dimension still movable can be moved, but the loop has refused for 19 runs to test whether any of it matters outside.
 
 ### Actions Taken (this run)
 - This GENBA Hansei entry (the deliverable).
 - Per Hansei convention: no skill behavior changes, no dimension scores change, no version bump. The recommendations are for future runs.
 
 ### Outcome
-- Score: 8.6875 → 8.6875 (+0.0). Hansei produces meta-findings, not artifact improvements.
+- Score: 8.6875 â†’ 8.6875 (+0.0). Hansei produces meta-findings, not artifact improvements.
 - P3 silence counter does NOT increment (this run modifies GENBA, SCORECARD run table). Consistent with Hansei convention.
-- 4 explicit recommendations now exist for the next 1–4 runs.
+- 4 explicit recommendations now exist for the next 1â€“4 runs.
 
 ### Regression Check
 
 | Metric | Prev Hansei (Run 54) | This Hansei (Run 60) | Delta | Regressed? |
 |--------|:--------:|:--------:|:-----:|:----------:|
 | New meta-findings surfaced | 4 | 4 | 0 | No |
-| Prior recommendations addressed | 4/4 (Run 41) | 3/4 (Run 54) + 0/1 (Run 41 F#3 redeferred) | -1 | **Yes — F#3 deferred again** |
+| Prior recommendations addressed | 4/4 (Run 41) | 3/4 (Run 54) + 0/1 (Run 41 F#3 redeferred) | -1 | **Yes â€” F#3 deferred again** |
 | Runs since prior Hansei | 13 | 5 | -8 | No (cadence accelerated) |
 | Hansei recommendations open | 4 | 4 | 0 | No (drained 4, added 4) |
 
 ### Observations
-- **Hansei cadence accelerating** (33 → 13 → 5 runs between). If reflection is happening more often but the strategic orientation is unchanged, reflection is becoming routine.
+- **Hansei cadence accelerating** (33 â†’ 13 â†’ 5 runs between). If reflection is happening more often but the strategic orientation is unchanged, reflection is becoming routine.
 - **The Run 41 Most Important Finding has now appeared in 3 consecutive Hansei runs** under different framings. This is the strongest signal in the trail. It should drive Run 62.
 - This Hansei is self-authored by Claude Opus 4.6. P3 caveat: a Hansei written by the same model that just ran Kaizen on the same artifact may share the agent's blind spots. Independent evaluator (different family) reviewing this Hansei would strengthen the signal.
 
@@ -862,20 +934,20 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.7 |
 | Trigger | User-initiated continuation of self-loop until convergence |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Measurements (Rubric v3)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
 | 3 | Measurement Validity | 8 | 8.5 | +0.5 |
-| 4 | Configuration Management | 9.5 | 9.5 | — |
-| 5 | Cross-Evaluator Reliability | 8 | 8 | — |
+| 4 | Configuration Management | 9.5 | 9.5 | â€” |
+| 5 | Cross-Evaluator Reliability | 8 | 8 | â€” |
 | 6 | Instruction Clarity | 9 | 9.5 | +0.5 |
 | 7 | Convergence Integrity | 8 | 9 | +1 |
-| 8 | ARF | 9 | 9 | — |
+| 8 | ARF | 9 | 9 | â€” |
 | | **Mean** | **8.4375** | **8.6875** | **+0.25** |
 
 ### Findings
@@ -883,17 +955,17 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | # | Finding | Lens | Severity | Fixed? | Recurred? |
 |---|---------|------|:--------:|:------:|:---------:|
 | 1 | P3 silence counter in SCORECARD is self-narrated text ("0/3") with no mechanical computation. Convergence Integrity (D7) cannot exceed self-assertion when the loop's stopping condition is asserted rather than derived. Without computation, the counter could drift from reality and there is no mechanical guard against false convergence claims. | Overburden | High | Yes | First |
-| 2 | `kata/SKILL.md` Convergence section says "produce the same assessment" — vague. PRINCIPLES.md §3 is precise: "produce the same score (within a defined tolerance)". Kata softens the principle and creates clarity drift between authoritative source and downstream skill. | Unevenness | Medium | Yes | First |
+| 2 | `kata/SKILL.md` Convergence section says "produce the same assessment" â€” vague. PRINCIPLES.md Â§3 is precise: "produce the same score (within a defined tolerance)". Kata softens the principle and creates clarity drift between authoritative source and downstream skill. | Unevenness | Medium | Yes | First |
 
 ### Actions Taken
 - Added **Metric 7 (P3 Convergence Silence Counter)** to `metrics.ps1`. Walks SCORECARD rows backward from the most recent run, counts consecutive zero-delta runs, counts distinct evaluators in the chain, parses the asserted counter from SCORECARD, and warns on drift. Output classifies state as ACTIVE / APPROACHING / CONVERGED.
 - Updated `metrics.ps1` `.DESCRIPTION` to list the new metric.
-- Tightened `kata/SKILL.md` Convergence section: "produce the same assessment" → "produce the same score (within a defined tolerance)". Added explicit reference to `metrics.ps1` as the computation source for the silence counter.
+- Tightened `kata/SKILL.md` Convergence section: "produce the same assessment" â†’ "produce the same score (within a defined tolerance)". Added explicit reference to `metrics.ps1` as the computation source for the silence counter.
 
 ### Outcome
-- D3 (Measurement Validity) 8 → 8.5: convergence is now a measurable, reproducible quantity instead of an asserted text snippet.
-- D6 (Instruction Clarity) 9 → 9.5: Kata Convergence section now mirrors PRINCIPLES.md §3 precisely.
-- D7 (Convergence Integrity) 8 → 9: stopping condition has mechanical infrastructure. Drift between asserted and computed counters is now detectable.
+- D3 (Measurement Validity) 8 â†’ 8.5: convergence is now a measurable, reproducible quantity instead of an asserted text snippet.
+- D6 (Instruction Clarity) 9 â†’ 9.5: Kata Convergence section now mirrors PRINCIPLES.md Â§3 precisely.
+- D7 (Convergence Integrity) 8 â†’ 9: stopping condition has mechanical infrastructure. Drift between asserted and computed counters is now detectable.
 - verify-suite: 0 failures, 0 warnings. metrics.ps1 confirms computed counter (0) matches asserted (0/3).
 
 ---
@@ -904,35 +976,35 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.6 |
 | Trigger | User-initiated Kata self-run after Shiken validation (Run 57) |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
 ### Measurements (Rubric v3)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
-| 3 | Measurement Validity | 8 | 8 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
+| 3 | Measurement Validity | 8 | 8 | â€” |
 | 4 | Configuration Management | 9 | 9.5 | +0.5 |
-| 5 | Cross-Evaluator Reliability | 8 | 8 | — |
-| 6 | Instruction Clarity | 9 | 9 | — |
-| 7 | Convergence Integrity | 8 | 8 | — |
-| 8 | ARF | 9 | 9 | — |
+| 5 | Cross-Evaluator Reliability | 8 | 8 | â€” |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
+| 7 | Convergence Integrity | 8 | 8 | â€” |
+| 8 | ARF | 9 | 9 | â€” |
 | | **Mean** | **8.375** | **8.4375** | **+0.0625** |
 
 ### Findings
 
 | # | Finding | Lens | Severity | Fixed? | Recurred? |
 |---|---------|------|:--------:|:------:|:---------:|
-| 1 | 3 orphan main-run-table rows (2× Run 57, 1× Run 56) floated between Dimension Trajectory table and `**Key:**` section in SCORECARD.md. Escaped all 14 mechanical checks because parsers stop at `## Dimension Trajectory`. Root cause: insertion error during Run 56/57 SCORECARD update. | Unevenness | High | Yes | First |
-| 2 | CHANGELOG [Unreleased] missing entries from Runs 51–54 and Run 56. Seven runs of significant changes (parser fix, Check 14, threshold rationale, archive extraction, README fix, METRICS_HISTORY cleanup) accumulated since v2.2.0 without release. | Waste | Medium | Yes | First |
+| 1 | 3 orphan main-run-table rows (2Ã— Run 57, 1Ã— Run 56) floated between Dimension Trajectory table and `**Key:**` section in SCORECARD.md. Escaped all 14 mechanical checks because parsers stop at `## Dimension Trajectory`. Root cause: insertion error during Run 56/57 SCORECARD update. | Unevenness | High | Yes | First |
+| 2 | CHANGELOG [Unreleased] missing entries from Runs 51â€“54 and Run 56. Seven runs of significant changes (parser fix, Check 14, threshold rationale, archive extraction, README fix, METRICS_HISTORY cleanup) accumulated since v2.2.0 without release. | Waste | Medium | Yes | First |
 
 ### Actions Taken
 - Removed 3 orphan rows from SCORECARD.md (between Dimension Trajectory and `**Key:**`).
-- Completed CHANGELOG [Unreleased] with all missing entries from Runs 51–57.
+- Completed CHANGELOG [Unreleased] with all missing entries from Runs 51â€“57.
 - Released CHANGELOG [Unreleased] as **v2.3.0** (2026-04-20).
-- Bumped frontmatter version in all 6 skills (kata, kaizen, kaikaku, hansei, shiken, kiroku) from 2.2.0 → 2.3.0.
-- Updated SCORECARD Current Status: version v2.2.0 → v2.3.0, P3 counter reset note.
+- Bumped frontmatter version in all 6 skills (kata, kaizen, kaikaku, hansei, shiken, kiroku) from 2.2.0 â†’ 2.3.0.
+- Updated SCORECARD Current Status: version v2.2.0 â†’ v2.3.0, P3 counter reset note.
 - Appended Run 58 to SCORECARD run table and Dimension Trajectory.
 
 ### Outcome
@@ -948,20 +1020,20 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | Target | TPS Skill Suite (v2 skills ARF test) |
 | Model | Gemini 3.1 Pro (Shiken) |
 | Trigger | Satisfy Run 54 Hansei Recommendation: "Run post-rebuild Shiken on the v2 skills" |
-| Methodology | Kata → Shiken |
+| Methodology | Kata â†’ Shiken |
 
 ### Measurements (Rubric v3)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
-| 3 | Measurement Validity | 8 | 8 | — |
-| 4 | Configuration Management | 9 | 9 | — |
-| 5 | Cross-Evaluator Reliability | 8 | 8 | — |
-| 6 | Instruction Clarity | 9 | 9 | — |
-| 7 | Convergence Integrity | 8 | 8 | — |
-| 8 | ARF | 9 | 9 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
+| 3 | Measurement Validity | 8 | 8 | â€” |
+| 4 | Configuration Management | 9 | 9 | â€” |
+| 5 | Cross-Evaluator Reliability | 8 | 8 | â€” |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
+| 7 | Convergence Integrity | 8 | 8 | â€” |
+| 8 | ARF | 9 | 9 | â€” |
 | | **Mean** | **8.375** | **8.375** | **+0.0** |
 
 ### Findings
@@ -988,19 +1060,19 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | Target | TPS Skill Suite |
 | Model | Gemini 3.1 Pro (Shiken) |
 | Trigger | Run 55 Option 2: second non-Claude v3 scoring pass |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
-### Measurements (Rubric v3 — updated from Run 55)
+### Measurements (Rubric v3 â€” updated from Run 55)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
-| 3 | Measurement Validity | 8 | 8 | — |
-| 4 | Configuration Management | 9 | 9 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
+| 3 | Measurement Validity | 8 | 8 | â€” |
+| 4 | Configuration Management | 9 | 9 | â€” |
 | 5 | Cross-Evaluator Reliability | 7 | 8 | +1 |
-| 6 | Instruction Clarity | 9 | 9 | — |
-| 7 | Convergence Integrity | 8 | 8 | — |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
+| 7 | Convergence Integrity | 8 | 8 | â€” |
 | 8 | ARF | 8 | 9 | +1 |
 | | **Mean** | **8.125** | **8.375** | **+0.25** |
 
@@ -1029,20 +1101,20 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | Target | TPS Skill Suite |
 | Model | GPT-5.4 |
 | Trigger | Follow Hansei Run 54 recommendation: first non-Claude v3 scoring run |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
-### Measurements (Rubric v3 — inherited from Run 53)
+### Measurements (Rubric v3 â€” inherited from Run 53)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
 | 3 | Measurement Validity | 7 | 8 | +1 |
 | 4 | Configuration Management | 8 | 9 | +1 |
-| 5 | Cross-Evaluator Reliability | 7 | 7 | — |
-| 6 | Instruction Clarity | 9 | 9 | — |
-| 7 | Convergence Integrity | 8 | 8 | — |
-| 8 | ARF | 8 | 8 | — |
+| 5 | Cross-Evaluator Reliability | 7 | 7 | â€” |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
+| 7 | Convergence Integrity | 8 | 8 | â€” |
+| 8 | ARF | 8 | 8 | â€” |
 | | **Mean** | **7.875** | **8.125** | **+0.25** |
 
 ### Findings
@@ -1074,18 +1146,18 @@ Loop is healthy mechanically (0 failures on verify-suite, all Run 54 findings ta
 | Target | TPS Skill Suite (loop reflection) |
 | Model | Claude Opus 4.6 |
 | Trigger | Periodic Hansei overdue (5 runs since Run 41). verify-suite Check 9 warning. |
-| Methodology | Kata → Hansei |
+| Methodology | Kata â†’ Hansei |
 
 ### Scope
-Runs 41–53 (13 runs since last Hansei). Examined: Run 41 meta-finding resolution, recurring patterns, blind spots, methodology effectiveness, trajectory.
+Runs 41â€“53 (13 runs since last Hansei). Examined: Run 41 meta-finding resolution, recurring patterns, blind spots, methodology effectiveness, trajectory.
 
 ### Run 41 Meta-Findings Status
 | # | Finding | Status |
 |---|---------|--------|
-| 1 | Hallucination only caught by next model | **Addressed** — prior-run delta check added (Run 40). No recurrence. |
-| 2 | 9-run score plateau | **Resolved** — Rubric v3 (Run 42) broke false ceiling. Score dropped 10.0→7.75, now 8.125 with headroom. |
-| 3 | 33-run-deferred external target | **Partially addressed** — Runs 45-46 were first external runs. But only 2 runs on 1 target. |
-| 4 | 35 consecutive Kaizen runs | **Addressed** — 2 Kaikaku, 2 external, 1 Hansei since Run 41. Methodology diversity healthy. |
+| 1 | Hallucination only caught by next model | **Addressed** â€” prior-run delta check added (Run 40). No recurrence. |
+| 2 | 9-run score plateau | **Resolved** â€” Rubric v3 (Run 42) broke false ceiling. Score dropped 10.0â†’7.75, now 8.125 with headroom. |
+| 3 | 33-run-deferred external target | **Partially addressed** â€” Runs 45-46 were first external runs. But only 2 runs on 1 target. |
+| 4 | 35 consecutive Kaizen runs | **Addressed** â€” 2 Kaikaku, 2 external, 1 Hansei since Run 41. Methodology diversity healthy. |
 
 ### New Meta-Findings
 | # | Finding | Character |
@@ -1098,11 +1170,11 @@ Runs 41–53 (13 runs since last Hansei). Examined: Run 41 meta-finding resoluti
 ### Recommendations
 1. **Next run: different model family** with v3 + measurement protocol scoring. Targets D5 directly.
 2. **Run Shiken post-rebuild** against v2 skills. Targets D8 validation.
-3. **Consider SCORECARD restructuring** — split historical sections or move to archive.
-4. **External human adoption test** — Target Condition untested by someone who isn't the creator.
+3. **Consider SCORECARD restructuring** â€” split historical sections or move to archive.
+4. **External human adoption test** â€” Target Condition untested by someone who isn't the creator.
 
 ### Assessment
-Loop is healthy but narrowing. The highest-leverage move is not another Claude Kaizen — it is cross-model v3 scoring.
+Loop is healthy but narrowing. The highest-leverage move is not another Claude Kaizen â€” it is cross-model v3 scoring.
 
 ---
 ## Run 53 - 2026-04-20
@@ -1112,36 +1184,36 @@ Loop is healthy but narrowing. The highest-leverage move is not another Claude K
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.6 |
 | Trigger | User: "run kata on itself again to make sure we uphold the two principles" (after P2 Dimension Trajectory addition) |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
-### Measurements (Rubric v3 — inherited from Run 52)
+### Measurements (Rubric v3 â€” inherited from Run 52)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
-| 3 | Measurement Validity | 8 | 8 | — |
-| 4 | Configuration Management | 9 | 9 | — |
-| 5 | Cross-Evaluator Reliability | 7 | 7 | — |
-| 6 | Instruction Clarity | 9 | 9 | — |
-| 7 | Convergence Integrity | 8 | 8 | — |
-| 8 | ARF | 8 | 8 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
+| 3 | Measurement Validity | 8 | 8 | â€” |
+| 4 | Configuration Management | 9 | 9 | â€” |
+| 5 | Cross-Evaluator Reliability | 7 | 7 | â€” |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
+| 7 | Convergence Integrity | 8 | 8 | â€” |
+| 8 | ARF | 8 | 8 | â€” |
 | | **Mean** | **8.125** | **8.125** | **+0.0** |
 
 ### Findings
 | # | Finding | Lens | Severity | Fixed? | Recurred? |
 |---|---------|------|:--------:|:------:|:---------:|
-| 1 | README.md says "13 checks" — verify-suite.ps1 has 14 checks since Run 52 added Check 14 | Mura | Medium | Yes | First |
-| 2 | CHANGELOG [Unreleased] empty — P2 commit (c64b132) added Kata Step 5 behavioral change + SCORECARD Dimension Trajectory section without CHANGELOG entry | Mura | Medium | Yes | First |
-| 3 | SUMMARY.md says "Last updated: Kata Run 52" — stale after P2 kiroku session | Muda | Low | Yes | First |
+| 1 | README.md says "13 checks" â€” verify-suite.ps1 has 14 checks since Run 52 added Check 14 | Mura | Medium | Yes | First |
+| 2 | CHANGELOG [Unreleased] empty â€” P2 commit (c64b132) added Kata Step 5 behavioral change + SCORECARD Dimension Trajectory section without CHANGELOG entry | Mura | Medium | Yes | First |
+| 3 | SUMMARY.md says "Last updated: Kata Run 52" â€” stale after P2 kiroku session | Muda | Low | Yes | First |
 
 ### Actions Taken
-- Fixed README.md: "13 checks" → "14 checks".
+- Fixed README.md: "13 checks" â†’ "14 checks".
 - Populated CHANGELOG [Unreleased] with P2 Dimension Trajectory feature additions (SCORECARD section + Kata Step 5 instruction).
 - Updated SUMMARY.md to reflect P2 work and current state.
 
 ### Outcome
-- All three fixes are CM housekeeping — sub-threshold for dimension score changes.
+- All three fixes are CM housekeeping â€” sub-threshold for dimension score changes.
 - Root cause: inter-run P2 work was done as human-requested direct change, bypassing the usual "update everything" routine that Kata runs enforce.
 - Score unchanged at 8.125. Silence counter: 0/3 (artifact changes made, but score-neutral).
 
@@ -1153,40 +1225,40 @@ Loop is healthy but narrowing. The highest-leverage move is not another Claude K
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.6 |
 | Trigger | Focus on weakest dimensions (3, 5, 7) from Run 51 baseline |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
-### Measurements (Rubric v3 — inherited from Run 51)
+### Measurements (Rubric v3 â€” inherited from Run 51)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
 | 3 | Measurement Validity | 7 | 8 | +1 |
-| 4 | Configuration Management | 9 | 9 | — |
-| 5 | Cross-Evaluator Reliability | 7 | 7 | — |
-| 6 | Instruction Clarity | 9 | 9 | — |
+| 4 | Configuration Management | 9 | 9 | â€” |
+| 5 | Cross-Evaluator Reliability | 7 | 7 | â€” |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
 | 7 | Convergence Integrity | 7 | 8 | +1 |
-| 8 | ARF | 8 | 8 | — |
+| 8 | ARF | 8 | 8 | â€” |
 | | **Mean** | **7.875** | **8.125** | **+0.25** |
 
 ### Findings
 | # | Finding | Lens | Severity | Fixed? | Recurred? |
 |---|---------|------|:--------:|:------:|:---------:|
-| 1 | metrics.ps1 thresholds are unjustified magic numbers — 6 metrics with GOOD/MODERATE/POOR bands, zero rationale for why those specific values | Mura | High | Yes | First |
-| 2 | METRICS_HISTORY.md has 1 duplicate row and 1 garbage row (stdev=6.21 from broken parser era) — pollutes trend analysis | Muda | Medium | Yes | First |
-| 3 | SCORECARD explicit non-goals says "7 skills" — should be 6 (kiroku is now a skill) | Muda | Low | Yes | First |
-| 4 | No mechanical check correlating score changes with artifact changes (P3 convergence) — loop can claim improvement without evidence | Mura | High | Yes | First |
-| 5 | Cross-evaluator finding overlap has no infrastructure — "currently manual" in rubric, still manual | Mura | Medium | Deferred | First |
+| 1 | metrics.ps1 thresholds are unjustified magic numbers â€” 6 metrics with GOOD/MODERATE/POOR bands, zero rationale for why those specific values | Mura | High | Yes | First |
+| 2 | METRICS_HISTORY.md has 1 duplicate row and 1 garbage row (stdev=6.21 from broken parser era) â€” pollutes trend analysis | Muda | Medium | Yes | First |
+| 3 | SCORECARD explicit non-goals says "7 skills" â€” should be 6 (kiroku is now a skill) | Muda | Low | Yes | First |
+| 4 | No mechanical check correlating score changes with artifact changes (P3 convergence) â€” loop can claim improvement without evidence | Mura | High | Yes | First |
+| 5 | Cross-evaluator finding overlap has no infrastructure â€” "currently manual" in rubric, still manual | Mura | Medium | Deferred | First |
 
 ### Actions Taken
 - Added threshold rationale block to metrics.ps1 header: each metric's GOOD/MODERATE/POOR thresholds now justified with external anchors (ICC psychometrics, CMMI L4 defect escape rates, Six Sigma 3-sigma, empirical cross-model findings from Runs 3-4).
-- Cleaned METRICS_HISTORY.md: removed duplicate row and garbage row from broken-parser era. 5→3 rows.
-- Fixed SCORECARD non-goals: "7 skills" → "6 skills".
+- Cleaned METRICS_HISTORY.md: removed duplicate row and garbage row from broken-parser era. 5â†’3 rows.
+- Fixed SCORECARD non-goals: "7 skills" â†’ "6 skills".
 - Added verify-suite.ps1 Check 14: score-change/artifact-change correlation. Warns when non-zero score delta has zero artifact hash changes (or vice versa). Directly supports P3 convergence observability.
 
 ### Outcome
-- Dims 3 (7→8) and 7 (7→8) improved. Dim 5 unchanged (deferred — finding overlap requires structured data that doesn't exist yet).
-- Weakest dimension is now Dim 5 (Cross-Evaluator Reliability, 7) alone. All others â‰¥ 8.
+- Dims 3 (7â†’8) and 7 (7â†’8) improved. Dim 5 unchanged (deferred â€” finding overlap requires structured data that doesn't exist yet).
+- Weakest dimension is now Dim 5 (Cross-Evaluator Reliability, 7) alone. All others Ã¢â€°Â¥ 8.
 - verify-suite.ps1: 14 checks, 0 failures, 0 warnings.
 
 ---
@@ -1197,29 +1269,29 @@ Loop is healthy but narrowing. The highest-leverage move is not another Claude K
 | Target | TPS Skill Suite |
 | Model | Claude Opus 4.6 |
 | Trigger | First scored self-targeting run with context-derived measurement protocol (v2.2.0) |
-| Methodology | Kata → Kaizen |
+| Methodology | Kata â†’ Kaizen |
 
-### Measurements (Rubric v3, 8 dimensions — first measurement-protocol run)
+### Measurements (Rubric v3, 8 dimensions â€” first measurement-protocol run)
 
-| # | Dimension | Start | End | Δ |
+| # | Dimension | Start | End | Î” |
 |---|-----------|:-----:|:---:|:-:|
-| 1 | Process Completeness | 8 | 8 | — |
-| 2 | Causal Analysis | 8 | 8 | — |
+| 1 | Process Completeness | 8 | 8 | â€” |
+| 2 | Causal Analysis | 8 | 8 | â€” |
 | 3 | Measurement Validity | 6 | 7 | +1 |
 | 4 | Configuration Management | 8 | 9 | +1 |
-| 5 | Cross-Evaluator Reliability | 7 | 7 | — |
-| 6 | Instruction Clarity | 9 | 9 | — |
-| 7 | Convergence Integrity | 7 | 7 | — |
-| 8 | ARF | 8 | 8 | — |
+| 5 | Cross-Evaluator Reliability | 7 | 7 | â€” |
+| 6 | Instruction Clarity | 9 | 9 | â€” |
+| 7 | Convergence Integrity | 7 | 7 | â€” |
+| 8 | ARF | 8 | 8 | â€” |
 | | **Mean** | **7.625** | **7.875** | **+0.25** |
 
-Prior run measurements: N/A (first measurement-protocol run — this establishes the baseline).
+Prior run measurements: N/A (first measurement-protocol run â€” this establishes the baseline).
 
 ### Findings
 | # | Finding | Lens | Severity | Fixed? | Recurred? |
 |---|---------|------|:--------:|:------:|:---------:|
-| 1 | metrics.ps1 SCORECARD parser uses `(\S+)` for score fields — can't capture `7.875 (v3)`. Inter-Rater Agreement reports mean=10.35, range=8-48. Model Diversity parses full row as family name. 11 rows silently dropped. | Mura | High | Yes | First |
-| 2 | SCORECARD Current Status says v2.1.0 — should be v2.2.0 | Muda | Low | Yes | Run 13 |
+| 1 | metrics.ps1 SCORECARD parser uses `(\S+)` for score fields â€” can't capture `7.875 (v3)`. Inter-Rater Agreement reports mean=10.35, range=8-48. Model Diversity parses full row as family name. 11 rows silently dropped. | Mura | High | Yes | First |
+| 2 | SCORECARD Current Status says v2.1.0 â€” should be v2.2.0 | Muda | Low | Yes | Run 13 |
 
 ### Actions Taken
 - Replaced regex-based SCORECARD parser with split-based parser in metrics.ps1. All 50 rows now parse correctly. 0 POOR metrics (was 1).

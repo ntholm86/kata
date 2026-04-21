@@ -340,7 +340,7 @@ for ($i = $rows.Count - 1; $i -ge 0; $i--) {
     # Zero-delta action runs (CM fixes, sub-threshold housekeeping, etc.) that
     # are not explicitly marked 'silence' break the chain -- they are not P3
     # silence votes even though the score did not move.
-    if ($r.Result -notmatch '(?i)\(silence\)') { break }
+    if ($r.Result -notmatch '(?i)\(silence') { break }
     $silentChain += $r
 }
 $silentRuns = $silentChain.Count
