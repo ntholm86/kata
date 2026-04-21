@@ -3,6 +3,61 @@
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
 ---
+## Run 73 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Claude Sonnet 4.6 |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session — scores re-derived independently without prior-run anchoring (P3 independence requirement). |
+| Methodology | Kaizen (silence) |
+
+**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived without consulting Run 72's end score (9.125 confirmed after derivation — stable).
+
+### Pre-flight CM Check
+
+- `verify-suite.ps1`: **0 failures, 0 warnings** (all 14 checks pass)
+- `metrics.ps1`: Metric 7 computed=0, asserted=0, **no DRIFT**. Calibration 3 GOOD, 2 MODERATE, 0 POOR. No degradation from prior snapshot.
+
+Both tools clean. No CM drift.
+
+### Findings
+
+Read: all 5 methodology skills (kata, kaizen, kaikaku, hansei, shiken), kiroku/SKILL.md, PRINCIPLES.md, README.md, CHANGELOG.md.
+
+| # | Lens | Observation | Actionable? |
+|---|------|-------------|-------------|
+| 1 | Unevenness | Kiroku at v2.4.0 vs methodology skills at v2.6.1 — investigated: CHANGELOG consistently says "All 5 skill files"; verify-suite Check 4 does not flag it; convention is intentional (infrastructure vs methodology versioning tiers) | No |
+| 2 | D2 ceiling | Recurrence 13.3% MODERATE — structural, principled ceiling confirmed again | No |
+| 3 | Waste | None found | — |
+| 4 | Overburden | None found | — |
+| 5 | P1 drift | Re-checked all 5 skills for prescriptive drift — none found | — |
+
+**Conclusion:** No actionable findings. Zero artifact changes.
+
+### Verification
+
+No changes made — no regression to verify. verify-suite 0/0 pre- and post-run.
+
+### Measurements (Rubric v3)
+
+| Dimension | Start | End | Delta | Notes |
+|-----------|-------|-----|-------|-------|
+| D1 Process Completeness | 9.5 | 9.5 | 0 | All phases explicit. Evidence sections in all 4 non-Kata skills. Kata Step 1 requires measurement scheme. |
+| D2 Causal Analysis | 8 | 8 | 0 | 13.3% recurrence MODERATE — structural ceiling confirmed. |
+| D3 Measurement Validity | 8.5 | 8.5 | 0 | 11 operational metrics, no DRIFT, no POOR. |
+| D4 Configuration Management | 10 | 10 | 0 | verify-suite 0/0. |
+| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 families. P3 counter 0→1. |
+| D6 Instruction Clarity | 10 | 10 | 0 | P1-compliant, no prescriptive drift. |
+| D7 Convergence Integrity | 10 | 10 | 0 | Metric 7 correct, silence convention documented. |
+| D8 ARF | 9 | 9 | 0 | Open-ended skills. Run 70 Shiken PASS. Self-administered limitation. |
+| **Mean** | **9.125** | **9.125** | **+0.0** | |
+
+### Assessment
+
+Both pre-flight tools clean. Independent derivation: 9.125. Thorough diagnostic pass found nothing actionable — no unevenness, no overburden, no waste, no prescriptive drift. Kiroku versioning difference is intentional convention; D2 ceiling is structural. P3 counter advances 0→1. Two more consecutive silence runs from distinct fresh-session evaluators needed for convergence.
+
+---
 ## Run 72 - 2026-04-21
 
 | Field | Value |
