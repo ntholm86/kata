@@ -3,6 +3,66 @@
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
 ---
+## Run 74 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (self-targeting) |
+| Model | Claude Opus 4.7 |
+| Trigger | User-requested Kata self-targeting, P3 convergence attempt. Fresh session, distinct evaluator (Claude Opus 4.7) from Run 73's Claude Sonnet 4.6. Independence requirement honored: prior GENBA/SUMMARY read for context but score re-derived from current file state without anchoring. |
+| Methodology | Kaizen (silence) |
+
+**Measurement scheme:** Inheriting Rubric v3 — no revision. Independent re-derivation from current file state (P3 independence requirement). Start score derived before consulting Run 73's end score (9.125 confirmed after derivation — stable across two consecutive distinct evaluators).
+
+### Pre-flight CM Check
+
+- `verify-suite.ps1`: **0 failures, 0 warnings** (all 14 checks pass)
+- `metrics.ps1`: Metric 7 computed=1, asserted=1, **no DRIFT**. Calibration 3 GOOD / 2 MODERATE / 0 POOR. METRICS_HISTORY: no degradation from previous snapshot.
+
+Both tools clean. No CM drift since Run 73.
+
+### Findings
+
+Read: all 5 methodology skills (kata, kaizen, kaikaku, hansei, shiken), kiroku/SKILL.md, PRINCIPLES.md, README.md, CHANGELOG.md, SCORECARD.md.
+
+| # | Lens | Observation | Actionable? |
+|---|------|-------------|-------------|
+| 1 | Unevenness | Kiroku at v2.4.0 vs methodology skills at v2.6.1 — re-confirmed intentional (verifier Check 4 silent on it; CHANGELOG convention "All 5 skill files" excludes kiroku) | No |
+| 2 | Unevenness | All 5 methodology skills uniformly v2.6.1; SUMMARY/GENBA/SCORECARD aligned on Run 73 | — |
+| 3 | Overburden | Kata Step 1 (measurement scheme + Target Condition + assumptions + constraints + prior-run verification) — checked whether it is asking too much | No. Each sub-requirement earns its place via P2 (observable output) or P3 (independent derivation). Splitting fragments "grasp before act." |
+| 4 | Waste | Re-checked PRINCIPLES scope-clarification, Hansei "Retirement" subsection, ARF section length | None. Each earns place (anti-overclaim guard, P1 thinking tool, externally-validated metric definition). |
+| 5 | P1 drift | Re-checked all 5 skills for prescriptive checklists creeping in | None. All skills phrase as questions/destinations. |
+| 6 | P2 trail integrity | SUMMARY freshness (Run 73), INDEX completeness, GENBA archive split at Run 50 | Clean. Self-authorship marked. |
+| 7 | P3 counter integrity | Asserted vs computed counter | Aligned (computed=asserted=1). Run 73 `(silence)` marker correctly counted. |
+| 8 | D2 ceiling | Recurrence 13.3% MODERATE — structural ceiling re-confirmed | No new insight |
+
+**Conclusion:** No actionable findings. Zero artifact changes to skills, PRINCIPLES, CHANGELOG, or tooling. Only ledger artifacts (SCORECARD row, GENBA entry, SUMMARY status, session, INDEX) updated as required by Kata Step 5.
+
+### Verification
+
+No content changes — no regression to verify. `verify-suite.ps1` 0/0 pre- and post-run; `metrics.ps1` no DRIFT pre- and post-run.
+
+### Measurements (Rubric v3)
+
+Independent re-derivation from current file state (Run 73 end score not consulted before deriving).
+
+| Dimension | Start | End | Delta | Notes |
+|-----------|-------|-----|-------|-------|
+| D1 Process Completeness | 9.5 | 9.5 | 0 | All 6 Kata phases explicit. Evidence sections in non-Kata skills. Step 1 measurement-scheme requirement present. |
+| D2 Causal Analysis | 8 | 8 | 0 | Recurrence 13.3% MODERATE — structural ceiling. |
+| D3 Measurement Validity | 8.5 | 8.5 | 0 | 11 metrics operational, no DRIFT, 0 POOR, thresholds anchored. |
+| D4 Configuration Management | 10 | 10 | 0 | verify-suite 14/14, INTEGRITY hash stable, CHANGELOG contiguous. |
+| D5 Cross-Evaluator Reliability | 8 | 8 | 0 | 7 model families, stdev 0.7 MODERATE. P3 counter 1→2. |
+| D6 Instruction Clarity | 10 | 10 | 0 | P1-compliant, no prescriptive drift. |
+| D7 Convergence Integrity | 10 | 10 | 0 | Metric 7 mechanically grounded; silence convention enforced. |
+| D8 ARF | 9 | 9 | 0 | Open-ended skills, Run 70 Shiken PASS, multi-resolution trail. Self-administered limitation acknowledged. |
+| **Mean** | **9.125** | **9.125** | **+0.0** | |
+
+### Assessment
+
+Two consecutive distinct fresh-session evaluators (Claude Sonnet 4.6 Run 73, Claude Opus 4.7 Run 74) independently derived 9.125 with zero actionable findings. Both pre-flight tools clean both runs. P3 counter advances 1 → 2/3. One more consecutive silence run from a distinct fresh-session evaluator (ideally a non-Claude family — GPT or Gemini — to maximize convergence integrity) closes convergence at 3/3.
+
+---
 ## Run 73 - 2026-04-21
 
 | Field | Value |
