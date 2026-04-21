@@ -18,6 +18,7 @@ This repository uses a **dual-licensing model**:
 | **[kaikaku](kaikaku/SKILL.md)** | Radical redesign — when incremental improvement has converged too low or the architecture is wrong |
 | **[hansei](hansei/SKILL.md)** | Reflect on the improvement loop itself — surface blind spots, recurring findings, methodology gaps |
 | **[shiken](shiken/SKILL.md)** | Construct novelty probes that distinguish genuine reasoning from pattern-matching |
+| **[intent](intent/SKILL.md)** | Apply Commander's Intent to the user's prompt — interpret intent, narrate the interpretation, then act |
 | **[kiroku](kiroku/SKILL.md)** | Evidence trail management — start sessions, record decisions, close sessions, validate trail integrity |
 
 ## Principles
@@ -37,6 +38,7 @@ skills/
   kaikaku/SKILL.md        # Radical redesign
   hansei/SKILL.md         # Loop reflection
   shiken/SKILL.md         # Novelty probes
+  intent/SKILL.md         # Prompt interpretation (Commander's Intent applied to user input)
   kiroku/SKILL.md         # Evidence trail management
   kiroku/*.ps1            # Trail lifecycle scripts
   PRINCIPLES.md           # Constitutional layer

@@ -91,7 +91,7 @@ function Get-ScorecardRunRows {
     return $rows
 }
 
-$skills = @('kata', 'kaizen', 'kaikaku', 'hansei', 'shiken')
+$skills = @('kata', 'kaizen', 'kaikaku', 'hansei', 'shiken', 'intent')
 
 Write-Host "`n=== TPS Skill Suite - Mechanical Integrity Check ===" -ForegroundColor Cyan
 Write-Host "Suite root: $script:suiteRoot"

@@ -9,6 +9,16 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [2.8.0] - 2026-04-21
+
+### Added
+
+- **New skill: `intent/SKILL.md`.** A meta-skill that applies Commander's Intent (Principle 1) in reverse: the agent interprets the user's prompt rather than executing it literally. Operationalizes what was previously implicit — Principle 1 covered how skills should address the agent, but not how the agent should address imprecise user prompts. The skill requires three things before work begins: extract what the user actually wants (not the verb they used), narrate the interpretation visibly, and name the divergence between literal and interpreted. Designed to be shareable standalone — references the TPS Principles for grounding but does not require the other skills to be present. Does not participate in the cross-reference sibling requirements because it operates above the other skills, not alongside them. Added to verify-suite Check 1/2/4/6/8 (same mechanical integrity as other TPS skills) but not Check 3 (cross-references).
+
+### Changed
+
+- All skills bumped to v2.8.0 to reflect the suite addition.
+
 ## [2.7.1] - 2026-04-21
 
 ### Fixed
