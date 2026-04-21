@@ -1,6 +1,6 @@
 ---
 name: shiken
-version: 2.8.1
+version: 2.8.2
 description: 'Construct novelty probes that distinguish genuine situated reasoning from pattern-matching. Builds examination scenarios where routine execution fails but interpretation succeeds. Measures Autonomous Reasoning Fidelity. USE WHEN: test reasoning quality, construct novelty probes, is the agent actually reasoning, ARF measurement, shiken, novelty injection, anti-compliance test, distinguish reasoning from pattern-matching, stress test.'
 argument-hint: 'Specify the skill or system to probe, and optionally the aspect of reasoning to test'
 ---

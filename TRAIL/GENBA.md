@@ -2,6 +2,41 @@
 
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
+## Run 85 - 2026-04-21
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite — scoped to intent/SKILL.md |
+| Model | Claude Sonnet 4.6 |
+| Trigger | User explicit request: "Please run kata on the intent skill." First Kata cycle scoped to the newborn intent skill (born v2.8.0, Kata-integrated v2.8.1). |
+| Methodology | Kaizen (incremental; structure sound, targeted fixes) |
+
+**Measurement scheme:** New bespoke micro-scheme for a single-skill-file target — Rubric v3 is suite-level and does not apply cleanly to one document. Four measurements derived: (1) P1 compliance of the skill itself (does it teach destination + vocabulary rather than prescribe a checklist?); (2) internal consistency (frontmatter vs body, naming, cross-references); (3) observability of output (can an observer verify Intent actually ran?); (4) shareability (is the outside-TPS path operational or just claimed?). **Re-derivation: new scoped scheme (bespoke, not Rubric v3).** Rubric v3 is used for the suite-level score below; the bespoke scheme drove the diagnosis.
+
+**Key findings:**
+1. **`argument-hint` frontmatter was stale.** Said "Automatic — not invoked explicitly" while the body now documents both Kata Step 0 and standalone-invocation — explicit paths. The skill's public-facing manifest contradicted its own body.
+2. **"Extract" phrased as a three-question checklist.** The skill whose purpose is to apply P1 to user prompts was itself mildly non-compliant with P1 — "answer three questions" is prescriptive in the exact shape the principle warns against. The questions are good vocabulary; only the *instruction to answer a fixed count* was the defect.
+3. **"Narrate" section's "minimum content" overlapped with Extract probes.** Two partially overlapping checklists compound the compliance risk.
+4. **"Standalone" collision.** One word carrying two concepts (within-TPS-outside-Kata vs porting-outside-TPS).
+5. **Porting section thin.** Two sentences for a skill explicitly marketed as shareable to colleagues.
+
+**What was done:**
+- All 5 findings actioned in a single doc-edit pass to `intent/SKILL.md`. See CHANGELOG [2.8.2] for per-finding resolution.
+- All 5 skills bumped 2.8.1 → 2.8.2.
+- CHANGELOG [2.8.2] entry.
+
+**Verification:** verify-suite 14/14, 0 failures, 1 warning (Hansei cadence plateau — unchanged from v2.7.1/v2.8.0/v2.8.1).
+
+**Measurements:** D1=9.5, D2=8, D3=8.5, D4=10, D5=8, D6=10, D7=10, D8=9 → mean=9.125. Delta: +0.0. Same rationale as Runs 83/84: the rubric doesn't directly reward document-level P1 refinement or naming-collision fixes. D8 (Autonomous Reasoning Fidelity) arguably ticks up — the diagnosis found a P1 tension *before* it produced behavior drift — but self-congratulation in the same run that introduces the refinement is not warranted. Score movement deferred to the next cross-family evaluator.
+
+**Assessment:** Intent skill now internally consistent with the principle it teaches. Three invocation modes (Kata Step 0 / standalone-within-TPS / ported-outside-TPS) cleanly disambiguated. v2.8.2. P3 counter resets 0/3.
+
+[!DECISION] Derived a bespoke micro-scheme rather than forcing Rubric v3 onto a single-skill-file target. Rubric v3 is suite-level. For a scoped Kata on one document, the dimensions that matter are different (P1-compliance-of-the-artifact, internal consistency, observability-of-output, shareability). Recording as Re-derivation: new rather than inherited or divergent.
+[!DECISION] Deferred two lower-value findings (no narration exemplar; re-extract loop is buried in "Act"). Scope kept tight to highest-leverage items. Recorded as known-unactioned for a future pass.
+[!REALIZATION] The highest-leverage finding was the one that would have damaged the skill's credibility most: a skill teaching P1 while mildly violating P1 in its own structure. Fixed before it produced real behavior drift. This is what the holistic-scan discipline (added in Run 84) was for — the defect was in the skill's framing, not in its recent edits, so change-scoped diagnosis would have missed it.
+
+---
+
 ## Run 84 - 2026-04-21
 
 | Field | Value |

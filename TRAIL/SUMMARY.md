@@ -1,6 +1,6 @@
-﻿# Trail Summary
+# Trail Summary
 
-*Last updated: 2026-04-21 - Run 84: Kata (holistic-scan discipline) — Claude Sonnet 4.6. Added rule to kata/SKILL.md Step 2 requiring the whole artifact to be scanned after 3 consecutive change-scoped runs. Repaired 249-line GENBA mojibake block deferred through Runs 82 and 83. Caught a subagent hallucination mid-run and corrected it (Principle 2 self-application: visible ≠ correct). All 5 skills at v2.7.1. verify-suite 0 failures (was 249). P3 counter resets to 0/3. Score 9.125→9.125 (+0.0).*
+*Last updated: 2026-04-21 - Run 85: Kata scoped to intent/SKILL.md - Claude Sonnet 4.6. First Kata cycle on the newborn intent skill (born v2.8.0, integrated v2.8.1). 5 findings actioned: stale argument-hint frontmatter, P1 tension in "Extract" (skill teaching P1 was itself checklist-shaped), redundant "Narrate" list, "Standalone" naming collision, thin porting section. Bespoke micro-scheme used for diagnosis (Rubric v3 is suite-level); Rubric v3 scored for suite-level delta (9.125 -> 9.125, +0.0, movement deferred). All skills at v2.8.2. verify-suite 0 failures. P3 counter resets to 0/3.*
 *This summary is self-authored. Cross-verify with the session transcripts for independent confirmation.*
 
 ---

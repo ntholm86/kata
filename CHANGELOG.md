@@ -9,6 +9,19 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [2.8.2] - 2026-04-21
+
+### Changed
+
+- **`intent/SKILL.md`: Kata-on-intent Run 85 refinements.** First Kata cycle scoped to the newborn intent skill. Five findings actioned:
+  - **Frontmatter `argument-hint` updated.** Previously claimed "Automatic — not invoked explicitly," which contradicted the Kata Step 0 and standalone-invocation paths documented in v2.8.1. Now reflects the three actual invocation modes.
+  - **"Extract" section de-checklisted.** Previous phrasing "answer three questions" framed the probes as a fixed list — the exact shape Principle 1 warns against. Rewritten so the three probes are presented as vocabulary and examples, not required items, with explicit "these are probes, not a checklist" framing. The skill teaching P1 now embodies P1 in its own structure.
+  - **"Narrate" redundant checklist removed.** The "minimum content" list partially overlapped with Extract's probes and risked compliance-shaped narration. Replaced with a destination-level statement: enough content for the user to catch a wrong interpretation cheaply.
+  - **Naming collision resolved.** "Standalone invocation" (within TPS, outside Kata) and "Standalone Use (outside TPS)" (porting) shared the word "standalone" for two different concepts. Renamed to "Inside Kata" / "Outside Kata, inside TPS" / "Porting Outside TPS" for sharp disambiguation.
+  - **"Porting Outside TPS" expanded.** Previously two sentences. Now operational: lists the specific cross-references to replace, what the "kiroku session's Intent section" maps to in non-TPS environments, and which sections can be dropped without loss of meaning.
+
+All 5 skills bumped 2.8.1 → 2.8.2 for suite-version alignment. No other skill behavior changes.
+
 ## [2.8.1] - 2026-04-21
 
 ### Changed

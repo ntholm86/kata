@@ -1,8 +1,8 @@
 ---
 name: intent
-version: 2.8.1
+version: 2.8.2
 description: 'Apply Commander''s Intent to the user''s own prompt before acting. Interpret what the user is trying to achieve, not what they literally wrote. Narrate the interpretation so the user can correct drift before work begins. USE WHEN: any substantive user request that implies work (build, fix, improve, explain, investigate, decide). SKIP WHEN: the request is unambiguous and mechanical (a specific file read, a one-line command, a yes/no confirmation).'
-argument-hint: 'Automatic — applies to the incoming prompt, not invoked explicitly'
+argument-hint: 'Usually triggered automatically by any substantive user prompt; can also be invoked explicitly (''apply intent to this request'') or as Kata Step 0'
 ---
 
 # Intent
@@ -19,19 +19,19 @@ This skill makes that interpretation explicit and visible.
 
 ### Extract
 
-Before doing anything else, answer three questions about the prompt:
+Before doing anything else, understand the destination the prompt is pointing at and the reason behind it. The literal words are compression; the task is decompression. Probes that help decompression:
 
-**What does the user actually want?** Not the verb they used — the outcome they're after. "Rewrite this function" might mean "make it shorter," "make it correct," "make it match the rest of the codebase," or "teach me how you'd write it." These are different tasks. Which one makes the rest of what they said make sense?
+- **What outcome does the user actually want?** Not the verb they used — the end-state that makes the rest of what they said make sense. "Rewrite this function" might mean make-it-shorter, make-it-correct, match-the-codebase, or teach-me-how-you'd-write-it. These are different tasks.
+- **Why do they want it?** The reason reshapes the work. "Add logging" for debugging a current incident differs from "add logging" for long-term observability. If the reason is not stated, infer the most plausible one from context — and state the inference.
+- **What would count as a wrong interpretation?** Name alternatives you considered and rejected, and why. If you cannot name one, you probably did not interpret — you pattern-matched.
 
-**Why do they want it?** The reason reshapes the work. "Add logging" for debugging a current incident is different from "add logging" for long-term observability. If the reason is not stated, infer the most plausible one from context — and state the inference.
-
-**What would count as a wrong interpretation?** Name the alternative readings you considered and rejected, and why. If you can't name one, you probably didn't interpret — you pattern-matched.
+These are probes, not a checklist. If the situation calls for different probes, ask different ones. The destination is understanding the user's real request; the probes are one route.
 
 ### Narrate
 
-State the interpretation before acting. Brief is fine; silent is not. The user cannot correct a misreading they can't see.
+State the interpretation before acting. Brief is fine; silent is not. The user cannot correct a misreading they cannot see.
 
-Minimum content: what you took them to mean, what you're about to do, and the strongest alternative interpretation you considered. If the prompt was unambiguous, say so in one line and proceed — but say it.
+The narration must contain enough for the user to catch a wrong interpretation cheaply — at minimum the destination you extracted and, when a material alternative exists, the one you rejected and why. If the prompt was unambiguous, say so in one line and proceed — but say it.
 
 ### Check the Gap
 
@@ -71,10 +71,14 @@ This skill runs first. Other TPS skills (Kata, Kaizen, Kaikaku, Hansei, Shiken) 
 
 When the prompt invokes a specific methodology ("run Kata on X"), Intent still applies — "run Kata" is itself an interpretable statement. The user might mean the full orchestration, a specific phase, or merely the vocabulary.
 
-**Kata integration:** Intent is Step 0 of the Kata cycle (see [kata/SKILL.md](../kata/SKILL.md)). Every Kata run begins with Intent extraction before grasping the target. The interpretation is recorded in the kiroku session's Intent section and is part of the evidence trail.
+**Inside Kata:** Intent is Step 0 of the Kata cycle (see [kata/SKILL.md](../kata/SKILL.md)). Every Kata run begins with Intent extraction before grasping the target. The interpretation is recorded in the kiroku session's Intent section and is part of the evidence trail.
 
-**Standalone invocation:** Intent can also be invoked independently of Kata, in the same way kiroku can be invoked without running a full improvement cycle. Any conversation involving a substantive request — design discussion, code question, architectural decision, bug investigation — benefits from the extract/narrate/check-gap sequence regardless of whether a Kata cycle is running. When used standalone, the narration goes into the conversation; no session file is required unless the work ends up producing one.
+**Outside Kata, inside TPS:** Intent can be invoked on its own for any substantive request that is not otherwise running a Kata cycle — design discussion, code question, architectural decision, bug investigation. The extract / narrate / check-gap sequence still applies. The narration goes into the conversation; no session file is required unless the work ends up producing one. Same pattern as invoking kiroku alone.
 
-## Standalone Use (outside TPS)
+## Porting Outside TPS
 
-This skill is designed to be shareable independently. It references the TPS Principles for grounding but does not require the other TPS skills to be present. If adopted alone in another environment, replace the cross-references with equivalents in that environment, or keep them as-is — the principle they point to is not TPS-specific.
+This skill is designed to be shareable on its own. It does not require the other TPS skills to run — the work it describes (extract, narrate, check the gap, act) stands alone. When adopting it in a non-TPS environment:
+
+- Replace the cross-reference to [PRINCIPLES.md](../PRINCIPLES.md#principle-1-commanders-intent) with a local pointer to wherever Commander's Intent is defined in that environment, or keep it as-is — the principle is not TPS-specific.
+- The reference to "kiroku session's Intent section" under Visibility Requirements means: wherever your environment keeps a durable record of a working session, the interpretation belongs there verbatim. If no such record exists, the conversation itself is the trail.
+- The references to Kata Step 0 and to kiroku-standalone patterns can be dropped without loss — they describe how Intent composes with the rest of TPS, not how Intent itself works.
