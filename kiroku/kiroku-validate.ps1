@@ -268,43 +268,8 @@ if ($secretHits -eq 0) {
     Pass "No high-confidence secret patterns detected in trail artifacts"
 }
 
-# Check 8: Pending Handoff section (next-session bootstrapping)
-Write-Host "`nCheck 8: Pending Handoff section"
-if (Test-Path $summaryPath) {
-    $summaryContent = [System.IO.File]::ReadAllText($summaryPath, [System.Text.Encoding]::UTF8)
-    $handoffMatch = [regex]::Match($summaryContent, '(?ms)^##\s+Pending Handoff\s*(.*?)(?=^##\s+|\z)')
-    if (-not $handoffMatch.Success) {
-        Fail "SUMMARY.md missing '## Pending Handoff' section (kiroku envelope for next-session bootstrapping)"
-    } else {
-        $handoffBody = $handoffMatch.Groups[1].Value
-        $cleanHandoff = ([regex]::Replace($handoffBody, '(?ms)<!--.*?-->', '')).Trim()
-        # Strip the schema's italic instruction line so it doesn't count as content
-        $cleanHandoff = ($cleanHandoff -split "`n" | Where-Object { $_ -notmatch '^\s*\*[^*].*\*\s*$' }) -join "`n"
-        $cleanHandoff = $cleanHandoff.Trim()
-
-        if ([string]::IsNullOrWhiteSpace($cleanHandoff)) {
-            Fail "Pending Handoff section is empty (must be 'None - work complete.' sentinel or a filled envelope)"
-        } elseif ($cleanHandoff -match 'None\s*[\u2014\-]\s*work complete') {
-            Pass "Pending Handoff resolved: None - work complete"
-        } else {
-            $requiredFields = @('Target model family', 'Reading order', 'Task statement')
-            $missing = @()
-            foreach ($field in $requiredFields) {
-                if ($cleanHandoff -notmatch [regex]::Escape($field)) {
-                    $missing += $field
-                }
-            }
-            if ($missing.Count -gt 0) {
-                Fail "Pending Handoff envelope missing required fields: $($missing -join ', ')"
-            } else {
-                Pass "Pending Handoff envelope present and well-formed"
-            }
-        }
-    }
-}
-
-# Check 9: Performance guardrail
-Write-Host "`nCheck 9: Performance guardrail"
+# Check 8: Performance guardrail
+Write-Host "`nCheck 8: Performance guardrail"
 $timer.Stop()
 $sessionTotalBytes = ($sessionFiles | Measure-Object -Property Length -Sum).Sum
 if (-not $sessionTotalBytes) {

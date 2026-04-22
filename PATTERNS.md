@@ -31,7 +31,7 @@ When P3 (Convergence Is Silence) requires diverse independent evaluator scrutiny
 
 - **Pool:** N ≥ 3 distinct model families (e.g., Claude / Gemini / Grok / GPT). N can grow as more families become available; the pattern is monotone in N.
 - **Per-peg discipline:** cold derivation from source documents (PRINCIPLES.md, PROBLEM.md, PROOF.md), then comparison to existing rubric. Reading prior runs' session logs **before** independent derivation contaminates the peg.
-- **Carrier:** `TRAIL/SUMMARY.md → ## Pending Handoff` envelope (kiroku v2.5.0+). Envelope is methodology-agnostic; payload (target family, reading order, do-not-read list, verbatim task statement) is methodology-specific.
+- **Carrier:** the Pending Handoff envelope convention (PT-002). Envelope is methodology-agnostic; payload (target family, reading order, do-not-read list, verbatim task statement) is methodology-specific.
 - **Silence outcome:** convergence chain advances when N consecutive pegs reproduce the same dimensions and score with no additive or contradictory finding.
 - **Divergence outcome:** legitimate signal that the rubric or scored artifact has changed materially; recorded as such, not reconciled away.
 - **Contamination disclosure:** any prior conversation context (the agent having read the target in the same chat, the agent having authored prior-turn prescriptions on the same proposal) must be disclosed and the run excluded from the chain.
@@ -50,9 +50,52 @@ If parallel multi-family orchestration becomes available and produces strictly s
 
 ### Skills that reference or implement this pattern
 
-- **kiroku** (v2.5.0+) — provides the Pending Handoff envelope that carries state between pegs.
-- **kata** — typically the methodology that opens and closes the per-peg sessions, but the pattern is methodology-agnostic and works equally well for per-skill-convergence runs (e.g., Intent skill peg chain).
-- **shiken** — probe construction can be subjected to the same chain when independent probe authorship across families is desirable.
+None. The pattern is satisfied by data convention (PT-002), not by skill behavior. Any methodology (kata, per-skill-convergence runs, shiken probe authorship across families) can use it.
+
+---
+
+## PT-002 — Pending Handoff Envelope in Trail Summary
+
+**Status:** Validated (2026-04-22). Used by PT-001 instances on this repo and on `c:\git\manifesto`.
+
+**Validated instances:**
+- `C:\Users\admin\.copilot\skills\TRAIL\SUMMARY.md` carrying the GPT peg-3 brief between sessions.
+- `c:\git\manifesto\TRAIL\SUMMARY.md` carrying the closed-chain sentinel after Runs 4–6.
+
+### The pattern
+
+When work spans multiple sessions and the next session may run in a different model family or after context loss, the closing agent writes a **Pending Handoff** envelope into `TRAIL/SUMMARY.md`. The opening agent of the successor session reads only `TRAIL/SUMMARY.md`, finds the envelope, and follows it. No skill, no methodology, no tooling enforcement is required — the convention is a data convention layered on top of the existing trail.
+
+### Envelope schema
+
+A `## Pending Handoff` section in `TRAIL/SUMMARY.md` containing **either** the sentinel:
+
+> `None — work complete.`
+
+**or** the following fields:
+
+- **Target model family:** which family the next session should use (or "any").
+- **Important context:** what changed since the prior peg that the successor must know.
+- **Reading order:** ordered list of files the successor reads first, with rationale.
+- **Do NOT read:** files that would contaminate cold derivation.
+- **Task statement:** verbatim prompt to paste into the fresh session.
+- **Closed by:** the session log that authored this envelope.
+
+### Why this is a separable pattern
+
+The envelope is **data**, not skill behavior. It does not interpret, score, derive, or reason — it is a structured note left in a file the next agent will read anyway. Embedding it in a skill would (a) bind a methodology-agnostic convention to a specific skill's lifecycle, and (b) require bumping the skill artifact every time the envelope schema changes, which disturbs principle-level convergence chains scored against that skill.
+
+The convention is enforceable mechanically (regex on the SUMMARY section) but the enforcement is optional and lives outside the skill suite — for example, a project-local pre-commit hook or a methodology's own validator. The skill suite itself takes no position on whether a project must use this pattern.
+
+### When NOT to use
+
+- Single-session work with no successor.
+- Work where the successor will be the same agent in the same context (no handoff actually occurs).
+- Projects whose trail layer is not `TRAIL/SUMMARY.md` (the pattern is specific to that file location; an analogue could be defined for other layouts but is a different pattern).
+
+### Skills that reference or implement this pattern
+
+None. By design.
 
 ---
 
