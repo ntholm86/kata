@@ -1,6 +1,6 @@
 ---
 name: intent
-version: 2.9.0
+version: 2.10.0
 description: 'Apply Commander''s Intent to the user''s own prompt before acting. Interpret what the user is trying to achieve, not what they literally wrote. Narrate the interpretation so the user can correct drift before work begins. USE WHEN: any substantive user request that implies work (build, fix, improve, explain, investigate, decide). SKIP WHEN: the request is unambiguous and mechanical (a specific file read, a one-line command, a yes/no confirmation).'
 argument-hint: 'Usually triggered automatically by any substantive user prompt; can also be invoked explicitly (''apply intent to this request'') or as Kata Step 0'
 ---

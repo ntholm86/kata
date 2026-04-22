@@ -9,6 +9,18 @@ and this project adheres to a custom versioning scheme.
 
 ## [Unreleased]
 
+## [2.10.0] - 2026-04-22
+
+### Changed
+
+- **Manifesto Externalization:** The theoretical foundation of the framework (`PROBLEM.md` and `PRINCIPLES.md`) has been extracted to an external, independent repository (`c:\git\manifesto\`). The previous architecture forced the TPS suite's tool-specific scorecard to evaluate the framework's overarching theory, conflating implementation details with constitutional principles. The suite now consumes the Manifesto as external Commander's Intent rather than owning it.
+- **Rubric v4 (Derived Scheme):** The SCORECARD has been reset and thoroughly re-derived using the new external Manifesto as ground truth. The conflated Rubric v3 has been archived (`TRAIL/SCORECARD_ARCHIVE_v3.md`). 
+  - **Six New Dimensions:** D1 Intent Fidelity, D2 Resolution Coverage, D3 Convergence Integrity, D4 Transferability, D5 Artifact Integrity, D6 ARF Evidence.
+  - **Anchored to Delegability:** The new dimensions directly assess the four-question deployer delegability test from the Manifesto.
+  - **Metrics Alignment:** P3 counter reset to 0/3.
+
+All 6 skills bumped 2.9.0 → 2.10.0. No skill-behavior changes. Minor version bump for major architectural decoupling and measurement substrate reset.
+
 ## [2.9.0] - 2026-04-21
 
 ### Changed

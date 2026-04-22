@@ -1,6 +1,6 @@
 ---
 name: kaizen
-version: 2.9.0
+version: 2.10.0
 description: 'Incremental improvement - diagnose, challenge blind spots, prioritize by impact, implement, verify. The core improvement cycle. Includes diagnostic vocabulary for unevenness, overburden, and waste. USE WHEN: audit, review, rate, improve, make impressive, quality loop, iterate, kaizen, evolve this, what would make this better, ROI analysis, blind spots, what am I missing.'
 argument-hint: 'Specify the target to improve and optionally a focus area or quality concern'
 ---

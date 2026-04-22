@@ -1,6 +1,6 @@
 ---
 name: hansei
-version: 2.9.0
+version: 2.10.0
 description: 'Reflect on the improvement loop itself. Examine the trail, surface recurring findings, blind spots, methodology effectiveness, and what the loop has been ignoring. Meta-improvement - improving the improvement process. USE WHEN: reflect, retrospective, what are we missing, blind spots in the loop, why does this keep recurring, hansei, examine the trail, meta-improvement, loop critique, what hasnt worked, why is the score plateauing.'
 argument-hint: 'Specify the target whose improvement history to reflect on, and optionally a specific concern about the loop'
 ---

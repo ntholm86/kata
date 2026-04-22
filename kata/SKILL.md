@@ -1,6 +1,6 @@
 ---
 name: kata
-version: 2.9.0
+version: 2.10.0
 description: 'Orchestrate an improvement cycle: diagnose, select methodology, execute, record, persist. The meta-pattern that connects all skills into a coherent workflow. USE WHEN: improve, audit, review, full treatment, kata, run the loop, comprehensive improvement, what does this project need.'
 argument-hint: 'Specify the target (project, file, system) and optionally a focus area or concern'
 ---
