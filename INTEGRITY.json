@@ -1,5 +1,5 @@
 ﻿{
-    "last_verified":  "2026-04-22T04:06:29.1728577+02:00",
+    "last_verified":  "2026-04-22T04:25:00.8438829+02:00",
     "suite_version":  "2.10.0",
     "latest_scored_run":  null,
     "files":  {
@@ -11,10 +11,10 @@
                   "intent/SKILL.md":  "4E918F310BB83516",
                   "TRAIL/GENBA.md":  "B616D3C2D6C8CC6F",
                   "TRAIL/GENBA_ARCHIVE.md":  "B9080FDE0EDF1577",
-                  "SCORECARD.md":  "4354301B4B385F80",
+                  "SCORECARD.md":  "7987D84D5DA9BCA8",
                   "CHANGELOG.md":  "05E3ACE5FF1EA37F",
                   "STANDARDS.md":  "7A678D46046EC38E",
-                  "METRICS_HISTORY.md":  "42673A6C6F93941C",
+                  "METRICS_HISTORY.md":  "0F6C25BAFC27D4F0",
                   "verify-suite.ps1":  "8B122DCB24639C38",
                   "metrics.ps1":  "F4171874CAD6731B"
               }
