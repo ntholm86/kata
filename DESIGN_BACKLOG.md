@@ -102,3 +102,63 @@ Do nothing now. Revisit when (a) a colleague actually evaluates the suite and th
 **Why parked:** Same constraints as triangulation generally — Copilot Chat lacks model-rotation automation, and the empirical question of whether cross-family scoring divergence is large enough to justify the cost has not been answered. Belongs to the same downstream validation track as the triangulation pattern.
 
 **Not adopted. No skill files change.**
+
+---
+
+## DB-003 — Multi-family × multi-phase + judges as a generalized pattern
+
+**Status:** Parked (recorded 2026-04-22). User flagged as "important thoughts — please note these things so we don't forget."
+
+**Origin:** Conversation 2026-04-22 after building the kiroku Pending Handoff envelope (kiroku v2.5.0). User observation: *"I am starting to see darkness at the end of the tunnel."*
+
+### The pattern (user's own framing, captured)
+
+> Multiple families running on multiple phases + judges = consolidation (applying this pattern everywhere meaningfully, the pool of X families can be big or small — it will only improve quality) + handover to next phase (the handover is also the documentation/proof — argues why this should be in kiroku, but it's still tied to kata so it's hard to solve in a standardized way). This can be applied many many places — one other place it will be valuable to apply is the hansei.
+
+### What this generalizes
+
+DB-001 (per-phase artifacts), DB-002 (cross-family scoring), and the kiroku Pending Handoff section that just shipped are all **instances of the same underlying pattern**:
+
+1. A unit of work (a phase, a scoring round, a Hansei reflection) is performed by **N independent agents from distinct families**.
+2. Their outputs are **consolidated by a judge step** (which may itself be multi-family).
+3. The consolidated artifact is **handed off** to the next unit of work — and the handoff itself is the **proof/documentation** that the consolidation happened.
+
+The pool size N is variable. N=1 is the current default. N=2 already produces useful divergence/silence signal (this is what the P3 chain demonstrates today, just sequentially over time). N=3+ converts P3 from sequential to parallel and removes the temporal-contamination risk of "evaluator reads prior runs."
+
+### Where this could apply (named examples, non-exhaustive)
+
+- **Scoring** (DB-002): N families score independently → judge consolidates → recorded score preserves divergence.
+- **Per-phase Kata work** (DB-001): N families execute the phase → judge consolidates → next phase receives consolidated artifact.
+- **Hansei reflection** (newly named): N families reflect on the same trail independently → judge consolidates blind-spots → produces a reflection artifact richer than any single agent could produce. This is particularly valuable because Hansei's failure mode is precisely the agent failing to see its own blind spots — multi-family Hansei is the mechanical answer to that.
+- **Shiken probe construction:** N families construct novelty probes independently → judge selects/consolidates → reduces the risk that probes only catch failure modes the probe-author already knew about.
+- **Intent interpretation:** N families interpret the user's prompt independently → divergence in interpretation surfaces ambiguity in the prompt itself, which is upstream evidence for Commander's Intent.
+
+### Why the handoff-is-proof claim matters
+
+In the current architecture, handoff content is methodology-shaped (Kata's handoff differs from a Shiken handoff differs from a Hansei handoff). Kiroku owns only the envelope (Pending Handoff section in SUMMARY.md, v2.5.0). The user's point: under the generalized pattern, the consolidated handoff artifact *is* the proof of the multi-family consolidation having happened — there is nothing to prove separately. This strengthens the case that handoff is fundamentally a P2/Kiroku concern, while leaving the payload methodology-specific (preserving the one-skill-one-principle rule).
+
+The friction the user names: "it's still tied to kata so it's hard to solve in a standardized way." The envelope/payload separation we just shipped is a partial answer — kiroku owns the standard envelope; methodology owns the payload — but the *consolidation* step (multiple agents → one artifact) is not yet a kiroku primitive. It would need to be, for the pattern to generalize cleanly.
+
+### Blocker (named honestly)
+
+**Technology.** Full implementation requires programmatic model-family rotation within a single workflow — the ability for a script (or a kiroku command) to invoke "the same task across N distinct families and collect N artifacts." Copilot Chat today does not expose this; the user has to manually open chats in different model pickers. This is an external blocker, not a design defect.
+
+User's own note: *"it will probably come soon — that's one blocker."*
+
+Until then, the pattern is approximated **sequentially** (different families across different sessions, with kiroku Pending Handoff carrying the baton). That is exactly what the P3 silence chains do today. The generalized pattern, parallelized, is what arrives once the orchestration layer matures.
+
+### What to do now
+
+- **Do nothing structural.** This is a future-looking design note, not a current implementation.
+- **Watch for instances.** When a new skill or workflow asks "should this run across multiple families?", recognize it as an instance of DB-003 and treat the answer consistently.
+- **When the orchestration layer arrives** (Copilot Chat or alternative), the natural first targets are:
+  1. Scoring (DB-002 immediately becomes mechanizable).
+  2. Hansei (newly named — high value because it directly attacks the single-agent blind-spot problem).
+  3. Shiken probe construction.
+- **Architectural note for future work:** the consolidation step (judge over N artifacts) should likely live in kiroku as a primitive (`kiroku-consolidate.ps1` or similar), keeping the pattern envelope/payload-clean rather than duplicating it in every methodology skill.
+
+### What this entry is NOT
+
+- Not a current commitment.
+- Not a manifesto-level claim. The Manifesto already names "Evaluator independence and diversity" as an open problem in `What Must Be Built on Top`; this entry is one *implementation pattern* candidate for that, not a principle.
+- Not blocked on us. Blocked on tooling that is plausibly inbound.
