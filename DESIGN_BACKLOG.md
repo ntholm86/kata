@@ -162,3 +162,9 @@ Until then, the pattern is approximated **sequentially** (different families acr
 - Not a current commitment.
 - Not a manifesto-level claim. The Manifesto already names "Evaluator independence and diversity" as an open problem in `What Must Be Built on Top`; this entry is one *implementation pattern* candidate for that, not a principle.
 - Not blocked on us. Blocked on tooling that is plausibly inbound.
+
+### Promotion path (if and when evidence accrues)
+
+The user proposed (2026-04-22) elevating this to a 4th principle: *"Cross-Phase Multi-Model Consolidation."* Declined for now on three grounds: (a) P3 (Convergence Is Silence) already states the abstract claim — this pattern is one *operationalization* of P3, not a separate principle; (b) the empirical assertion (higher robustness, lower bias, greater trustworthiness than single-model or single-phase ensembles) is unproven and PROOF.md's discipline requires evidence before principle-level claims; (c) PROBLEM.md `What Must Be Built on Top` already accommodates it correctly as an implementation problem.
+
+If empirical evidence eventually demonstrates that **parallel** cross-phase multi-family consolidation produces strictly stronger signal than the **sequential** P3 silence chains we use today, the natural promotion path is a **P3 refinement** (analogous to how P2 gained the "resolution requirement" refinement), not a 4th principle. A standalone 4th principle would only be justified if the pattern addresses a failure mode that P3 cannot detect — currently no such failure mode is named.
