@@ -1,7 +1,7 @@
 ﻿{
-    "last_verified":  "2026-04-22T08:35:10.7880020+02:00",
+    "last_verified":  "2026-04-22T14:29:50.6139028+02:00",
     "suite_version":  "2.11.0",
-    "latest_scored_run":  91,
+    "latest_scored_run":  97,
     "files":  {
                   "kata/SKILL.md":  "93C4C73AF52A2E60",
                   "kaizen/SKILL.md":  "57CE496566D2A5D9",
@@ -9,13 +9,13 @@
                   "hansei/SKILL.md":  "7B16546967ED4F79",
                   "shiken/SKILL.md":  "E138D547E8E124EE",
                   "intent/SKILL.md":  "563776EB54491D5C",
-                  "TRAIL/GENBA.md":  "43C787BBD9BD2F1B",
+                  "TRAIL/GENBA.md":  "F2E009C9E5A125A9",
                   "TRAIL/GENBA_ARCHIVE.md":  "B9080FDE0EDF1577",
-                  "SCORECARD.md":  "4D01A3C8D1B6AF10",
+                  "SCORECARD.md":  "EE7652588E81E7F7",
                   "CHANGELOG.md":  "E84B8E22B99EBF66",
                   "STANDARDS.md":  "7A678D46046EC38E",
                   "METRICS_HISTORY.md":  "A99596084202D383",
-                  "verify-suite.ps1":  "8B122DCB24639C38",
+                  "verify-suite.ps1":  "DDE6833225BE173E",
                   "metrics.ps1":  "F4171874CAD6731B"
               }
 }

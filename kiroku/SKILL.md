@@ -1,6 +1,6 @@
 ---
 name: kiroku
-version: 2.4.0
+version: 2.5.0
 description: 'Evidence trail management. Start sessions, record decisions during work, close sessions, index decisions, validate trail integrity. The implementation of Observable Autonomy (Principle 2). USE WHEN: start session, record trail, kiroku, audit trail, evidence, close session, validate trail, begin work, observable autonomy, track decisions.'
 argument-hint: 'Specify the target project path where TRAIL/ should be managed'
 ---
@@ -157,7 +157,7 @@ Scans all session files for `[!DECISION]` markers. Extracts decision text, ratio
 .\kiroku-validate.ps1 -Project "C:\git\mathkit"
 ```
 
-Validates 8 checks:
+Validates 9 checks:
 1. Trail structure (SUMMARY, INDEX, sessions/, README exist)
 2. Session headers and scope correctness (fidelity/source/project target)
 3. Decision count consistency (sessions vs INDEX)
@@ -165,7 +165,8 @@ Validates 8 checks:
 5. Open-session safety (single open session, non-empty Trigger/Intent, stale session detection)
 6. Fidelity honesty (verbatim or mixed claims require verbatim markers)
 7. Secret hygiene (high-confidence credential patterns)
-8. Validation performance guardrail (runtime visibility)
+8. Pending Handoff section present and resolved (next-session bootstrapping)
+9. Validation performance guardrail (runtime visibility)
 
 ## Fidelity honesty
 
@@ -174,6 +175,43 @@ VS Code Copilot Chat does not expose an API for exporting conversation transcrip
 ## After a session
 
 1. Run `kiroku-close.ps1` to finalize the session
-2. Update `TRAIL/SUMMARY.md` with current status
+2. Update `TRAIL/SUMMARY.md` with current status, including the **Pending Handoff** section (see below)
 3. Run `kiroku-validate.ps1` to check consistency
 4. Commit the TRAIL/ changes alongside any code changes
+
+## Pending Handoff (next-session bootstrapping)
+
+Work that spans session boundaries — convergence pegs in different model families, Kata cycles paused mid-loop, anything where a fresh agent in a new chat is expected to resume — needs a place to leave the next agent enough context to start cleanly without the human re-explaining each time.
+
+`TRAIL/SUMMARY.md` carries a single `## Pending Handoff` section that the closing agent always leaves in one of two states:
+
+- **None — work complete.** Use this exact sentinel when no successor session is expected.
+- **A filled handoff envelope** when a successor is expected.
+
+### Envelope vs payload
+
+Kiroku owns only the **envelope** (the section's existence, position, schema, and validation that it is resolved). The **payload** — what the next agent should actually do — is written by whichever methodology happens to be closing (Kata, per-skill convergence, Shiken, ad-hoc work). Kiroku never interprets the payload; it only routes it.
+
+This preserves the one-skill-one-principle separation: kiroku is P2 infrastructure, the methodology skills carry their own vocabulary inside the payload.
+
+### Schema
+
+```markdown
+## Pending Handoff
+
+*Filled by the closing agent if a successor session is expected. Sentinel `None — work complete.` if not.*
+
+- **Target model family:** <e.g., Gemini, GPT, Grok, Claude — typically a different family than the one that just ran>
+- **Reading order (start fresh, no prior context):**
+  1. <path>
+  2. <path>
+- **Do NOT read (contamination risk):**
+  - <path> — <why>
+- **Task statement (paste verbatim into the fresh session):**
+
+  > <one-paragraph mission in Commander's-Intent form: destination + why, not steps>
+
+- **Closed by:** <session log path>
+```
+
+The user's repeated instruction across sessions collapses to a single sentence: *"Open `TRAIL/SUMMARY.md`, find Pending Handoff, follow it."*

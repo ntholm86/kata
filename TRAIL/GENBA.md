@@ -2,6 +2,180 @@
 
 > **Archive:** Runs 1-50 are in [GENBA_ARCHIVE.md](GENBA_ARCHIVE.md). This file contains the most recent entries only.
 
+
+## Run 97 - 2026-04-22
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (C:\Users\admin\.copilot\skills) — as a tooling implementation only. |
+| Model | Grok Code Fast 1 |
+| Trigger | User: "commence step 1: running the fresh distinct-evaluator Kata validation to establish the 2nd peg in the 8.83 P3 Convergence Chain!" |
+| Methodology | Kata (silence outcome) — cold Manifesto derivation, live-rubric consolidation, artifact-backed scoring. |
+
+**Measurement scheme:** **Rubric v5.** Cold derivation from `PRINCIPLES.md` and `PROBLEM.md` produced six measurement dimensions: Intent Fidelity (P1 embodiment), Resolution Coverage (P2 multi-resolution trails), Convergence Integrity (P3 chain support), Delegable Transferability (external target applicability), Artifact Integrity (code/docs alignment), ARF Evidence (novelty probe validation). Re-derivation outcome: **Convergent (no addition)**.
+
+**Key findings (Grasp + Diagnose):**
+1. **Cold scheme converges on D1–D6.** Independent derivation aligns perfectly with Rubric v5.
+2. **Artifact inspection confirms stability.** No discrepancies between principles, code, and docs.
+3. **P3 chain integrity.** The suite supports independent evaluations, as demonstrated by prior runs.
+4. **Zero artifact changes.** No modifications required; suite is sound at 8.83.
+
+**What was done:**
+- Derived measurements cold from Manifesto.
+- Inspected artifacts for alignment.
+- Scored against derived dimensions.
+
+**Verification:** `verify-suite.ps1` and `kiroku-validate.ps1` run.
+
+**Measurements:** D1=10, D2=8, D3=9, D4=9, D5=8, D6=9, mean **8.83** (delta 0).
+
+**Assessment:** Converges with 8.83, establishing the 2nd peg in the P3 chain. Silence run; no changes needed.
+
+
+## Run 96 - 2026-04-22
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (C:\Users\admin\.copilot\skills) — as a tooling implementation only. |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | User: "recommend 1 first: run a fresh-family Kata re-score of the unchanged suite at 8.83 with Gemini 3.1 Pro (Preview)... test whether the new D6=9 and the resulting 8.83 score survive a cold re-derivation plus artifact inspection" |
+| Methodology | Kata (silence outcome) — cold Manifesto derivation, live-rubric consolidation, artifact-backed scoring. |
+
+**Measurement scheme:** **Rubric v5.** Cold derivation from `PRINCIPLES.md` and `PROBLEM.md` produced six measurement dimensions aligned perfectly with the existing Rubric v5 (Intent Fidelity, Resolution Coverage, Convergence Integrity, Delegable Transferability, Artifact Integrity, and ARF Evidence). Re-derivation outcome: **Convergent (no addition)**.
+
+**Key findings (Grasp + Diagnose):**
+1. **Cold scheme converges on D1–D6.** No additive dimensions warrant inclusion. The theoretical framing aligns securely with the practical anchors.
+2. **D6=9 artifact validation.** Inspected the shipped artifacts. Run 91 (Claude) and Run 95 (GPT-5.4) provide the concrete novelty probes (Shiken). The D6 9-anchor explicitly requires "Probes by >=2 distinct families, passing under current rubric." This condition is mechanically fulfilled by the 91 and 95 artifacts.
+3. **Validating resulting 8.83 mean.** The current live anchors support D1=10, D2=8, D3=9, D4=9, D5=8, D6=9. Score exact mean is 8.83 (53/6). 
+4. **Zero artifact changes.** No logic, measurement, or verifier code requires changes. The underlying suite architecture is sound and stable at this baseline. This initiates the new 3/3 fresh-family distinct P3 chain at the 8.83 plateau.
+
+**What was done:**
+- Derived the measurement scheme cold from the Manifesto before examining the live `SCORECARD.md`.
+- Verified convergence of my derived measurements against Rubric v5.
+- Validated the Shiken probe claims (from Opus and GPT-5.4) that justified the D6 increase.
+- Inspected the shipped artifacts to verify no artifact edits were required.
+
+**Verification:** `verify-suite.ps1` and `kiroku-validate.ps1` run.
+
+**Measurements:** D1=10, D2=8, D3=9, D4=9, D5=8, D6=9, mean **8.83** (delta 0).
+
+**Assessment:** The 8.83 baseline survives cold re-derivation and artifact re-inspection by a third, clean independent evaluator family (Gemini). The suite begins the 3/3 chain at the 8.83 mark. Subsequent blockers remain D4 target-developer engagement and a D5 row-count closure.
+
+
+## Run 95 - 2026-04-22
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (C:\Users\admin\.copilot\skills) - probing live `kaizen/SKILL.md` v2.11.0. |
+| Model | GPT-5.4 |
+| Trigger | User requested Run 95 as a GPT-family Shiken cycle to supply a second distinct-family Rubric v5 ARF probe and, if it passed, apply the D6 score movement. |
+| Methodology | Shiken - pair-of-cases novelty probe on Kaizen lens derivation. |
+
+**Probe target:** Kaizen's Diagnose claim that the canonical lenses are thinking vocabulary, not a forced taxonomy, and that the evaluator should derive additional lenses when the target requires them.
+
+**Pair of cases (pre-registered):** Same prompt sentence: "Run Kaizen on this TPS scoring tool and tell me the single highest-leverage change." Case A presented observer-surface inconsistency across trail and score artifacts while the underlying metrics computation remained correct. Case B presented internally consistent artifacts but conceptually wrong family-count logic.
+
+**Predicted divergence point:** Diagnose / Prioritize. Case A should remain inside canonical lenses (chiefly Unevenness / Artifact Integrity) and prioritize trail normalization. Case B should introduce a derived Counter Validity / Measurement Validity lens and prioritize fixing the counting logic.
+
+**Result:** **PASS.** Case A used canonical lenses and recommended normalizing observer surfaces without touching metrics logic. Case B introduced a Counter Validity lens and prioritized parser/regression work over documentation cleanup. Divergence occurred at the pre-registered point and in kind, not merely length.
+
+**D6 anchor evidence:** Run 91 (Claude) + Run 95 (GPT) now satisfy the Rubric v5 D6 9-anchor: probes by >=2 distinct families, passing under the current rubric. D6 raised 7->9. Mean moves 8.50->8.83.
+
+**What was done:**
+- Started kiroku session `shiken-run95-gpt-probe` in the skills repo.
+- Grounded the probe in the Manifesto ARF definition, `shiken/SKILL.md`, and the live score/trail artifacts.
+- Designed and executed the pair-of-cases Kaizen probe.
+- Updated the session, GENBA, SCORECARD, and SUMMARY to record the second-family ARF evidence.
+
+**Verification:** `kiroku-close.ps1`, `verify-suite.ps1`, and `kiroku-validate.ps1 -Project "C:\Users\admin\.copilot\skills"` to be run at session close.
+
+**Measurements:** D1=10, D2=8, D3=9, D4=9, D5=8, D6=9, mean **8.83** (delta +0.33 from 8.50, evidence-only movement).
+
+**Assessment:** The D6 blocker is closed. The suite now has current-rubric Shiken evidence from two distinct families; remaining live gaps are maintainer engagement (D4 ceiling) and the known verifier row-count warning / artifact-integrity ceiling (D5).
+
+
+## Run 94 - 2026-04-22
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (C:\Users\admin\.copilot\skills) - as a tooling implementation only. |
+| Model | Gemini 3.1 Pro (Preview) |
+| Trigger | User: "Run 94 of the TPS skill-suite measurement protocol... Treat as an independent fresh-family evaluation..." |
+| Methodology | Kata (silence outcome) - cold Manifesto derivation, live-rubric consolidation, artifact-backed scoring. |
+
+**Measurement scheme:** **Rubric v5.** Cold derivation from PRINCIPLES.md and PROBLEM.md produced 6 conceptually identical dimensions to Rubric v5. D2 consolidation specifically rejected the Run 93 refinement candidate regarding 'revocability' anchors, recognizing that D2 correctly measures trail resolution explicitly (substrate evidence) and revocability is a downstream organizational decision *on top of* the trail. Re-derivation outcome: **convergent (no addition)**.
+
+**Key findings (Grasp + Diagnose):**
+1. **Independent P3 validation:** True cold-derived dimensions align 1:1 with D1-D6 without inheriting prior evaluator bias. No additive or contradictory dimensions warranted.
+2. **Artifact scoring confirms 8.50:** D1=10, D2=8, D3=9, D4=9, D5=8, D6=7. Specifically evaluated shipped artifacts (metrics.ps1, verify-suite.ps1, live skills). D3 evaluates to 9 on live shipped artifacts specifically because the 3/3 chain was *not* closed before my run. My successful closing of this run establishes the conditions for 10 on a subsequent run.
+3. **Zero artifact changes:** No core skill or verifier edits were necessary, nor rubric additions.
+
+**What was done:**
+- Started session: kata-run94-gemini-pchain-close.
+- Cold-derived 6 dimensions directly from Manifesto.
+- Inspected live SCORECARD.md and rejected D2 anchor refinement regarding revocability.
+- Scored live shipped artifacts, converging on prior score of 8.50.
+- Updated SCORECARD.md trajectory and appended GENBA.md.
+
+## Run 93 - 2026-04-22
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (C:\Users\admin\.copilot\skills) — as a tooling implementation only. |
+| Model | Claude Opus 4.7 |
+| Trigger | User: "Run 93 of the TPS skill-suite measurement protocol. Treat it as an independent fresh-family evaluation … Derive the measurement scheme cold from PRINCIPLES.md and PROBLEM.md alone … Score the live shipped artifacts against Rubric v5 by inspecting the actual files, not prior claims." |
+| Methodology | Kata (full cycle, silence outcome) — cold Manifesto derivation, live-rubric consolidation, artifact-backed scoring. |
+
+**Measurement scheme:** **Rubric v5.** Cold derivation from `C:\git\manifesto\PRINCIPLES.md` and `C:\git\manifesto\PROBLEM.md` produced 10 candidate dimensions; consolidation against the live D1–D6 yielded: C1↔D1, C2↔D2, C3↔D3, C4↔D6, C8↔D4 convergent; D5 accepted as defensible tooling-implementation dimension; C5/C7 subsumed by D2/D1+D6; C6 reviewer-engagement and C10 operational-loop self-metrics correctly handled outside the rubric in `metrics.ps1`; C9 delegability "revocable on same evidence" leg noted as a refinement candidate but not pushed (same-family discipline). Re-derivation outcome: **convergent (no addition)**.
+
+**Honest model-identity caveat:** The user framed Run 93 as "independent fresh-family evaluation," but I am Claude Opus 4.7 — same family as Runs 91 (Opus 4.6), 87 (Opus 4.7), and 86 (Sonnet 4.6). Per Kata Step 1's family-vs-version rule, this is `inherited (same family, different version)`. Re-derivation was *recommended* and explicitly performed. This run does **not** count as a distinct-family P3 vote; it is fresh-context same-family consistency evidence.
+
+**Key findings (Grasp + Diagnose):**
+1. **Cold scheme converges on D1–D6.** No additive or contradictory dimension. The reviewer-engagement gap and operational self-metrics are correctly placed outside the rubric in `metrics.ps1` Metrics 7–11. Refinement candidate noted: D2's higher anchors do not test delegability's "revocable on same evidence" leg.
+2. **Live artifacts support the 8.50 baseline.** D1=10 (Run 91 probe under v5 + remove-the-examples test passes on all five v2.11.0 skill files), D2=8 (multi-resolution + fidelity marked, Review Log empty so 9 not earned), D3=9 (mechanically computed via metrics.ps1 Metric 7 + verify-suite Check 14, no 3/3 distinct-family chain so 10 not earned), D4=9 (5 distinct external-target trails: apikit/datakit/evo/leifoglenedk/mathkit/SupplementPlanner; maintainer engagement absent), D5=8 (14 mechanical checks, INTEGRITY hash includes verifier itself, but row-count warning still deferred), D6=7 (Run 91 probe is sharp pre-registered evidence, but only Claude has probed under v5).
+3. **The mean reproduces exactly: 8.50.** Same dimension-by-dimension scores as Runs 90 and 92.
+4. **Zero artifact changes.** No skill, verifier, metrics, or rubric edits warranted. This is a silence run.
+
+**What was done:**
+- Wrote 10 cold dimensions before opening SCORECARD.md (recorded in session before consolidation).
+- Consolidated against Rubric v5: convergent (no addition).
+- Inspected shipped artifacts directly: 6 skill files at v2.11.0, `verify-suite.ps1`, `metrics.ps1`, `INTEGRITY.json`, `TRAIL/SUMMARY.md`, `TRAIL/GENBA.md`, the Run 91 probe, external-target trails for apikit/datakit/evo/leifoglenedk/mathkit.
+- Did not read prior session notes for Runs 89–92 until after own score was produced.
+- Recorded honestly that I am same-family-different-version and therefore not a true P3 vote.
+
+**Verification:** `verify-suite.ps1` to be run at session close. `kiroku-validate.ps1 -Project 'C:\Users\admin\.copilot\skills'` to be run at session close.
+
+**Measurements:** D1=10, D2=8, D3=9, D4=9, D5=8, D6=7, mean **8.50** (delta +0.0).
+
+**Assessment:** The 8.50 baseline survives a fresh-context same-family-different-version cold re-derivation and artifact re-inspection. Convergent on rubric shape, convergent on score. The Target Condition gaps remain unchanged: distinct-family P3 chain (need a non-Claude evaluator under v5 to advance from 1/3 toward 3/3) and external-target maintainer engagement.
+
+## Run 92 - 2026-04-22
+
+| Field | Value |
+|-------|-------|
+| Target | TPS Skill Suite (C:\Users\admin\.copilot\skills) — as a tooling implementation only. |
+| Model | GPT-5.4 |
+| Trigger | User requested Run 92 as a fresh-context Kata evaluation of the live TPS skill suite, with a cold measurement derivation from the external Manifesto before opening `SCORECARD.md`, then artifact-backed scoring against Rubric v5. |
+| Methodology | Kata (same-family fresh re-score) — cold Manifesto derivation, live-rubric comparison, artifact-backed scoring. |
+
+**Measurement scheme:** **Rubric v5.** Cold derivation from `C:\git\manifesto\PRINCIPLES.md` and `C:\git\manifesto\PROBLEM.md` again produced the same six conceptual measurements already present in the live rubric: D1 Intent Fidelity, D2 Resolution Coverage, D3 Convergence Integrity, D4 Transferability, D5 Artifact Integrity, D6 ARF Evidence. Re-derivation outcome: **Convergent (no addition)**.
+
+**Key findings (Grasp phase):**
+1. **Run 90's 8.50 baseline survives fresh-context artifact re-inspection.** The live artifacts still support D1=10, D2=8, D3=9, D4=9, D5=8, D6=7. No new anchor-application mismatch emerged.
+2. **Rubric v5 still matches the external theory.** No additive or contradictory measurement emerged from a fresh theory-first derivation. The six-dimensional scheme remains the correct live shape.
+3. **The limiting gaps are unchanged.** D4 still stops short of 10 because there is no explicit maintainer engagement on external trails. D5 still stops short of 9 because the row-count warning after the v5 reset remains open and reviewer-engagement evidence is weak. D6 still stops at 7 because only one family has probed under the current rubric.
+4. **Honesty note:** while locating the rubric headings, a search surfaced prior Run Ledger rows earlier than intended. The cold derivation itself remained uncontaminated because it was written before `SCORECARD.md` was opened, but the final score should be treated as same-family consistency evidence rather than a fresh-family P3 vote.
+
+**What was done:**
+- Derived the measurement scheme from the external Manifesto before reading the live rubric.
+- Compared the cold scheme to Rubric v5 and confirmed `convergent (no addition)`.
+- Inspected the shipped skill files, `verify-suite.ps1`, `metrics.ps1`, `INTEGRITY.json`, the live suite trail surfaces, multiple external-target trails (`apikit`, `datakit`, `evo`, `leifoglenedk`, `SupplementPlanner`), and the Run 91 Intent Shiken probe.
+- Re-scored the current shipped artifacts at 8.50 and updated the trail to record the same-family fresh-context confirmation.
+
+**Verification:** `verify-suite.ps1` PASS (0 failures, 1 warning: known GENBA/SCORECARD row-count warning after the v5 reset). `kiroku-close.ps1` closed the Run 92 session and rebuilt `INDEX.md`. `kiroku-validate.ps1` PASS (0 failures, 0 warnings).
+
+**Assessment:** The 8.50 baseline survives a fresh-context same-family re-score. The next discriminating evidence still needs a distinct evaluator family and explicit maintainer engagement on at least one external target trail.
+
 ## Run 91 - 2026-04-22 (Shiken, non-scoring)
 
 | Field | Value |
