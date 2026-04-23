@@ -1,7 +1,8 @@
 # Principles of Autonomous Development
 
-> This file is a copy of [PRINCIPLES.md](https://github.com/ntholm86/autonomous-agent-principles/blob/main/PRINCIPLES.md) from the [autonomous-agent-principles](https://github.com/ntholm86/autonomous-agent-principles) repository (v1.0.0, CC BY-SA 4.0).
-> The principles repo is the canonical source. This copy exists so the skills suite is self-contained for offline use. If they diverge, the manifesto repo wins.
+> **This file is a copy.** Source: [autonomous-agent-principles](https://github.com/ntholm86/autonomous-agent-principles) repository, tag `v1.0.0`, commit `a9e1e27`. Copied 2026-04-23.
+> The manifesto repo is canonical. If this copy diverges from the source, the manifesto wins. To verify, diff this file against the corresponding tagged version in the manifesto repo.
+> License: CC BY-SA 4.0 (the principles document). The execution tools and scripts in this repo are MIT.
 
 ---
 

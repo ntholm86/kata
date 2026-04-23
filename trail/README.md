@@ -63,3 +63,13 @@ Every entry begins with a level-2 heading containing the date and a short slug, 
 - `tools/verify.py` — check trail integrity (chronological order, mandatory metadata fields present).
 
 Both scripts are pure Python 3 with no third-party dependencies. They run on Windows, macOS, and Linux.
+
+## Reading convergence state from the log
+
+v2 tracked convergence in a separate `SCORECARD.md` with a counter row. v3 reads the same information from `log.md` directly. The chain length is:
+
+> the number of consecutive most-recent entries whose `outcome` is silence (no material change to the artifact) **and** whose `agent` field names a distinct provider/family from the entry before it.
+
+A chain reaches **3/3 (converged)** when three such entries exist in a row, from three distinct evaluator families, each performed in a fresh conversation (i.e. independent assessment per Principle 3, condition 3). Any entry whose `outcome` records a change to the artifact resets the chain to zero — regardless of whether the change improved a score.
+
+The chain has no separate counter file. It is a property of the log.

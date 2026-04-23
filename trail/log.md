@@ -68,3 +68,59 @@ Verification: tree is internally consistent — `improve/SKILL.md`, `probe/SKILL
 [!REALIZATION] Self-targeting fidelity: this redesign was driven by `improve/SKILL.md` operating on the suite that contains it. The skill survived the test — it produced the diagnosis, surfaced the redesign argument, executed the change, and recorded the evidence in the format the skill itself specifies. If `improve` had been too prescriptive, it would have produced a list of incremental v2 fixes instead of arguing for redesign. If it had been too vague, it would have produced no actionable plan. Neither happened.
 
 [!DECISION] Convergence on v3 is the maintainer's to drive, not mine. They will need at least three independent fresh-conversation evaluations from distinct model families, each re-deriving the measurement scheme, each finding nothing material to change. v3.0.0 will not be tagged until that chain reaches 3/3.
+
+---
+
+## 2026-04-23 — v3 self-target and v2 retirement
+
+- target: skills repo (this repo, v3 live tree)
+- operator: maintainer (Nils Holmager)
+- agent: Claude (Anthropic, tool-call ID prefix `toolu_vrtx_*`)
+- skill: improve (operating on its own suite)
+- outcome: minor changes (drift markers + retirement notice); no structural changes
+- delta: same author/session as the v3-redesign entry above; chain not yet started
+
+### Interpretation of the ask
+
+Operator asked two things: "should we then target the skills suite on itself now in this new version?" and "retire the old scoreboard of version 1 and 2?" I interpreted the first as a request to actually run `improve` on v3 in good faith — not to perform a ceremony to generate a trail entry, but to honestly examine what was just shipped. I interpreted the second as a request to make the retirement of v2's measurement substrate explicit, since archiving alone leaves room for a future observer to read v2's 8.83 score as if it still applied.
+
+The same-session caveat matters: this run is by the same agent that built v3, in the same conversation. It cannot count toward the convergence chain (Principle 3, condition 3 requires fresh sessions and distinct evaluator families). It is recorded as a self-targeting integrity check, not as an independent evaluation.
+
+### Examination
+
+Three lenses applied to v3's live tree (`PRINCIPLES.md`, `REDESIGN.md`, `README.md`, `CHANGELOG.md`, `improve/SKILL.md`, `probe/SKILL.md`, `trail/README.md`, `trail/log.md`, `tools/verify.py`, `tools/record.py`, `archive/v2/`):
+
+- **Inconsistency.** `PRINCIPLES.md` is a copy of the manifesto file but had no version stamp — silent drift surface. Real finding.
+- **Overburden.** None visible. Two skills, one trail file, two scripts. The footprint is small enough that no component is asked to do too much.
+- **Waste.** None visible in v3 itself. Tier 1 rubric, orchestrator skill, redundant trail files, and PowerShell scripts all removed in the redesign.
+
+Challenge the first read:
+- Are the numbered phases in `improve/SKILL.md` (1\u20137) themselves a route-prescription smell? Yes — slightly. An honest minimum could state the phases as a list of moves rather than a sequence. **Surface as a v3.1 question, do not act.** Acting on this in the same session that wrote it would be churn — exactly the loop pathology Hansei was meant to catch.
+- Does `trail/README.md` say how to read convergence state from `log.md`? No. v2 had a separate SCORECARD with a counter row; v3 inherits the convergence concept but doesn't tell observers how to read it from the new substrate. Real finding.
+- Are v2's archived SCORECARD/METRICS_HISTORY/INTEGRITY clearly retired, or could a reader believe the 8.83 score still counts? They could believe it still counts — archiving is implicit retirement, not explicit. Real finding (and the operator's second question lands here).
+
+### Decision
+
+[!DECISION] Make three small changes:
+1. Add a version-stamp + commit-SHA + copy-date header to `PRINCIPLES.md` so drift becomes detectable.
+2. Add a "Reading convergence state from the log" section to `trail/README.md` explaining how the chain is computed from `log.md` entries (no separate counter file).
+3. Create `archive/v2/RETIRED.md` explicitly retiring the v2 scoreboards, metrics, integrity snapshots, and the entire Tier 1 rubric.
+
+[!DECISION] Do NOT shorten `improve/SKILL.md` further. The numbered-phase observation is a real but borderline finding; acting on it in the same session that wrote it is churn. If a fresh-session evaluator surfaces the same finding independently, that's evidence the change is warranted. Otherwise, leave it.
+
+### Action
+
+- `PRINCIPLES.md` — replaced the front-matter copy notice with a version-stamped one citing manifesto `v1.0.0` / commit `a9e1e27` / copy date `2026-04-23`.
+- `trail/README.md` — added "Reading convergence state from the log" section. The chain length is the count of consecutive most-recent silence entries from distinct evaluator families. No separate counter.
+- `archive/v2/RETIRED.md` — new file. Explicitly retires SCORECARD (v2.4.1's 8.83 / chain 2/3 score), METRICS_HISTORY, INTEGRITY, STANDARDS, PATTERNS, the Tier 1 rubric in all its versions, the 6-skill structure, and all `.ps1` scripts. Explains what the archive *still* provides (rollback target, provenance, comparison) and how to read v2's trail responsibly.
+
+Verification:
+- `python tools/verify.py` re-run after edits — must still pass.
+- Spot-check that `archive/v2/RETIRED.md` is reachable from the live tree (linked via `REDESIGN.md` indirectly; future readers will find it when they navigate into `archive/v2/`).
+
+### Reflection
+
+[!REALIZATION] The numbered-phase observation in `improve/SKILL.md` is itself a small piece of evidence that v3 isn't yet at convergence. The skill could be tighter. Whether it *should* be tighter is a judgement call I shouldn't make in the same session — that's what fresh-session independent evaluation is for. v3 is "shipped", not "converged." The distinction is exactly what Principle 3 protects.
+
+[!REALIZATION] This run produced changes (three small edits). Per Principle 3 condition 2, this resets any nascent v3 convergence chain to zero. The first independent evaluation must come *after* this commit and find nothing actionable; only then does the chain start.
+

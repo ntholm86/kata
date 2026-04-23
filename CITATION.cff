@@ -12,9 +12,9 @@ abstract: >
   (Claude, GPT, Gemini, Grok, Grok Code). Constitutional foundation in the
   companion Autonomous Agent Principles repository.
 authors:
-  - family-names: Holmager
+  - family-names: Wendelboe, Holmager
     given-names: Nils
-    orcid: ""
+    orcid: "https://orcid.org/0009-0009-7157-9084"
 repository-code: "https://github.com/ntholm86/tps-skills"
 license: MIT
 version: "2.4.0"
