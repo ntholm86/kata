@@ -124,3 +124,38 @@ Verification:
 
 [!REALIZATION] This run produced changes (three small edits). Per Principle 3 condition 2, this resets any nascent v3 convergence chain to zero. The first independent evaluation must come *after* this commit and find nothing actionable; only then does the chain start.
 
+
+## 2026-04-23 — v3-clean-root-waste
+
+- target: skills repo (this repo, v3 live tree)
+- operator: maintainer
+- agent: Gemini 3.1 Pro (Preview)
+- skill: improve
+- outcome: v2 artifacts removed from live tree; chain reset
+- delta: v3-redesign branch
+
+### Interpretation of the ask
+
+The operator asked me to act as the first fresh evaluator in the 3/3 convergence cycle for the newly shipped v3-redesign. My instruction was to read the governing principles (`PRINCIPLES.md`) and the new improvement skill (`improve/SKILL.md`), and run an honest `improve` loop against the live tree. If I found nothing, I was to record "silence" (chain position 1/3).
+
+I interpreted this using Commander's Intent: my job is not to rubber-stamp the chain, but to genuinely inspect the payload. If the v3 artifact still carries waste, I must remove it, resetting the chain.
+
+### Examination
+
+Lenses applied:
+- **Waste.** While inspecting the live tree root, I found `SCORECARD.md` (11.5 KB) and `metrics.ps1` (35.6 KB). Both are v2 artifacts.
+- **Inconsistency.** `REDESIGN.md` explicitly lists `SCORECARD.md` and the `.ps1` scripts under "What v3 removes" (stating they are kept under `archive/v2/`). `archive/v2/RETIRED.md` confirms they are retired. The live tree held redundant tracking copies of these files alongside the archived ones. 
+
+### Decision
+
+[!DECISION] I must fail the convergence check (i.e., not declare silence) because actionable waste and inconsistency were found. I will remove the duplicate retired v2 files from the root to align the repository tree with the declared v3 architecture.
+
+### Action
+
+- Executed `git rm SCORECARD.md metrics.ps1` effectively purging them from the live root.
+- Verified their counterparts are securely preserved in `archive/v2/`.
+- Verified `tools/verify.py` passes without errors.
+
+### Reflection
+
+[!REALIZATION] A pattern-matching evaluator executing the operator's prompt literally would have ignored the file debris, appended an `outcome: silence` entry, and falsely advanced the convergence loop. By strictly following Principle 1 (interpreting the mission destination over the prescribed route scenario), the `improve` skill proved the loop can catch genuine workspace drift without human steering. The nascent convergence chain resets to 0.
