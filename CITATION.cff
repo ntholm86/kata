@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this skill suite, please cite it as below."
+type: software
+title: "TPS Skill Suite: Autonomous Development Skills for AI Agents"
+abstract: >
+  A suite of reasoning skills for autonomous AI agents implementing the
+  Autonomous Agent Principles framework. Skills include Kata (orchestration),
+  Kaizen (incremental improvement), Kaikaku (radical redesign), Hansei
+  (reflection), Shiken (novelty probes), and Kiroku (evidence trail management).
+  Accompanied by computable metrics (metrics.ps1) and a mechanical integrity
+  verifier (verify-suite.ps1). Evaluated across 97+ runs and 5 model families
+  (Claude, GPT, Gemini, Grok, Grok Code). Constitutional foundation in the
+  companion Autonomous Agent Principles repository.
+authors:
+  - family-names: Holmager
+    given-names: Nils
+    orcid: ""
+repository-code: "https://github.com/ntholm86/tps-skills"
+license: MIT
+version: "2.4.0"
+date-released: "2026-04-23"
+keywords:
+  - autonomous agents
+  - AI skills
+  - kaizen
+  - kata
+  - kaikaku
+  - hansei
+  - shiken
+  - kiroku
+  - evidence trail
+  - agent governance
+  - large language models
+references:
+  - type: software
+    title: "Autonomous Agent Principles: A Governance Framework for Earned Autonomy"
+    authors:
+      - family-names: Holmager
+        given-names: Nils
+    repository-code: "https://github.com/ntholm86/autonomous-agent-principles"
