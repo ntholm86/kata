@@ -501,3 +501,50 @@ Challenge the first read: I considered putting the full statement into CHANGELOG
 ### Reflection
 
 [!REALIZATION] This change improves observer alignment and reduces the risk of "local silence" being mistaken for "research completion." It is a material docs change and therefore resets any in-progress convergence chain on the skills artifact.
+
+## 2026-04-24 — convergence-scope-protocol-adopted
+
+- target: skills repo (v3 live tree)
+- operator: user
+- agent: GitHub Copilot (GPT-5.3-Codex; provider-family: openai/gpt-5.x; tool-call ID prefix not exposed in this runtime)
+- skill: improve
+- outcome: convergence scope protocol added and integrated into Grasp inputs; verifier now requires protocol file
+- delta: CONVERGENCE_SCOPE_PROTOCOL.md added; README.md, trail/README.md, improve/SKILL.md, tools/verify.py updated
+
+### Interpretation of the ask
+
+The operator asked to proceed with the 1-5 publication path (freeze baselines, restart and complete convergence, run coherence check, then publish gate) and asked for a formal convergence scope protocol that must be considered during Grasp in the next convergence run.
+
+### Examination
+
+Three lenses on current v3 governance artifacts:
+
+- **Inconsistency.** The ordered 1-5 path existed in conversation, but there was no single normative file defining dependency-aware reset scope. This left room for evaluators to apply convergence locally (skills-only) without explicit upstream dependency checks.
+- **Overburden.** Existing docs carried intent and trail mechanics but not the reset matrix. This forced evaluators to infer scope ad hoc.
+- **Waste.** Avoided by adding one protocol file and linking it from existing Grasp-facing docs, rather than duplicating full policy across many files.
+
+Challenge the first read: I considered embedding all scope rules directly into `README.md` only, but that weakens operational discoverability during run execution. A dedicated protocol file with references from README, trail guidance, and improve skill is clearer and easier to audit.
+
+### Decision
+
+[!DECISION] Add `CONVERGENCE_SCOPE_PROTOCOL.md` as the canonical scope/reset policy and make it mandatory pre-read for convergence runs via references in `README.md`, `trail/README.md`, and `improve/SKILL.md`.
+
+[!DECISION] Add the protocol file to `tools/verify.py` required files to keep governance artifacts mechanically enforced.
+
+### Action
+
+- Added `CONVERGENCE_SCOPE_PROTOCOL.md` with:
+	- dependency order (intent -> problem -> principles -> skills),
+	- ordered 1-5 execution sequence,
+	- reset matrix,
+	- required Grasp inputs,
+	- trail recording requirements for convergence runs.
+- Updated `README.md` to reference protocol as operational scope authority.
+- Updated `trail/README.md` to require protocol use during Grasp for convergence-advancing runs.
+- Updated `improve/SKILL.md` step 1 to require protocol read when ask is convergence/publication readiness.
+- Updated `tools/verify.py` required files/docstring to include `CONVERGENCE_SCOPE_PROTOCOL.md`.
+- Verification: `python tools/verify.py` pending after edits in this run.
+
+### Reflection
+
+[!REALIZATION] This is a material governance change to the skills artifact, so skills convergence resets to zero again. The next convergence run should be treated as peg 1/3 under the new protocol.

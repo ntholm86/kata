@@ -28,6 +28,8 @@ Work is done only when all of the following hold, in order:
 4. A cross-layer coherence check finds no contradiction between problem, principles, and skills.
 5. The evidence package is complete and reviewable for external publication (GitHub and Zenodo).
 
+Operational scoping rules for convergence are defined in [CONVERGENCE_SCOPE_PROTOCOL.md](./CONVERGENCE_SCOPE_PROTOCOL.md).
+
 ## What's here
 
 ```
@@ -90,6 +92,8 @@ python tools/record.py summary
 ## Versioning and convergence
 
 Untagged. v3 is on branch `v3-redesign` until it has been reviewed by at least three independent evaluators from distinct model families, each finding nothing material to change. That is what convergence (Principle 3) requires; v2's in-progress 2/3 chain was invalidated by the redesign and does not carry over.
+
+Convergence claims in this repo are scope-bound by [CONVERGENCE_SCOPE_PROTOCOL.md](./CONVERGENCE_SCOPE_PROTOCOL.md). Evaluators should treat that file as mandatory pre-read during Grasp for convergence runs.
 
 ## License
 

@@ -11,8 +11,8 @@ Checks:
 4. Every entry contains the mandatory metadata fields: target, agent, skill, outcome.
 5. No U+FFFD replacement characters (mojibake) anywhere in the live tree
     (excludes archive/).
-6. PRINCIPLES.md, REDESIGN.md, improve/SKILL.md, probe/SKILL.md, trail/README.md,
-    trail/log.md all exist.
+6. PRINCIPLES.md, REDESIGN.md, CONVERGENCE_SCOPE_PROTOCOL.md, improve/SKILL.md,
+    probe/SKILL.md, trail/README.md, trail/log.md all exist.
 7. Required markdown docs do not contain duplicate H1 headings, and their local
     markdown links resolve.
 
@@ -30,6 +30,7 @@ LOG = ROOT / "trail" / "log.md"
 REQUIRED_FILES = [
     "PRINCIPLES.md",
     "REDESIGN.md",
+    "CONVERGENCE_SCOPE_PROTOCOL.md",
     "README.md",
     "improve/SKILL.md",
     "probe/SKILL.md",

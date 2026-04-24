@@ -75,3 +75,5 @@ A chain reaches **3/3 (converged)** when three such entries exist in a row, from
 The chain has no separate counter file. It is a property of the log.
 
 Convergence is always relative to declared mission intent, not text stability alone. Each entry should therefore state which layer is being evaluated (problem, principles, skills, or cross-layer coherence) and why that run contributes to the publication claim. A silence run that does not specify this can show local cleanliness, but it does not by itself demonstrate research-level completion.
+
+Convergence runs must apply [CONVERGENCE_SCOPE_PROTOCOL.md](../CONVERGENCE_SCOPE_PROTOCOL.md) during Grasp. If the protocol is not read, the run can still be useful diagnostics but should not be counted as a convergence-advancing evaluation.
