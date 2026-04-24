@@ -1055,3 +1055,45 @@ None. Trail entry appended only. Executed `python tools/verify.py` locally and c
 ### Reflection
 
 [!REALIZATION] Three consecutive independent evaluators from three distinct families (Anthropic -> OpenAI/xAI -> Google) have now declared silence on the skills layer live tree. Under the convergence scope protocol, the v3 skillset artifact has achieved independent silence convergence.
+
+## 2026-04-24 — cross-layer-coherence
+
+- target: problem (manifesto@cfae048) + principles (PRINCIPLES.md@f2857ef) + skills (this repo@f2857ef)
+- operator: User
+- agent: GitHub Copilot (Anthropic/Claude Sonnet 4.6, tool-call ID prefix `toolu_`)
+- skill: improve
+- outcome: silence — no contradiction found across all three layers; coherence check passes
+- delta: none
+
+### Interpretation of the ask
+
+Step 4 of the convergence scope protocol: evaluate whether the principles address the problem, and whether the skills uphold the principles while addressing the problem. Locked references: problem at manifesto@cfae048, principles at f2857ef (copy in this repo), skills at f2857ef (this repo HEAD at start of this session).
+
+### Examination
+
+**Problem → Principles mapping:**
+- Problem 1 (autonomous reasoning: agent must interpret, not comply) maps directly to Principle 1 (Commander's Intent). The principle's operational test ("remove all examples and thresholds — would an intelligent agent still know what to do?") is precisely structured to force interpretation over compliance.
+- Problem 2 (earned autonomy: reasoning must be visible to justify delegation) maps directly to Principle 2 (Observable Autonomy). The multi-resolution requirement and the five observer classes in PROBLEM.md are exactly what P2's resolution requirement serves.
+- ARF validation requirement ("ARF that only one observer validated is an assertion") maps directly to Principle 3 (Convergence Is Silence). P3's minimum bar (3 families, fresh sessions, zero changes) is the operational form of that validation.
+- PROBLEM.md's framing as "evidence substrate, not trust manufacturing" is reproduced verbatim in PRINCIPLES.md's Principle 3 scope note. No drift.
+
+**Principles → Skills mapping:**
+- improve/SKILL.md names all three principles explicitly in its Governing Principles section. The lenses are framed as "vocabulary for thinking, not a checklist" — this is Commander's Intent stated in implementation terms. Trail entry is mandatory — Observable Autonomy. Silence is a valued outcome — Convergence Is Silence.
+- probe/SKILL.md implements the "structured novelty" layer PROBLEM.md names as "the most critical" missing piece in "What Must Be Built On Top." This is coherent and complete: the problem identifies the gap, the skills fill it.
+- PRINCIPLES.md "For skill authors" says: scoring rubrics are tool prescriptions, not architectural constraints. v3 dropped the rubric. This is explicitly permitted, not a deviation.
+
+**One potential tension examined:** PRINCIPLES.md Principle 3 minimum bar mentions "same score." v3 has no rubric. Resolution: PRINCIPLES.md's deeper statement is "diverse independent evaluators arrive at the same assessment." v3's assessment signal is silence/not-silence — three families all declared silence, which is the same assessment. PRINCIPLES.md itself says "score stability alone is not convergence," subordinating score to assessment. No contradiction.
+
+**Out-of-scope alignment:** PROBLEM.md names reviewer engagement as "the framework's deepest unresolved gap." The skills make no claim to solve this. Coherent with the out-of-scope declaration.
+
+### Decision
+
+[!DECISION] Silence. No material contradiction found between problem, principles, and skills. The three layers are mutually coherent: principles address the problem, skills uphold the principles, and the skills' scope matches the problem's scope boundaries. This satisfies step 4 of the convergence scope protocol.
+
+### Action
+
+None. Trail entry only. Verification: `python tools/verify.py`.
+
+### Reflection
+
+[!REALIZATION] Steps 1–4 of the convergence scope protocol are now satisfied for the skills layer. Step 5 (evidence package complete and reviewable for Zenodo) remains. The cross-layer coherence check confirmed that the v3 skillset is not just internally consistent but coherent with its upstream problem and principles — the chain from gap to framework to implementation holds end-to-end.
