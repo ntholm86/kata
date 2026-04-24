@@ -18,6 +18,10 @@ repository-code: "https://github.com/ntholm86/kata"
 license: MIT
 version: "3.1.0"
 date-released: "2026-04-24"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.19732827"
+    description: "Zenodo archive of v3.1.0"
 keywords:
   - autonomous agents
   - AI skills

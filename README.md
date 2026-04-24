@@ -1,5 +1,7 @@
 # Skills
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19732827.svg)](https://doi.org/10.5281/zenodo.19732827)
+
 Two skills and a trail format that operationalize three principles for autonomous agents.
 
 > **The repository is named `kata` for historical reasons.** v1 and v2 of this suite were named after Toyota Production System concepts (Kata, Kaizen, Kaikaku, Hansei, Shiken, Kiroku). v3 dropped that vocabulary in favour of plain English. The repository name is kept as a project codename to preserve URL, DOI, and citation lineage.
