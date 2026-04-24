@@ -2,6 +2,8 @@
 
 **Author**: Nils Holmager | **Date**: April 2026
 
+> **Archive note.** This directory and its contents are preserved verbatim as historical evidence for the v3 redesign. File paths referenced inside these documents (e.g. `C:\Users\admin\.copilot\skills\...`) point at the original development environment and are kept unchanged on purpose: rewriting them after the fact would compromise the integrity of the trail. They are not required to navigate or use the archive — they are part of the record. See [`RETIRED.md`](RETIRED.md) for what has been retired and why.
+
 A set of skills for autonomous improvement work. Each skill is a self-contained instruction file that an AI agent (or human) loads when the situation calls for it.
 
 ### License and Attribution
