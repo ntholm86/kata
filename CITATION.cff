@@ -12,7 +12,7 @@ abstract: >
   foundation in the companion Autonomous Agent Principles repository.
 authors:
   - family-names: Holmager
-    given-names: Nils
+    given-names: Nils Wendelboe
     orcid: "https://orcid.org/0009-0009-7157-9084"
 repository-code: "https://github.com/ntholm86/kata"
 license: MIT
@@ -31,5 +31,5 @@ references:
     title: "Autonomous Agent Principles: A Governance Framework for Earned Autonomy"
     authors:
       - family-names: Holmager
-        given-names: Nils
+        given-names: Nils Wendelboe
     repository-code: "https://github.com/ntholm86/autonomous-agent-principles"

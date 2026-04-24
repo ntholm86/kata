@@ -1,6 +1,6 @@
 # Principles of Autonomous Development
 
-> **This file is a copy.** Source: [autonomous-agent-principles](https://github.com/ntholm86/autonomous-agent-principles) repository, tag `v1.0.0`, commit `a9e1e27`. Copied 2026-04-23.
+> **This file is a copy.** Source: [autonomous-agent-principles](https://github.com/ntholm86/autonomous-agent-principles) repository, commit `dea859d`. Copied 2026-04-23; header updated 2026-04-24 (only metadata changed in manifesto since v1.0.0 — principles text unchanged).
 > The manifesto repo is canonical. This copy rewrites manifesto-internal links to canonical URLs so the document remains navigable from this suite.
 > License: CC BY-SA 4.0 (the principles document). The execution tools and scripts in this repo are MIT.
 
