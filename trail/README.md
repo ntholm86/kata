@@ -73,3 +73,5 @@ v2 tracked convergence in a separate `SCORECARD.md` with a counter row. v3 reads
 A chain reaches **3/3 (converged)** when three such entries exist in a row, from three distinct evaluator families, each performed in a fresh conversation (i.e. independent assessment per Principle 3, condition 3). Any entry whose `outcome` records a change to the artifact resets the chain to zero — regardless of whether the change improved a score.
 
 The chain has no separate counter file. It is a property of the log.
+
+Convergence is always relative to declared mission intent, not text stability alone. Each entry should therefore state which layer is being evaluated (problem, principles, skills, or cross-layer coherence) and why that run contributes to the publication claim. A silence run that does not specify this can show local cleanliness, but it does not by itself demonstrate research-level completion.

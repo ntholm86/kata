@@ -464,3 +464,40 @@ Challenge the first read:
 ### Reflection
 
 [!REALIZATION] The suite was close to convergence, but this run found a mechanical-integrity blind spot in the verifier itself. Per Principle 3, any material artifact change resets the chain. This entry is therefore a legitimate reset, not a failure of the protocol.
+
+## 2026-04-24 — intent-done-condition-canonicalized
+
+- target: skills repo (v3 live tree)
+- operator: user
+- agent: GitHub Copilot (GPT-5.3-Codex; provider-family: openai/gpt-5.x; tool-call ID prefix not exposed in this runtime)
+- skill: improve
+- outcome: intent and done-condition contract added to live docs; convergence interpretation clarified
+- delta: README.md and trail/README.md updated
+
+### Interpretation of the ask
+
+The operator asked where the intent statement should live, then asked me to implement it. I interpreted this as a request to add canonical wording to the highest-visibility doc and add operational wording where convergence is computed.
+
+### Examination
+
+Three lenses on the live docs:
+
+- **Inconsistency.** Mission intent (publishable evidence across problem/principles/skills coherence) was clear in conversation but not explicitly codified in the live docs where evaluators look first.
+- **Overburden.** None. Two docs can carry this cleanly without adding process overhead.
+- **Waste.** Avoided by writing the statement once as canonical wording in README and once as operational interpretation in trail guidance, rather than duplicating full policy across many files.
+
+Challenge the first read: I considered putting the full statement into CHANGELOG or CITATION as primary text, but those are publication metadata surfaces, not the canonical policy location for evaluators during active convergence runs.
+
+### Decision
+
+[!DECISION] Add the canonical intent/done-condition text to `README.md` and add a convergence-intent interpretation paragraph to `trail/README.md`.
+
+### Action
+
+- `README.md`: added a new section "Research intent and done condition" defining mission intent and five ordered completion conditions.
+- `trail/README.md`: added clarification that convergence is measured against declared mission intent and evaluation layer (problem/principles/skills/coherence), not file quietness alone.
+- Verification: `python tools/verify.py` passed after the edits.
+
+### Reflection
+
+[!REALIZATION] This change improves observer alignment and reduces the risk of "local silence" being mistaken for "research completion." It is a material docs change and therefore resets any in-progress convergence chain on the skills artifact.

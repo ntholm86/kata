@@ -16,6 +16,18 @@ The three principles, in 60 seconds:
 
 The full statement is in [PRINCIPLES.md](./PRINCIPLES.md).
 
+## Research intent and done condition
+
+The intent of this research is to produce publishable, externally auditable evidence that the defined problem is addressed by the principles and operationalized by the v3 skillset. Convergence is not the objective by itself; it is the stopping signal that this intent has been satisfied.
+
+Work is done only when all of the following hold, in order:
+
+1. The problem artifact has independent silence convergence.
+2. The principles artifact has independent silence convergence.
+3. The v3 skillset artifact has independent silence convergence.
+4. A cross-layer coherence check finds no contradiction between problem, principles, and skills.
+5. The evidence package is complete and reviewable for external publication (GitHub and Zenodo).
+
 ## What's here
 
 ```
