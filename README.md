@@ -1,6 +1,6 @@
 # Skills
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19732827.svg)](https://doi.org/10.5281/zenodo.19732827)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19842994.svg)](https://doi.org/10.5281/zenodo.19842994)
 
 Four composable skills that operationalize three principles for autonomous agents.
 
@@ -115,4 +115,4 @@ MIT (this suite). The principles documents (`PRINCIPLES.md`) are licensed under 
 
 ## Citation
 
-See [CITATION.cff](./CITATION.cff). When v3 is released, this repository will be deposited to Zenodo for a DOI.
+See [CITATION.cff](./CITATION.cff). Archived on Zenodo: [10.5281/zenodo.19842994](https://doi.org/10.5281/zenodo.19842994) (v3.2.0). All versions: [10.5281/zenodo.19732826](https://doi.org/10.5281/zenodo.19732826).
