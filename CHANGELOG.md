@@ -1,5 +1,30 @@
 # Changelog
 
+## v3.3.0 — 2026-04-29
+
+### Added
+- `tools/record.py history` subcommand: renders a per-run timeline from `trail/log.md` — date, slug, outcome, delta, decisions. `▸` for change runs, `·` for silence. Closes the proof-of-improvement gap left when the v2 scorecard was removed.
+- `INSTALLING.md`: installation guide explaining Copilot's one-level-deep skill discovery rule, minimum vs full install, sibling file requirements, and trail initialisation.
+
+### Changed
+- `README.md` opening rewritten to lead with "autonomous self-improving loop" — the first sentence now communicates what this system is, not just what files it contains.
+- `README.md` "Using the skills" section links to INSTALLING.md.
+
+---
+
+## v3.2.0 — 2026-04-28
+
+### Added
+- `intent/SKILL.md` — Intent as a standalone first-class skill.
+- `trail/SKILL.md` — Trail as a standalone first-class skill.
+
+### Changed
+- `improve/SKILL.md` — step 1 delegates to Intent when installed; step 7 delegates to Trail when installed.
+- `probe/SKILL.md` — step 5 delegates to Trail when installed.
+- `README.md` — four-skill description; composable installation progression documented.
+
+---
+
 ## v3.1.0 — 2026-04-24
 
 ### Changed

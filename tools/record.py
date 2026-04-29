@@ -10,6 +10,10 @@ Subcommands:
 
   summary
       Print the most recent entry. Suitable for a 60-second observer view.
+
+  history [--target=<target>]
+      Print a per-iteration timeline: date, slug, outcome, and decisions.
+      Shows convergence direction at a glance. Optionally filter by target.
 """
 from __future__ import annotations
 
@@ -23,6 +27,8 @@ ROOT = Path(__file__).resolve().parent.parent
 LOG = ROOT / "trail" / "log.md"
 
 ENTRY_HEADING = re.compile(r"^##\s+(\d{4}-\d{2}-\d{2})\s+[\u2014-]\s+(.+?)\s*$")
+META_FIELD = re.compile(r"^-\s+(target|outcome|delta):\s*(.+)$")
+MARKER = re.compile(r"^\[!(DECISION|REVERSAL|REALIZATION)\]\s*(.+)$")
 
 STUB_TEMPLATE = """\
 
@@ -83,6 +89,103 @@ def cmd_new(args: argparse.Namespace) -> int:
     return 0
 
 
+def _parse_entries(text: str) -> list[dict]:
+    """Parse trail/log.md into a list of entry dicts."""
+    lines = text.splitlines()
+    entries: list[dict] = []
+    current: dict | None = None
+
+    for line in lines:
+        m = ENTRY_HEADING.match(line)
+        if m:
+            if current is not None:
+                entries.append(current)
+            current = {
+                "date": m.group(1),
+                "slug": m.group(2),
+                "target": "",
+                "outcome": "",
+                "delta": "",
+                "decisions": [],
+                "reversals": [],
+                "realizations": [],
+            }
+            continue
+
+        if current is None:
+            continue
+
+        meta = META_FIELD.match(line)
+        if meta:
+            current[meta.group(1)] = meta.group(2).strip()
+            continue
+
+        marker = MARKER.match(line)
+        if marker:
+            kind = marker.group(1).lower() + "s"
+            current[kind].append(marker.group(2).strip())
+
+    if current is not None:
+        entries.append(current)
+    return entries
+
+
+def cmd_history(args: argparse.Namespace) -> int:
+    if not LOG.exists():
+        print(f"ERROR: {LOG} does not exist.", file=sys.stderr)
+        return 1
+
+    text = LOG.read_text(encoding="utf-8")
+    entries = _parse_entries(text)
+
+    if not entries:
+        print("(no entries in trail/log.md)")
+        return 0
+
+    target_filter: str | None = getattr(args, "target", None)
+    if target_filter:
+        entries = [e for e in entries if target_filter.lower() in e["target"].lower()]
+        if not entries:
+            print(f"(no entries matching target '{target_filter}')")
+            return 0
+
+    col_w = 72  # total line width
+
+    for i, e in enumerate(entries, 1):
+        is_silence = "silence" in e["outcome"].lower()
+        icon = "·" if is_silence else "▸"
+
+        # Header line
+        header = f"{icon} Run {i:>2}  {e['date']}  {e['slug']}"
+        print(header)
+
+        # Outcome
+        if e["outcome"]:
+            print(f"         outcome:  {e['outcome']}")
+
+        # Delta (only if present and non-trivial)
+        if e["delta"] and e["delta"].upper() != "TODO":
+            print(f"         delta:    {e['delta']}")
+
+        # Decisions (truncated to first 80 chars each)
+        for d in e["decisions"]:
+            truncated = d if len(d) <= 80 else d[:77] + "..."
+            print(f"         decided:  {truncated}")
+
+        # Reversals (rare but important)
+        for r in e["reversals"]:
+            truncated = r if len(r) <= 80 else r[:77] + "..."
+            print(f"         REVERSAL: {truncated}")
+
+        print()
+
+    # Summary line
+    silence_count = sum(1 for e in entries if "silence" in e["outcome"].lower())
+    change_count = len(entries) - silence_count
+    print(f"  {len(entries)} runs total — {change_count} with changes, {silence_count} silence")
+    return 0
+
+
 def cmd_summary(_args: argparse.Namespace) -> int:
     if not LOG.exists():
         print(f"ERROR: {LOG} does not exist.", file=sys.stderr)
@@ -119,6 +222,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_sum = sub.add_parser("summary", help="Print the most recent entry as a 60-second digest.")
     p_sum.set_defaults(func=cmd_summary)
+
+    p_hist = sub.add_parser("history", help="Print a per-iteration timeline of all trail entries.")
+    p_hist.add_argument("--target", default=None, help="Filter entries by target name (substring match).")
+    p_hist.set_defaults(func=cmd_history)
+
     return p
 
 

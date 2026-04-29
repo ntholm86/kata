@@ -1143,3 +1143,49 @@ None. Trail entry only. Verification: `python tools/verify.py`.
 ### Reflection
 
 [!REALIZATION] Steps 1–4 of the convergence scope protocol are now satisfied for the skills layer. Step 5 (evidence package complete and reviewable for Zenodo) remains. The cross-layer coherence check confirmed that the v3 skillset is not just internally consistent but coherent with its upstream problem and principles — the chain from gap to framework to implementation holds end-to-end.
+
+## 2026-04-29 — v3.3.0-history-and-install
+
+- target: skills repo (this repo)
+- operator: maintainer (Nils Holmager)
+- agent: Claude Sonnet 4.6 (Anthropic, GitHub Copilot)
+- skill: improve (self-targeting)
+- outcome: history command added to record.py; INSTALLING.md created; README opening rewritten
+- delta: v3.2.0 → v3.3.0
+
+### Interpretation of the ask
+
+Operator reported a colleague couldn't get the skills working — dropped the whole repo folder into `.copilot/skills/` and Copilot found nothing. Operator also noted the README opening didn't communicate that this is an iterative self-improving loop. Separately, a discussion about proof-of-improvement led to a `history` command that surfaces per-iteration evidence from the trail.
+
+I interpreted this as three distinct improvements to ship together as v3.3.0: (1) fix the README opening to lead with the loop concept, (2) add `record.py history` for visible per-iteration proof, (3) add INSTALLING.md to prevent the nesting mistake.
+
+### Examination
+
+- **Inconsistency.** README opened with "Four composable skills that operationalize three principles" — accurate but static. It described the artifacts, not the system. A reader's first sentence should tell them this is an active loop that has run on itself, not a library description.
+- **Waste.** The trail contained all the per-iteration evidence needed to prove improvement over time, but `record.py` had no command to surface it. The proof existed; the view didn't.
+- **Overburden.** INSTALLING.md gap meant users had to read the README and reason about Copilot's discovery rules themselves. Two users had already gotten it wrong in the same way (wrong nesting level).
+
+### Decision
+
+[!DECISION] Rewrite README opening paragraph to lead with "autonomous self-improving loop" and establish that the loop has run on this repo repeatedly under observation.
+
+[!DECISION] Add `record.py history` command that parses trail/log.md and renders a per-run timeline: date, slug, outcome, delta, decisions. Use `▸` for change runs and `·` for silence runs so convergence direction is visible at a glance.
+
+[!DECISION] Add INSTALLING.md explaining the one-level-deep discovery rule, minimum vs full install, and what sibling files each skill needs. Link from README "Using the skills" section.
+
+[!DECISION] Increment to v3.3.0. No skill logic changed; no convergence chain impact. These are tooling and documentation additions.
+
+### Action
+
+Files modified:
+- `README.md` — opening rewritten; "Using the skills" section links to INSTALLING.md.
+- `tools/record.py` — `history` subcommand added; `_parse_entries()` and `cmd_history()` added; `META_FIELD` and `MARKER` regex added; module docstring updated; `build_parser()` extended.
+
+Files created:
+- `INSTALLING.md` — installation guide covering discovery rules, minimum and full install, sibling file requirements, trail initialisation, and usage.
+
+### Reflection
+
+The `history` command closes the proof-of-improvement gap that the v2 scorecard used to fill. The scorecard encoded what to measure; the history command reads what actually happened. These are not equivalent — the history view is stronger evidence because it cannot be optimised toward in advance.
+
+INSTALLING.md is the kind of file that should have existed at v3.0.0. The discovery-rule confusion is predictable and the fix is a one-time document, not a structural change to the skills.

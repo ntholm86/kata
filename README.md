@@ -73,6 +73,8 @@ archive/v2/       # The previous version of this suite, kept as evidence and for
 
 ## Using the skills
 
+**New here?** See [INSTALLING.md](./INSTALLING.md) for how to copy the skills into your own repo and why the folder structure matters.
+
 All four skills are markdown files an agent reads at the start of an autonomous operation. Each works standalone; any combination works. Install only what you need.
 
 - **Intent** is the entry point. One skill, immediate impact — the agent surfaces its interpretation before acting. Start here if you want one thing that makes AI agents less wrong from the first message.
