@@ -22,24 +22,15 @@ The three principles that govern every iteration, in 60 seconds:
 
 The full statement is in [PRINCIPLES.md](./PRINCIPLES.md).
 
-## Research intent and done condition
+## Research intent
 
-The intent of this research is to produce publishable, externally auditable evidence that the defined problem is addressed by the principles and operationalized by the v3 skillset. Convergence is not the objective by itself; it is the stopping signal that this intent has been satisfied.
+The goal is a skillset that reaches independent silence convergence: three consecutive silence outcomes from distinct model families, each applied cold to the live tree. That is the done condition for this repo.
 
-Work is done only when all of the following hold, in order:
-
-1. The problem artifact has independent silence convergence.
-2. The principles artifact has independent silence convergence.
-3. The v3 skillset artifact has independent silence convergence.
-4. A cross-layer coherence check finds no contradiction between problem, principles, and skills.
-5. The evidence package is complete and reviewable for external publication (GitHub and Zenodo).
-
-Operational scoping rules for convergence are defined in [CONVERGENCE_SCOPE_PROTOCOL.md](./CONVERGENCE_SCOPE_PROTOCOL.md).
+The broader research context (problem definition, principles convergence, cross-layer coherence) is governed by the [autonomous-agent-principles](https://github.com/ntholm86/autonomous-agent-principles) repo. This repo is one artifact in that chain.
 
 ## What's here
 
 ```
-CONVERGENCE_SCOPE_PROTOCOL.md
 improve/
 PRINCIPLES.md
 README.md
@@ -120,16 +111,6 @@ python tools/record.py summary
 - Skills convergence: three independent silence runs from distinct model families — Anthropic (Claude Sonnet 4.6), xAI/Grok, Google/Gemini — each applied cold to the live tree. No material changes proposed.
 - Cross-layer coherence: a fourth evaluation found no contradiction between the problem artifact, principles artifact, and skills.
 - All four results are recorded in [trail/log.md](./trail/log.md).
-
-Post-v3.1.0 changes (v3.2.0 – v3.6.0) are additive or clarifying. Notable changes since the convergence baseline:
-
-- **v3.2.0**: Intent and Trail promoted to standalone first-class skills.
-- **v3.3.x**: Trail location made explicit (target repo root); `INSTALLING.md` rewritten; skills made self-contained (no required sibling files).
-- **v3.4.0**: `record.py history --write` produces `trail/history.md` as a committed artifact.
-- **v3.5.0**: `record.py` no longer copied into target repos — stays in the skills install.
-- **v3.6.0**: Multi-iteration trail protocol: each iteration is a separate trail entry committed before the next iteration begins.
-
-Convergence claims in this repo are scope-bound by [CONVERGENCE_SCOPE_PROTOCOL.md](./CONVERGENCE_SCOPE_PROTOCOL.md). Evaluators should treat that file as mandatory pre-read during Grasp for convergence runs, and read the current chain from [trail/log.md](./trail/log.md).
 
 **Future direction:** [OBSERVABLE-LOOPS.md](./OBSERVABLE-LOOPS.md) is a draft packaging contract that would make any Observable Loop portable across runtimes and verifiable by CI — the trail-mandatory, cross-family-evaluator model as a standard format. Draft only; no runtime conforms to it yet.
 
