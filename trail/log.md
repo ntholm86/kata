@@ -1567,3 +1567,42 @@ verify.py passes after change.
 ### Reflection
 
 This session caught follow-on bugs originating from the 3.5.0 architectural change. It reinforces that when we shift file boundaries (like deciding ecord.py should no longer exist relative to the target's .copilot folder), we must sweep text content for embedded assumptions. The loop is getting closer to convergence.
+
+## 2026-04-30 — ghost-protocol-reference
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve + intent
+- outcome: changed
+- delta: removed references to nonexistent CONVERGENCE_SCOPE_PROTOCOL.md from INSTALLING.md and improve/SKILL.md
+
+### Interpretation of the ask
+
+Run the full Improve loop. Find the highest-leverage remaining change, or declare convergence if nothing remains.
+
+### Examination
+
+**Inconsistency lens:** INSTALLING.md told users to optionally copy CONVERGENCE_SCOPE_PROTOCOL.md next to the skill folders, and listed it as an optional sibling for improve. improve/SKILL.md told agents to read CONVERGENCE_SCOPE_PROTOCOL.md before convergence runs "if available." The file does not exist in the repo — it was added in a prior session and removed, but the outbound references were not cleaned up. A first-time user following the installer would copy a file that doesn't exist; an agent reading improve/SKILL.md would search for a file by a specific name that no copy of the suite ships.
+
+**Waste lens:** Nothing else actionable.
+
+**Overburden lens:** Nothing actionable.
+
+**Challenge:** Is there a deeper structural problem? No. This is the same pattern as the previous three runs — residual documentation drift from prior refactors. The suite's architecture is sound; the remaining findings are surface-level stale references.
+
+### Decision
+
+[!DECISION] Remove the two stale references. Rationale: a named optional file that does not exist is worse than no mention — it creates a search cost for users and agents that always fails. Generic language ("read the repo's convergence-scope protocol if it has one") is correct for any target repo, whether or not one exists. Alternatives: (1) re-add the file — rejected, the protocol content was absorbed into improve/SKILL.md and PRINCIPLES.md; (2) silence — rejected, the references were demonstrably stale.
+
+### Action
+
+INSTALLING.md: removed CONVERGENCE_SCOPE_PROTOCOL.md from the "Full install" optionals paragraph and from the "What each skill needs" table row for improve.
+
+improve/SKILL.md: changed "read CONVERGENCE_SCOPE_PROTOCOL.md before proceeding if it is available" to "read the repo's convergence-scope protocol before proceeding if it has one".
+
+verify.py passes.
+
+### Reflection
+
+[!REALIZATION] Four consecutive runs, each finding a stale reference left by a prior refactor. The pattern is clear: every time a file or a path convention changes, the outbound references to it don't get swept. This is not a structural problem — it is the expected shape of late-stage convergence. Each run is smaller than the last. The question for the next run is whether anything substantive remains, or whether this is the last surface inconsistency.

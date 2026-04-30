@@ -55,7 +55,7 @@ your-repo/
         verify.py
 ```
 
-Optionally copy `PRINCIPLES.md` and `CONVERGENCE_SCOPE_PROTOCOL.md` next to the skill folders — the skills reference them but work fully without them (the principles are inlined in each SKILL.md).
+Optionally copy `PRINCIPLES.md` next to the skill folders — the skills reference it but work fully without it (the principles are inlined in each SKILL.md).
 
 ---
 
@@ -66,7 +66,7 @@ All four skills work with only their own `SKILL.md`. No required sibling files.
 | Skill | Optional sibling files |
 |---|---|
 | **intent** | `PRINCIPLES.md` (cross-reference link; content is inlined) |
-| **improve** | `PRINCIPLES.md`, `CONVERGENCE_SCOPE_PROTOCOL.md` |
+| **improve** | `PRINCIPLES.md` |
 | **probe** | `PRINCIPLES.md` |
 | **trail** | nothing — creates `trail/log.md` on first use |
 

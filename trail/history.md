@@ -42,6 +42,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 35 | 2026-04-30 | readme-stopped-to-converged | changed — "stopped" → "converged" in README opening paragraph | one word change; README opening now consistent with PRINCIPLES.md definition and Evidence section framing |
 | ▸ 36 | 2026-04-30 | install-instructions-missing-tools | changed | added \	ools/\ to README.md and INSTALLING.md copy instructions |
 | ▸ 37 | 2026-04-30 | relative-path-inconsistencies | changed | fixed broken link to format spec and invalid relative paths to record.py in documentation |
+| ▸ 38 | 2026-04-30 | ghost-protocol-reference | changed | removed references to nonexistent CONVERGENCE_SCOPE_PROTOCOL.md from INSTALLING.md and improve/SKILL.md |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -206,4 +207,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Update relative paths in improve/SKILL.md, 	rail/SKILL.md, and README.md to correct the dead format spec link and explicitly use <skills>/tools/record.py for commands meant to be run from target repos.
 
-**37 runs total — 27 with changes, 10 silence**
+### Run 38 — 2026-04-30 — ghost-protocol-reference
+
+- **decided:** Remove the two stale references. Rationale: a named optional file that does not exist is worse than no mention — it creates a search cost for users and agents that always fails. Generic language ("read the repo's convergence-scope protocol if it has one") is correct for any target repo, whether or not one exists. Alternatives: (1) re-add the file — rejected, the protocol content was absorbed into improve/SKILL.md and PRINCIPLES.md; (2) silence — rejected, the references were demonstrably stale.
+
+**38 runs total — 28 with changes, 10 silence**

@@ -29,7 +29,7 @@ Full statement of the principles: [PRINCIPLES.md](../PRINCIPLES.md) — read it 
 
 If Intent is not installed: before examining anything, narrate your interpretation of what you've been asked to do, in your own words. State what you believe the destination is and what would count as success. If your interpretation diverges from a literal reading of the request, say so explicitly so the operator can correct course before you act.
 
-If the ask is about convergence or publication readiness, read `CONVERGENCE_SCOPE_PROTOCOL.md` before proceeding if it is available, then declare which layer (problem, principles, skills, cross-layer coherence) this run is evaluating.
+If the ask is about convergence or publication readiness, read the repo's convergence-scope protocol before proceeding if it has one, then declare which layer (problem, principles, skills, cross-layer coherence) this run is evaluating.
 
 This is not ceremony. The most common failure mode in autonomous improvement is solving a precisely-executed wrong problem.
 
