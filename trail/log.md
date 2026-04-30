@@ -1503,7 +1503,8 @@ Run the full Improve loop on the repo using the convergence-loop prompt. Intent:
 
 ### Examination
 
-**Inconsistency lens:** In v3.5.0, \ecord.py\ was changed to stay in the skills install rather than being copied into the target repo's \	rail/\ folder. However, the installation instructions in both \README.md\ and \INSTALLING.md\ still only instructed users to copy \intent/\, \improve/\, \probe/\, and \	rail/\ to their \.copilot/skills/\ directory. Without copying the \	ools/\ folder, the "mandatory" history generation command (\python <skills>/tools/record.py history --write\) documented in \	rail/SKILL.md\ fails with a file not found error, breaking the trail workflow.
+**Inconsistency lens:** In v3.5.0, \
+ecord.py\ was changed to stay in the skills install rather than being copied into the target repo's \	rail/\ folder. However, the installation instructions in both \README.md\ and \INSTALLING.md\ still only instructed users to copy \intent/\, \improve/\, \probe/\, and \	rail/\ to their \.copilot/skills/\ directory. Without copying the \	ools/\ folder, the "mandatory" history generation command (\python <skills>/tools/record.py history --write\) documented in \	rail/SKILL.md\ fails with a file not found error, breaking the trail workflow.
 
 **Waste lens:** Nothing actionable.
 
@@ -1548,7 +1549,8 @@ Run the full Improve loop on the repo using the convergence-loop prompt. Intent:
 
 **Overburden lens:** Nothing actionable.
 
-**Challenge:** Are these mechanical documentation fixes hiding a deeper architectural issue? No. These are residual inconsistencies stemming from the 3.5.0 refactor (where ecord.py stopped being copied to target repos) and the 3.2.0 suite unbundling (where trail was separated into its own skill). Fixing these mechanical paths prevents user friction when adopting the V3 architecture on new codebases.
+**Challenge:** Are these mechanical documentation fixes hiding a deeper architectural issue? No. These are residual inconsistencies stemming from the 3.5.0 refactor (where 
+ecord.py stopped being copied to target repos) and the 3.2.0 suite unbundling (where trail was separated into its own skill). Fixing these mechanical paths prevents user friction when adopting the V3 architecture on new codebases.
 
 ### Decision
 
@@ -1566,7 +1568,8 @@ verify.py passes after change.
 
 ### Reflection
 
-This session caught follow-on bugs originating from the 3.5.0 architectural change. It reinforces that when we shift file boundaries (like deciding ecord.py should no longer exist relative to the target's .copilot folder), we must sweep text content for embedded assumptions. The loop is getting closer to convergence.
+This session caught follow-on bugs originating from the 3.5.0 architectural change. It reinforces that when we shift file boundaries (like deciding 
+ecord.py should no longer exist relative to the target's .copilot folder), we must sweep text content for embedded assumptions. The loop is getting closer to convergence.
 
 ## 2026-04-30 — ghost-protocol-reference
 
@@ -1606,3 +1609,45 @@ verify.py passes.
 ### Reflection
 
 [!REALIZATION] Four consecutive runs, each finding a stale reference left by a prior refactor. The pattern is clear: every time a file or a path convention changes, the outbound references to it don't get swept. This is not a structural problem — it is the expected shape of late-stage convergence. Each run is smaller than the last. The question for the next run is whether anything substantive remains, or whether this is the last surface inconsistency.
+
+## 2026-04-30 — probe-unexplained-v2-jargon
+
+- target: probe/SKILL.md
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve
+- outcome: one incremental change
+- delta: replaced "(Tier 1)" jargon with an explanation readable without v2 knowledge
+
+### Interpretation of the ask
+
+Run the autonomous improve loop on the skills repo itself until silence (zero actionable findings) or the agent cannot advance. Iteration 4. One change per run.
+
+### Examination
+
+All four SKILL.md files, INSTALLING.md, and README.md re-read in full this iteration.
+
+- **Inconsistency:** `improve/SKILL.md`, `intent/SKILL.md`, `trail/SKILL.md` — clean after prior fixes. `INSTALLING.md` — clean after prior fix. `README.md` — clean.
+- **Inconsistency:** `probe/SKILL.md` "What this skill does not do" section contains "(Tier 1)" — jargon from the v2 scoring architecture, which v3 explicitly retired. No other reference to "Tier 1" exists anywhere in the skills suite. A reader installing only v3 has no context to decode it. The principle "Human-readable. If a term requires prior knowledge to understand, it fails." (constraint 3) makes this actionable.
+- **Waste:** The parenthetical carries no meaning a new reader can decode. Cargo from v2.
+- **Overburden:** Nothing.
+
+### Decision
+
+[!DECISION] Remove the unexplained v2 jargon and replace with a self-contained explanation of the failure mode being avoided. The functional claim of the sentence is preserved; the opaque reference is eliminated.
+
+Alternatives considered: delete the entire bullet — rejected, because the "don't score" guidance is valuable. Leave the jargon — rejected, it fails the human-readable constraint.
+
+### Action
+
+In `probe/SKILL.md`, replaced:
+> "Numerical scoring on probes recreates the failure mode (Tier 1) that v3 deliberately removed."
+
+With:
+> "Numerical scoring on probes recreates the failure mode v3 deliberately removed: scores that stabilise while the artifact keeps churning, evaluated by a single observer who cannot see their own blind spots."
+
+`python tools/verify.py` → OK.
+
+### Reflection
+
+Four consecutive iterations have found and fixed documentation drift: missing install entries, stale path prefixes, a ghost file reference, and now unexplained jargon from a retired architecture. All four findings share the same pattern: when architectural decisions are made, their vocabulary (file names, path conventions, tier names) leaves residue in surrounding text that doesn't get swept at the time. The loop is converging — each finding is narrower in scope than the last. The next run may achieve silence.

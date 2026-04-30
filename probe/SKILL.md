@@ -70,5 +70,5 @@ A FAIL is not an embarrassment; it is signal. A PASS is not a victory; it is one
 ## What this skill does not do
 
 - It does not certify the agent. One probe tests one claim. ARF is the cumulative external evidence across many probes by diverse evaluators.
-- It does not score. Verdicts are pass/fail, not numbers. Numerical scoring on probes recreates the failure mode (Tier 1) that v3 deliberately removed.
+- It does not score. Verdicts are pass/fail, not numbers. Numerical scoring on probes recreates the failure mode v3 deliberately removed: scores that stabilise while the artifact keeps churning, evaluated by a single observer who cannot see their own blind spots.
 - It does not measure compliance. Compliance is measurable trivially. Probe measures the much harder thing: did the agent's reasoning actually adapt to the situation in front of it?
