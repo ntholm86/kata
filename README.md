@@ -2,15 +2,13 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19842994.svg)](https://doi.org/10.5281/zenodo.19842994)
 
-An autonomous self-improving loop — and the four skills that power it. The loop has run on this repository dozens of times. Every iteration is recorded in `trail/log.md`. Three principles govern every run.
+An autonomous improvement loop — and the four skills that power it. The loop can target any codebase. The loop has run more than 100 times on this repository, understanding its own mechanics, deciding how to improve it — with the three principles as the only human input.
 
-> **This repository was previously named `kata`.** v1 and v2 of this suite used Toyota Production System vocabulary (Kata, Kaizen, Kaikaku, Hansei, Shiken, Kiroku). v3 dropped that vocabulary in favour of plain English. The repository was renamed `autonomous-agent-skills` at v3.2.0; GitHub redirects all old URLs automatically.
+During the process, it decided on its own to refactor itself, twice. Each run reads the full trail of prior iterations before acting — that accumulated reflection (called hansei in v2) is what surfaced the need for structural change rather than incremental improvement. Every v3 iteration is recorded in `trail/log.md`. Earlier iterations are preserved in `archive/v2/TRAIL/` (v2) and `archive/v2/v1_archive/` (v1). The reasoning framework is inspired by Toyota Production Systems Philosophy (TPS).
 
 ## What this is
 
-This repository is the loop it describes. An autonomous agent reads the skills, examines the target, decides what to change, makes the change, and records the reasoning — then the next run starts from that new state. The skills in this repo have been applied to this repo itself, repeatedly, under observation, until independent evaluators from three different model families found nothing left to change.
-
-The four skills are both the tool and the proof of concept.
+This repository is the loop it describes — the four skills are both the tool and the proof of concept. Applied to this repo itself, repeatedly, under observation, until independent evaluators from three different model families found nothing left to change.
 
 This is one implementation of the [autonomous-agent-principles](https://github.com/ntholm86/autonomous-agent-principles) governance framework. The principles come from that repo (CC BY-SA 4.0); this repo is one tool suite that operates under them (MIT).
 
