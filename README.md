@@ -4,7 +4,9 @@
 
 An autonomous improvement loop — and the four skills that power it. The loop can target any codebase. The loop has run more than 100 times on this repository, understanding its own mechanics, deciding how to improve it — with the three principles as the only human input.
 
-During the process, it decided on its own to refactor itself, twice. Each run reads the full trail of prior iterations before acting — that accumulated reflection (called hansei in v2) is what surfaced the need for structural change rather than incremental improvement. Every v3 iteration is recorded in `trail/log.md`. Earlier iterations are preserved in `archive/v2/TRAIL/` (v2) and `archive/v2/v1_archive/` (v1). The reasoning framework is inspired by Toyota Production Systems Philosophy (TPS).
+During the process, it decided on its own to refactor itself, twice. Each run reads the full trail of prior iterations before acting — that accumulated reflection (called hansei in v2) is what surfaced the need for structural change rather than incremental improvement.
+
+Every v3 iteration is recorded in `trail/log.md` — including the reasoning behind every autonomous decision. Earlier iterations are preserved in `archive/v2/TRAIL/` (v2) and `archive/v2/v1_archive/` (v1). The reasoning framework is inspired by Toyota Production Systems Philosophy (TPS).
 
 ## What this is
 
@@ -16,7 +18,7 @@ The three principles that govern every iteration, in 60 seconds:
 
 1. **Commander's Intent** — define the destination, never prescribe the route. Agents reason about goals; they don't execute checklists.
 2. **Observable Autonomy** — every autonomous step produces a continuous, multi-resolution trail. If you can't see it, it shouldn't be doing it.
-3. **Convergence Is Silence** — the system has converged when diverse, independent evaluators find nothing to change. Score stability alone is not convergence.
+3. **Convergence Is Silence** — the system has converged when diverse, independent evaluators find nothing to change. Score stability alone is not convergence. One model's silence is not convergence either — it may just be that model's blind spots. Convergence requires silence from evaluators that don't share the same training, reasoning patterns, or failure modes.
 
 The full statement is in [PRINCIPLES.md](./PRINCIPLES.md).
 
@@ -73,12 +75,18 @@ archive/v2/       # The previous version of this suite, kept as evidence and for
 
 **New here?** See [INSTALLING.md](./INSTALLING.md) for how to copy the skills into your own repo and why the folder structure matters.
 
+The basic loop:
+1. Install the skills into your repo's `.copilot/skills/`.
+2. Run an agent (any model) on your codebase with the Improve skill — it reads the code, decides what to change, makes it, and appends a trail entry.
+3. Commit. Run again. Knowledge compounds: each run reads the full trail of prior decisions.
+4. When a run finds nothing actionable, that is one silence vote. Repeat with a different model family. Three independent silences from distinct families = convergence.
+
 All four skills are markdown files an agent reads at the start of an autonomous operation. Each works standalone; any combination works. Install only what you need.
 
 - **Intent** is the entry point. One skill, immediate impact — the agent surfaces its interpretation before acting. Start here if you want one thing that makes AI agents less wrong from the first message.
 - **Trail** makes Intent durable. Without Trail, the interpretation from one session is gone by the next. With Trail, it accumulates in `trail/log.md` and Intent reads it on every future session.
 - **Improve** is the examination and change skill. Use it for any audit, refactor, redesign, or fix. Delegates to Intent (step 1) and Trail (step 7) when they are installed.
-- **Probe** tests whether the agent is actually reasoning or pattern-matching. Use it when you want evidence (one way or the other) about reasoning quality. Delegates to Trail (step 5) when installed.
+- **Probe** answers the question everyone asks but nobody has a tool for: is the agent *actually reasoning*, or is it pattern-matching against the prompt? It constructs two cases that look similar but differ in one material way, then observes whether the agent's response diverges where it should. If it doesn't, you have evidence of shallow compliance, not reasoning. Delegates to Trail (step 5) when installed.
 
 There is no orchestrator and no scoring rubric. The skills define the shape; the agent does the reasoning. The trail is the proof.
 
@@ -122,6 +130,8 @@ Post-v3.1.0 changes (v3.2.0 – v3.6.0) are additive or clarifying. Notable chan
 - **v3.6.0**: Multi-iteration trail protocol: each iteration is a separate trail entry committed before the next iteration begins.
 
 Convergence claims in this repo are scope-bound by [CONVERGENCE_SCOPE_PROTOCOL.md](./CONVERGENCE_SCOPE_PROTOCOL.md). Evaluators should treat that file as mandatory pre-read during Grasp for convergence runs, and read the current chain from [trail/log.md](./trail/log.md).
+
+**Future direction:** [OBSERVABLE-LOOPS.md](./OBSERVABLE-LOOPS.md) is a draft packaging contract that would make any Observable Loop portable across runtimes and verifiable by CI — the trail-mandatory, cross-family-evaluator model as a standard format. Draft only; no runtime conforms to it yet.
 
 ## License
 
