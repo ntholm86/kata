@@ -1,6 +1,6 @@
 ---
 name: trail
-version: 1.2.0
+version: 1.3.0
 description: 'Evidence trail management. Append a structured entry to trail/log.md IN THE TARGET REPO ROOT at the end of every substantive session — recording the interpretation of the ask, examination, decisions, actions, and reflection. The implementation of Observable Autonomy — autonomy without evidence is not delegation, it is abdication. USE WHEN: any substantive autonomous work that produces decisions, changes, or findings.'
 argument-hint: 'The target being worked on (repo, file, system) — used to populate the log entry header'
 ---
@@ -48,9 +48,18 @@ Append-only ledger of autonomous operations on this repo. Newest entries at the 
 
 After initialisation, the user can run `python trail/record.py history` from the repo root to see the improvement timeline.
 
+After every session that appends a new entry to `log.md`, also regenerate the committed history view:
+
+```
+python trail/record.py history --write
+```
+
+This writes `trail/history.md` — a markdown summary of all runs that renders cleanly on GitHub. Commit it alongside `log.md` so anyone viewing the repo can see the improvement record without running anything.
+
 ```
 trail/
-  log.md          — append-only ledger, one entry per session
+  log.md          — append-only ledger, one entry per session (the source of truth)
+  history.md      — auto-generated readable summary (regenerated each run)
   record.py       — history/summary viewer (copied from skills tools/)
   sessions/       — optional: full verbatim transcripts, linked from log entries
 ```

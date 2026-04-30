@@ -130,6 +130,64 @@ def _parse_entries(text: str) -> list[dict]:
     return entries
 
 
+def _render_history(entries: list[dict], markdown: bool) -> str:
+    """Render entries as either a terminal timeline or a markdown document."""
+    lines: list[str] = []
+
+    if markdown:
+        lines.append("# History")
+        lines.append("")
+        lines.append("Auto-generated from `trail/log.md` by `python trail/record.py history --write`.")
+        lines.append("Do not edit by hand — re-run the command to refresh.")
+        lines.append("")
+        lines.append("| # | Date | Slug | Outcome | Delta |")
+        lines.append("|---|------|------|---------|-------|")
+        for i, e in enumerate(entries, 1):
+            icon = "·" if "silence" in e["outcome"].lower() else "▸"
+            outcome = (e["outcome"] or "").replace("|", "\\|")
+            delta = (e["delta"] or "").replace("|", "\\|")
+            slug = e["slug"].replace("|", "\\|")
+            lines.append(f"| {icon} {i} | {e['date']} | {slug} | {outcome} | {delta} |")
+        lines.append("")
+
+        # Decisions / reversals per entry
+        for i, e in enumerate(entries, 1):
+            if not (e["decisions"] or e["reversals"]):
+                continue
+            lines.append(f"### Run {i} — {e['date']} — {e['slug']}")
+            lines.append("")
+            for d in e["decisions"]:
+                lines.append(f"- **decided:** {d}")
+            for r in e["reversals"]:
+                lines.append(f"- **REVERSAL:** {r}")
+            lines.append("")
+
+        silence_count = sum(1 for e in entries if "silence" in e["outcome"].lower())
+        change_count = len(entries) - silence_count
+        lines.append(f"**{len(entries)} runs total — {change_count} with changes, {silence_count} silence**")
+        return "\n".join(lines) + "\n"
+
+    # Terminal format (original)
+    for i, e in enumerate(entries, 1):
+        icon = "·" if "silence" in e["outcome"].lower() else "▸"
+        lines.append(f"{icon} Run {i:>2}  {e['date']}  {e['slug']}")
+        if e["outcome"]:
+            lines.append(f"         outcome:  {e['outcome']}")
+        if e["delta"] and e["delta"].upper() != "TODO":
+            lines.append(f"         delta:    {e['delta']}")
+        for d in e["decisions"]:
+            truncated = d if len(d) <= 80 else d[:77] + "..."
+            lines.append(f"         decided:  {truncated}")
+        for r in e["reversals"]:
+            truncated = r if len(r) <= 80 else r[:77] + "..."
+            lines.append(f"         REVERSAL: {truncated}")
+        lines.append("")
+    silence_count = sum(1 for e in entries if "silence" in e["outcome"].lower())
+    change_count = len(entries) - silence_count
+    lines.append(f"  {len(entries)} runs total — {change_count} with changes, {silence_count} silence")
+    return "\n".join(lines)
+
+
 def cmd_history(args: argparse.Namespace) -> int:
     if not LOG.exists():
         print(f"ERROR: {LOG} does not exist.", file=sys.stderr)
@@ -149,40 +207,15 @@ def cmd_history(args: argparse.Namespace) -> int:
             print(f"(no entries matching target '{target_filter}')")
             return 0
 
-    col_w = 72  # total line width
+    write = getattr(args, "write", False)
+    output = _render_history(entries, markdown=write)
 
-    for i, e in enumerate(entries, 1):
-        is_silence = "silence" in e["outcome"].lower()
-        icon = "·" if is_silence else "▸"
-
-        # Header line
-        header = f"{icon} Run {i:>2}  {e['date']}  {e['slug']}"
-        print(header)
-
-        # Outcome
-        if e["outcome"]:
-            print(f"         outcome:  {e['outcome']}")
-
-        # Delta (only if present and non-trivial)
-        if e["delta"] and e["delta"].upper() != "TODO":
-            print(f"         delta:    {e['delta']}")
-
-        # Decisions (truncated to first 80 chars each)
-        for d in e["decisions"]:
-            truncated = d if len(d) <= 80 else d[:77] + "..."
-            print(f"         decided:  {truncated}")
-
-        # Reversals (rare but important)
-        for r in e["reversals"]:
-            truncated = r if len(r) <= 80 else r[:77] + "..."
-            print(f"         REVERSAL: {truncated}")
-
-        print()
-
-    # Summary line
-    silence_count = sum(1 for e in entries if "silence" in e["outcome"].lower())
-    change_count = len(entries) - silence_count
-    print(f"  {len(entries)} runs total — {change_count} with changes, {silence_count} silence")
+    if write:
+        out_path = LOG.parent / "history.md"
+        out_path.write_text(output, encoding="utf-8")
+        print(f"wrote {out_path} ({len(entries)} entries)")
+    else:
+        print(output)
     return 0
 
 
@@ -225,6 +258,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_hist = sub.add_parser("history", help="Print a per-iteration timeline of all trail entries.")
     p_hist.add_argument("--target", default=None, help="Filter entries by target name (substring match).")
+    p_hist.add_argument("--write", action="store_true", help="Write trail/history.md as committed markdown instead of printing.")
     p_hist.set_defaults(func=cmd_history)
 
     return p

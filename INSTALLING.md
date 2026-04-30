@@ -77,13 +77,18 @@ When the trail skill runs for the first time on a project it will:
 1. Create `<repo-root>/trail/log.md` (the append-only evidence log)
 2. Copy `record.py` from the skills install into `<repo-root>/trail/record.py`
 
-After that you can run from the project root:
+After every run that adds an entry to `log.md`, regenerate the readable summary:
 ```
-python trail/record.py history    # timeline of all improvement runs
+python trail/record.py history --write    # writes trail/history.md
+```
+
+For ad-hoc viewing in the terminal:
+```
+python trail/record.py history    # timeline to stdout
 python trail/record.py summary    # digest of the most recent run
 ```
 
-Commit the `trail/` folder to your repo — it is the audit record, not a scratch file.
+`trail/log.md` is the source of truth (append-only). `trail/history.md` is auto-generated and renders cleanly on GitHub. Commit both alongside your code.
 
 ---
 

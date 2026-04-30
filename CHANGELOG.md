@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.4.0 — 2026-04-30
+
+### Added
+- `tools/record.py history --write`: writes `trail/history.md` as committed markdown — a readable, GitHub-renderable summary of all runs. Closes the actual proof-of-improvement gap from v3.0.0: `record.py history` produced terminal output only, not a committed artifact a colleague could read.
+- `trail/SKILL.md`: standard workflow now includes regenerating `trail/history.md` after every session. Documented in the directory tree.
+
+### Changed
+- `cmd_history` refactored: rendering split into `_render_history(entries, markdown=...)` so the same parser drives both terminal and markdown outputs.
+
+---
+
 ## v3.3.4 — 2026-04-30
 
 ### Fixed
