@@ -32,16 +32,22 @@ Each run starts by reading the full trail of prior decisions. That trail is both
 
 The reasoning follows a specific sequence, drawn from Toyota Production System (TPS) and military doctrine:
 
-**Intent first.** The agent starts with the prompt the user actually wrote. It applies Commander's Intent in reverse: extract the goal, constraints, and success condition behind that prompt. It states its interpretation and one considered alternative, Coaching Kata style: target condition, actual condition, obstacle. The user can correct drift before work begins.
+**Intent** — the agent starts with the prompt the user actually wrote. It extracts the goal, constraints, and success condition behind that prompt, states its interpretation and one considered alternative, and lets the user correct drift before work begins.
 
 > [!IMPORTANT]
 > **[Commander's Intent](./PRINCIPLES.md), Principle 1** — the user defines the destination in the prompt. The Intent skill makes that direction explicit before the agent acts.
 
-**Then Genba** — go to where the work is. The agent reads the code, the trail, and the output as they are, and builds its model from that.
+**Observe** — go to where the work is. The agent reads the code, the trail, and the output as they are, and builds its model from that. No assumptions, no summaries.
 
-**Then the three TPS lenses:** **Waste** (what adds no value), **Overburden** (what is carrying too much), **Inconsistency** (where the target contradicts itself). These are thinking tools, used only where they help.
+**Examine** — three TPS lenses applied as thinking tools, not a checklist: **Waste** (what adds no value), **Overburden** (what is carrying too much), **Inconsistency** (where the target contradicts itself).
 
-**Then Hansei** — structured reflection after acting. The agent rereads the full trail of prior iterations and asks whether the loop is converging or drifting. Did this run move closer to the target condition? What should the next run examine? Each decision records the alternatives considered and why one path won.
+**Challenge** — the agent explicitly asks what it is not seeing. Is it anchored to the most obvious finding? Is the structure itself wrong, such that no incremental fix will help? This is the step that can trigger a full redesign argument instead of another incremental patch.
+
+**Decide** — pick one: make one high-leverage change, argue for redesign, or declare silence. One answer. Ranked alternatives stated.
+
+**Act** — make the change. State what and why before touching anything. Verify after.
+
+**Reflect** — reread the full trail of prior iterations. Is the loop converging or drifting? What should the next run examine? Each decision records the alternatives considered and why one path won.
 
 > [!IMPORTANT]
 > **[Observable Autonomy](./PRINCIPLES.md), Principle 2** — every autonomous step leaves a trail. `trail/log.md` is the proof: an outside reader can reconstruct, audit, and challenge the reasoning.
