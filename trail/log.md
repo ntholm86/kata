@@ -1808,3 +1808,40 @@ Ran `python verify.py` → OK.
 ### Reflection
 
 Eight consecutive iterations, all documentation drift. One known item remains in `trail/README.md` ("Shiken-style" in probe description). If that is the only finding in Iteration 9, fixing it would clear the last known residue of v2 vocabulary in the live docs, making Iteration 10 the first plausible silence run for Claude Sonnet 4.6.
+
+## 2026-04-30 — trail-readme-shiken-jargon
+
+- target: trail/README.md
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve
+- outcome: one incremental change
+- delta: removed "(Shiken-style)" v2 jargon from probe skill description
+
+### Interpretation of the ask
+
+Run the autonomous improve loop on the skills repo itself until silence (zero actionable findings). Iteration 9. One change per run.
+
+### Examination
+
+`trail/README.md` re-read in full. All other live docs re-swept via grep for remaining v2 vocabulary.
+
+- **Inconsistency lens:** probe bullet still reads "construct a novelty probe (Shiken-style) that distinguishes…". "Shiken" was the v2 name for the probe concept — the Japanese vocabulary layer retired in v3.0.0. A grep for v2 vocabulary across the skills repo returned zero hits outside this file (other repos like apikit and datakit have v2 vocabulary in their own trails but those are historical records from v2 sessions, outside our scope).
+- **Waste, Overburden:** Nothing actionable.
+
+After removing this parenthetical, no remaining v2 jargon exists anywhere in the live skills docs.
+
+### Decision
+
+[!DECISION] Remove "(Shiken-style)" from the probe bullet in `trail/README.md`. The sentence is complete and accurate without it.
+Rationale: parenthetical is unexplained jargon from a retired architecture, same pattern as the "Tier 1" fix in Iteration 4. A reader who doesn't know v2 history cannot decode it.
+Alternative considered: replace with a brief explanation — rejected, the parenthetical adds no value once the jargon is stripped. The sentence stands without it.
+
+### Action
+
+Removed "(Shiken-style)" from the probe skill bullet in `trail/README.md`.
+Ran `python verify.py` → OK.
+
+### Reflection
+
+Nine consecutive iterations, all documentation drift. After this fix, no known findings remain in any live doc. The next iteration is the first plausible silence run for Claude Sonnet 4.6 on this repo. If Iteration 10 is silence, that constitutes the first silence run required by Principle 3's convergence protocol (one of three needed across distinct model families).

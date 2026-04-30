@@ -48,6 +48,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 41 | 2026-04-30 | changelog-version-drift | one incremental change | added v3.6.1 entry to CHANGELOG.md; bumped version string in README.md |
 | ▸ 42 | 2026-04-30 | indexed-marker-grep-path | one incremental change | fixed broken grep command path in indexed-marker recovery instructions |
 | ▸ 43 | 2026-04-30 | trail-readme-v2-vocabulary | one incremental change | removed "kata skills" from H1 title — retired v2 vocabulary |
+| ▸ 44 | 2026-04-30 | trail-readme-shiken-jargon | one incremental change | removed "(Shiken-style)" v2 jargon from probe skill description |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -237,4 +238,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Remove "kata skills" subtitle from the H1. Change to `# Audit Trail` — accurate and version-stable without referencing a retired name.
 
-**43 runs total — 33 with changes, 10 silence**
+### Run 44 — 2026-04-30 — trail-readme-shiken-jargon
+
+- **decided:** Remove "(Shiken-style)" from the probe bullet in `trail/README.md`. The sentence is complete and accurate without it.
+
+**44 runs total — 34 with changes, 10 silence**

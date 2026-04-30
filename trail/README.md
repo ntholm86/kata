@@ -28,7 +28,7 @@ The suite has four skills:
 
 - **intent** — state the agent's interpretation of the ask before work begins. Catches misreading early.
 - **improve** — examine a target, find what most needs changing, change it (or argue for radical redesign), verify, and record. The core autonomous loop.
-- **probe** — construct a novelty probe (Shiken-style) that distinguishes genuine situated reasoning from pattern-matching against a checklist.
+- **probe** — construct a novelty probe that distinguishes genuine situated reasoning from pattern-matching against a checklist.
 - **trail** — append a structured evidence entry to `trail/log.md` after every session. Implements Observable Autonomy.
 
 Earlier versions of this suite (v1, v2) had more skills with Japanese vocabulary (Kata, Kaizen, Kaikaku, Hansei, Mura, Muri, Muda, Intent). v3.0.0 collapsed them into two (improve and probe). v3.2.0 re-extracted intent and trail as standalone first-class skills. The full history is preserved in `archive/v2/` and the v2 tags.
