@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.3.3 — 2026-04-30
+
+### Fixed
+- `trail/SKILL.md`: trail initialisation now includes copying `record.py` into `trail/record.py` in the target repo. The history viewer is self-contained per project — no dependency on the global skills install path. Usage: `python trail/record.py history` from the repo root.
+
+---
+
 ## v3.3.2 — 2026-04-30
 
 ### Fixed

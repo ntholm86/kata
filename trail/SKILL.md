@@ -1,6 +1,6 @@
 ---
 name: trail
-version: 1.1.0
+version: 1.2.0
 description: 'Evidence trail management. Append a structured entry to trail/log.md IN THE TARGET REPO ROOT at the end of every substantive session — recording the interpretation of the ask, examination, decisions, actions, and reflection. The implementation of Observable Autonomy — autonomy without evidence is not delegation, it is abdication. USE WHEN: any substantive autonomous work that produces decisions, changes, or findings.'
 argument-hint: 'The target being worked on (repo, file, system) — used to populate the log entry header'
 ---
@@ -32,7 +32,9 @@ Every repo gets its own trail. The trail is local evidence for that project — 
 
 One file: `trail/log.md` in the target repo root. Append-only. One `##` entry per session, newest at the bottom.
 
-If `trail/log.md` does not exist yet, create it now with this header before proceeding:
+If `trail/log.md` does not exist yet, initialise the trail now:
+
+1. Create `trail/log.md` with this header:
 
 ```markdown
 # Trail log
@@ -42,9 +44,14 @@ Append-only ledger of autonomous operations on this repo. Newest entries at the 
 ---
 ```
 
+2. Copy `record.py` from the skills install directory (`tools/record.py` next to this SKILL.md) into `trail/record.py` in the target repo. This gives the project a self-contained history viewer — no dependency on the global skills install.
+
+After initialisation, the user can run `python trail/record.py history` from the repo root to see the improvement timeline.
+
 ```
 trail/
   log.md          — append-only ledger, one entry per session
+  record.py       — history/summary viewer (copied from skills tools/)
   sessions/       — optional: full verbatim transcripts, linked from log entries
 ```
 
