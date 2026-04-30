@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19842994.svg)](https://doi.org/10.5281/zenodo.19842994)
 
-An autonomous improvement loop — and the four skills that power it. The loop has run more than 100 times on this repository, understanding its own mechanics, deciding how to improve it — with the three principles as the only human input. During the process, it decided on its own to refactor itself, twice.
+An autonomous improvement loop — and the four skills that power it. The loop has run more than 100 times on this repository, understanding its own mechanics, deciding how to improve it — with the [three principles](./PRINCIPLES.md) as the requirements. During the process, it decided on its own to refactor itself, twice.
 
 ## The four skills
 
