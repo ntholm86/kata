@@ -38,7 +38,7 @@ The reasoning follows a specific sequence, drawn from Toyota Production System (
 
 **Then the three TPS lenses:** **Waste** (what carries no value), **Overburden** (what is asked to do too much), **Inconsistency** (where the target contradicts itself). Applied as thinking tools, not a checklist — and only the ones the target invites.
 
-**Then Hansei** — structured reflection after acting. Did the loop converge or churn? What should the next run look at? Every decision names what was rejected and why. A decision without a rejected alternative isn't a decision — it's an output.
+**Then Hansei** — structured reflection after acting. This includes reading the full list of prior iterations in the trail — not to repeat them, but to evaluate whether the loop is converging or drifting. Did this run move toward the target condition or away from it? What should the next run look at? Every decision names what was rejected and why. A decision without a rejected alternative isn't a decision — it's an output.
 
 Every decision, reversal, and dead end is recorded in `trail/log.md`. That file is the proof that the autonomy was real — not that it produced good outputs, but that the reasoning behind each output can be reconstructed, audited, and challenged by anyone who wasn't there.
 
