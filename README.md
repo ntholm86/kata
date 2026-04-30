@@ -1,8 +1,8 @@
-# Skills
+# Autonomous Development Skills Suite
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19842994.svg)](https://doi.org/10.5281/zenodo.19842994)
 
-An autonomous improvement loop, and the four skills behind it. The loop can target any codebase. On this repository, it has run more than 100 times against its own code and refactored the suite twice, guided by the [three principles](./PRINCIPLES.md).
+Four skills that give any AI agent a complete improvement loop for any codebase: interpret the prompt, observe the target, find the highest-leverage change, make it, and record the evidence. The loop ran on this repository more than 100 times and restructured the suite twice. It stopped when three independent evaluators from distinct model families found nothing left to change.
 
 ## The four skills
 

@@ -1361,3 +1361,44 @@ verify.py passes after change.
 ### Reflection
 
 Loop is converging. This was a stale-content inconsistency introduced when v3.2.0 added the two new skills but trail/README.md was not updated. The verifier checks links and structure but not factual accuracy of prose — this class of drift requires a human or agent audit to catch. No churn observed.
+
+## 2026-04-30 — readme-title-and-hook
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: Claude Sonnet 4.6 (Anthropic / GitHub Copilot)
+- skill: improve
+- outcome: changed — README title and opening paragraph rewritten for first impression
+- delta: README.md title "Skills" → "Autonomous Development Skills Suite"; opening paragraph now leads with what it does, proof, and stopping condition
+
+### Interpretation of the ask
+
+Fresh-eyes audit of README.md with intent to make it more compelling as a selling document. "More impressive" interpreted as: the most remarkable thing about this project should land immediately, not be discovered mid-page.
+
+### Examination
+
+**Inconsistency lens:** Title is `# Skills` — a generic directory name with zero information value. GitHub renders this as the page headline. CITATION.cff has the actual title "Autonomous Development Skills Suite". The live README and the citation record disagree. [!REALIZATION] This is both an inconsistency and a first-impression failure — a reader landing on the repo sees "Skills" and has no idea what they're looking at.
+
+**Waste lens:** Opening paragraph mentions 100+ runs and two restructures but omits the project's most remarkable claim — the stopping condition (three independent evaluators from distinct model families). That detail is buried in Quick Start step 4 and again in Evidence. A reader who skims the opening and leaves never encounters it.
+
+**Overburden lens:** Nothing structural — section order and density are appropriate.
+
+**Challenge:** Am I anchored to the title? Genuinely no — it is the highest-leverage single change and independently wrong (inconsistent with CITATION.cff). The subtler insight is that the opening paragraph undersells the uniqueness of the system by not leading with its differentiator.
+
+### Decision
+
+[!DECISION] Title + opening paragraph. Single incremental change. Ranked alternatives: (1) title fix only — would improve headline but not the hook; (2) restructure the whole page — overkill, structure is sound; (3) this change — highest leverage per word changed.
+
+### Action
+
+Changed `# Skills` to `# Autonomous Development Skills Suite` (matches CITATION.cff).
+
+Rewrote opening paragraph: "Four skills that give any AI agent a complete improvement loop for any codebase: interpret the prompt, observe the target, find the highest-leverage change, make it, and record the evidence. The loop ran on this repository more than 100 times and restructured the suite twice. It stopped when three independent evaluators from distinct model families found nothing left to change."
+
+Structure: what it does → proof it works → stopping condition. Three sentences, front-loaded.
+
+verify.py passes after change.
+
+### Reflection
+
+Loop converging. Prior runs fixed structure and completeness; this run fixes the first impression. The title was the last major inconsistency with the citation record. No churn — this is not undoing anything from a prior run.

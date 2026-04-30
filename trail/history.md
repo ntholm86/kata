@@ -37,6 +37,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 30 | 2026-04-30 | readme-human-scan-and-user-direction | README tightened for human scanning; user-set direction made explicit | README wording only; no behavior change |
 | ▸ 31 | 2026-04-30 | verify-contract-and-trail-repair | verifier aligned with current repo contract; trail integrity restored | `tools/verify.py`, `improve/SKILL.md`, `CHANGELOG.md`, `trail/log.md`, `trail/history.md` |
 | ▸ 32 | 2026-04-30 | trail-readme-skill-count | changed — corrected stale skill count in trail/README.md | trail/README.md "The two skills" → "The four skills" (intent, improve, probe, trail) |
+| ▸ 33 | 2026-04-30 | readme-title-and-hook | changed — README title and opening paragraph rewritten for first impression | README.md title "Skills" → "Autonomous Development Skills Suite"; opening paragraph now leads with what it does, proof, and stopping condition |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -181,4 +182,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Fix trail/README.md. Single highest-leverage change: a REQUIRED_FILE containing an actively false claim about the number of skills. A user reading trail/ directory would believe the suite is two skills and that Intent was retired. Both wrong.
 
-**32 runs total — 22 with changes, 10 silence**
+### Run 33 — 2026-04-30 — readme-title-and-hook
+
+- **decided:** Title + opening paragraph. Single incremental change. Ranked alternatives: (1) title fix only — would improve headline but not the hook; (2) restructure the whole page — overkill, structure is sound; (3) this change — highest leverage per word changed.
+
+**33 runs total — 23 with changes, 10 silence**
