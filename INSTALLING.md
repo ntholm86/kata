@@ -28,23 +28,20 @@ To get started with just the Intent skill:
 your-repo/
   .copilot/
     skills/
-      PRINCIPLES.md                  ← required (copy from repo root)
       intent/
-        SKILL.md                     ← copy the intent/ folder
+        SKILL.md
 ```
 
-Why `PRINCIPLES.md`? The SKILL.md files reference `../PRINCIPLES.md` — i.e., they expect it as a sibling of the skill folder. Without it, the cross-reference is a dead link (the skill still works, but the link is broken).
+No sibling files required. Each skill is self-contained as of v3.3.1.
 
 ---
 
-## Full install (all four skills + trail)
+## Full install (all four skills)
 
 ```
 your-repo/
   .copilot/
     skills/
-      PRINCIPLES.md                  ← copy from repo root
-      CONVERGENCE_SCOPE_PROTOCOL.md  ← copy from repo root (needed by Improve)
       intent/
         SKILL.md
       improve/
@@ -53,32 +50,40 @@ your-repo/
         SKILL.md
       trail/
         SKILL.md
-        README.md
-        log.md                       ← start with an empty log (see below)
 ```
 
-**Starting an empty trail log** — create `trail/log.md` with just the header:
-
-```markdown
-# Trail log
-
-Append-only ledger of autonomous operations on this repo. See [README.md](./README.md) for the format spec. Newest entries at the bottom.
-
----
-```
+Optionally copy `PRINCIPLES.md` and `CONVERGENCE_SCOPE_PROTOCOL.md` next to the skill folders — the skills reference them but work fully without them (the principles are inlined in each SKILL.md).
 
 ---
 
 ## What each skill needs at runtime
 
-| Skill | Required sibling files |
+All four skills work with only their own `SKILL.md`. No required sibling files.
+
+| Skill | Optional sibling files |
 |---|---|
-| **intent** | `PRINCIPLES.md` (for the cross-reference link) |
+| **intent** | `PRINCIPLES.md` (cross-reference link; content is inlined) |
 | **improve** | `PRINCIPLES.md`, `CONVERGENCE_SCOPE_PROTOCOL.md` |
 | **probe** | `PRINCIPLES.md` |
-| **trail** | `trail/log.md` (the append-only ledger) |
+| **trail** | nothing — creates `trail/log.md` on first use |
 
-The skills work without these files — Copilot will load the SKILL.md regardless. The references just become dead links, and Improve will remind the agent to read the convergence protocol if it's missing.
+---
+
+## The trail — where it lives and how to use it
+
+The trail is **per project**. It lives in the root of the repo being worked on — not inside `.copilot/skills/`.
+
+When the trail skill runs for the first time on a project it will:
+1. Create `<repo-root>/trail/log.md` (the append-only evidence log)
+2. Copy `record.py` from the skills install into `<repo-root>/trail/record.py`
+
+After that you can run from the project root:
+```
+python trail/record.py history    # timeline of all improvement runs
+python trail/record.py summary    # digest of the most recent run
+```
+
+Commit the `trail/` folder to your repo — it is the audit record, not a scratch file.
 
 ---
 
@@ -93,12 +98,6 @@ Example:
 
 ---
 
-## Keeping the trail in your repo
-
-The trail (`trail/log.md`) is append-only evidence of every autonomous operation. Commit it to your repo alongside your code — it is the audit record, not a scratch file.
-
----
-
 ## Updating
 
-Skills are just markdown files. To update, replace the SKILL.md files with newer versions. The trail log is separate from the skills and does not need to change.
+Skills are just markdown files. Replace the SKILL.md files with newer versions to update. The trail log is separate from the skills and does not change when you update.

@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.3.4 — 2026-04-30
+
+### Fixed
+- `INSTALLING.md`: fully rewritten to match current truth.
+  - Trail section corrected: trail lives in target repo root, not in `.copilot/skills/`. Documents `record.py` and `python trail/record.py history` usage.
+  - Removed `PRINCIPLES.md` and `CONVERGENCE_SCOPE_PROTOCOL.md` from required files (they have been optional since v3.3.1).
+  - "What each skill needs" table updated to "optional" sibling files only.
+  - Minimum install simplified: no sibling files needed.
+  - Full install directory tree no longer shows `trail/log.md` and `trail/README.md` inside `.copilot/skills/`.
+
+---
+
 ## v3.3.3 — 2026-04-30
 
 ### Fixed
