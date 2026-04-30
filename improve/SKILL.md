@@ -1,6 +1,6 @@
 ---
 name: improve
-version: 3.1.0
+version: 3.2.0
 description: 'The improvement skill. Examine a target, find what most needs changing, change it (or argue for radical redesign), verify, and record. Combines incremental refinement, structural rethinking, and reflection on the loop itself. USE WHEN: improve, audit, review, fix, refactor, redesign, evaluate, what would make this better, am I missing something.'
 argument-hint: 'The target to improve, and optionally the concern (correctness, simplicity, performance, etc.)'
 ---
@@ -83,6 +83,8 @@ If the loop is churning, that is itself a finding. Surface it. Do not silently k
 ### 7. Record
 
 *If [Trail](../trail/SKILL.md) is installed, apply it now — it handles this step in full.*
+
+**In multi-iteration runs, this step executes after every iteration — not once at the end of all iterations.** The trail entry is the commit point for that iteration. Append it, regenerate `history.md`, and commit before starting the next iteration. A user who stops a 10-iteration run after iteration 4 must have 4 committed trail entries, not 0.
 
 If Trail is not installed: append a single entry to `trail/log.md`. The entry must include:
 

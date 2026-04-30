@@ -1,6 +1,6 @@
 ---
 name: trail
-version: 1.4.0
+version: 1.5.0
 description: 'Evidence trail management. Append a structured entry to trail/log.md IN THE TARGET REPO ROOT at the end of every substantive session — recording the interpretation of the ask, examination, decisions, actions, and reflection. The implementation of Observable Autonomy — autonomy without evidence is not delegation, it is abdication. USE WHEN: any substantive autonomous work that produces decisions, changes, or findings.'
 argument-hint: 'The target being worked on (repo, file, system) — used to populate the log entry header'
 ---
@@ -166,6 +166,22 @@ A summary written by the audited party is evidence, but it is not independent ev
 Every session where substantive work happens. If the work produces decisions, changes, or findings, it produces a log entry. No autonomous session is invisible.
 
 Write during the session, not after. A trail written from memory compresses and rationalises. The markers belong in context, at the moment the decision or reversal occurs.
+
+### Multi-iteration runs
+
+**Each iteration is a separate trail entry. Append it immediately after that iteration completes — before beginning the next iteration.**
+
+Do not buffer entries to write at the end of all iterations. The trail is the checkpoint: if the agent crashes, times out, or the user stops the run after iteration 3 of 10, the first 3 entries must already be committed to `log.md`.
+
+The commit sequence for a multi-iteration run is:
+
+```
+iteration 1 → append trail entry 1 → run: record.py history --write → commit
+iteration 2 → append trail entry 2 → run: record.py history --write → commit
+...
+```
+
+Each trail append + history regeneration is a Git checkpoint. A partial run is recoverable; a batch write at the end is not.
 
 ---
 
