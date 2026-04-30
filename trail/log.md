@@ -1192,7 +1192,7 @@ INSTALLING.md is the kind of file that should have existed at v3.0.0. The discov
 
 ---
 
-## 2026-04-30 — v3.3.2-trail-location-fix
+## 2026-04-30 ï¿½ v3.3.2-trail-location-fix
 
 - target: skills repo (this repo)
 - operator: Nils Holmager
@@ -1203,22 +1203,66 @@ INSTALLING.md is the kind of file that should have existed at v3.0.0. The discov
 
 ### Interpretation of the ask
 
-User said: 'The intent of the trail folder is that it will appear in the scope of what you are targeting with the skill. If I chose to target my own hobby project repo — then the trail is relevant ONLY for that project — and so there must be one trail folder for each repo.'
+User said: 'The intent of the trail folder is that it will appear in the scope of what you are targeting with the skill. If I chose to target my own hobby project repo ï¿½ then the trail is relevant ONLY for that project ï¿½ and so there must be one trail folder for each repo.'
 
 Meaning: the trail belongs in the target repo, not in the skills install directory. The SKILL.md was ambiguous; agents were defaulting to writing relative to themselves (skills folder) instead of the project being worked on.
 
 ### Examination
 
-**Inconsistency lens**: trail/SKILL.md said 'trail/log.md' without specifying the base directory. This is ambiguous when the skill is installed globally — the agent has no clear anchor. The rest of the skill design assumes per-repo trails ('this repo', 'Append-only ledger of autonomous operations on this repo') but never explicitly states where 'this repo' root is.
+**Inconsistency lens**: trail/SKILL.md said 'trail/log.md' without specifying the base directory. This is ambiguous when the skill is installed globally ï¿½ the agent has no clear anchor. The rest of the skill design assumes per-repo trails ('this repo', 'Append-only ledger of autonomous operations on this repo') but never explicitly states where 'this repo' root is.
 
-**Waste lens**: The ambiguity caused misrouted trail entries — the global skills folder accumulated entries that should have gone into individual project repos. The per-repo isolation was the design intent from the start, never made explicit.
+**Waste lens**: The ambiguity caused misrouted trail entries ï¿½ the global skills folder accumulated entries that should have gone into individual project repos. The per-repo isolation was the design intent from the start, never made explicit.
 
 ### Decision
 
-[!DECISION] Added explicit location statement to The Structure section of trail/SKILL.md: 'The trail lives in the root of the target repo being worked on — not in the skills install directory.' With concrete examples (c:\git\clikit\trail\log.md).\nRationale: the fix is a wording clarification, not a structural change. The design was always per-repo; it just was never stated.\nAlternative: add a 'configuration' section with a variable for trail root — rejected, over-engineered for a naming problem.\n\n### Action
+[!DECISION] Added explicit location statement to The Structure section of trail/SKILL.md: 'The trail lives in the root of the target repo being worked on ï¿½ not in the skills install directory.' With concrete examples (c:\git\clikit\trail\log.md).\nRationale: the fix is a wording clarification, not a structural change. The design was always per-repo; it just was never stated.\nAlternative: add a 'configuration' section with a variable for trail root ï¿½ rejected, over-engineered for a naming problem.\n\n### Action
 
 Edited trail/SKILL.md The Structure section to lead with the location rule. Bumped trail skill version 1.0.0 ? 1.1.0. Bumped repo version 3.3.1 ? 3.3.2 in CHANGELOG.md and CITATION.cff.
 
 ### Reflection
 
-This ambiguity would have caused silent misbehaviour on every new repo run: the agent writes the trail to the wrong place, the user sees nothing in their project, trust is not built. One sentence fixes it. The lesson: location is load-bearing — never leave it implicit.
+This ambiguity would have caused silent misbehaviour on every new repo run: the agent writes the trail to the wrong place, the user sees nothing in their project, trust is not built. One sentence fixes it. The lesson: location is load-bearing ï¿½ never leave it implicit.
+
+---
+
+## 2026-04-30 â€” readme-human-scan-and-user-direction
+
+- target: skills repo (this repo)
+- operator: Nils Holmager
+- agent: GitHub Copilot (GPT-5.4)
+- skill: improve
+- outcome: README tightened for human scanning; user-set direction made explicit
+- delta: README wording only; no behavior change
+
+### Interpretation of the ask
+
+User's intent across this session was editorial, not structural: make the README easier for humans to scan, use fewer words without losing force, remove AI-sounding contrastive phrasing, and make it obvious that autonomy starts from the prompt the user actually writes. The key reader concern was that the README could sound as if the system runs autonomously without a human setting direction.
+
+I interpreted this as a request for a surgical rewrite of the README's wording and emphasis, not a redesign of the repo, the skills, or the principles.
+
+### Examination
+
+- **Waste.** The README carried repeated phrasing, abstract formulations, and a few lines that said the same thing twice in different words. This slowed scanning.
+- **Inconsistency.** The README explained autonomy clearly, but left the user's role too implicit. That weakened the explanation of Commander's Intent, whose point is that the human still sets the destination.
+- **Overburden.** The principle callouts were doing too much work because the surrounding prose had not anchored the user-prompt relationship strongly enough.
+
+### Decision
+
+[!DECISION] Keep the README structure intact and tighten the wording locally. The load-bearing fix is to state, early in "How it works," that the user sets the direction in the prompt and the agent is autonomous in how it gets there.
+
+[!DECISION] Preserve the three principle callouts, but rewrite them to explain the mechanism at the point of use rather than restate abstract principle language.
+
+### Action
+
+Files modified:
+- `README.md` â€” opening paragraph tightened; skill table descriptions shortened; quick start made more direct; "How it works" compressed; Commander's Intent section rewritten to say explicitly that the user defines the destination in the prompt.
+
+Validation:
+- `git diff -- README.md`
+- `python tools/verify.py`
+
+### Reflection
+
+[!REALIZATION] The main comprehension risk was not "too much autonomy" in the system itself, but autonomy presented without an obvious steering wheel. One short sentence near the top of "How it works" fixes that mental model.
+
+[!REALIZATION] Most of the AI-like feel came from repeated contrastive phrasing and overwritten transitions, not from the underlying concepts. The concepts held up once the prose got shorter.
