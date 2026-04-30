@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19842994.svg)](https://doi.org/10.5281/zenodo.19842994)
 
-Four markdown files an AI agent reads at the start of a session. Drop them into any repo and your agent gets structured intent, autonomous improvement, reasoning verification, and a persistent audit trail.
+An autonomous improvement loop — and the four skills that power it. The loop has run more than 100 times on this repository, understanding its own mechanics, deciding how to improve it — with the three principles as the only human input. During the process, it decided on its own to refactor itself, twice.
 
 ## The four skills
 
@@ -28,7 +28,7 @@ See [INSTALLING.md](./INSTALLING.md) for setup details.
 
 No code to run, no orchestrator, no scoring rubric. The skills define the shape; the agent does the reasoning. The trail is the proof.
 
-Trail entries accumulate in `trail/log.md`. Each run reads the full history before acting — this accumulated reflection is what surfaced the need for structural change rather than incremental fixes. Over 100+ runs on this repo, the loop refactored itself twice.
+Each run reads the full trail of prior iterations before acting — that accumulated reflection is what surfaced the need for structural change rather than incremental improvement. Every iteration is recorded in `trail/log.md` including the reasoning behind every autonomous decision. Earlier iterations are preserved in `archive/v2/`.
 
 ## The three principles
 
