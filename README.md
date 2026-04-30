@@ -25,7 +25,7 @@ Each skill is standalone. Install only what you need. Any combination works.
 
 See [INSTALLING.md](./INSTALLING.md) for setup details.
 
-1. Copy `intent/`, `improve/`, `probe/`, and `trail/` into your repo's `.copilot/skills/`.
+1. Copy `intent/`, `improve/`, `probe/`, `trail/`, and `tools/` into your repo's `.copilot/skills/`.
 2. Run an agent on your codebase with the Improve skill. It reads the code, decides what to change, makes the change, and appends a trail entry.
 3. Commit. Run again. Each run reads the full trail of prior decisions.
 4. When a run finds nothing actionable, count one silence. Repeat with a different model family. Convergence requires three independent silences from distinct model families.

@@ -40,6 +40,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 33 | 2026-04-30 | readme-title-and-hook | changed — README title and opening paragraph rewritten for first impression | README.md title "Skills" → "Autonomous Development Skills Suite"; opening paragraph now leads with what it does, proof, and stopping condition |
 | ▸ 34 | 2026-04-30 | readme-goal-section | changed — added "The goal" section to README.md | README.md gains explicit statement of operator intent and verification philosophy |
 | ▸ 35 | 2026-04-30 | readme-stopped-to-converged | changed — "stopped" → "converged" in README opening paragraph | one word change; README opening now consistent with PRINCIPLES.md definition and Evidence section framing |
+| ▸ 36 | 2026-04-30 | install-instructions-missing-tools | changed | added \	ools/\ to README.md and INSTALLING.md copy instructions |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -196,4 +197,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Change "stopped" to "converged" in the opening paragraph. One word. The opening is the first statement any reader or agent encounters about what the loop does. If it encodes the wrong mental model of convergence (permanent cessation vs. point-in-time state), that model propagates into how the agent understands the stopping condition. Alternatives ranked: (1) this change — highest leverage per word changed; (2) add first-run guidance to Intent — addresses a minor edge case; (3) declare convergence — premature given the identified inconsistency.
 
-**35 runs total — 25 with changes, 10 silence**
+### Run 36 — 2026-04-30 — install-instructions-missing-tools
+
+- **decided:** Update \README.md\ and \INSTALLING.md\ to explicitly include \	ools/\ in the installation instructions. Alternatives ranked: (1) this change — fixes a broken workflow that violates Observable Autonomy due to missing tooling; (2) change \	rail/SKILL.md\ to make \	ools/\ an optional sibling file — rejected, trail requires history generation to fulfill multi-resolution observability; (3) silence — rejected, the local install instructions actively broke the workflow.
+
+**36 runs total — 26 with changes, 10 silence**

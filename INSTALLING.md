@@ -50,6 +50,9 @@ your-repo/
         SKILL.md
       trail/
         SKILL.md
+      tools/
+        record.py
+        verify.py
 ```
 
 Optionally copy `PRINCIPLES.md` and `CONVERGENCE_SCOPE_PROTOCOL.md` next to the skill folders — the skills reference them but work fully without them (the principles are inlined in each SKILL.md).

@@ -1488,3 +1488,40 @@ verify.py passes after change.
 ### Reflection
 
 The loop is converging. This session has been primarily README editorial work — the skills themselves are unchanged. The remaining gap is whether a new convergence run (with a different model family) agrees. This run's finding was small but precise: one word that misstated the central concept. That is what late-stage convergence looks like — the large structural changes happened in prior sessions; what remains is semantic precision.
+## 2026-04-30 — install-instructions-missing-tools
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Gemini 3.1 Pro)
+- skill: improve + intent
+- outcome: changed
+- delta: added \	ools/\ to README.md and INSTALLING.md copy instructions
+
+### Interpretation of the ask
+
+Run the full Improve loop on the repo using the convergence-loop prompt. Intent: find the highest-leverage remaining change that makes the skills more effective on any arbitrary codebase, or declare convergence if nothing remains. Constraints: generic first, no test infrastructure, human-readable, one change per run.
+
+### Examination
+
+**Inconsistency lens:** In v3.5.0, \ecord.py\ was changed to stay in the skills install rather than being copied into the target repo's \	rail/\ folder. However, the installation instructions in both \README.md\ and \INSTALLING.md\ still only instructed users to copy \intent/\, \improve/\, \probe/\, and \	rail/\ to their \.copilot/skills/\ directory. Without copying the \	ools/\ folder, the "mandatory" history generation command (\python <skills>/tools/record.py history --write\) documented in \	rail/SKILL.md\ fails with a file not found error, breaking the trail workflow.
+
+**Waste lens:** Nothing actionable.
+
+**Overburden lens:** Nothing actionable.
+
+**Challenge:** Is there anything more fundamental? The workflow relies on the trail to function as intended (Observable Autonomy). By omitting \	ools/\ from the installation instructions, the entire feedback loop breaks for new users installing the skills locally in their repo. Fixing this structural inconsistency is the highest leverage actionable change.
+
+### Decision
+
+[!DECISION] Update \README.md\ and \INSTALLING.md\ to explicitly include \	ools/\ in the installation instructions. Alternatives ranked: (1) this change — fixes a broken workflow that violates Observable Autonomy due to missing tooling; (2) change \	rail/SKILL.md\ to make \	ools/\ an optional sibling file — rejected, trail requires history generation to fulfill multi-resolution observability; (3) silence — rejected, the local install instructions actively broke the workflow.
+
+### Action
+
+Added \	ools/\ to the list of folders to copy in \README.md\ Quick Start.
+Added \	ools/record.py\ and \	ools/verify.py\ to the tree visualization under "Full install (all four skills)" in \INSTALLING.md\.
+
+verify.py passes after change.
+
+### Reflection
+
+The codebase is nearing convergence. Prior sessions addressed conceptual consistency (like defining convergence), but this run surfaced a mechanical inconsistency created by a recent refactor (v3.5.0). As architectural changes are made, documentation often lags. Addressing this makes the skills usable again for local installations.
