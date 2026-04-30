@@ -30,7 +30,15 @@ No orchestrator. No scoring rubric. No human in the loop between iterations.
 
 Each run reads the complete trail of every prior decision before acting. That accumulated context is both log and memory. The agent doesn't repeat the same analysis; it builds on what it already concluded, and challenges it. After enough iterations on this repo, it stopped making incremental fixes and proposed restructuring the suite entirely. Twice. Both times the reasoning was in the trail before any human saw it.
 
-The reasoning itself follows the Improve skill's loop, rooted in Toyota Production System (TPS) thinking. The agent examines the target through three lenses — **Waste** (what carries no value), **Overburden** (what is asked to do too much), **Inconsistency** (where the target contradicts itself) — then challenges its own first read before deciding. After acting, it reflects in the Hansei tradition: did the loop converge or churn, and what should the next run look at? Every step is made explicit. The agent names what each lens revealed, what it chose and why, and what it rejected. A decision without a rejected alternative isn't a decision — it's an output.
+The reasoning follows a specific sequence, drawn from Toyota Production System (TPS) and military doctrine:
+
+**Intent first.** Before touching anything, the agent applies Commander's Intent in reverse — decoding what the human actually wants, not what they literally wrote. It names the interpretation and one rejected alternative, Coaching Kata style: what is the target condition, what is the actual condition, what is in the way. The user sees the interpretation before work begins and can correct it at zero cost.
+
+**Then Genba** — go to where the work is. Read the actual code, the actual trail, the actual output. Not a summary, not an assumption. The agent forms its model from what is there, not what should be there.
+
+**Then the three TPS lenses:** **Waste** (what carries no value), **Overburden** (what is asked to do too much), **Inconsistency** (where the target contradicts itself). Applied as thinking tools, not a checklist — and only the ones the target invites.
+
+**Then Hansei** — structured reflection after acting. Did the loop converge or churn? What should the next run look at? Every decision names what was rejected and why. A decision without a rejected alternative isn't a decision — it's an output.
 
 Every decision, reversal, and dead end is recorded in `trail/log.md`. That file is the proof that the autonomy was real — not that it produced good outputs, but that the reasoning behind each output can be reconstructed, audited, and challenged by anyone who wasn't there.
 
