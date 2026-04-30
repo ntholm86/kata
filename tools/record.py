@@ -152,7 +152,7 @@ def _render_history(entries: list[dict], markdown: bool) -> str:
     if markdown:
         lines.append("# History")
         lines.append("")
-        lines.append("Auto-generated from `trail/log.md` by `python trail/record.py history --write`.")
+        lines.append("Auto-generated from `trail/log.md` by the `record.py history --write` command in the autonomous-agent-skills install.")
         lines.append("Do not edit by hand — re-run the command to refresh.")
         lines.append("")
         lines.append("| # | Date | Slug | Outcome | Delta |")
