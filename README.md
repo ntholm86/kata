@@ -35,7 +35,7 @@ See [INSTALLING.md](./INSTALLING.md) for setup details.
 
 The user still sets the direction in the prompt. The agent is autonomous in how it gets there.
 
-Each run starts by reading `.trail/compass.md` (the current synthesized orientation, if Retrospect has been run) and then the full trail of prior decisions. That trail is the evidence; the compass is the distillation. The agent builds on earlier conclusions instead of starting cold. On this repo, that process eventually led it to stop making incremental fixes and propose a full restructure of the suite. Twice.
+Each run starts by reading `.trail/vision.md` (the operator-held destination, if present), then `.trail/compass.md` (the Retrospect-derived current orientation, if present), then the full trail of prior decisions. Vision is the destination, compass is the current location, the trail is the path. The agent builds on earlier conclusions instead of starting cold. On this repo, that process eventually led it to stop making incremental fixes and propose a full restructure of the suite. Twice.
 
 The reasoning follows a specific sequence, drawn from Toyota Production System (TPS) and military doctrine:
 
@@ -83,7 +83,7 @@ python <skills>/tools/record.py new --slug=my-operation --target=some-repo
 python <skills>/tools/record.py summary
 ```
 
-**Version:** v3.9.1 (2026-05-01) — [CHANGELOG.md](./CHANGELOG.md)  
+**Version:** v3.10.0 (2026-05-01) — [CHANGELOG.md](./CHANGELOG.md)  
 **Convergence baseline:** v3.1.0 (2026-04-24) — three silence runs, cross-layer coherence check, all in [.trail/log.md](./.trail/log.md).  
 **Future direction:** [archive/OBSERVABLE-LOOPS.md](./archive/OBSERVABLE-LOOPS.md) — draft spec for making any Observable Loop portable and verifiable by CI.
 

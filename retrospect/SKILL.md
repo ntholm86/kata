@@ -1,7 +1,7 @@
 ---
 name: retrospect
-version: 1.1.0
-description: 'Read the trail as a single document and form arc-level claims about the target. What is the target becoming? Where has the loop''s attention been, and is that where the target''s real weight lies? What does the arc reveal that no individual iteration would surface? Writes .trail/compass.md — the current orientation for the target that Improve reads at the start of each run. USE WHEN: about to declare convergence, recurring finding-class suspected, operator asks "how are we doing?", or an independent arc-read is needed without running a full improve loop.'
+version: 1.2.0
+description: 'Read the trail as a single document and form arc-level claims about the target. What is the target becoming? Where has the loop''s attention been, and is that where the target''s real weight lies? What does the arc reveal that no individual iteration would surface? Writes .trail/compass.md — the Retrospect-derived current orientation for the target. Vision (.trail/vision.md), if present, is the operator-held destination and is read but never written. USE WHEN: about to declare convergence, recurring finding-class suspected, operator asks "how are we doing?", or an independent arc-read is needed without running a full improve loop.'
 argument-hint: 'The target and its trail, and optionally the specific arc-question to answer'
 ---
 
@@ -71,9 +71,11 @@ Run this step when: the loop is about to declare convergence, the finding patter
 
 ### 5. Write the compass
 
-Write the arc-claims from step 3 (and any loop-effectiveness findings from step 4) to `.trail/compass.md` in the target repo root. This file is the **compass** — the current synthesized understanding of the target that orients future runs before they act.
+Write the arc-claims from step 3 (and any loop-effectiveness findings from step 4) to `.trail/compass.md` in the target repo root. This file is the **compass** — the current Retrospect-derived orientation: where the loop's attention has been, what the arc currently shows is true of the target, and what the next runs should test.
 
-`.trail/compass.md` is not append-only. Retrospect replaces it each time it runs. The full reasoning history lives in `log.md`; the compass is the current distillation.
+If `.trail/vision.md` exists, **read it first and do not write to it.** Vision is the operator-held destination — what the target is for, the constraints that hold across all runs, the hard problem the work is trying to chip away at. Vision is input to Retrospect; compass is output. The compass should make sense in light of vision (e.g. arc-claims may reference whether the loop has been pursuing what vision says matters), but it must not duplicate vision content.
+
+`.trail/compass.md` is not append-only. Retrospect replaces it each time it runs. The full reasoning history lives in `log.md`; vision is the destination; the compass is the current distillation of where the target is along the way.
 
 The file shape is simple:
 
@@ -86,12 +88,16 @@ _Last updated: YYYY-MM-DD (run: <slug>)_
 
 <Arc-claims from step 3, each as a falsifiable statement.>
 
+## What the next runs should test
+
+<Specific arc-derived suggestions for what would most advance the target now.>
+
 ## Loop-effectiveness notes
 
 <From step 4, if triggered. Omit section if step 4 was not run.>
 ```
 
-Commit `.trail/compass.md` alongside `log.md` and `history.md` after the run.
+Commit `.trail/compass.md` alongside `log.md` and `history.md` after the run. Never commit changes to `.trail/vision.md` from a Retrospect run.
 
 ### 6. Record
 

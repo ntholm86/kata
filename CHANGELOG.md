@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.10.0 — 2026-05-01
+
+### Added
+- `.trail/vision.md` — new optional artifact: the **operator-held destination**. Stable across runs, never written by any skill, read by Improve at step 1 before compass and trail. Resolves the contract incoherence between Retrospect (which rewrites `.trail/compass.md` each run) and operator-written orientation that should not be overwritten. Vision is input to the loop; compass is output (run 67).
+
+### Changed
+- `improve/SKILL.md` (v3.3.0 → v3.4.0) — step 1 read order now: vision → compass → log. Vision is the destination, compass is the current location, trail is the path. Resolution rule on disagreement spelled out: vision wins over compass (operator holds destination); trail wins over compass (trail is evidence) (run 67).
+- `retrospect/SKILL.md` (v1.1.0 → v1.2.0) — step 5 clarified: Retrospect reads vision but never writes to it. Compass shape extended with explicit "What the next runs should test" section (previously implicit). Frontmatter description updated to name vision as input (run 67).
+- `trail/SKILL.md` (v1.6.0 → v1.7.0) — directory listing includes `vision.md`; commit step clarifies vision is committed only when the operator changes it, not as a side effect of any agent run (run 67).
+- `README.md` — "How it works" updated for the vision/compass/trail read order (run 67).
+
+---
+
 ## v3.9.1 — 2026-05-01
 
 ### Added

@@ -1,6 +1,6 @@
 ---
 name: trail
-version: 1.6.0
+version: 1.7.0
 description: 'Evidence trail management. Append a structured entry to .trail/log.md IN THE TARGET REPO ROOT at the end of every substantive session — recording the interpretation of the ask, examination, decisions, actions, and reflection. The implementation of Observable Autonomy — autonomy without evidence is not delegation, it is abdication. USE WHEN: any substantive autonomous work that produces decisions, changes, or findings.'
 argument-hint: 'The target being worked on (repo, file, system) — used to populate the log entry header'
 ---
@@ -60,7 +60,7 @@ git add .trail/log.md .trail/history.md
 git commit -m "trail: <slug>"
 ```
 
-Both `.trail/log.md` and `.trail/history.md` must be committed together. `history.md` is generated from `log.md` — if only one is committed they will diverge. If Retrospect ran this session and updated `.trail/compass.md`, commit it in the same commit.
+Both `.trail/log.md` and `.trail/history.md` must be committed together. `history.md` is generated from `log.md` — if only one is committed they will diverge. If Retrospect ran this session and updated `.trail/compass.md`, commit it in the same commit. `.trail/vision.md` is operator-managed and is committed only when the operator changes it — never as a side effect of an agent run.
 
 For ad-hoc viewing in the terminal:
 
@@ -73,9 +73,12 @@ python <skills>/tools/record.py summary    # digest of the most recent run
 .trail/
   log.md          — append-only ledger, one entry per session (the source of truth)
   history.md      — auto-generated readable summary (regenerated each run)
-  compass.md      — current orientation for the target (written by Retrospect, read by Improve)
+  vision.md       — operator-held destination (optional; read by Improve, never written by any skill)
+  compass.md      — Retrospect-derived current orientation (written by Retrospect, read by Improve)
   sessions/       — optional: full verbatim transcripts, linked from log entries
 ```
+
+Vision and compass are distinct: vision is the destination the operator holds and rarely changes; compass is the agent's current synthesis of where the target is, rewritten each Retrospect run. Vision is input to the loop; compass is output.
 
 Both files are committed. `record.py` is **not** committed to the target repo — it stays in the skills install.
 

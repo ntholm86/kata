@@ -1,6 +1,6 @@
 ---
 name: improve
-version: 3.3.0
+version: 3.4.0
 description: 'The improvement skill. Understand the ask, examine the target, challenge the first read, decide on one change (or argue for redesign, or declare silence), act, reflect on the target, and record. Combines incremental refinement, structural rethinking, and reflection on the target itself. USE WHEN: improve, audit, review, fix, refactor, redesign, evaluate, what would make this better, am I missing something.'
 argument-hint: 'The target to improve, and optionally the concern (correctness, simplicity, performance, etc.)'
 ---
@@ -31,7 +31,13 @@ If Intent is not installed: before examining anything, narrate your interpretati
 
 If the ask is about convergence or publication readiness, read the repo's convergence-scope protocol before proceeding if it has one, then declare which layer (problem, principles, skills, cross-layer coherence) this run is evaluating.
 
-Before examining the target, check whether `.trail/compass.md` exists. If it does, read it first — it is the current working model of the target, written by [Retrospect](../retrospect/SKILL.md) and updated each time a retrospect run completes. It distills what is currently believed about the target so you do not have to re-derive it from the full trail. Read `log.md` for the full history; read `compass.md` for the current synthesis.
+Before examining the target, check `.trail/` for two orientation files and read whichever exist, in this order:
+
+1. `.trail/vision.md` — the **operator-held destination**. What the target is for, the constraints that hold across all runs, the hard problem the work is trying to chip away at. Stable: not written by any skill, only by the operator/team. If present, it is the highest-priority context — it tells you what success means before you decide what to change.
+2. `.trail/compass.md` — the **current Retrospect-derived orientation**. What the arc currently shows is true of the target, what the next runs should test. Rewritten each Retrospect run. If present, it tells you where the loop's attention has been and what the latest arc-read concluded.
+3. `.trail/log.md` — the full history. Read for the evidence behind the orientation, and for any specific prior decision the current run might contradict.
+
+Vision is the destination, compass is the current location, the trail is the path. If vision and compass disagree, vision wins (the operator holds the destination); if compass and trail disagree, the trail wins (the trail is the evidence).
 
 This is not ceremony. The most common failure mode in autonomous improvement is solving a precisely-executed wrong problem.
 
