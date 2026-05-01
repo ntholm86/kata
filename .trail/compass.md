@@ -41,21 +41,22 @@ These two goals constrain each other. A skill that works conversationally but ca
 
 ## Memory, learning, meta-cognition (the protocol must require all three)
 
-A reasoning layer that can't carry anything across runs is not a reasoning layer. The protocol the skills define must require all three, while leaving the implementation open — different harnesses will satisfy them in different (and sometimes faster) ways.
+A reasoning layer that can't carry anything across runs is not a reasoning layer. The protocol the skills define must require all three, while leaving the implementation open — different harnesses will satisfy them in different ways, and some of those ways will be faster or more structured than what this skillset uses.
 
-**What this skillset has, and where:**
-- **Memory** — `.trail/log.md` (append-only, human-readable, source of truth) and `.trail/history.md` (auto-generated digest).
-- **Learning** — none in the strict sense. There is no mechanism that updates a stored strategy from outcomes; "learning" here means a future agent reads the trail and reasons over it.
-- **Meta-cognition** — `.trail/compass.md` (the current synthesized orientation, written by Retrospect, read by Improve at step 1). This is the only artifact that explicitly reasons about what the target is becoming.
+**Memory** — *what happened.* The full record of decisions, actions, and reflections from prior runs, kept in a form that can be re-read. Without it, every run starts from zero and the agent cannot be held to anything it concluded yesterday.
+- *How the skillset solves it:* `.trail/log.md` — append-only, human-readable, source of truth. `.trail/history.md` is an auto-generated digest. The Trail skill enforces the structure.
 
-**What evo has, as a concrete reference implementation of the same three needs:**
-- **Memory** — proof-ledger.jsonl (hash-chained iteration log), history.jsonl (cross-repo), in-process file-change tracker.
-- **Learning** — gene library (per-category success rates feed PROPOSE), lessons journal (local + global cross-repo, feed ANALYZE/PROPOSE), category-stats (merge rates re-weight category priority).
-- **Meta-cognition** — fitness scorer (evo clamps its own authority when verification power is low), meta-analysis (when self-targeting, evo injects its own failure patterns into ANALYZE).
+**Learning** — *what to do differently next time.* Some signal extracted from prior runs that changes future behavior. This is not the same as memory; memory is the substrate, learning is the update.
+- *How the skillset solves it:* Indirectly and weakly. There is no stored strategy artifact. "Learning" here means a future agent re-reads the trail and reasons over it. This is honest but slow; it is also the most underdeveloped of the three and a likely place a future loop run will find leverage.
 
-The skills approach satisfies these needs through a single human-readable trail that an agent re-reasons over each run. Evo satisfies them through structured per-category statistics that adjust prompts mechanically. Both are valid. The protocol must specify **what** each artifact is for, not **how** it is stored — a harness with structured stats and a conversational agent with a markdown trail must both be able to claim conformance.
+**Meta-cognition** — *what the target is becoming, and is the loop's attention in the right place.* Reasoning about the work itself: the arc, the recurring patterns, whether the questions being asked are the right questions. Without this, an agent will keep solving local problems while the structural problem drifts.
+- *How the skillset solves it:* `.trail/compass.md` (this file) — the current synthesized orientation, written by Retrospect after reading the arc, read by Improve at step 1 before each run. The Retrospect skill is the mechanism that produces it.
 
-**The gap that cuts deepest:** evo's meta-cognition (fitness, meta-analysis) reasons about *its own performance*. It does not reason about *what the target is becoming* — that vision is held by the human. Evo ran on itself and could not improve its own compass, because it had no mechanism to derive one. The skills suite is trying to give that mechanism a name and shape (Retrospect → compass), and self-targeting this repo just brings the loop a level deeper: the agent must derive the same compass we are right now writing by hand. **Solving that — autonomous compass derivation — is the hard problem this repo exists to chip away at.**
+## The hard problem this repo exists to chip away at
+
+When this repo targets itself, the loop has to derive the compass it would otherwise be handed. The agent cannot be told "this is what the target is for" — it has to read the trail, form arc-claims, and write that orientation itself. **That — autonomous compass derivation — is the hard problem.** Every other reasoning capability sits on top of it: an agent that cannot derive what the target is becoming will keep optimizing for whatever metric is in front of it.
+
+The current state of this file is the honest baseline: the compass was seeded by the operator. The next milestone is a Retrospect run that produces a compass an Improve run would not have produced — and that holds up to scrutiny. Until that happens, the protocol's meta-cognition layer is unproven.
 
 ## Horizon (context, not current focus)
 
