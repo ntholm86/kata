@@ -31,6 +31,8 @@ If Intent is not installed: before examining anything, narrate your interpretati
 
 If the ask is about convergence or publication readiness, read the repo's convergence-scope protocol before proceeding if it has one, then declare which layer (problem, principles, skills, cross-layer coherence) this run is evaluating.
 
+Before examining the target, check whether `.trail/model.md` exists. If it does, read it first — it is the current working model of the target, written by [Retrospect](../retrospect/SKILL.md) and updated each time a retrospect run completes. It distills what is currently believed about the target so you do not have to re-derive it from the full trail. Read `log.md` for the full history; read `model.md` for the current synthesis.
+
 This is not ceremony. The most common failure mode in autonomous improvement is solving a precisely-executed wrong problem.
 
 ### 2. Examine

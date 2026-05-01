@@ -83,7 +83,7 @@ python <skills>/tools/record.py new --slug=my-operation --target=some-repo
 python <skills>/tools/record.py summary
 ```
 
-**Version:** v3.9.0 (2026-05-01) — [CHANGELOG.md](./CHANGELOG.md)  
+**Version:** v3.9.1 (2026-05-01) — [CHANGELOG.md](./CHANGELOG.md)  
 **Convergence baseline:** v3.1.0 (2026-04-24) — three silence runs, cross-layer coherence check, all in [.trail/log.md](./.trail/log.md).  
 **Future direction:** [archive/OBSERVABLE-LOOPS.md](./archive/OBSERVABLE-LOOPS.md) — draft spec for making any Observable Loop portable and verifiable by CI.
 

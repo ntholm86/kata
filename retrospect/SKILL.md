@@ -1,6 +1,6 @@
 ---
 name: retrospect
-version: 1.0.0
+version: 1.1.0
 description: 'Read the trail as a single document and form arc-level claims about the target. What is the target becoming? Where has the loop''s attention been, and is that where the target''s real weight lies? What does the arc reveal that no individual iteration would surface? USE WHEN: about to declare convergence, recurring finding-class suspected, operator asks "how are we doing?", or an independent arc-read is needed without running a full improve loop.'
 argument-hint: 'The target and its trail, and optionally the specific arc-question to answer'
 ---
@@ -69,7 +69,31 @@ Ask:
 
 Run this step when: the loop is about to declare convergence, the finding pattern looks suspiciously tidy, or the operator explicitly asked how the loop is performing.
 
-### 5. Record
+### 5. Write the working model
+
+Write the arc-claims from step 3 (and any loop-effectiveness findings from step 4) to `.trail/model.md` in the target repo root. This file is the **working model** — the current synthesized understanding of the target that future runs read first, before the full trail.
+
+`.trail/model.md` is not append-only. Retrospect replaces it each time it runs. The full reasoning history lives in `log.md`; the model is the current distillation.
+
+The file shape is simple:
+
+```markdown
+# Working model — <target name>
+
+_Last updated: YYYY-MM-DD (run: <slug>)_
+
+## Current claims
+
+<Arc-claims from step 3, each as a falsifiable statement.>
+
+## Loop-effectiveness notes
+
+<From step 4, if triggered. Omit section if step 4 was not run.>
+```
+
+Commit `.trail/model.md` alongside `log.md` and `history.md` after the run.
+
+### 6. Record
 
 *If [Trail](../trail/SKILL.md) is installed, apply it now — it handles this step in full.*
 
@@ -84,6 +108,6 @@ There is no separate "decision" or "action" field unless a follow-up action was 
 
 ## What this skill does not do
 
-- **It does not make changes.** Retrospect reads and claims; Improve changes. If the arc reveals a specific finding, hand off to Improve.
+- **It does not make changes to the target.** Retrospect reads and claims; Improve changes. If the arc reveals a specific finding, hand off to Improve.
 - **It does not replace Improve's step 6b.** Step 6b is a lightweight in-loop check that fires inside an improve iteration when a trigger condition is met. Retrospect is a standalone arc-read run instead of an improve iteration when a high-altitude view is what is needed. Use both.
 - **It does not score the trail.** No number, no rubric, no grade. Claims are the output — claims a future run can test.

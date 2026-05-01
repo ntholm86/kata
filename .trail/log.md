@@ -2828,3 +2828,59 @@ The Retrospect skill was designed in a single session without running it against
 **Across-trail arc-reflection** *(triggered: structural change, new skill added)*:
 
 [!REALIZATION] The suite has now grown from four skills to five by the loop's own operation — the loop identified a gap in itself (run 63 macro-Hansei), the operator named the solution, and the loop implemented it. This is the first time the improve loop on this repo produced a structural addition (new skill) rather than a refinement or correction. Whether Retrospect earns its place depends on whether it produces distinct signal when run on external targets. The next meaningful test: run Retrospect as a standalone skill on any non-trivial external target with a trail, and check whether the arc-claims differ from what improve's step 6b would have produced in the same session.
+
+## 2026-05-01 — feat-working-model
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve (self-targeting)
+- outcome: added `.trail/model.md` as the working model artifact — written by Retrospect, read by Improve
+- delta: v3.9.0 → v3.9.1
+
+### Interpretation of the ask
+
+Operator answered the ownership question from the run 64 debrief: "Definitely Retrospect owns it." The working model concept was identified in that debrief as the one genuine gap remaining — the suite had no mechanism to accumulate a durable, forward-looking synthesis of what is currently believed about a target across runs. Trail is append-only history; Retrospect reads it; neither holds a current-state distillation that the next run can consume immediately.
+
+### Examination
+
+**The gap:** After run 64, a new Improve run on a 64-entry trail must read 2800+ lines to reconstruct what is currently believed about the target. The [!REALIZATION] markers are the closest thing to a current model, but finding them requires reading the full log. There is no synthesized forward-facing document.
+
+**Retrospect's role:** Retrospect already forms arc-claims (step 3). Those claims *are* the working model — they just weren't being persisted anywhere. The fix is: add a write step to Retrospect that saves the claims to `.trail/model.md`, and add a read step to Improve that consumes it.
+
+**Ownership:** Retrospect writes it (after each arc-read), Improve reads it (at step 1 before examining). Trail documents it in the directory structure. No new skill needed — this is a protocol addition to existing skills.
+
+**Constraint check:**
+- Generic first: `.trail/model.md` is a plain text file in the same `.trail/` directory any trail-enabled target uses. No infrastructure.
+- Human-readable: "working model" is plain English. The file shape is `# Working model` with a claims list.
+- One change: the working model mechanism is one change, with housekeeping propagation to three files.
+
+### Decision
+
+[!DECISION] Add `.trail/model.md` as the working model artifact. Retrospect writes it (new step 5); Improve reads it at step 1; Trail documents it in the directory structure. Bump retrospect to v1.1.0, suite to v3.9.1.
+
+Alternative considered: add a `record.py` subcommand to generate `model.md` from [!REALIZATION] markers automatically. Rejected: automated extraction misses the judgment call about which realizations are still current — Retrospect's arc-read is that judgment. The human-written synthesis is the point.
+
+### Action
+
+1. `retrospect/SKILL.md` v1.0.0 → v1.1.0: added step 5 "Write the working model" — writes arc-claims to `.trail/model.md` using a defined file shape. Added note that "it does not make changes to the target" (preserving the prior "does not make changes" but scoped correctly, since writing `model.md` is an intentional output, not a target change).
+2. `improve/SKILL.md` step 1: added paragraph — check for `.trail/model.md` before examining; if present, read it first as the current working model.
+3. `trail/SKILL.md`: added `model.md` to directory structure listing; updated commit step to include `model.md` when Retrospect ran.
+4. CHANGELOG: v3.9.1 entry.
+5. README version line: v3.9.0 → v3.9.1.
+6. CITATION.cff: version → 3.9.1.
+7. `verify.py` passes.
+
+### Reflection
+
+**Falsifiable claim about the target's current state:**
+
+The suite now has a memory mechanism that spans runs without requiring a full log re-read. The claim to test: when an agent starts an improve run on a target that has a populated `.trail/model.md`, it will correctly use the working model to orient its examination rather than re-deriving the same conclusions from scratch. If agents ignore `model.md` and still re-derive, the mechanism does not work in practice.
+
+**Named blind spot:**
+
+The `model.md` file has no schema enforcement — it is prose, written by whichever agent ran Retrospect last. Different agents may write it with different granularity, different claim sharpness, different section completeness. There is no mechanism to detect or flag a stale or low-quality `model.md`. A future run could be misdirected by a confidently-written but wrong working model without any warning signal.
+
+**Imagined-reader pushback:**
+
+"You've added a file that agents are *instructed* to write and read, but there's no verification that they actually do. The trail already has this problem — agents can skip trail entries. Adding another file to the protocol adds another thing to skip. The working model is only valuable if agents consistently write it after Retrospect runs and consistently read it before Improve runs. What is the enforcement mechanism?" The answer is: the trail is the evidence. If `model.md` is not committed alongside retrospect trail entries, the run is incomplete. Same discipline as `history.md`.

@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.9.1 — 2026-05-01
+
+### Added
+- `retrospect/SKILL.md` (v1.0.0 → v1.1.0) — new step 5: write `.trail/model.md`, the **working model** of the target. After each retrospect run the arc-claims are written to `.trail/model.md` — a plain file that distills the current synthesized understanding of the target. Retrospect owns it; Improve reads it (run 65).
+- `improve/SKILL.md` — step 1 updated: check for `.trail/model.md` before examining the target; if present, read it first as the current working model before reading the full trail (run 65).
+- `trail/SKILL.md` — directory structure updated to include `model.md`; commit step updated to include `model.md` when Retrospect ran this session (run 65).
+
+---
+
 ## v3.9.0 — 2026-05-01
 
 ### Added

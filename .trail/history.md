@@ -69,6 +69,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 62 | 2026-05-01 | v381-patch-release | changed — cut v3.8.1 patch release; CHANGELOG, README version line, CITATION.cff all bumped from 3.8.0 → 3.8.1 | v3.8.1 |
 | · 63 | 2026-05-01 | silence-run-63 | silence — no actionable finding after full sweep of all active files | none |
 | ▸ 64 | 2026-05-01 | feat-retrospect-skill | added Retrospect — new standalone arc-reflection skill (v1.0.0) | v3.8.1 → v3.9.0 |
+| ▸ 65 | 2026-05-01 | feat-working-model | added `.trail/model.md` as the working model artifact — written by Retrospect, read by Improve | v3.9.0 → v3.9.1 |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -342,4 +343,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Create `retrospect/SKILL.md` as a new standalone arc-reflection skill. Update improve/SKILL.md step 6 to reference it. Propagate to all metadata surfaces.
 
-**64 runs total — 50 with changes, 14 silence**
+### Run 65 — 2026-05-01 — feat-working-model
+
+- **decided:** Add `.trail/model.md` as the working model artifact. Retrospect writes it (new step 5); Improve reads it at step 1; Trail documents it in the directory structure. Bump retrospect to v1.1.0, suite to v3.9.1.
+
+**65 runs total — 51 with changes, 14 silence**

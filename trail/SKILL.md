@@ -60,7 +60,7 @@ git add .trail/log.md .trail/history.md
 git commit -m "trail: <slug>"
 ```
 
-Both `.trail/log.md` and `.trail/history.md` must be committed together. `history.md` is generated from `log.md` — if only one is committed they will diverge.
+Both `.trail/log.md` and `.trail/history.md` must be committed together. `history.md` is generated from `log.md` — if only one is committed they will diverge. If Retrospect ran this session and updated `.trail/model.md`, commit it in the same commit.
 
 For ad-hoc viewing in the terminal:
 
@@ -73,6 +73,7 @@ python <skills>/tools/record.py summary    # digest of the most recent run
 .trail/
   log.md          — append-only ledger, one entry per session (the source of truth)
   history.md      — auto-generated readable summary (regenerated each run)
+  model.md        — current working model of the target (written by Retrospect, read by Improve)
   sessions/       — optional: full verbatim transcripts, linked from log entries
 ```
 
