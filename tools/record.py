@@ -280,6 +280,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # Ensure UTF-8 output on platforms where the default encoding is not UTF-8
+    # (e.g. Windows cp1252 terminals). Trail entries contain em-dashes, arrows,
+    # and other Unicode characters that cp1252 cannot encode.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = build_parser()
     args = parser.parse_args(argv)
     return args.func(args)

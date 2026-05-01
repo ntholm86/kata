@@ -1956,3 +1956,45 @@ Alternative considered: rename to `TRAIL/` (uppercase) — rejected; `.trail/` i
 ### Reflection
 
 This fix eliminates a genuine installation footgun: the collision between skill definition and evidence in the same directory. The `.trail/` convention is now universal — this repo uses it too, so the skill eats its own dog food. Convergence chain resets to 0/3 per Principle 3 (a diff was produced).
+
+## 2026-05-01 — record-py-unicode-fix
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve (self-targeting)
+- outcome: changed — `record.py history` UnicodeEncodeError on Windows fixed; v3.7.1
+- delta: v3.7.0 → v3.7.1
+
+### Interpretation of the ask
+
+Run the full Improve loop on the autonomous-agent-skills repo. Find the highest-leverage change or declare convergence.
+
+### Examination
+
+**Inconsistency lens:** `trail/SKILL.md` frontmatter description still says `trail/log.md` (old path) while the skill body correctly says `.trail/log.md`. The `.trail/` rename from run 47 updated all skill bodies and tools, but the YAML `description:` field was missed. Minor documentation drift.
+
+**Overburden lens:** Nothing new.
+
+**Waste lens:** `record.py history` throws `UnicodeEncodeError: 'charmap' codec can't encode character '\u25b8'` on Windows cp1252 terminals. The `▸`/`·` icons and the `→` characters in delta fields cannot be encoded in cp1252. The tool is completely unusable without `PYTHONUTF8=1` as a workaround — but the tool documents no such requirement, so users on Windows hit a cryptic crash. This was hit live during this run before any workaround was applied.
+
+**Challenge the first read:** Two issues found. Which is higher leverage? The Unicode crash is a runtime failure of a core tool on the most common developer OS. The frontmatter drift is a documentation inconsistency. Runtime failure outranks documentation drift. Fix the crash.
+
+### Decision
+
+[!DECISION] Add `sys.stdout.reconfigure(encoding='utf-8')` at the start of `main()` in `tools/record.py`, guarded by `hasattr` for robustness. This configures stdout to write UTF-8 bytes regardless of the platform default, fixing the crash for all trail content (em-dashes, arrows, `▸`, `·`, and any other Unicode chars trail entries may contain).
+Rationale: The crash is caused by arbitrary Unicode in trail entries (not just the icons), so per-character replacement would be whack-a-mole. The stdout reconfigure is a one-line root-cause fix. It's the Python 3.7+ idiom for exactly this problem.
+Alternative: Replace `▸`/`·` with `>`/`.` — rejected because the arrows in delta fields (`→`) would still crash.
+Alternative: `sys.stdout.buffer.write(...)` — works but bypasses Python's print abstraction and is messier.
+
+### Action
+
+`tools/record.py`:
+- Added 3-line block at start of `main()`: docstring comment + `if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")`
+- No other changes.
+
+Verification: `python tools/record.py history` (without PYTHONUTF8=1) — runs cleanly, `▸`/`·`/`→` render correctly. `python verify.py` → OK.
+
+### Reflection
+
+The `.trail/` rename from run 47 was a larger-scope change that reset the convergence chain. This run finds and fixes one real crash discovered during the run itself — an honest signal from actual use. The `trail/SKILL.md` frontmatter description stale path is deferred (documentation drift, not a runtime failure) and is the most obvious candidate for the next run. If the next run finds only that, the chain resumes converging. If the next run finds nothing at all, that would be the first silence post-rename.

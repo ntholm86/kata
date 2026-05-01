@@ -52,6 +52,7 @@ Do not edit by hand — re-run the command to refresh.
 | · 45 | 2026-04-30 | claude-silence-run-1 | silence | none — zero actionable findings |
 | · 46 | 2026-05-01 | claude-silence-run-2 | silence | none — zero actionable findings; second consecutive silence from this model family |
 | ▸ 47 | 2026-05-01 | trail-dir-rename-to-dottrail | changed — structural fix; evidence trail moved from `trail/` to `.trail/` | v3.6.1 → v3.7.0 |
+| ▸ 48 | 2026-05-01 | record-py-unicode-fix | changed — `record.py history` UnicodeEncodeError on Windows fixed; v3.7.1 | v3.7.0 → v3.7.1 |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -257,4 +258,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Move evidence (`log.md`, `history.md`, `sessions/`) from `trail/` to `.trail/`. Update the skill convention in all four SKILL.md files, INSTALLING.md, README.md, trail/README.md, verify.py, and tools/record.py to use `.trail/` as the evidence location. The skill definition folder (`trail/SKILL.md`, `trail/README.md`) stays at `trail/`.
 
-**47 runs total — 35 with changes, 12 silence**
+### Run 48 — 2026-05-01 — record-py-unicode-fix
+
+- **decided:** Add `sys.stdout.reconfigure(encoding='utf-8')` at the start of `main()` in `tools/record.py`, guarded by `hasattr` for robustness. This configures stdout to write UTF-8 bytes regardless of the platform default, fixing the crash for all trail content (em-dashes, arrows, `▸`, `·`, and any other Unicode chars trail entries may contain).
+
+**48 runs total — 36 with changes, 12 silence**
