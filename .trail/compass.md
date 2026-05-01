@@ -8,7 +8,12 @@ _Last updated: 2026-05-01 (seeded from operator conversation + convergence-loop-
 
 This repo is **simultaneously the workshop and the proof**. The skills — intent, improve, probe, trail, retrospect — are generic tools meant to make any AI agent's improvement loop better. The honest test is whether they can improve themselves. If they can't, the claim is hollow.
 
-The present focus is **improving the reasoning layer**. Each run finds the highest-leverage thing left to change in the skills themselves and changes it — or declares convergence. Nothing else.
+The present focus has two parts:
+
+1. **Get the reasoning layer to a reasonable state** — each run finds the highest-leverage thing left to change in the skills themselves and changes it, or declares convergence.
+2. **Document the process well enough to be implementable** — by something like evo, by another agent framework, by a human team. "Reasonable" means: clear enough that someone who didn't write it can pick it up and run it.
+
+These two goals constrain each other. A skill that works conversationally but can't be specified precisely enough for another system to invoke is not done. A specification precise enough for machine invocation but unreadable by a human violates the human-readable principle.
 
 ## Architectural constraints (not guidelines)
 
@@ -36,7 +41,7 @@ The present focus is **improving the reasoning layer**. Each run finds the highe
 
 ## Horizon (context, not current focus)
 
-The longer arc is that the skills suite is intended to become the reasoning layer for an autonomous execution harness (evo, `c:\git\evo`). Integration is **deferred** — it does not begin until the reasoning layer has proven itself on real targets with Retrospect in play. Specifics of what that integration would require live in the trail and in evo's own docs, not here. This compass intentionally does not lead with that work.
+The longer arc is that the skills suite is intended to become the reasoning layer for an autonomous execution harness — evo (`c:\git\evo`) is the concrete instance, but the goal is broader: **the skills should be specifiable cleanly enough that any execution harness could invoke them**. Integration with any specific system is **deferred** — it does not begin until the reasoning layer has proven itself on real targets with Retrospect in play, and until the specification is precise enough that the integration is a matter of wiring, not interpretation.
 
 ## What this compass is not
 
