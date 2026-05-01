@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.12.0 — 2026-05-01
+
+### Added
+- `POSITION.md` (v0.1) — new top-level stance document. Names what this repo is betting on: **operation-time trustworthy delegation** — what it takes for a human to safely hand real work to an AI more capable than themselves on that work and remain the responsible party. Defines the area via four sub-claims (operation-time, delegation, evidence-while-driving, protocol-not-tool), maps it against adjacent fields (scalable oversight, agentic AI safety, human-AI collaboration, constitutional AI, SRE), states what the repo is **not** claiming, and lists five explicit falsification criteria. Marked v0.1 and provisional. Aimed at skeptical technical practitioners; signed work, not corporate-we (run 71).
+- `.trail/vision.md` — added "What this work is, beyond a skillset" section framing the repo as research as much as development; introduces the trustworthy-delegation question and the dashboard-instruments framing for transparency-while-steering. Drafted from operator intent via Hunch, not paraphrased from operator words (run 70).
+
 ## v3.11.0 — 2026-05-01
 
 ### Added
