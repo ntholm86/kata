@@ -2105,3 +2105,41 @@ Post-fix grep for `[^.]trail/log\.` across all live non-CHANGELOG files: **zero 
 [!REALIZATION] This is the third consecutive run fixing stale path references from the v3.7.0 rename. The rename touched ~12 files in one commit. Each subsequent run found 3-5 more stale paths that the initial sweep missed — in docstrings, function comments, and deeper sections of SKILL.md. The pattern: large find-and-replace operations tend to miss references in code comments, docstrings, and inline examples because those aren't what the operator was looking for when they did the rename.
 
 The sweep is now provably complete — zero grep hits. The next run examines the live tree with no known stale references outstanding.
+
+## 2026-05-01 — changelog-v370-v373
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve (self-targeting)
+- outcome: changed — CHANGELOG entries for v3.7.0–v3.7.3 written; README version updated to v3.7.3
+- delta: v3.7.3 (CHANGELOG + README only; no code change)
+
+### Interpretation of the ask
+
+"Lets continue." Continue the improve loop on the skills repo, run 51.
+
+### Examination
+
+**Inconsistency lens:** README.md version line said `v3.6.1 (2026-04-30)`. Current version at HEAD is v3.7.3 (committed in run 50). CHANGELOG.md contained no entries for v3.7.0, v3.7.1, v3.7.2, or v3.7.3 — four shipped versions with no changelog documentation. The v3.7.0 rename is a breaking change (users must `git mv trail .trail`); not documenting it means upgraders have no migration guidance.
+
+**Inconsistency lens:** The stale-path sweep from runs 48–50 was correct and complete (grep confirms zero hits). The CHANGELOG not tracking those runs is a separate failure.
+
+**Waste lens:** The `.trail/sessions/` reference in `intent/SKILL.md` is aspirational text (the directory is never created), but hedged with "if ... exist" so it is vacuously harmless. Not worth changing.
+
+**Challenge the first read:** Is the CHANGELOG gap the real highest-leverage finding, or am I anchored to the obvious? Reconsidered: the code and skills are internally correct after run 50's sweep. The CHANGELOG is the user-facing contract — someone installing v3.7.0 and seeing their trail break would look here first and find nothing. The gap is real and harmful.
+
+### Decision
+
+[!DECISION] Write CHANGELOG entries for v3.7.0, v3.7.1, v3.7.2, v3.7.3. Update README version line. No code changes — this is documentation-only but addresses a genuine user-facing gap: the breaking rename has no migration note visible to anyone not reading the trail.
+
+### Action
+
+- Prepended four CHANGELOG sections (newest-first) above v3.6.1.
+- v3.7.0 includes a `### Migration` subsection with the explicit `git mv` command.
+- README.md: `v3.6.1 (2026-04-30)` → `v3.7.3 (2026-05-01)`.
+- `python verify.py` → OK.
+
+### Reflection
+
+[!REALIZATION] The pattern across runs 48–51: the v3.7.0 rename was executed correctly but created a long tail of inconsistencies — stale paths in 3 runs, missing CHANGELOG in this run. Large structural changes (renames, directory moves) consistently leave this tail. The fix is not to avoid structural changes but to include a documentation sweep as a mandatory step in any rename commit. The trail/SKILL.md or improve/SKILL.md might benefit from an explicit "after any rename: sweep all docs and CHANGELOG" reminder — worth examining next run.

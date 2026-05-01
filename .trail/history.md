@@ -55,6 +55,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 48 | 2026-05-01 | record-py-unicode-fix | changed — `record.py history` UnicodeEncodeError on Windows fixed; v3.7.1 | v3.7.0 → v3.7.1 |
 | ▸ 49 | 2026-05-01 | trail-stale-paths-cleanup | changed — stale `trail/log.md` paths from v3.7.0 rename fixed; v3.7.2 | v3.7.1 → v3.7.2 |
 | ▸ 50 | 2026-05-01 | trail-stale-paths-final | changed — remaining stale `trail/log.md` paths fixed in record.py and trail/SKILL.md; v3.7.3 | v3.7.2 → v3.7.3 |
+| ▸ 51 | 2026-05-01 | changelog-v370-v373 | changed — CHANGELOG entries for v3.7.0–v3.7.3 written; README version updated to v3.7.3 | v3.7.3 (CHANGELOG + README only; no code change) |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -272,4 +273,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Fix all five remaining stale `trail/log.md` references: `record.py` module and subcommand docstrings (×3), `trail/SKILL.md` grep example, `trail/SKILL.md` "The test" sentence.
 
-**50 runs total — 38 with changes, 12 silence**
+### Run 51 — 2026-05-01 — changelog-v370-v373
+
+- **decided:** Write CHANGELOG entries for v3.7.0, v3.7.1, v3.7.2, v3.7.3. Update README version line. No code changes — this is documentation-only but addresses a genuine user-facing gap: the breaking rename has no migration note visible to anyone not reading the trail.
+
+**51 runs total — 39 with changes, 12 silence**

@@ -1,5 +1,45 @@
 # Changelog
 
+## v3.7.3 — 2026-05-01
+
+### Fixed
+- `tools/record.py` module docstring, subcommand description, and `_parse_entries()` docstring: `trail/log.md` → `.trail/log.md`. Post-rename sweep complete — grep for `[^.]trail/log.` across all live non-CHANGELOG files now returns zero hits.
+- `trail/SKILL.md` grep example command: `trail/` → `.trail/` — users copying this to search their evidence directory would have got zero results.
+- `trail/SKILL.md` "The test" sentence: `trail/log.md` → `.trail/log.md` — the skill's own definition of what the trail file is now names the correct path.
+
+---
+
+## v3.7.2 — 2026-05-01
+
+### Fixed
+- `trail/SKILL.md` frontmatter `description:` field, two example git commands: `trail/log.md` → `.trail/log.md`.
+- `README.md`: two references to `trail/log.md` in the "How it works" and "Evidence" sections corrected.
+- `verify.py` `REQUIRED_FILES` list: `trail/log.md` → `.trail/log.md`, `trail/README.md` → `.trail/README.md`.
+
+---
+
+## v3.7.1 — 2026-05-01
+
+### Fixed
+- `tools/record.py`: added `sys.stdout.reconfigure(encoding='utf-8')` at the start of `main()`. Users on Windows with cp1252 or similar non-UTF-8 default code pages received a `UnicodeEncodeError` on any run that printed trail content containing em-dash or other non-ASCII characters.
+
+---
+
+## v3.7.0 — 2026-05-01
+
+### Changed — Breaking
+- Evidence directory renamed from `trail/` to `.trail/` in both the skills repo and the trail skill convention. The hidden-directory convention (`.trail/`) keeps the evidence in the repo without cluttering directory listings.
+
+### Migration
+Any target repo that has previously run the trail skill must be migrated:
+```bash
+git mv trail .trail
+git commit -m "trail: rename trail/ to .trail/"
+```
+Update any CI scripts, `grep` commands, or external links that reference `trail/log.md` → `.trail/log.md` and `trail/history.md` → `.trail/history.md`. Set `$TRAIL_ROOT` if you cannot run `record.py` from the target repo root.
+
+---
+
 ## v3.6.1 — 2026-04-30
 
 ### Fixed
