@@ -138,7 +138,7 @@ they bind the suite to one OS for no reason a few hundred lines of Python won't 
 To find every load-bearing decision across all sessions:
 
 ```sh
-grep -rn '\[!DECISION\]\|\[!REALIZATION\]\|\[!REVERSAL\]' trail/
+grep -rn '\[!DECISION\]\|\[!REALIZATION\]\|\[!REVERSAL\]' .trail/
 ```
 
 ---
@@ -214,7 +214,7 @@ Do not begin the next iteration until steps 1–3 are complete. Each commit is a
 
 ## The test
 
-Can someone who was not present reconstruct what was done, why each significant decision was made, and whether the work achieved what was asked for — using only `trail/log.md` and the linked sessions?
+Can someone who was not present reconstruct what was done, why each significant decision was made, and whether the work achieved what was asked for — using only `.trail/log.md` and the linked sessions?
 
 If yes, the trail is sufficient. If no, something is missing.
 

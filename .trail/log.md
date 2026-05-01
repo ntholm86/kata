@@ -2052,3 +2052,56 @@ Verification: `python verify.py` → OK. No logic changed.
 ### Reflection
 
 The v3.7.0 rename was a structural fix that touched ~12 files. This run cleaned up the 5 stale path references the rename missed. The convergence chain restarted at run 47 (rename). Runs 48 and 49 both produced changes — a Unicode crash and a stale-path sweep. The next run is the first real candidate for silence post-rename. If nothing actionable is found, that is peg 1/3 of the new convergence chain.
+
+## 2026-05-01 — trail-stale-paths-final
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve (self-targeting)
+- outcome: changed — remaining stale `trail/log.md` paths fixed in record.py and trail/SKILL.md; v3.7.3
+- delta: v3.7.2 → v3.7.3
+
+### Interpretation of the ask
+
+"Go again." Continue the loop. Run 49 cleaned five stale paths. Verified whether the sweep was complete.
+
+### Examination
+
+Ran a grep across all live non-archive, non-CHANGELOG, non-evidence files for `[^.]trail/log.` — finding stale paths that reference the old evidence location without a leading dot.
+
+Three more found:
+1. `tools/record.py` module docstring (line 2): `"record.py — append entries to trail/log.md"` — this is the text shown by `python record.py --help`. A user reads the help output and copies the wrong path.
+2. `tools/record.py` subcommand description (line 8): `"Append a stub entry to trail/log.md"` — same help text, same problem.
+3. `tools/record.py` `_parse_entries()` docstring (line 108): cosmetic but inconsistent.
+4. `trail/SKILL.md` grep command example (line 141): `grep ... trail/` — a user running this to search for decisions in their evidence directory gets 0 results because evidence is in `.trail/`.
+5. `trail/SKILL.md` "The test" section (line 217): `trail/log.md` as the canonical audit artefact — wrong path in the sentence that defines what the trail IS.
+
+CHANGELOG references not fixed — they describe historical state; fixing them would rewrite history.
+README.md `trail/` and INSTALLING.md `trail/` not stale — those refer to the skill folder name, which is correctly `trail/`.
+
+**Challenge the first read:** After these fixes, the grep produces zero hits outside CHANGELOG and archive. Is the sweep actually complete? Yes — manually verified with the regex after each fix.
+
+### Decision
+
+[!DECISION] Fix all five remaining stale `trail/log.md` references: `record.py` module and subcommand docstrings (×3), `trail/SKILL.md` grep example, `trail/SKILL.md` "The test" sentence.
+Rationale: The grep example and help text are the most operationally harmful — users copy commands from them. The "The test" sentence is the skill's own definition of what the trail file is, so having the wrong path there is directly contradictory.
+
+### Action
+
+`tools/record.py`:
+- Module docstring line 2: `trail/log.md` → `.trail/log.md`
+- Subcommand description line 8: `trail/log.md` → `.trail/log.md`
+- `_parse_entries()` docstring: `trail/log.md` → `.trail/log.md`
+
+`trail/SKILL.md`:
+- grep example: `trail/` → `.trail/`
+- "The test" sentence: `trail/log.md` → `.trail/log.md`
+
+Post-fix grep for `[^.]trail/log\.` across all live non-CHANGELOG files: **zero results**. `python verify.py` → OK.
+
+### Reflection
+
+[!REALIZATION] This is the third consecutive run fixing stale path references from the v3.7.0 rename. The rename touched ~12 files in one commit. Each subsequent run found 3-5 more stale paths that the initial sweep missed — in docstrings, function comments, and deeper sections of SKILL.md. The pattern: large find-and-replace operations tend to miss references in code comments, docstrings, and inline examples because those aren't what the operator was looking for when they did the rename.
+
+The sweep is now provably complete — zero grep hits. The next run examines the live tree with no known stale references outstanding.

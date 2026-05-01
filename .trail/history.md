@@ -54,6 +54,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 47 | 2026-05-01 | trail-dir-rename-to-dottrail | changed — structural fix; evidence trail moved from `trail/` to `.trail/` | v3.6.1 → v3.7.0 |
 | ▸ 48 | 2026-05-01 | record-py-unicode-fix | changed — `record.py history` UnicodeEncodeError on Windows fixed; v3.7.1 | v3.7.0 → v3.7.1 |
 | ▸ 49 | 2026-05-01 | trail-stale-paths-cleanup | changed — stale `trail/log.md` paths from v3.7.0 rename fixed; v3.7.2 | v3.7.1 → v3.7.2 |
+| ▸ 50 | 2026-05-01 | trail-stale-paths-final | changed — remaining stale `trail/log.md` paths fixed in record.py and trail/SKILL.md; v3.7.3 | v3.7.2 → v3.7.3 |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -267,4 +268,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Fix all five stale `trail/log.md` path references in the live skill surface to `.trail/log.md`. Treat as one conceptual change: cleanup of the v3.7.0 rename across the user-facing surface.
 
-**49 runs total — 37 with changes, 12 silence**
+### Run 50 — 2026-05-01 — trail-stale-paths-final
+
+- **decided:** Fix all five remaining stale `trail/log.md` references: `record.py` module and subcommand docstrings (×3), `trail/SKILL.md` grep example, `trail/SKILL.md` "The test" sentence.
+
+**50 runs total — 38 with changes, 12 silence**

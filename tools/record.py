@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""record.py — append entries to trail/log.md and digest the latest one.
+"""record.py — append entries to .trail/log.md and digest the latest one.
 
 Replaces the kiroku-*.ps1 family from v2. Pure-Python, zero dependencies.
 
 Subcommands:
   new --slug=<slug> [--target=<target>] [--skill=<skill>]
-      Append a stub entry to trail/log.md and print the line range so the
+      Append a stub entry to .trail/log.md and print the line range so the
       agent (or operator) can edit it.
 
   summary
@@ -105,7 +105,7 @@ def cmd_new(args: argparse.Namespace) -> int:
 
 
 def _parse_entries(text: str) -> list[dict]:
-    """Parse trail/log.md into a list of entry dicts."""
+    """Parse .trail/log.md into a list of entry dicts."""
     lines = text.splitlines()
     entries: list[dict] = []
     current: dict | None = None
