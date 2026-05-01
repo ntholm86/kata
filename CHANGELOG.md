@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.8.0 — 2026-05-01
+
+### Changed
+- `improve/SKILL.md` step 6 — "Reflect on the loop itself" replaced with "Reflect", split into two operations:
+  - **6a. Per-iteration reflection** runs every iteration. Forces a falsifiable target-model claim, a named blind spot, and a perspective-injection question (what would someone who knows the target push back on).
+  - **6b. Across-trail reflection** is conditional. Triggers: recurring *class* of finding, about to declare silence, prior `[!REALIZATION]` contradicted, or operator asked. Reads the trail as one document about the target.
+  - Reflection is reframed throughout to be *about the target*, not *about the loop* — addressing templated arc-counting reflections observed across runs 48–53. Storage is the existing `[!REALIZATION]` marker; no new markers, files, or tooling.
+  - Skill version: 3.2.0 → 3.3.0.
+- `trail/SKILL.md` entry-shape template — the "Reflection" section description rewritten to match the new two-part structure (target-model claim + blind spot + push-back; arc-claim when triggered). Skill version: 1.5.0 → 1.6.0.
+
+---
+
 ## v3.7.4 — 2026-05-01
 
 ### Fixed

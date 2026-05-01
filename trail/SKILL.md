@@ -1,6 +1,6 @@
 ---
 name: trail
-version: 1.5.0
+version: 1.6.0
 description: 'Evidence trail management. Append a structured entry to .trail/log.md IN THE TARGET REPO ROOT at the end of every substantive session — recording the interpretation of the ask, examination, decisions, actions, and reflection. The implementation of Observable Autonomy — autonomy without evidence is not delegation, it is abdication. USE WHEN: any substantive autonomous work that produces decisions, changes, or findings.'
 argument-hint: 'The target being worked on (repo, file, system) — used to populate the log entry header'
 ---
@@ -109,7 +109,13 @@ If Intent was applied, paste its narration here.>
 
 ### Reflection
 
-<Is the loop converging or churning? What would the next run look at?>
+<Reflection is about the target, not about the loop. At minimum: an updated model
+of the target as a falsifiable claim a future run could disagree with, a named
+blind spot in this iteration, and what someone who knows the target better would
+push back on. If across-trail reflection was triggered (recurring class of
+finding, about to declare silence, prior [!REALIZATION] contradicted, or
+operator asked), also include an arc-claim about the target read from the trail
+as a whole. Mark material insights with [!REALIZATION].>
 ```
 
 ---

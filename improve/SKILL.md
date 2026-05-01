@@ -1,7 +1,7 @@
 ---
 name: improve
-version: 3.2.0
-description: 'The improvement skill. Examine a target, find what most needs changing, change it (or argue for radical redesign), verify, and record. Combines incremental refinement, structural rethinking, and reflection on the loop itself. USE WHEN: improve, audit, review, fix, refactor, redesign, evaluate, what would make this better, am I missing something.'
+version: 3.3.0
+description: 'The improvement skill. Examine a target, find what most needs changing, change it (or argue for radical redesign), verify, and record. Combines incremental refinement, structural rethinking, and reflection on the target itself. USE WHEN: improve, audit, review, fix, refactor, redesign, evaluate, what would make this better, am I missing something.'
 argument-hint: 'The target to improve, and optionally the concern (correctness, simplicity, performance, etc.)'
 ---
 
@@ -70,15 +70,36 @@ Make the change. For each non-trivial step, state what you are about to do and w
 
 If the change introduces a problem, surface it immediately. Half-done work that pretends to be done is worse than no work at all.
 
-### 6. Reflect on the loop itself
+### 6. Reflect
 
-Once per session, ask: *is this loop converging or churning?*
+Two operations live in this step. The first runs every iteration. The second runs only when the first surfaces a reason for it. Reflection in this skill is always *about the target* — the codebase, the system, the artefact you are working on — not about the loop that examines it. The loop is only interesting insofar as it reveals or obscures something about the target.
 
-- Are recent runs producing changes the next run will undo?
-- Has a finding recurred across runs without ever resolving?
-- Have prior recommendations turned out to be wrong, and if so, what does the loop need to do differently?
+#### 6a. Per-iteration reflection
 
-If the loop is churning, that is itself a finding. Surface it. Do not silently keep iterating.
+After the change is made (or silence is declared), but before recording, sit with three things. They are prompts for honest reflection inside the trail entry, not slots to fill.
+
+- **State your current model of the target as a claim a future run could disagree with.** Not a summary of what you did this run — a falsifiable assertion about *what the target is, what it is becoming, or where its real weight sits.* Examples of the right shape: "This codebase is converging on X." "The hardest part of this target is Y, and prior runs have consistently misread it as Z." "The real risk in this system lives in W, even though most attention has gone to V." A future iteration examining the same target should be able to read the sentence and say either "still true" or "no, here is what changed my mind."
+- **Name a blind spot in this run.** Something specific you suspect this iteration did not see clearly — an area you did not examine, a kind of evidence you did not gather, an assumption you took on faith. Generic hedging ("I might have missed something") is not a blind spot. If you genuinely cannot name one, say so, and say why ("this run touched only documentation; runtime behaviour was not exercised").
+- **Imagine a reader who knows this target better than you do.** What would they push back on in this run's findings or model? If nothing comes to mind, the run probably did not engage the target deeply enough.
+
+When something material surfaces — an updated model, a contradiction with a prior run, a blind spot worth carrying forward — write it as `[!REALIZATION]` in the entry. That is the storage mechanism. No new markers are introduced for reflection.
+
+#### 6b. Across-trail reflection
+
+Most iterations do not need this. Run it only when one of the following is true:
+
+- The last few iterations found the same *class* of finding (not the same text — the same kind of thing). A recurring shape of inconsistency, a repeating fix pattern, the same lens triggering each time.
+- You are about to declare silence. Read the arc of the trail before counting the peg — silence read against a mistaken arc is not convergence.
+- A prior `[!REALIZATION]` is contradicted by what this run found.
+- The operator explicitly asked.
+
+When triggered, read `.trail/log.md` as a *single document about the target*, not as a list of past runs. Then sit with this:
+
+- Which prior realisations aged well, and which were wrong in retrospect? If the trail is long enough, name at least one of each.
+- Where has attention been spent, and is that where the target's real weight lies? A long tail of small fixes in one corner can mean either "that corner is the bottleneck" or "this is the corner the loop has grown comfortable looking at." The trail itself is the evidence — re-read it.
+- What does the target need next that *no individual iteration would have surfaced* — only the arc reveals?
+
+Write the result as `[!REALIZATION]` in this entry, framed as a claim about the target. If it changes the priority for the next iteration, say so plainly.
 
 ### 7. Record
 
