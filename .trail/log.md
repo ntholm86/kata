@@ -2143,3 +2143,44 @@ The sweep is now provably complete — zero grep hits. The next run examines the
 ### Reflection
 
 [!REALIZATION] The pattern across runs 48–51: the v3.7.0 rename was executed correctly but created a long tail of inconsistencies — stale paths in 3 runs, missing CHANGELOG in this run. Large structural changes (renames, directory moves) consistently leave this tail. The fix is not to avoid structural changes but to include a documentation sweep as a mandatory step in any rename commit. The trail/SKILL.md or improve/SKILL.md might benefit from an explicit "after any rename: sweep all docs and CHANGELOG" reminder — worth examining next run.
+
+## 2026-05-01 — stale-paths-zenodo-citation
+
+- target: autonomous-agent-skills
+- operator: ntholm86
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: improve (self-targeting)
+- outcome: changed — three stale paths / version mismatches fixed in .trail/README.md, .zenodo.json, CITATION.cff; v3.7.4
+- delta: v3.7.3 → v3.7.4
+
+### Interpretation of the ask
+
+"Again." Run 52. Continue the loop. Runs 48–51 cleaned stale paths and the missing CHANGELOG from v3.7.0. Examine the tree for remaining findings now that those are closed.
+
+### Examination
+
+**Inconsistency lens — stale paths:**
+- `.trail/README.md` line 32: "append a structured evidence entry to `trail/log.md`" — stale, should be `.trail/log.md`. Same class as the prior sweep.
+- `.zenodo.json` description HTML: two occurrences of `trail/log.md` — in the Trail skill description and in the "Read in this order" list. Zenodo reads this file when a new release is created; publishing with the wrong path would embed it in the public Zenodo metadata.
+- `CITATION.cff`: `version: "3.6.0"`, `date-released: "2026-04-30"` — current HEAD is v3.7.3 (2026-05-01). The CITATION.cff has been kept current with git HEAD throughout prior releases, so leaving it at 3.6.0 is an inconsistency.
+
+**Challenge the first read:** Am I manufacturing findings by continuing to look for the same class of stale-path bug? No — these are genuine occurrences in three different files that were not covered by previous sweeps. The `.zenodo.json` is especially operationally significant because it's read by an external system on the next Zenodo publish. The CITATION.cff version mismatch is a standard housekeeping inconsistency.
+
+Is there a more important finding being missed? Examined: `improve/SKILL.md` is substantively clean. `trail/SKILL.md` is substantively clean. `INSTALLING.md` is clean. The "after any rename, sweep docs" insight from run 51 was worth noting but adding it as an explicit step in the skills would make them more checklist-like — directly contradicting Principle 1. Not worth adding.
+
+### Decision
+
+[!DECISION] Fix three findings:
+1. `.trail/README.md` stale path: `trail/log.md` → `.trail/log.md`
+2. `.zenodo.json` two stale paths: `trail/log.md` → `.trail/log.md` (×2)
+3. `CITATION.cff`: bump version to 3.7.3, date to 2026-05-01
+
+Rationale: all three are genuine inconsistencies. `.zenodo.json` is operationally significant. CITATION.cff has a documented convention of tracking HEAD. All three are mechanical, unambiguous fixes.
+
+### Action
+
+`multi_replace_string_in_file` across `.trail/README.md`, `.zenodo.json`, and `CITATION.cff`. `python verify.py` → OK.
+
+### Reflection
+
+[!REALIZATION] The stale-path tail from v3.7.0 is now genuinely exhausted — `.trail/README.md` and `.zenodo.json` were the only remaining live files not covered by the runs 48–51 sweep. Post-fix grep for `[^.]trail/log\.` across all live files should return zero results outside CHANGELOG. If run 53 finds nothing of this class, that is peg 1/3 of a new convergence chain — but only if the model family is distinct from Anthropic.

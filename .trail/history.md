@@ -56,6 +56,7 @@ Do not edit by hand — re-run the command to refresh.
 | ▸ 49 | 2026-05-01 | trail-stale-paths-cleanup | changed — stale `trail/log.md` paths from v3.7.0 rename fixed; v3.7.2 | v3.7.1 → v3.7.2 |
 | ▸ 50 | 2026-05-01 | trail-stale-paths-final | changed — remaining stale `trail/log.md` paths fixed in record.py and trail/SKILL.md; v3.7.3 | v3.7.2 → v3.7.3 |
 | ▸ 51 | 2026-05-01 | changelog-v370-v373 | changed — CHANGELOG entries for v3.7.0–v3.7.3 written; README version updated to v3.7.3 | v3.7.3 (CHANGELOG + README only; no code change) |
+| ▸ 52 | 2026-05-01 | stale-paths-zenodo-citation | changed — three stale paths / version mismatches fixed in .trail/README.md, .zenodo.json, CITATION.cff; v3.7.4 | v3.7.3 → v3.7.4 |
 
 ### Run 1 — 2026-04-23 — v3 redesign
 
@@ -277,4 +278,8 @@ Do not edit by hand — re-run the command to refresh.
 
 - **decided:** Write CHANGELOG entries for v3.7.0, v3.7.1, v3.7.2, v3.7.3. Update README version line. No code changes — this is documentation-only but addresses a genuine user-facing gap: the breaking rename has no migration note visible to anyone not reading the trail.
 
-**51 runs total — 39 with changes, 12 silence**
+### Run 52 — 2026-05-01 — stale-paths-zenodo-citation
+
+- **decided:** Fix three findings:
+
+**52 runs total — 40 with changes, 12 silence**
