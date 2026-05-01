@@ -4,6 +4,18 @@ _Operator-held. Stable across runs. Read by Improve at step 1, before the trail 
 
 ---
 
+## What this work is, beyond a skillset
+
+This repo is **as much research as it is development**. The development output is a set of skills; the research question those skills serve is older and bigger than any of them:
+
+> **What is the architecture of trustworthy delegation?** What does it actually take for a human to safely hand real work to an AI more capable than themselves — and remain the responsible party for what gets done?
+
+The skills are one attempt at an answer. They may turn out to be the wrong attempt, the right attempt for a narrower class of work than hoped, or a step toward an architecture none of us has named yet. A negative result on the skills is still a result on the question.
+
+A load-bearing piece of any answer to that question — and the piece this skillset is most directly aimed at — is this: **the AI's power has to be made transparent enough that the human keeps steering even when the AI exceeds their ability to verify in detail.** "Transparent" here does not mean regulator-grade auditability after the fact; it means evidence the operator can use *while driving*, in time to correct course. That is what the trail, the compass, and the read-order at step 1 of Improve are trying to be — instruments on a dashboard, not a black box and a logfile.
+
+**Convergence on a particular skill is not convergence on the question.** The question is the longer arc the skills serve. Every claim this repo makes about being "done" must be read against that distinction.
+
 ## What this repo is for
 
 This repo is **simultaneously the workshop and the proof**. The skills — intent, improve, probe, trail, retrospect — are generic tools meant to make any AI agent's improvement loop better. The honest test is whether they can improve themselves. If they can't, the claim is hollow.
