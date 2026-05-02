@@ -1,6 +1,6 @@
 # Vision — autonomous-agent-skills
 
-_Operator-held. Stable across runs. Read by Improve at step 1, before the trail and the compass. Not written by any skill — only by the operator/team that holds the destination._
+_Operator-held. Stable within runs — no skill changes this file; only the operator revises it. Read by Improve at step 1, before the trail and the compass. Revisit with Hunch whenever the operator's understanding has evolved or after a major arc milestone._
 
 ---
 
@@ -12,13 +12,21 @@ This repo is **as much research as it is development**. The development output i
 
 The skills are one attempt at an answer. They may turn out to be the wrong attempt, the right attempt for a narrower class of work than hoped, or a step toward an architecture none of us has named yet. A negative result on the skills is still a result on the question.
 
-**This is an entry in an emerging space.** Reasoning frameworks for AI agents are being developed from multiple directions simultaneously. The differentiator this one is aiming for is not feature depth — it is that it is *as easy to understand and explain as it is efficient*. Simplicity and explainability are not polish added at the end; they are design constraints from the start. A framework that works but cannot be explained in a conversation has failed the adoption test. A framework that can be explained but does not produce better outcomes has failed the research test. Both constraints must hold simultaneously.
+**This is an entry in an emerging space.** Reasoning frameworks for AI agents are being developed from multiple directions simultaneously. The differentiator this one is aiming for is **recognition, not comprehension**. If the psychological primitives are correct, practitioners who have experienced the friction — unclear AI intent, invisible reasoning, improvement loops that stall without explanation — will recognise the problem being named the moment they encounter this framework. That instant recognition is the test of whether the model found the right primitives. If the framework requires extensive explanation before someone sees the point, the model is probably wrong, not just badly communicated. Effectiveness without recognition produces a tool no one reaches for. Recognition without effectiveness produces a concept no one deploys.
 
 **The mechanism is psychological, not procedural.** Most reasoning frameworks improve the quality of a single run — better decomposition, better tool use, better output validation. This approach is different: the skills are designed to give the AI a progressively richer *interior model of the situation*, so that its autonomous decisions are more enlightened rather than just more structured. Commander's Intent gives the AI the *why*, not just the *what*. The trail gives the AI memory of its own reasoning across sessions. Hunch closes the gap between what the operator holds in their head and what the AI is actually working from. Retrospect gives the AI a sense of what the target is *becoming* — not just what it is. The compass gives the AI its current orientation before it acts. None of these are output-quality levers. They are all about building situational understanding over time. An AI running these skills is not following a better procedure — it is developing a richer model of the work, the operator's intent, and its own prior reasoning. That is the bet.
 
 **Two success conditions run in parallel:**
 1. **Research success** — the experiment produces evidence about what trustworthy delegation actually requires, including negative results.
-2. **Adoption success** — developers read the skills and start using them in their own projects without help from the author. Not integration into a pipeline — just: someone encounters these skills, understands what they do, and finds them worth running.
+2. **Adoption success** — developers read the skills and start using them in their own projects without help from the author. Not integration into a pipeline — just: someone encounters these skills, recognises the problem, and finds them worth running.
+
+**The architecture has two phases, and only one is fully automatable.**
+
+Phase 1 is **vision convergence**: the human and the AI converge on a shared, precise model of what is to be built and why. This is done through dialogue — Hunch, Intent, and revision cycles on this file. It cannot be automated; the AI cannot derive the full vision from the work alone, because the human's understanding of the goal is always ahead of what has been written down. Vision will expand and change as the operator has realisations — that is expected and healthy. Hunch is the mechanism for revisiting it.
+
+Phase 2 is **the iterative loop**: once vision is precise enough, the loop runs against it. The autonomy level is configurable — from full autonomy to human-gated at key decision points. What is safe to automate fully: testing, robustness improvements, internal consistency fixes, trail maintenance. What requires a human gate: direction changes, and most importantly — **what to implement next**.
+
+**The irreducible human gate is: what to implement.** The AI can reason toward the vision, identify the highest-leverage gap, and propose the next change. But there will always be constraints and context the human holds that haven't made it into vision.md — cost, stakeholders, downstream implications, things not yet realised. The AI proposes; the human decides — or explicitly delegates that decision back to the AI. The goal is to make this gate as lightweight as possible while keeping the human genuinely in the loop, not just formally in the loop.
 
 A load-bearing piece of any answer to that question — and the piece this skillset is most directly aimed at — is this: **the AI's power has to be made transparent enough that the human keeps steering even when the AI exceeds their ability to verify in detail.** "Transparent" here does not mean regulator-grade auditability after the fact; it means evidence the operator can use *while driving*, in time to correct course. That is what the trail, the compass, and the read-order at step 1 of Improve are trying to be — instruments on a dashboard, not a black box and a logfile.
 
