@@ -3396,3 +3396,50 @@ Falsifiable claim: on a future run with an underspecified ask, Improve v3.7.0 wi
 Blind spot: this pass occurred in the same session family and same operator-agent pairing as prior runs; it may overfit local context.
 
 Imagined-reader pushback: this is self-referential because the same loop designed and evaluated the mechanism. Correct. Reliability testing on a different arc remains required and is now explicitly queued.
+
+
+## 2026-05-02 — trail-v1-10-0-sessions-mandatory
+
+- target: skills repo (this repo)
+- operator: Nils Holmager
+- agent: Claude Sonnet 4.6 (Anthropic, via GitHub Copilot)
+- skill: trail (self-fix)
+- outcome: fixed — sessions/ writing is now mandatory with explicit format
+- session-file: .trail/sessions/2026-05-02-trail-v1-10-0-sessions-mandatory.md
+- delta: trail/SKILL.md v1.9.0 → v1.10.0
+
+### Interpretation of the ask
+
+"I am expecting the trail skill to always produce the trail in C:\Users\admin\.copilot\skills\.trail\sessions of our session — but I don't see that happening."
+
+The operator expected .trail/sessions/ files to be written at the end of every substantive session. They weren't. Root cause needed identifying in trail/SKILL.md.
+
+### Examination
+
+Read trail/SKILL.md (v1.9.0) in full. Two compounding gaps found:
+1. The .trail/ directory listing marked sessions/ as "optional" — giving the agent explicit permission to skip it.
+2. There was no procedural write step anywhere in the skill. The three-resolution table described what session files should contain but never said "create one."
+
+The skill described the artefact but not the action to produce it.
+
+### Decision
+
+[!DECISION] Add a new "Writing the session file" section to trail/SKILL.md with: mandatory framing (not optional), filename convention (YYYY-MM-DD-<slug>.md), content template with fidelity label, session-file: link in log.md entry header, and git commit sequence. Change directory listing from "optional" to mandatory.
+Rationale: the three-resolution principle already established Full resolution as the deepest tier; it simply was never mandated. Making it mandatory aligns the skill with the Observable Autonomy principle it governs.
+Alternative: make sessions/ a separate optional skill — rejected, overhead without benefit; trail already owns .trail/ writes.
+
+### Action
+
+- trail/SKILL.md: version 1.9.0 → 1.10.0; sessions/ listing changed from optional to mandatory; three-resolution table updated; new "Writing the session file" section added.
+- CHANGELOG.md: v3.17.0 entry added.
+- verify.py: OK.
+- Committed 87f8449, pushed to ntholm86/autonomous-agent-skills.
+- Created .trail/sessions/2026-05-02-trail-v1-10-0-sessions-mandatory.md (this session's file).
+
+### Reflection
+
+Trail is now structurally complete: log.md (digest + indexed tiers) + sessions/ (full tier) are both mandatory. The Observable Autonomy claim — that a non-present observer can reconstruct what happened — now has a viable path to being true.
+
+Blind spot: enforcement is soft. The skill says "mandatory" but verify.py does not check for a sessions/ file accompanying each commit. A harness-level enforcement step would close this.
+
+[!REALIZATION] The gap was partly mechanical (no write step) and partly rhetorical (the word "optional" gave explicit permission to skip). Both needed fixing. The mechanical fix without removing "optional" would still leave the agent an out.
