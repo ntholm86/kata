@@ -125,7 +125,7 @@ This stance is **v0.2 and provisional** (updated 2026-05-02 with first empirical
 
 I'm putting this here so the bet is stated and findable. If you read it and think I'm pointing at something real, I'd like to hear from you. If you read it and think I'm pointing at something that already has a name and a literature I'm ignoring, I'd especially like to hear from you.
 
-— Lars
+— Nils
 
 Repo: <https://github.com/ntholm86/autonomous-agent-skills>
 Principles (separate): <https://github.com/ntholm86/autonomous-agent-principles>

@@ -1,30 +1,39 @@
-# Compass — autonomous-agent-skills
+﻿# Compass -- autonomous-agent-skills
 
-_Last updated: 2026-05-01 (after runs 67–68; still operator-seeded, not yet a formal Retrospect run)_
-
-_Compass is the Retrospect-derived current orientation: what the arc shows is currently true of the target, and what the next runs should test. It is rewritten each Retrospect run. Vision (`.trail/vision.md`) is the stable operator-held destination — read it first._
+_Last updated: 2026-05-02 (run: retrospect-first-real-run)_
+_Derived from: full arc read, runs 55-71. Vision read first (step 0)._
 
 ---
 
-## Current claims about the reasoning layer
+## Current claims
 
-1. **The suite has shifted from convergence work to design work, and the README has not caught up.** The convergence baseline (three silences, three distinct model families) is pinned at v3.1.0 — five skills, no Retrospect, no compass, no vision, no Hunch. Runs 64–68 added all four of those structural pieces. The current v3.11.0 suite is **not** converged and has not been evaluated by independent model families since the additions. The README still implies convergence in a way that conflates "v3.1.0 was once converged" with "the current suite is converged." The next operator-facing change should make that distinction explicit; until then, every external read of this repo is slightly misleading.
+**1. Phase boundary crossed: documentation-convergence to validated-capability.**
+Runs 55-63 were documentation propagation after structural changes. Runs 64-71 added four structural capabilities (Retrospect, compass/vision split, Hunch, .trail/ directory discipline) and validated three of them against real targets. The suite is no longer converging on a stable design -- it is proving a live design against external evidence. The convergence baseline at v3.1.0 does not apply to the current suite; a new convergence cycle has not yet started.
 
-2. **The loop is still closer to a text-consistency engine than a behavioral improvement engine — but the diagnosis has sharpened.** Runs 55–63 were doc propagation following operator-driven structural change. Runs 64–68 added behavioral mechanisms (Retrospect, compass, vision split, Hunch) — but every one of them was operator-prompted. The loop has not yet found a behavioral improvement on its own. Hunch (added run 68) is the first skill explicitly designed to reduce the operator's articulation cost; whether it shifts the discovery rate is an open empirical question.
+**2. The validation gap has shifted from Hunch to Retrospect.**
+Every prior compass entry named "Hunch unproven in execution" as the validation gap. As of 2026-05-02, Hunch has confirmed hunches on five runs across four targets (own vision, evo, vectorium, leifoglenedk, manifesto). The falsification condition was met. The current unvalidated claim is: "a Retrospect run produces arc-level findings that an improve loop run in the same session would not." This run is the first real Retrospect execution; it is its own validation event.
 
-3. **The orientation contract is now coherent for the first time.** Vision (operator-held, stable, never written by any skill), compass (Retrospect-derived, rewritten each run), trail (append-only evidence). Hunch sits outside the autonomous loop and surfaces guesses about where the operator is heading without writing to vision. A Retrospect run can now execute its spec literally without destroying operator content. This was incoherent through run 66.
+**3. The loop still has no occasion-independence -- every structural change in runs 64-71 was operator-prompted.**
+The trail names this repeatedly (runs 68, 71) but no run has resolved it. Hunch was designed to reduce operator-prompting dependency; it has reduced content dependency (agent surfaces direction rather than waiting for operator to articulate it) but not occasion dependency (operator still creates the moment). Whether Hunch will eventually surface direction questions without being invoked is an open empirical question.
 
-4. **Retrospect, compass, and Hunch are all unproven in execution.** Retrospect has never been run end-to-end. This compass was seeded by the operator both times. Hunch has never been invoked even once — including in the natural opportunity at the end of run 68 when the operator's direction was an obvious thing to ask about. The protocol is increasingly precise on paper; the validation gap is widening.
+**4. The two-repo relationship (manifesto = principles layer, skills = one domain conformance) is now tracked at the trail level but not yet reflected in either repo's README.**
+The manifesto's .trail/vision.md names this relationship explicitly. Neither repo's README explains it to an incoming reader. This is a documentation gap that is now strategically important as the operator moves toward SOLID-like recognition for the principles.
 
-5. **The work is research, not iterative refinement of a finished system.** The operator has named this explicitly: figuring out how to safely leverage AI in a way that is transparent, reviewable, and verifiable to the human at the wheel. That framing changes how convergence should be interpreted in this period — silence on a research artifact is not the same signal as silence on a production loop. The convergence protocol still applies, but only to settled designs; the present design is not yet settled.
+**5. The skills suite is specifiable and composable but has never been run by a harness that did not co-evolve with it.**
+Vision names this as a hard requirement before integration with evo or any other harness. No evidence exists yet that the skills work cleanly when invoked by a system that did not participate in their design. This remains the most important unvalidated claim in the entire research bet.
+
+---
 
 ## What the next runs should test
 
-- **Invoke Hunch on this very conversation.** The first natural use was missed at the end of run 68. The next time direction feels even slightly unclear, the agent should run Hunch instead of guessing silently. The trail will then have at least one Hunch run to evaluate the skill against.
-- **Run Retrospect for real.** Produce a falsifiable arc-claim from the trail that an Improve run would not have surfaced, and check whether it holds up. Until this happens, the meta-cognition layer of the protocol is asserted, not demonstrated.
-- **Address the convergence-staleness in the README** — but use Hunch first to confirm with the operator how to frame it. The risk is propagating a doc edit that misnames the current state; the right framing (research artifact in active design vs. converged production protocol) is the operator's call.
-- **Probe Intent's core claim** — that the agent is acting on what the operator means, not what they typed. With Hunch added, this probe can also test whether Hunch's hunches diverge from Intent's interpretation when they should.
+1. **Retrospect self-validation:** Does this Retrospect run produce claims an Improve run this session would not have produced? This run itself is the first data point.
+2. **Commit pending mechanical debt:** POSITION.md fix, CHANGELOG v3.15.1 entry, manifesto .trail/ commit, trail entry for this session.
+3. **Manifesto PROOF.md rewrite:** restructure from "Nils tested this once" to "here is what conformance looks like and how you would test it in your own context." Highest-leverage move for the recognition goal.
+4. **README relationship statement:** Both repos need a sentence explaining the two-repo structure to an incoming reader.
+5. **One external proof:** run the protocol on a target where the AI exceeds the operator on the underlying task and the operator is not the author.
 
-## What this compass is not
+---
 
-This file was seeded from operator conversation, not from a Retrospect arc-read of the trail. The claims above are plausible and consistent with what the operator has said, but they have not been derived from reading the 69-entry trail as a single document. A Retrospect run will replace this file with claims that are. Treat the present file as a working hypothesis, to be falsified by the next real arc-read.
+## Loop-effectiveness notes
+
+The loop is executing correctly as a structural-tightening and validation mechanism: every gap surfaced this session was found, fixed, and committed. The loop is not yet functioning as an independent finding mechanism -- direction has consistently been operator-supplied. This is honest for the current phase (design and validation, not convergence), but should be named. The operator-prompting dependency is structural, not accidental -- the trail names it in [!REALIZATION] markers in runs 68 and 71, and it has persisted across two sessions without resolution.
