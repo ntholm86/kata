@@ -3554,3 +3554,45 @@ The full three-skill arc ran correctly on vectorium — a real, dormant, non-sel
 Gap that remains: operator is also the author. Adoption success condition (stranger deploys skills without help) is still unobserved.
 
 [!REALIZATION] The external proof run also generated a potential learning falsification case: the `[!REALIZATION]` about the `(any)` injection pattern in vectorium's Improve trail entry is now in vectorium's `.trail/log.md`. A future agent reading that trail in a fresh session should act on it rather than re-diagnosing the same root cause. If it does, that is the first clean cross-session learning falsification case the suite has produced.
+
+## 2026-05-02 — retrospect-vectorium-arc-evidence-2026-05-02
+
+- target: autonomous-agent-skills
+- operator: Nils Wendelboe Holmager (ntholm86)
+- agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+- skill: retrospect v1.5.0 (autonomous-agent-skills v3.17.1)
+- outcome: compass updated — full arc read incorporating vectorium external-proof arc (5 trail entries, 2 sessions); first clear cross-session learning case identified; compass claims updated on 4 of 6 items
+- session-file: .trail/sessions/2026-05-02-retrospect-vectorium-arc-evidence.md
+- delta: .trail/compass.md replaced
+
+### Scope
+
+Read vision.md first. Then current compass (retro-on-updated-vision, 2026-05-02 earlier). Then the full arc from the point where the prior retrospect left off: the entries between retro-on-updated-vision and the end of log.md. Key entries in the new arc: trail-v1-10-0-sessions-mandatory, hunch:vision-competitive-framing, external-proof-vectorium-improve-run, external-proof-vectorium-retrospect, and the two vectorium runs completed in this session (statemachine-tests-all-green, typed-scene-services).
+
+Arc question: what do five vectorium runs across two sessions tell us about the compass claims? Specifically: does the arc advance claims 4 (learning), 3 (Observable Autonomy), 5 (capability), 6 (external proof)?
+
+### Arc-level result
+
+Six claims updated relative to prior compass:
+
+**Claim 1 (Phase 1 occasion-independence):** Refined rather than advanced. The "continue" prompt in this session triggered compass-oriented work correctly — the mechanism fired on a primed arc. Cold case (no compass, no priming, genuinely new arc) still unobserved. Updated wording reflects that distinction.
+
+**Claim 3 (Trail v1.10.0 / Observable Autonomy):** Upgraded from "closes the spec gap" to "validated in practice." The compass written by session 1's Retrospect successfully oriented session 2 (this session) before any code was examined. The inter-session memory mechanism worked end-to-end, not just on paper.
+
+**Claim 4 (learning falsification):** Status changed from "borderline case, no clear cross-session positive" to "first clear cross-session case observed." Session 1's [!REALIZATION] about the (any) injection pattern in vectorium was distilled into the compass's "next runs" queue. Session 2 (new context window) opened the compass and acted on that queued work — removing 5 (any) casts, adding typed Scene services — without re-diagnosing the root cause. Vision's definition of learning is met: a future agent acted on a prior [!REALIZATION] rather than rediscovering it. The mechanism is compass-mediated, which is exactly how the learning protocol is designed.
+
+**Claim 5 (capability evidence):** Strengthened. Now 5 runs across 2 sessions on vectorium, a real TypeScript/WebGL2 codebase, with all three skills (Hunch, Improve, Retrospect) producing evidence. 30/30 tests passing after correctness fixes. Retrospect produced a decision-useful compass that oriented the next session.
+
+**Claim 6 (external harness proof):** Status refined. Prior compass said "nothing in the current queue removes this gap." The vectorium arc substantially narrows the gap (5 runs, 2 sessions, learning carry-forward) without closing it. The structural gap is precisely named: all runs share the same operator as author. More vectorium runs will not change that. The next move must be a different kind of run.
+
+**Claim 2 (recognition/adoption gap):** Unchanged. No Phase 3 outreach has started.
+
+[!REALIZATION] Reading the arc as one document, the vectorium external-proof arc is the most evidence-dense arc the suite has produced. But it reveals a ceiling: accumulating more runs on the same target with the same operator cannot close the adoption success condition, no matter how many correctness fixes are made or how many (any) casts are removed. The single most leveraged remaining action is a run on a target the operator did not build.
+
+### Reflection
+
+**Falsifiable claim about the target's current state:** The compass at this point is the first version where claim 4 (learning) moves from "definition without observation" to "first confirmed case." A future Retrospect run that reads the same arc should produce compatible claim-4 evidence or name a specific reason for disagreement. If a future run reads this arc and concludes there is still no cross-session learning case, it would need to argue that compass-mediated learning does not count per vision's definition — that would itself be a high-value finding about the spec's precision.
+
+**Named blind spot:** The arc-read was conducted by the same agent that ran the vectorium improve sessions — the one that wrote the [!REALIZATION] it is now citing as a learning case. There is a circularity risk: I am the agent that wrote the prior session's compass and I am now citing its correctness as evidence. An independent agent (different model family or different operator) reading the same arc might assess the learning case differently.
+
+**Imagined-reader pushback:** "You are citing the compass itself as both the distillation artifact and the evidence that distillation worked. That is circular. The real test is whether the compass entry was read and acted on, not whether I can trace a chain of commits that look like acting on it." Counter: the commits are the evidence — statemachine-tests-all-green and typed-scene-services are both committed to vectorium with trail entries that describe the work done. The chain from [!REALIZATION] → compass queue → session-2 commits is traceable. The circularity concern is real but the evidence chain is not closed.
