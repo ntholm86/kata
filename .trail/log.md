@@ -3239,12 +3239,12 @@ The full trail entry for this run is in `c:\git\vectorium\.trail\log.md` — it 
 
 Skills-level significance: this is the first cold foreign-target validation of the Hunch skill. Falsification condition from POSITION.md — "Hunch surfaces something not written anywhere, confirmed by operator" — was met. Hunch is no longer unproven across all three use modes (operator intent, known target, cold foreign target).
 
-## 2026-05-02 -- session-v3-16-0-retrospect-first-run
+## 2026-05-02 — session-v3-16-0-retrospect-first-run
 
 - target: autonomous-agent-skills
 - operator: Nils Wendelboe Holmager (ntholm86)
 - agent: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
-- skills: hunch, retrospect, improve (structural fixes)
+- skill: hunch, retrospect, improve (structural fixes)
 - outcome: v3.16.0 -- Hunch validated on 3 foreign targets; all writing skills gain .trail/ directory creation; Retrospect gains vision-first read order; first real Retrospect arc-read; compass updated from operator-seeded to evidence-derived
 - delta: v3.15.0 -> v3.16.0
 
