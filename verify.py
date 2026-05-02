@@ -34,7 +34,6 @@ REQUIRED_FILES = [
     "probe/SKILL.md",
     "intent/SKILL.md",
     "trail/SKILL.md",
-    ".trail/README.md",
     ".trail/log.md",
 ]
 
