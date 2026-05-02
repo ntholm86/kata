@@ -1,6 +1,20 @@
 # Changelog
 
-## v3.14.0 — 2026-05-02
+## v3.15.0 — 2026-05-02
+
+### Changed — all skills: explicit target-repo anchor for `.trail/` reads and writes
+
+Every skill that reads or writes `.trail/` now explicitly states that `.trail/` is in the **target repo root** — never in the skills install directory. This closes a structural ambiguity: an agent running from the skills install directory could misinterpret bare `.trail/` references as relative to the install location rather than the target.
+
+- `intent/SKILL.md` (v1.1.0 → v1.2.0) — "Read the accumulated context" now opens with the explicit anchor: "the target repo's `.trail/` folder (in the root of the repo being worked on — never in the skills install directory)".
+- `improve/SKILL.md` (v3.4.0 → v3.5.0) — same anchor added to the trail-read step; fallback write step now says "`.trail/log.md` **in the target repo root**".
+- `probe/SKILL.md` (v3.1.0 → v3.2.0) — fallback write step now says "`.trail/log.md` **in the target repo root**".
+- `retrospect/SKILL.md` (v1.2.0 → v1.3.0) — arc-read step now says "`.trail/log.md` **in the target repo root**".
+- `hunch/SKILL.md` (v1.0.0 → v1.1.0) — signal-gather step now opens with the explicit anchor; vision write step now says "`.trail/vision.md` **in the target repo root**".
+
+`trail/SKILL.md` was already explicit — it is the reference implementation. All other skills now match it.
+
+
 
 ### Changed
 - `intent/SKILL.md` (v1.0.0 → v1.1.0) — "Read the accumulated context" section now explicitly lists `.trail/vision.md` and `.trail/compass.md` as the first two documents to read before interpreting any prompt. Vision (operator-held destination) and compass (Retrospect-derived orientation) are the most important context for intent interpretation; reading only `log.md` and sessions was insufficient. Adds note: if no `.trail/` exists yet, run Hunch first.

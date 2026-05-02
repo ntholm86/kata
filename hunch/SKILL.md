@@ -1,6 +1,6 @@
 ---
 name: hunch
-version: 1.0.0
+version: 1.1.0
 description: 'Surface the agent''s in-progress guesses about where the operator is heading — what they care about, what they are circling, what the implicit destination might be — and turn those guesses into questions the operator can confirm, correct, or reject. Closes the gap between what the operator has explicitly stated (vision) and what the agent has picked up from their conversation, reactions, and emphasis. USE WHEN: vision feels thin or stale, the operator is exploring rather than executing, the agent suspects it is missing implicit direction, or before a long autonomous run that will drift if the destination is unclear.'
 argument-hint: 'Optionally: the area you want hunches about (a specific concern, a recent decision, the project as a whole)'
 ---
@@ -40,7 +40,7 @@ Hunch is fast, conversational, and stops as soon as the operator says "yes, that
 
 ### 1. Gather signal
 
-Before forming any hunches, look at what is available:
+Before forming any hunches, look at what is available in the **target repo's `.trail/` folder** (in the root of the repo being worked on — not the skills install directory):
 
 - `.trail/vision.md` — what the operator has explicitly said (if it exists).
 - `.trail/compass.md` — what the agent's last arc-read concluded about the target.
@@ -97,7 +97,7 @@ After the conversation, capture three things:
 - **What was rejected.** Any hunches the operator explicitly disagreed with — these are valuable, because they prevent the agent from converging on the same wrong reading again.
 - **What is still open.** Any question the operator did not answer, or any uncertainty that remained. Hunch does not have to resolve everything; it has to make what is uncertain visible.
 
-If the operator wants the new understanding promoted to vision, propose the diff to `.trail/vision.md` and let the operator commit it. **Hunch never writes to `vision.md` without operator approval** — vision is operator-held by definition.
+If the operator wants the new understanding promoted to vision, propose the diff to `.trail/vision.md` **in the target repo root** and let the operator commit it. **Hunch never writes to `vision.md` without operator approval** — vision is operator-held by definition.
 
 If the conversation produced arc-claims about the target's current state rather than destination claims, those belong in compass — but compass is Retrospect's to write. Hunch surfaces them; Retrospect (or the next Improve run) decides what to do with them.
 

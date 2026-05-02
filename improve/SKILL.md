@@ -1,6 +1,6 @@
 ---
 name: improve
-version: 3.4.0
+version: 3.5.0
 description: 'The improvement skill. Understand the ask, examine the target, challenge the first read, decide on one change (or argue for redesign, or declare silence), act, reflect on the target, and record. Combines incremental refinement, structural rethinking, and reflection on the target itself. USE WHEN: improve, audit, review, fix, refactor, redesign, evaluate, what would make this better, am I missing something.'
 argument-hint: 'The target to improve, and optionally the concern (correctness, simplicity, performance, etc.)'
 ---
@@ -31,7 +31,7 @@ If Intent is not installed: before examining anything, narrate your interpretati
 
 If the ask is about convergence or publication readiness, read the repo's convergence-scope protocol before proceeding if it has one, then declare which layer (problem, principles, skills, cross-layer coherence) this run is evaluating.
 
-Before examining the target, check `.trail/` for two orientation files and read whichever exist, in this order:
+Before examining the target, check the **target repo's** `.trail/` folder for two orientation files and read whichever exist, in this order. The `.trail/` folder is always in the root of the repo being worked on — never in the skills install directory.
 
 1. `.trail/vision.md` — the **operator-held destination**. What the target is for, the constraints that hold across all runs, the hard problem the work is trying to chip away at. Stable: not written by any skill, only by the operator/team. If present, it is the highest-priority context — it tells you what success means before you decide what to change.
 2. `.trail/compass.md` — the **current Retrospect-derived orientation**. What the arc currently shows is true of the target, what the next runs should test. Rewritten each Retrospect run. If present, it tells you where the loop's attention has been and what the latest arc-read concluded.
@@ -117,7 +117,7 @@ For an arc-read that runs outside an improve iteration, use [Retrospect](../retr
 
 **In multi-iteration runs, this step executes after every iteration — not once at the end of all iterations.** The trail entry is the commit point for that iteration. Append it, regenerate `history.md`, and commit before starting the next iteration. A user who stops a 10-iteration run after iteration 4 must have 4 committed trail entries, not 0.
 
-If Trail is not installed: append a single entry to `.trail/log.md`. The entry must include:
+If Trail is not installed: append a single entry to `.trail/log.md` **in the target repo root** (not the skills install directory). The entry must include:
 
 - Date, target, operator (if known), model identity (provider + tool-call ID prefix if observable).
 - Your interpretation of the ask.

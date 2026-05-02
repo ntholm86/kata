@@ -1,6 +1,6 @@
 ---
 name: retrospect
-version: 1.2.0
+version: 1.3.0
 description: 'Read the trail as a single document and form arc-level claims about the target. What is the target becoming? Where has the loop''s attention been, and is that where the target''s real weight lies? What does the arc reveal that no individual iteration would surface? Writes .trail/compass.md — the Retrospect-derived current orientation for the target. Vision (.trail/vision.md), if present, is the operator-held destination and is read but never written. USE WHEN: about to declare convergence, recurring finding-class suspected, operator asks "how are we doing?", or an independent arc-read is needed without running a full improve loop.'
 argument-hint: 'The target and its trail, and optionally the specific arc-question to answer'
 ---
@@ -36,7 +36,7 @@ A scope statement prevents the arc-read from being undirected. It also makes the
 
 ### 2. Read the arc
 
-Read `.trail/log.md` as a single document about the target — not as a list of past runs. Look for:
+Read `.trail/log.md` **in the target repo root** as a single document about the target — not as a list of past runs. Look for:
 
 - **What has changed, and in what order?** The sequence often reveals a target's actual architecture more clearly than any single snapshot.
 - **Where has attention been concentrated?** Name the specific areas of the target that received the most runs, the most finding-types, the most reversals.
