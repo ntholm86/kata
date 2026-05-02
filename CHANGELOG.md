@@ -1,6 +1,14 @@
 # Changelog
 
-## v3.12.0 — 2026-05-01
+## v3.14.0 — 2026-05-02
+
+### Changed
+- `intent/SKILL.md` (v1.0.0 → v1.1.0) — "Read the accumulated context" section now explicitly lists `.trail/vision.md` and `.trail/compass.md` as the first two documents to read before interpreting any prompt. Vision (operator-held destination) and compass (Retrospect-derived orientation) are the most important context for intent interpretation; reading only `log.md` and sessions was insufficient. Adds note: if no `.trail/` exists yet, run Hunch first.
+
+### Added
+- `README.md` — new "The recommended flow for a new codebase" section. Explains the Hunch-first onboarding flow (establish vision before the loop starts), the Intent+Improve loop, Trail's role as the evidence record, and Retrospect's role as the arc reader. Includes a table showing which skills read and write to `.trail/`. Captures the operator's articulation of how the skills compose through shared `.trail/` state.
+
+
 
 ### Added
 - `POSITION.md` (v0.1) — new top-level stance document. Names what this repo is betting on: **operation-time trustworthy delegation** — what it takes for a human to safely hand real work to an AI more capable than themselves on that work and remain the responsible party. Defines the area via four sub-claims (operation-time, delegation, evidence-while-driving, protocol-not-tool), maps it against adjacent fields (scalable oversight, agentic AI safety, human-AI collaboration, constitutional AI, SRE), states what the repo is **not** claiming, and lists five explicit falsification criteria. Marked v0.1 and provisional. Aimed at skeptical technical practitioners; signed work, not corporate-we (run 71).

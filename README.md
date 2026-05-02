@@ -32,7 +32,43 @@ See [INSTALLING.md](./INSTALLING.md) for setup details.
 3. Commit. Run again. Each run reads the full trail of prior decisions.
 4. When a run finds nothing actionable, count one silence. Repeat with a different model family. Convergence requires three independent silences from distinct model families.
 
-## How it works
+## The recommended flow for a new codebase
+
+All six skills are independent, but they compose. The `.trail/` folder in the target repo is the shared knowledge base that makes them aware of each other — every skill reads from it and writes to it.
+
+**Step 1 — Establish the destination (Hunch)**
+
+Run Hunch a few times before anything else. Hunch reads the codebase — code structure, commit arc, any existing docs — and surfaces guesses about where the operator is heading as short, falsifiable questions. The operator confirms or corrects. Together, the AI and operator home in on the destination. The result goes into `.trail/vision.md`, operator-held.
+
+A loop that starts without vision navigates without a destination.
+
+**Step 2 — Start the loop (Intent + Improve)**
+
+Each iteration begins with a prompt from the operator. Intent reads the prompt and all documents in `.trail/` — vision first, then compass, then the log — to interpret what the operator actually means in light of where they are trying to go. Improve then examines the target, decides on one highest-leverage change, makes it, and records its reasoning.
+
+**Step 3 — Record the evidence (Trail)**
+
+After each run, Trail appends a structured entry to `.trail/log.md` and optionally to `.trail/sessions/`. Nothing is lost. Every decision, its rationale, and the alternatives considered are logged in a form a future run can read and build on.
+
+**Step 4 — Read the arc (Retrospect)**
+
+Run Retrospect when the loop needs altitude. It reads everything in `.trail/` as a single document and produces `.trail/compass.md` — a synthesized statement of where the work actually is, what the loop has been attending to, and whether the loop's attention is in the right place. A future run reads compass before acting, so the loop does not drift.
+
+**The result**
+
+Each skill reinforces the others through the shared `.trail/` state:
+
+| Skill | Reads from `.trail/` | Writes to `.trail/` |
+|---|---|---|
+| Hunch | log.md, compass.md | vision.md (with operator approval) |
+| Intent | vision.md, compass.md, log.md, sessions/ | — |
+| Improve | vision.md, compass.md, log.md | (via Trail) |
+| Trail | — | log.md, sessions/ |
+| Retrospect | vision.md, log.md, sessions/ | compass.md |
+
+The skills can each run independently. Together they form a fully autonomous loop where nothing is assumed, nothing is lost, and the operator stays in control of the destination at every point.
+
+
 
 The user still sets the direction in the prompt. The agent is autonomous in how it gets there.
 
@@ -86,7 +122,7 @@ python <skills>/tools/record.py new --slug=my-operation --target=some-repo
 python <skills>/tools/record.py summary
 ```
 
-**Version:** v3.13.0 (2026-05-02) — [CHANGELOG.md](./CHANGELOG.md)  
+**Version:** v3.14.0 (2026-05-02) — [CHANGELOG.md](./CHANGELOG.md)  
 **Convergence baseline:** v3.1.0 (2026-04-24) — three silence runs, cross-layer coherence check, all in [.trail/log.md](./.trail/log.md).  
 **Future direction:** [archive/OBSERVABLE-LOOPS.md](./archive/OBSERVABLE-LOOPS.md) — draft spec for making any Observable Loop portable and verifiable by CI.
 
