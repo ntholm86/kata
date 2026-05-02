@@ -1,6 +1,6 @@
 ---
 name: hunch
-version: 1.2.0
+version: 1.3.0
 description: 'Surface the agent''s in-progress guesses about where the operator is heading — what they care about, what they are circling, what the implicit destination might be — and turn those guesses into questions the operator can confirm, correct, or reject. Closes the gap between what the operator has explicitly stated (vision) and what the agent has picked up from their conversation, reactions, and emphasis. USE WHEN: vision feels thin or stale, the operator is exploring rather than executing, the agent suspects it is missing implicit direction, or before a long autonomous run that will drift if the destination is unclear.'
 argument-hint: 'Optionally: the area you want hunches about (a specific concern, a recent decision, the project as a whole)'
 ---
@@ -97,7 +97,7 @@ After the conversation, capture three things:
 - **What was rejected.** Any hunches the operator explicitly disagreed with — these are valuable, because they prevent the agent from converging on the same wrong reading again.
 - **What is still open.** Any question the operator did not answer, or any uncertainty that remained. Hunch does not have to resolve everything; it has to make what is uncertain visible.
 
-**Write `.trail/vision.md` in the target repo root** with the agent's current understanding of the destination. Do not ask the operator to do this — write it as part of completing the run. Vision is operator-held in the sense that the *operator commits it to git* when it reads right, and revises it before committing if anything is off. The agent's job is to produce the file; the operator's job is to decide whether it is ready to commit.
+**Before writing: create the `.trail/` directory in the target repo root if it does not already exist.** Then write `.trail/vision.md` with the agent's current understanding of the destination. Do not ask the operator to do this — write it as part of completing the run. Vision is operator-held in the sense that the *operator commits it to git* when it reads right, and revises it before committing if anything is off. The agent's job is to produce the file; the operator's job is to decide whether it is ready to commit.
 
 If `.trail/vision.md` already exists, update it in place rather than replacing it wholesale — preserve anything the operator has written that the current hunches do not change.
 

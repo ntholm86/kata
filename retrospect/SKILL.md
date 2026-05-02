@@ -1,6 +1,6 @@
 ---
 name: retrospect
-version: 1.3.0
+version: 1.4.0
 description: 'Read the trail as a single document and form arc-level claims about the target. What is the target becoming? Where has the loop''s attention been, and is that where the target''s real weight lies? What does the arc reveal that no individual iteration would surface? Writes .trail/compass.md — the Retrospect-derived current orientation for the target. Vision (.trail/vision.md), if present, is the operator-held destination and is read but never written. USE WHEN: about to declare convergence, recurring finding-class suspected, operator asks "how are we doing?", or an independent arc-read is needed without running a full improve loop.'
 argument-hint: 'The target and its trail, and optionally the specific arc-question to answer'
 ---
@@ -70,6 +70,8 @@ Ask:
 Run this step when: the loop is about to declare convergence, the finding pattern looks suspiciously tidy, or the operator explicitly asked how the loop is performing.
 
 ### 5. Write the compass
+
+**Before writing: create the `.trail/` directory in the target repo root if it does not already exist.**
 
 Write the arc-claims from step 3 (and any loop-effectiveness findings from step 4) to `.trail/compass.md` in the target repo root. This file is the **compass** — the current Retrospect-derived orientation: where the loop's attention has been, what the arc currently shows is true of the target, and what the next runs should test.
 

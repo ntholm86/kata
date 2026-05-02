@@ -1,6 +1,6 @@
 ---
 name: probe
-version: 3.2.0
+version: 3.3.0
 description: 'Construct a novelty probe that distinguishes genuine situated reasoning from pattern-matching against a checklist. Build a pair of cases that look similar on the surface but differ in a material way; observe whether the agent''s response diverges where it should. Measures Autonomous Reasoning Fidelity. USE WHEN: test reasoning quality, is the agent actually reasoning, distinguish reasoning from compliance, stress test, novelty injection, ARF measurement.'
 argument-hint: 'The agent or skill to probe, and what claim about its reasoning you want to test'
 ---
@@ -56,7 +56,7 @@ The probe outcome is one of:
 
 *If [Trail](../trail/SKILL.md) is installed, apply it now — it handles this step in full. Include the probe-specific fields below in the "Examination" section of the log entry.*
 
-If Trail is not installed: append an entry to `.trail/log.md` **in the target repo root** (not the skills install directory) containing:
+If Trail is not installed: create the `.trail/` directory in the target repo root if it does not already exist, then append an entry to `.trail/log.md` **in the target repo root** (not the skills install directory) containing:
 
 - The mandatory metadata (`target`, `agent`, `skill`, `outcome`). For `outcome`, state the verdict.
 - The claim being tested.

@@ -1,6 +1,6 @@
 ---
 name: improve
-version: 3.5.0
+version: 3.6.0
 description: 'The improvement skill. Understand the ask, examine the target, challenge the first read, decide on one change (or argue for redesign, or declare silence), act, reflect on the target, and record. Combines incremental refinement, structural rethinking, and reflection on the target itself. USE WHEN: improve, audit, review, fix, refactor, redesign, evaluate, what would make this better, am I missing something.'
 argument-hint: 'The target to improve, and optionally the concern (correctness, simplicity, performance, etc.)'
 ---
@@ -117,7 +117,7 @@ For an arc-read that runs outside an improve iteration, use [Retrospect](../retr
 
 **In multi-iteration runs, this step executes after every iteration — not once at the end of all iterations.** The trail entry is the commit point for that iteration. Append it, regenerate `history.md`, and commit before starting the next iteration. A user who stops a 10-iteration run after iteration 4 must have 4 committed trail entries, not 0.
 
-If Trail is not installed: append a single entry to `.trail/log.md` **in the target repo root** (not the skills install directory). The entry must include:
+If Trail is not installed: create the `.trail/` directory in the target repo root if it does not already exist, then append a single entry to `.trail/log.md` **in the target repo root** (not the skills install directory). The entry must include:
 
 - Date, target, operator (if known), model identity (provider + tool-call ID prefix if observable).
 - Your interpretation of the ask.

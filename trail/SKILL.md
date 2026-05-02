@@ -1,6 +1,6 @@
 ---
 name: trail
-version: 1.8.0
+version: 1.9.0
 description: 'Evidence trail management. Append a structured entry to .trail/log.md IN THE TARGET REPO ROOT at the end of every substantive session — recording the interpretation of the ask, examination, decisions, actions, and reflection. The implementation of Observable Autonomy — autonomy without evidence is not delegation, it is abdication. USE WHEN: any substantive autonomous work that produces decisions, changes, or findings.'
 argument-hint: 'The target being worked on (repo, file, system) — used to populate the log entry header'
 ---
@@ -31,6 +31,8 @@ If you are improving `~/projects/myapp`, the trail is `~/projects/myapp/.trail/l
 Every repo gets its own trail. The trail is local evidence for that project — it belongs with the project.
 
 One file: `.trail/log.md` in the target repo root. Append-only. One `##` entry per session, newest at the bottom.
+
+**Before any write: create the `.trail/` directory in the target repo root if it does not already exist.** This applies whether the skill is run alone, as part of a chain, or for the first time on a fresh repo.
 
 If `.trail/log.md` does not exist yet, initialise it:
 
