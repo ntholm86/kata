@@ -13,8 +13,8 @@ Runs 55-63 were documentation propagation after structural changes. Runs 64-71 a
 **2. Retrospect has a second real data point; the gap narrows from existence to reliability.**
 Every prior compass entry named "Hunch unproven in execution" as the validation gap. As of 2026-05-02, Hunch has confirmed hunches on five runs across four targets (own vision, evo, vectorium, leifoglenedk, manifesto). The falsification condition was met. Retrospect now has two real executions: the first arc-read (session-v3-16-0-retrospect-first-run) and this second pass. The second pass is compatible with the first: it keeps the same unresolved structural bets (occasion-independence and external harness proof) while incorporating new evidence (manifesto consistency sweep completed). The remaining gap is no longer "does Retrospect produce arc claims at all" but "does it remain stable and decision-useful across more arcs and operators."
 
-**3. Occasion-independence now has a first positive data point, but reliability is unproven.**
-The trail previously named this as unresolved (runs 68, 71). In this run, an agent-initiated direction question produced one structural change (`improve/SKILL.md` v3.7.0 adds an underspecified-ask bootstrap in step 1). This closes the pure "zero evidence" state, but does not establish reliability across sessions. The open claim is now repeatability, not existence.
+**3. Occasion-independence now has two positive data points across different arcs; reliability is partially supported.**
+The trail previously named this as unresolved (runs 68, 71). In the first pass (2026-05-02, same session as the mechanism's design), an agent-initiated direction question produced one structural change (`improve/SKILL.md` v3.7.0). In the second pass (2026-05-02, different target: manifesto), an underspecified ask ("lets go") triggered the bootstrap on a different arc — the agent formed hunches from vision+trail tail, identified the PROOF.md Digest gap as the highest-confidence structural finding, and proceeded without operator topic injection. Two data points across two different targets and two different arcs. Reliability is partially supported. Remaining open: repeatability across different session families and longer time gaps.
 
 **4. The two-repo relationship (manifesto = principles layer, skills = one domain conformance) is now reflected in both READMEs.** ~~OPEN~~ **CLOSED 2026-05-02.**
 Both READMEs now name the other repo and state the relationship explicitly. Skills README: "this suite is one conformance example of the Autonomous Agent Principles." Manifesto README: names skills suite as the reference implementation with "evidence, not proof" framing. Gap closed.
@@ -34,7 +34,8 @@ Vision names this as a hard requirement before integration with evo or any other
 4. ~~**README relationship statement:** done (2026-05-02). Both READMEs updated.~~
 5. **One external proof:** run the protocol on a target where the AI exceeds the operator on the underlying task and the operator is not the author.
 6. ~~**Occasion-independence experiment:** first pass completed (2026-05-02). Agent-initiated direction question led to structural change in Improve v3.7.0.~~
-7. **Occasion-independence reliability test:** repeat the same experiment on a different day/arc and check whether it again yields a structural finding without operator topic injection.
+7. ~~**Occasion-independence reliability test (pass 2):** second pass completed (2026-05-02). Bootstrap fired on manifesto target with underspecified ask ("lets go") — PROOF.md Digest gap found and fixed without operator topic injection. Two data points across two targets and two arcs.~~
+8. **Occasion-independence reliability test (pass 3+):** repeat on a third arc in a different session family to establish cross-family reliability.
 8. **Retrospect reliability test (next level):** run on a materially different future arc (not same-day cleanup arc) and compare claim stability plus decision usefulness.
 
 ---
